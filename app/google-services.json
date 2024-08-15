@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "576392559523",
+    "project_id": "petplant-4ee4e",
+    "storage_bucket": "petplant-4ee4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576392559523:android:eda5c3e6761a82728fb816",
+        "android_client_info": {
+          "package_name": "com.example.petplant"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOaxfsW_wixzYzL4iHzqownDz4c3d0UHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
