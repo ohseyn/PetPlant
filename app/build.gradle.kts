@@ -40,6 +40,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     implementation (platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation ("com.google.firebase:firebase-analytics")
