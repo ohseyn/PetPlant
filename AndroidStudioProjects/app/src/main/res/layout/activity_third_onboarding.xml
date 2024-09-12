@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 페이지 인디케이터 -->
+    <LinearLayout
+        android:id="@+id/page_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="페이지 인디케이터">
+
+        <View
+            android:id="@+id/page1"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_weight="1"
+            android:background="@android:color/darker_gray"
+            android:layout_margin="4dp"
+            android:contentDescription="첫 번째 페이지 인디케이터"/>
+
+        <View
+            android:id="@+id/page2"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_weight="1"
+            android:background="@android:color/darker_gray"
+            android:layout_margin="4dp"
+            android:contentDescription="두 번째 페이지 인디케이터"/>
+
+        <View
+            android:id="@+id/page3"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_blue_light"
+            android:layout_margin="4dp"
+            android:contentDescription="세 번째 페이지 인디케이터"/>
+    </LinearLayout>
+
+    <!-- 프로필 사진 선택 및 편집 버튼 -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="171dp"
+            android:layout_height="182dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_background"
+            android:contentDescription="프로필 사진" />
+
+        <Button
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="편집"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_blue_dark"
+            android:layout_gravity="center"
+            android:contentDescription="편집 버튼"/>
+    </FrameLayout>
+
+    <!-- 이름 입력 박스 -->
+    <EditText
+        android:id="@+id/name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="이름을 입력해 주세요"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:contentDescription="이름 입력 박스" />
+
+    <!-- 시작하기 버튼 -->
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="시작하기"
+        android:contentDescription="시작하기 버튼"/>
+</LinearLayout>

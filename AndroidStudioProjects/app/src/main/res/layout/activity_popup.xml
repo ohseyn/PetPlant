@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+
+    <RelativeLayout
+        android:id="@+id/popup_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#E0E0E0"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/popup_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(이름)이의 꽃이 피었나요?"
+            android:layout_margin="16dp"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/flower_bloomed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="피었어요"
+            android:layout_below="@id/popup_text"
+            android:layout_margin="16dp"
+            android:background="#CCCCCC"/>
+
+        <Button
+            android:id="@+id/flower_not_bloomed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아직이에요"
+            android:layout_below="@id/flower_bloomed"
+            android:layout_margin="16dp"
+            android:background="#CCCCCC"/>
+    </RelativeLayout>
+</RelativeLayout>
