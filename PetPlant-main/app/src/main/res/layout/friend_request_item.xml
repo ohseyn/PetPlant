@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 요청 보낸 친구 이메일 표시 -->
+    <TextView
+        android:id="@+id/requester_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Requester Email"
+        android:textSize="16sp"/>
+
+    <!-- 친구 요청 수락 버튼 -->
+    <Button
+        android:id="@+id/btn_accept_request"
+        android:text="Accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- 친구 요청 거절 버튼 -->
+    <Button
+        android:id="@+id/btn_reject_request"
+        android:text="Reject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

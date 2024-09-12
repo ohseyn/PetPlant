@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             textView.setText(user.getEmail());
-            loadFriendRequests();
         }
 
         button_logout.setOnClickListener(new View.OnClickListener() {
