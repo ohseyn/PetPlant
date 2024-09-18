@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="16dp"
-    tools:context=".Login">
+    tools:context=".LoginMainActivity">
 
     <ImageView
         android:id="@+id/logoImageView"
@@ -21,7 +21,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/button_background"
         android:text="네이버로 회원가입"
-        android:textColor="#000000" />
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/emailSignUpButton"
@@ -29,8 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:src="@drawable/button_background"
-        android:text="이메일 또는 전화번호로 회원가입"
-        android:textColor="#000000" />
+        android:text="이메일로 회원가입"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/loginTextView"

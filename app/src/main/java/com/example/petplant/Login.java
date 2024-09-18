@@ -43,12 +43,12 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_email_login);
 
         mAuth = FirebaseAuth.getInstance();
-        editTextEmail = findViewById(R.id.email);
-        editTextPassword = findViewById(R.id.password);
-        buttonLogin = findViewById(R.id.emailSignUpButton);
+        editTextEmail = findViewById(R.id.login_email);
+        editTextPassword = findViewById(R.id.login_password);
+        buttonLogin = findViewById(R.id.loginButton);
         progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.registerNow);
 
@@ -86,7 +86,7 @@ public class Login extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
