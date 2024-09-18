@@ -50,7 +50,6 @@ public class inbox_friend extends AppCompatActivity {
 
         // Dialog 배경을 투명하게 설정
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.getWindow().setDimAmount(10);  // 배경 흐리게 하는 효과 제거
 
         // 닫기 버튼 설정
         ImageButton closeButton = dialog.findViewById(R.id.close_button);

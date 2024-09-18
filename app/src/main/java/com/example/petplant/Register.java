@@ -34,16 +34,16 @@ public class Register extends AppCompatActivity {
     ProgressBar progressBar;
     TextView textView;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null){
+//            Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +106,7 @@ public class Register extends AppCompatActivity {
                                     db.collection("users").document(user.getUid()).set(userInfo)
                                             .addOnSuccessListener(aVoid -> {
                                                 Toast.makeText(Register.this, "Account created and data saved.", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(getApplicationContext(), Login.class);
+                                                Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
                                                 startActivity(intent);
                                                 finish();
                                             })
