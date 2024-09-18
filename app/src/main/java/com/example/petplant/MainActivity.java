@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
-        friendEmailEditText = findViewById(R.id.friend_email);
-        sendRequestButton = findViewById(R.id.btn_send_request);
-        friendRequestsRecyclerView = findViewById(R.id.friend_requests_list);
+//        friendEmailEditText = findViewById(R.id.friend_email);
+//        sendRequestButton = findViewById(R.id.btn_send_request);
+//        friendRequestsRecyclerView = findViewById(R.id.friend_requests_list);
 
         friendRequestsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new FriendRequestAdapter(friendRequestList, db, user.getUid());

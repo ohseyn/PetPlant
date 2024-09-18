@@ -2,7 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,25 +20,179 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Material3.Light"
+        android:theme="@style/Theme.Material3.Light.NoActionBar"
         tools:targetApi="31">
+
         <activity
-            android:name=".Register"
+            android:name=".OnboardingActivity"
             android:theme="@style/Theme.Material3.Light.NoActionBar"
-            android:exported="false" />
+            android:exported="true">
+        </activity>
+
+
+        <activity
+            android:name=".SecondOnboardingActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".ThirdOnboardingActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".HomeMainActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Home_waterquestintroduce"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Home_removequest_introduce"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Home_smellquest"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".reward_quiz"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".waterquest_message"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".waterquest_clear_answer"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".water_oxquiz_start"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".waterquiz_correct"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".home_waterrequest_complete"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".inbox_user"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".inbox_friend"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".profile"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".CorrectActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".IncorrectActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".ShopActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".ItemAdapter"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".ShopMainActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".PopupMainActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".FriendActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".GuideSlidePageFragment"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".GuideSlidePagerAdapter"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Guide"
+            android:exported="true">
+        </activity>
+
         <activity
             android:name=".Login"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
+            android:exported="true">
+        </activity>
+
+<!--        <activity-->
+<!--            android:name=".MainActivity"-->
+<!--            android:exported="true">-->
+<!--        </activity>-->
+
+        <activity
+            android:name=".Register"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:name=".PopupActivity"
+            android:exported="true" />
+
+        <receiver
+            android:name=".PopupReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.Petplant.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
     </application>
 
 </manifest>

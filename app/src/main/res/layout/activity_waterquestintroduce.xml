@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home_waterquestintroduce">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E8F5E9"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-63dp">
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="16dp"
+            android:text="활동 하기"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/instructions_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="-25dp"
+            android:layout_marginTop="40dp"
+            android:text="활동하는 모습을 사진으로 남겨봅시다."
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/instructions_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="-10dp"
+            android:text="아래의 자세한 설명을 보고 활동을 진행해 봅시다."
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <FrameLayout
+            android:id="@+id/video_placeholder"
+            android:layout_width="332dp"
+            android:layout_height="245dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="#C8E6C9">
+
+            <!-- 동영상이 들어갈 자리입니다 -->
+            <!-- 여기에 VideoView나 다른 동영상 플레이어를 추가할 수 있습니다 -->
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/instructions_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="center_horizontal"
+            android:text="    방울토마토 화분의 흙을 꼭 짚었을 때\n흙이 말라있다면 물이 필요하다는 뜻입니다."
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/instructions_detail_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="      물뿌리개에 수도물을 담아 마른 흙이\n  남지 않도록 화분에 고루고루 물을 줍니다.\n화분 구멍으로 물이 나올 정도로 충분히 준 뒤,\n            화분 받침의 물을 버려줍니다."
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/do_quest"
+        android:layout_width="372dp"
+        android:layout_height="54dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_round"
+        android:onClick="onButtonClick"
+        android:text="사진 찍으러 가기"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/suit_extrabold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
