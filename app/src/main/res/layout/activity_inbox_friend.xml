@@ -208,7 +208,8 @@
         android:layout_marginStart="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/requestimage2"
-        tools:layout_editor_absoluteY="432dp" />
+        tools:layout_editor_absoluteY="432dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

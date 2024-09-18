@@ -47,6 +47,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-auth:21.1.0")
     implementation ("com.google.firebase:firebase-firestore")
     implementation ("com.google.firebase:firebase-storage")
+    implementation ("com.google.firebase:firebase-messaging:23.0.0")
 }
 
 apply {

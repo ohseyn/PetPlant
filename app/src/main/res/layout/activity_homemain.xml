@@ -28,15 +28,13 @@
         android:layout_height="32dp"
         android:layout_marginStart="56dp"
 
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="58dp"
+        android:layout_marginBottom="48dp"
         android:background="@drawable/mynaui_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/profile"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toEndOf="@+id/inbox"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager"
-        app:layout_constraintVertical_bias="0.382"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <Button

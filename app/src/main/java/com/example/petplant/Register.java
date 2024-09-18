@@ -19,6 +19,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -38,9 +39,22 @@ public class Register extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
+            // 현재 사용자가 로그인한 상태일 때 추가 조건을 체크 (예: 온보딩 여부)
+            // Firestore에서 유저의 프로필 정보나 온보딩 완료 여부를 확인하는 로직 추가
+            DocumentReference userDocRef = FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(currentUser.getUid());
+
+            userDocRef.get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.exists()) {
+                    // 이미 온보딩을 완료한 경우 HomeMainActivity로 이동
+                    Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+
+                }
+            });
         }
     }
 

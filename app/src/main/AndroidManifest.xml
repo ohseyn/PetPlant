@@ -27,8 +27,11 @@
             android:name=".OnboardingActivity"
             android:theme="@style/Theme.Material3.Light.NoActionBar"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
 
         <activity
             android:name=".SecondOnboardingActivity"
@@ -160,22 +163,22 @@
             android:exported="true">
         </activity>
 
-<!--        <activity-->
-<!--            android:name=".MainActivity"-->
-<!--            android:exported="true">-->
-<!--        </activity>-->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+        </activity>
 
         <activity
             android:name=".Register"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".PopupActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ActivityLog"
             android:exported="true" />
 
         <receiver

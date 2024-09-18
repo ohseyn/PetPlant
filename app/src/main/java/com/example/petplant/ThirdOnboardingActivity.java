@@ -90,7 +90,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
 
     // 메인 화면으로 이동
     private void startMainActivity() {
-        Intent intent = new Intent(ThirdOnboardingActivity.this, MainActivity.class);
+        Intent intent = new Intent(ThirdOnboardingActivity.this, HomeMainActivity.class);
         startActivity(intent);
         finish();
     }

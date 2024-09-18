@@ -88,7 +88,8 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="191dp">
+        tools:layout_editor_absoluteY="191dp"
+        tools:ignore="MissingConstraints">
 
         <!-- 사용자 이름 및 활동 -->
         <TextView
@@ -119,8 +120,8 @@
                 android:id="@+id/imageActivity"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/sample_image" />
+                android:scaleType="centerCrop"/>
+                <!--android:src="@drawable/sample_image"-->
 
             <TextView
                 android:id="@+id/textTime"
@@ -180,8 +181,8 @@
                 android:id="@+id/buttonLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="좋아요"
-                android:src="@drawable/ic_like" />
+                android:contentDescription="좋아요"/>
+                <!--android:src="@drawable/ic_like"-->
 
             <TextView
                 android:id="@+id/textLikeCount"
@@ -197,8 +198,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:contentDescription="댓글"
-                android:src="@drawable/ic_comment" />
+                android:contentDescription="댓글"/>
+                <!--android:src="@drawable/ic_comment"-->
         </LinearLayout>
     </LinearLayout>
 
