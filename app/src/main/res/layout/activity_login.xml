@@ -32,11 +32,13 @@
         android:text="이메일로 회원가입"
         android:textColor="#FFFFFF" />
 
-    <TextView
-        android:id="@+id/loginTextView"
+    <Button
+        android:id="@+id/login_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="기존 회원이라면? 로그인"
+        android:background="@android:color/transparent"
+        android:src="@drawable/button_background"
         android:textColor="#000000" />
 
 </LinearLayout>
