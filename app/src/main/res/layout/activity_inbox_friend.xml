@@ -10,24 +10,20 @@
 
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="427dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="407dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/frame566"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/appbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
         android:layout_width="126dp"
         android:layout_height="23dp"
         android:layout_marginTop="19dp"
-        android:layout_marginBottom="23dp"
         android:gravity="center_horizontal"
         android:text="활동 기록"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,174 +38,257 @@
         android:background="@drawable/mynaui_bell"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="535dp"
-        android:layout_height="210dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/appbar"
-        tools:layout_editor_absoluteY="588dp"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/open_dialog"
         android:layout_width="388dp"
         android:layout_height="182dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="176dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle104"
-        tools:layout_editor_absoluteY="170dp"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView9"
+
         android:layout_width="110dp"
         android:layout_height="103dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="240dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/request_image"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="231dp"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView10"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="296dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sticker"
-        tools:layout_editor_absoluteX="221dp"
-        tools:layout_editor_absoluteY="298dp"
         tools:ignore="MissingConstraints" />
+
 
     <ImageView
         android:id="@+id/imageView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="264dp"
+        android:layout_marginTop="296dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sticker"
-        tools:layout_editor_absoluteX="264dp"
-        tools:layout_editor_absoluteY="298dp"
         tools:ignore="MissingConstraints" />
-
 
     <ImageView
-        android:id="@+id/imageView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="304dp"
+        android:layout_marginTop="296dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sticker"
-        tools:layout_editor_absoluteY="298dp"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView5"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="188dp"
         android:font="@font/suit_extrabold"
         android:text="[최서형] 물 주기 활동 완료!"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="188dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+
     <TextView
-        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="208dp"
         android:font="@font/suit_bold"
         android:text="방울토마토 ㅣ 토마토랑이"
         android:textSize="12sp"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="209dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-
     <TextView
-        android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="316dp"
+        android:layout_marginTop="192dp"
         android:font="@font/suit_extrabold"
         android:text="오전 10:45"
-        android:textSize="10sp"
         android:textColor="#C0C0C0"
-        tools:layout_editor_absoluteX="325dp"
-        tools:layout_editor_absoluteY="188dp"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints,SmallSp" />
 
     <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="470dp"
+        android:layout_width="372dp"
         android:layout_height="184dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="380dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle105"
-        tools:layout_editor_absoluteY="367dp"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="388dp"
         android:font="@font/suit_extrabold"
         android:text="[강시우] 비료 주기 활동 완료!"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="383dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="408dp"
         android:font="@font/suit_bold"
         android:text="방울토마토 ㅣ 토마토마"
         android:textSize="12sp"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="404dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="264dp"
+        android:layout_marginTop="500dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sticker"
-        tools:layout_editor_absoluteX="264dp"
-        tools:layout_editor_absoluteY="501dp"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="304dp"
+        android:layout_marginTop="500dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sticker"
-        tools:layout_editor_absoluteY="501dp"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="324dp"
+        android:layout_marginTop="392dp"
         android:font="@font/suit_extrabold"
         android:text="오전 9:25"
         android:textColor="#C0C0C0"
         android:textSize="10sp"
-        tools:ignore="MissingConstraints,SmallSp"
-        tools:layout_editor_absoluteX="325dp"
-        tools:layout_editor_absoluteY="383dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints,SmallSp" />
 
     <ImageView
-        android:id="@+id/imageView16"
         android:layout_width="113dp"
         android:layout_height="105dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="440dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/requestimage2"
-        tools:layout_editor_absoluteY="432dp"
         tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="296dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mynaui_smile" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="500dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mynaui_smile" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_right" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_left" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="120dp"
+        android:font="@font/suit_bold"
+        android:text="2024.05.16(목)"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/go_profile"
+        android:layout_width="31dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="336dp"
+        android:layout_marginTop="680dp"
+        android:background="@drawable/mynaui_user"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/go_home"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="680dp"
+        android:background="@drawable/mynaui_home2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/inbox"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="680dp"
+        android:background="@drawable/mynaui_inbox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
