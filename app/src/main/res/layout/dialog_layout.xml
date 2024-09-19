@@ -117,12 +117,13 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="180dp"
-        android:layout_marginTop="596dp"
+        android:layout_marginTop="592dp"
         android:contentDescription="Close"
         android:src="@drawable/mynaui_plus"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

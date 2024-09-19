@@ -56,6 +56,15 @@ public class HomeMainActivity extends AppCompatActivity{
             }
         });
 
+        Button bell = findViewById(R.id.bell);
+        bell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), alarm.class);
+                startActivity(intent);
+            }
+        });
+
         Button store = findViewById(R.id.store);
         store.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,14 +74,7 @@ public class HomeMainActivity extends AppCompatActivity{
             }
         });
 
-        Button bell = findViewById(R.id.bell);
-        bell.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), alarm.class);
-                startActivity(intent);
-            }
-        });
+
 
         Button guide = findViewById(R.id.guide);
         guide.setOnClickListener(new View.OnClickListener() {
