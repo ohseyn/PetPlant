@@ -16,8 +16,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
-public class HomeMainActivity extends AppCompatActivity{
+public class HomeMainActivity extends AppCompatActivity {
 
     private ViewPager2 viewPager;
     private PageAdapter pageAdapter;
@@ -35,7 +36,7 @@ public class HomeMainActivity extends AppCompatActivity{
         character = findViewById(R.id.tomato_home);
         speechBubble = findViewById(R.id.speechbubble);
         viewPager = findViewById(R.id.viewPager);
-        timeTextView = findViewById(R.id.timeTextView); // 새로운 텍스트뷰 (초 단위로 업데이트되는 텍스트)
+        timeTextView = findViewById(R.id.timeTextView); // 새로운 텍스트뷰 (일 단위로 업데이트되는 텍스트)
 
         // 버튼 이벤트 핸들러들 (유지)
         Button inbox = findViewById(R.id.inbox);
@@ -115,7 +116,6 @@ public class HomeMainActivity extends AppCompatActivity{
 
                 if (intent != null) {
                     startActivity(intent);
-
                 }
             }
         });
@@ -134,30 +134,56 @@ public class HomeMainActivity extends AppCompatActivity{
             }
         });
 
-        // 초 단위로 업데이트되는 텍스트 설정
+        long startTime = System.currentTimeMillis();
+
+        // 날짜 갱신을 위한 Runnable
         timeUpdater = new Runnable() {
             @Override
             public void run() {
                 // 현재 시간 가져오기
-                String currentTime = getCurrentTimeString();
-                // 텍스트뷰에 시간 설정
-                timeTextView.setText("" + currentTime);
-                // 1초 후에 다시 실행
+                long currentTimeMillis = System.currentTimeMillis();
+                long elapsedTimeMillis = currentTimeMillis - startTime; // 시작 시간부터 지난 시간 계산
+
+                // 밀리초 -> 초 -> 분 -> 시간 -> 일로 변환
+                long elapsedDays = elapsedTimeMillis / (1000 * 60 * 60 * 24); // 지난 시간의 일 수 계산
+
+                // 시작하는 날이 1일이므로 +1
+                long currentDay = elapsedDays + 1;
+
+                // 텍스트뷰에 현재 일 수 설정
+                timeTextView.setText(" " + currentDay);
+
+                // 1초 후에 다시 실행 (갱신)
                 handler.postDelayed(this, 1000);
             }
         };
-        handler.post(timeUpdater); // 시간 갱신 시작
-    }
+        handler.post(timeUpdater);
 
-    // 현재 시간을 "HH:mm:ss" 형식으로 반환하는 메서드
-    private String getCurrentTimeString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("ss", Locale.getDefault());
-        return sdf.format(Calendar.getInstance().getTime());
-    }
+        // 초 단위로 업데이트되는 텍스트 설정
+//        timeUpdater = new Runnable() {
+//            @Override
+//            public void run() {
+//                // 현재 시간 가져오기
+//                String currentTime = getCurrentTimeString();
+//                // 텍스트뷰에 시간 설정
+//                timeTextView.setText("" + currentTime);
+//                // 1초 후에 다시 실행
+//                handler.postDelayed(this, 1000);
+//            }
+//        };
+//        handler.post(timeUpdater); // 시간 갱신 시작
+//    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        handler.removeCallbacks(timeUpdater); // 액티비티가 파괴될 때 시간 갱신 중지
+        //현재 시간을 "HH:mm:ss" 형식으로 반환하는 메서드
+//    private String getCurrentTimeString() {
+//        SimpleDateFormat sdf = new SimpleDateFormat("ss", Locale.getDefault());
+//        return sdf.format(Calendar.getInstance().getTime());
+//    }
+
+//        @Override
+//        protected void onDestroy () {
+//            super.onDestroy();
+//            handler.removeCallbacks(timeUpdater); // 액티비티가 파괴될 때 시간 갱신 중지
+//        }
     }
 }

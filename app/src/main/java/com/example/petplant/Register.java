@@ -34,42 +34,29 @@ public class Register extends AppCompatActivity {
     ProgressBar progressBar;
     TextView textView;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            // 현재 사용자가 로그인한 상태일 때 추가 조건을 체크 (예: 온보딩 여부)
-            // Firestore에서 유저의 프로필 정보나 온보딩 완료 여부를 확인하는 로직 추가
-            DocumentReference userDocRef = FirebaseFirestore.getInstance()
-                    .collection("users")
-                    .document(currentUser.getUid());
-
-            userDocRef.get().addOnSuccessListener(documentSnapshot -> {
-                if (documentSnapshot.exists()) {
-                    // 이미 온보딩을 완료한 경우 HomeMainActivity로 이동
-                    Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-
-                }
-            });
-        }
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null){
+//            Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_email_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
-        buttonReg = findViewById(R.id.btn_register);
+        buttonReg = findViewById(R.id.signUpButton);
         progressBar = findViewById(R.id.progressBar);
-        textView = findViewById(R.id.longinNow);
+        textView = findViewById(R.id.loginNow);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +106,7 @@ public class Register extends AppCompatActivity {
                                     db.collection("users").document(user.getUid()).set(userInfo)
                                             .addOnSuccessListener(aVoid -> {
                                                 Toast.makeText(Register.this, "Account created and data saved.", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(getApplicationContext(), Login.class);
+                                                Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
                                                 startActivity(intent);
                                                 finish();
                                             })
