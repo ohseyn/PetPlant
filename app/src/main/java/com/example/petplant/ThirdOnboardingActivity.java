@@ -107,10 +107,10 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
                 transaction.update(sfRef, "plantName", plantName != null ? plantName : "");  // null 방지
                 transaction.update(sfRef, "email", userEmail);  // 이메일 추가
 
-                String path = snapshot.getString("userImageUrl");
+                String path = snapshot.getString("profileImageUrl");
                 if (path == null || path.isEmpty()) {
                     path = "Images/profileImageUrl" + user.getUid();
-                    transaction.update(sfRef, "userImageUrl", path);
+                    transaction.update(sfRef, "profileImageUrl", path);
                 }
                 return null;
             }
@@ -159,7 +159,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
                         public void onSuccess(Uri downloadUri) {
                             // 이미지 다운로드 URL을 Firestore에 업데이트
                             db.collection("users").document(user.getUid())
-                                    .update("userImageUrl", downloadUri.toString())
+                                    .update("profileImageUrl", downloadUri.toString())
                                     .addOnSuccessListener(aVoid -> {
                                         Log.d("TAG", "이미지 URL 저장 성공");
                                         startMainActivity();
