@@ -12,5 +12,8 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:8.0.2")
         classpath("com.google.gms:google-services:4.4.2")
+        classpath("com.google.api:api-common:2.1.0")
+
+
     }
 }

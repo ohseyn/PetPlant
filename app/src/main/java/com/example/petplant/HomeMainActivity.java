@@ -1,15 +1,32 @@
 package com.example.petplant;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,12 +36,19 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class HomeMainActivity extends AppCompatActivity {
+    FirebaseFirestore db;
+    FirebaseAuth auth;
+    FirebaseUser user;
+    String name;
+    String plantName;
+    String profileUIri;
 
     private ViewPager2 viewPager;
     private PageAdapter pageAdapter;
     private ImageView character;
     private TextView speechBubble;
     private TextView timeTextView;
+    private  TextView character_name;
     private Handler handler = new Handler();
     private Runnable timeUpdater;
 
@@ -33,11 +57,19 @@ public class HomeMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homemain);
 
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+
+        character_name = findViewById(R.id.home_plantName);
         character = findViewById(R.id.tomato_home);
         speechBubble = findViewById(R.id.speechbubble);
         viewPager = findViewById(R.id.viewPager);
         timeTextView = findViewById(R.id.timeTextView); // 새로운 텍스트뷰 (일 단위로 업데이트되는 텍스트)
 
+        GetData(); // 데이터 가져오기
         // 버튼 이벤트 핸들러들 (유지)
         Button inbox = findViewById(R.id.inbox);
         inbox.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +85,9 @@ public class HomeMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), profile.class);
+                intent.putExtra("name",name);
+                intent.putExtra("plantName",plantName);
+                intent.putExtra("profileImageUri",profileUIri);
                 startActivity(intent);
             }
         });
@@ -185,5 +220,95 @@ public class HomeMainActivity extends AppCompatActivity {
 //            super.onDestroy();
 //            handler.removeCallbacks(timeUpdater); // 액티비티가 파괴될 때 시간 갱신 중지
 //        }
+    }
+
+    public void GetData()
+    {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        super.onStart();
+        DocumentReference docRef = db.collection("users").document(user.getUid());
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w("TAG", "Listen failed.", e);
+                    return;
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d("TAG", "Current data: " + snapshot.getData());
+
+                    // 데이터 업데이트 처리
+                    name = snapshot.getString("name");
+                    plantName = snapshot.getString("plantName");
+                    character_name.setText(plantName + "와");
+
+                    String path = snapshot.getString("userImageUrl");
+                    if (path != null && !path.isEmpty()) {
+                        storageRef.child(path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                // 이미지 다운로드 성공
+                                profileUIri = uri.toString();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // 이미지 다운로드 실패 처리
+                                Log.d("TAG", exception.toString());
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("TAG", "Current data: null");
+                }
+            }
+        });
+//        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                if (documentSnapshot.exists()) {
+//                    // 문서가 있는 경우 처리
+//                    Log.d("TAG", "Document data: " + documentSnapshot.getString("name"));
+//                    name = documentSnapshot.getString("name");
+//                    plantName = documentSnapshot.getString("plantName");
+//                    character_name.setText(plantName+"와");
+//                    // Points to the root reference
+////        ---------------------------------------------------------------
+////                    // Points to "images"
+////                    StorageReference imagesRef = storageRef.child("Images");
+//                    // Points to "images/space.jpg"
+////                    StorageReference spaceRef = imagesRef.child(fileName);
+////                    // File path is "images/space.jpg"
+////                    String path = spaceRef.getPath();
+////        ---------------------------------------------------------------
+//                    String path = documentSnapshot.getString("userImageUrl");
+//                    if(path!=""){
+//                        storageRef.child(path).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                            @Override
+//                            public void onSuccess(Uri uri) {
+//                                // Got the download URL for 'users/me/profile.png'
+//                                profileUIri  = uri.toString();
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception exception) {
+//                                // Handle any errors
+//                                Log.d("TAG",exception.toString());
+//                            }
+//                        });
+//                    }
+//
+//                } else {
+//                    Log.d("TAG", "No such document");
+//                }
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.d("TAG", "Error fetching document", e);
+//            }
+//        });
     }
 }
