@@ -48,6 +48,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
     private EditText nameInput;
     private Button editButton, startButton;
     private Uri imageUri;
+    private String profileImageUrl;  // URL을 저장할 변수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +69,6 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
         nameInput = findViewById(R.id.name_input);
         editButton = findViewById(R.id.edit_button);
         startButton = findViewById(R.id.start_button);
-
-        // 페이지 인디케이터 업데이트
-        updatePageIndicator(2);  // 세 번째 페이지로 설정
 
         // '편집' 버튼 클릭 리스너 (갤러리 열기)
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -117,14 +115,14 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
         }).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.d("TAG", "Firestore 업데이트 성공");
+                Log.d("ThirdOnboardingActivity", "Firestore 업데이트 성공");
                 // Firestore 업데이트가 성공하면, 이미지를 Firebase Storage에 업로드
                 uploadImageToStorage();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.w("TAG", "Firestore 업데이트 실패", e);
+                Log.w("ThirdOnboardingActivity", "Firestore 업데이트 실패", e);
             }
         });
     }
@@ -148,7 +146,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
                     // 업로드 실패 처리
-                    Log.e("TAG", "이미지 업로드 실패", exception);
+                    Log.e("ThirdOnboardingActivity", "이미지 업로드 실패", exception);
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -157,20 +155,23 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
                     imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri downloadUri) {
-                            // 이미지 다운로드 URL을 Firestore에 업데이트
+                            profileImageUrl = downloadUri.toString();
+                            Log.d("ThirdOnboardingActivity", "Image URL: " + profileImageUrl);  // 로그 추가
+
+                            // Firestore에 이미지 다운로드 URL 업데이트
                             db.collection("users").document(user.getUid())
-                                    .update("profileImageUrl", downloadUri.toString())
+                                    .update("profileImageUrl", profileImageUrl)
                                     .addOnSuccessListener(aVoid -> {
-                                        Log.d("TAG", "이미지 URL 저장 성공");
-                                        startMainActivity();
+                                        Log.d("ThirdOnboardingActivity", "Firestore에 이미지 URL 저장 성공");
+                                        startProfileActivity();  // profile 액티비티로 이동
                                     });
                         }
                     });
                 }
             });
         } else {
-            // 이미지가 없을 경우 바로 메인 화면으로 이동
-            startMainActivity();
+            // 이미지가 없을 경우 바로 프로필 화면으로 이동
+            startProfileActivity();
         }
     }
 
@@ -195,26 +196,12 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
         }
     }
 
-    // 페이지 인디케이터 업데이트
-    private void updatePageIndicator(int position) {
-        LinearLayout pageIndicator = findViewById(R.id.page_indicator);
-        for (int i = 0; i < pageIndicator.getChildCount(); i++) {
-            View indicator = pageIndicator.getChildAt(i);
-            if (i == position) {
-                indicator.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
-            } else {
-                indicator.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-            }
-        }
-    }
-
-    // 메인 화면으로 이동
-    private void startMainActivity() {
-        Intent intent = new Intent(ThirdOnboardingActivity.this, HomeMainActivity.class);
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra("name", "변경된 데이터");
-        setResult(Activity.RESULT_OK, resultIntent);
-        finish();
+    // 프로필 화면으로 이동
+    private void startProfileActivity() {
+        Intent intent = new Intent(ThirdOnboardingActivity.this, HomeMainActivity.class);  // profile 액티비티로 이동
+        intent.putExtra("profileImageUri", profileImageUrl);  // 프로필 이미지 URI 전달
+        intent.putExtra("name", nameInput.getText().toString());
+        intent.putExtra("plantName", getIntent().getStringExtra("plantName"));
         startActivity(intent);
 
         Log.d("ThirdOnboardingActivity", "HomeMainActivity로 이동");

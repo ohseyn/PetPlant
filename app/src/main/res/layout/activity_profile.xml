@@ -398,8 +398,8 @@
                 android:id="@+id/user_home"
                 android:layout_width="35dp"
                 android:layout_height="32dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginBottom="35dp"
+                android:layout_marginStart="188dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/mynaui_home"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -409,11 +409,11 @@
                 android:id="@+id/user_inbox"
                 android:layout_width="43dp"
                 android:layout_height="35dp"
-                android:layout_marginBottom="35dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/mynaui_inbox"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/profile2"
-                app:layout_constraintStart_toEndOf="@+id/user_home"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <Button
