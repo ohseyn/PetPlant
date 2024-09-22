@@ -49,6 +49,7 @@ public class Home_waterquestintroduce extends AppCompatActivity {
         });
     }
 
+    // 런타임 권한 요청 코드
     private void requestPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
@@ -64,6 +65,8 @@ public class Home_waterquestintroduce extends AppCompatActivity {
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            Log.d(TAG, "Camera app found, preparing to launch");
+
             File photoFile = null;
             try {
                 photoFile = createImageFile();
@@ -74,15 +77,23 @@ public class Home_waterquestintroduce extends AppCompatActivity {
             }
             if (photoFile != null) {
                 photoURI = FileProvider.getUriForFile(this, "com.example.mureok.fileprovider", photoFile);
+
+                // 로그로 URI 확인
+                Log.d(TAG, "Photo URI: " + photoURI.toString());
+
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                Log.d(TAG, "Starting camera intent");
+                takePictureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 takePictureLauncher.launch(takePictureIntent);
             } else {
                 Log.e(TAG, "Failed to create image file.");
             }
         } else {
             Log.e(TAG, "No camera app found to handle the intent.");
-            Toast.makeText(this, "No camera app found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "카메라 앱이 없습니다. 다른 앱을 사용하거나 카메라 앱을 설치해주세요.", Toast.LENGTH_LONG).show();
+
+            // 이미지 선택을 위한 대체 코드
+            Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            pickPhotoLauncher.launch(pickPhotoIntent);
         }
     }
 
@@ -101,7 +112,10 @@ public class Home_waterquestintroduce extends AppCompatActivity {
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
+
         currentPhotoPath = image.getAbsolutePath();
+        Log.d(TAG, "Photo file created at path: " + currentPhotoPath);
+
         return image;
     }
 
@@ -130,6 +144,25 @@ public class Home_waterquestintroduce extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     Log.e(TAG, "Failed to take picture");
+                }
+            }
+    );
+
+    private final ActivityResultLauncher<Intent> pickPhotoLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Uri selectedImageUri = result.getData().getData();
+                    if (selectedImageUri != null) {
+                        Log.d(TAG, "Image selected: " + selectedImageUri.toString());
+                        Intent intent = new Intent(this, waterquest_message.class);
+                        intent.putExtra("photoPath", selectedImageUri.toString());
+                        startActivity(intent);
+                    } else {
+                        Log.e(TAG, "No image selected");
+                    }
+                } else {
+                    Log.e(TAG, "Failed to select image");
                 }
             }
     );
