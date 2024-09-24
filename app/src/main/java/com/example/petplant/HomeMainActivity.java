@@ -96,7 +96,7 @@ public class HomeMainActivity extends AppCompatActivity {
         bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), alarm.class);
+                Intent intent = new Intent(getApplicationContext(), FriendRequestsActivity.class);
                 startActivity(intent);
             }
         });

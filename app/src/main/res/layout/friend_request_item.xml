@@ -1,31 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 요청 보낸 친구 이메일 표시 -->
     <TextView
-        android:id="@+id/requester_email"
-        android:layout_width="0dp"
+        android:id="@+id/requestText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Requester Email"
-        android:textSize="16sp"/>
+        android:layout_marginTop="8dp"
+        android:text="친구 요청이 있습니다."
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 친구 요청 수락 버튼 -->
     <Button
-        android:id="@+id/btn_accept_request"
-        android:text="Accept"
+        android:id="@+id/acceptButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="19dp"
+        android:text="수락"
+        app:layout_constraintEnd_toStartOf="@+id/declineButton"
+        app:layout_constraintStart_toEndOf="@+id/requestText"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 친구 요청 거절 버튼 -->
     <Button
-        android:id="@+id/btn_reject_request"
-        android:text="Reject"
+        android:id="@+id/declineButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="거절"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/acceptButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

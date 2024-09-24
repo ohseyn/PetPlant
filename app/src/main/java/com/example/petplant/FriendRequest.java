@@ -1,22 +1,14 @@
 package com.example.petplant;
 
 public class FriendRequest {
-    private String id;
     private String from;
-    private String to;
     private String status;
-    private String fromEmail;
+    private String requestId;  // Firestore의 문서 ID를 저장할 필드
 
-    // Constructors, getters, and setters
+    // 기본 생성자 (Firestore에서 객체로 매핑할 때 필요)
+    public FriendRequest() {}
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
+    // Getter and Setter for 'from'
     public String getFrom() {
         return from;
     }
@@ -25,14 +17,7 @@ public class FriendRequest {
         this.from = from;
     }
 
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
+    // Getter and Setter for 'status'
     public String getStatus() {
         return status;
     }
@@ -41,11 +26,12 @@ public class FriendRequest {
         this.status = status;
     }
 
-    public String getFromEmail() {
-        return fromEmail;
+    // Getter and Setter for 'requestId'
+    public String getRequestId() {
+        return requestId;
     }
 
-    public void setFromEmail(String fromEmail) {
-        this.fromEmail = fromEmail;
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 }

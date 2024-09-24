@@ -1,68 +1,55 @@
 package com.example.petplant;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.List;
 
-public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.ViewHolder> {
+public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.FriendRequestViewHolder> {
     private List<FriendRequest> friendRequestList;
-    private FirebaseFirestore db;
-    private String currentUserUid;
+    private OnFriendRequestActionListener listener;
 
-    public FriendRequestAdapter(List<FriendRequest> friendRequestList, FirebaseFirestore db, String currentUserUid) {
+    public interface OnFriendRequestActionListener {
+        void onAccept(String requestUserId);
+        void onDecline(String requestUserId);
+    }
+
+    public FriendRequestAdapter(List<FriendRequest> friendRequestList, OnFriendRequestActionListener listener) {
         this.friendRequestList = friendRequestList;
-        this.db = db;
-        this.currentUserUid = currentUserUid;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FriendRequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.friend_request_item, parent, false);
-        return new ViewHolder(view);
+        return new FriendRequestViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        FriendRequest friendRequest = friendRequestList.get(position);
+    public void onBindViewHolder(@NonNull FriendRequestViewHolder holder, int position) {
+        FriendRequest request = friendRequestList.get(position);
+        String requestId = request.getRequestId();
+        String requestUserName = request.getFrom();  // 요청한 사용자의 이름 가져오기
 
-        holder.requesterEmail.setText(friendRequest.getFromEmail());
+        holder.requestTextView.setText(requestUserName + "님이 친구 신청을 보냈습니다.");
 
         holder.acceptButton.setOnClickListener(v -> {
-            String requestId = friendRequest.getId();
-            String friendUid = friendRequest.getFrom();
-
-            db.collection("friend_requests").document(requestId)
-                    .update("status", "accepted")
-                    .addOnSuccessListener(aVoid -> {
-                        db.collection("users").document(currentUserUid)
-                                .update("friends", FieldValue.arrayUnion(friendUid));
-                        db.collection("users").document(friendUid)
-                                .update("friends", FieldValue.arrayUnion(currentUserUid));
-
-                        Toast.makeText(holder.itemView.getContext(), "Friend request accepted", Toast.LENGTH_SHORT).show();
-                    });
+            if (listener != null) {
+                listener.onAccept(requestId);
+            }
         });
 
-        holder.rejectButton.setOnClickListener(v -> {
-            String requestId = friendRequest.getId();
-
-            db.collection("friend_requests").document(requestId)
-                    .delete()
-                    .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(holder.itemView.getContext(), "Friend request rejected", Toast.LENGTH_SHORT).show();
-                    });
+        holder.declineButton.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onDecline(requestId);
+            }
         });
     }
 
@@ -71,16 +58,16 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         return friendRequestList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView requesterEmail;
-        Button acceptButton, rejectButton;
+    public class FriendRequestViewHolder extends RecyclerView.ViewHolder {
 
-        public ViewHolder(@NonNull View itemView) {
+        TextView requestTextView;
+        Button acceptButton, declineButton;
+
+        public FriendRequestViewHolder(@NonNull View itemView) {
             super(itemView);
-            requesterEmail = itemView.findViewById(R.id.requester_email);
-            acceptButton = itemView.findViewById(R.id.btn_accept_request);
-            rejectButton = itemView.findViewById(R.id.btn_reject_request);
+            requestTextView = itemView.findViewById(R.id.requestText);
+            acceptButton = itemView.findViewById(R.id.acceptButton);
+            declineButton = itemView.findViewById(R.id.declineButton);
         }
     }
-
 }
