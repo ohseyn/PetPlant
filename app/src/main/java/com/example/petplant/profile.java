@@ -31,7 +31,7 @@ public class profile extends AppCompatActivity {
     private FirebaseAuth auth;
     private CircleImageView profileImage;
     private TextView name, plantName, friendCount;
-    private Button addFriendButton;
+    private Button addFriendButton, logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +91,15 @@ public class profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SecondOnboardingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        logoutButton = findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), LoginMainActivity.class);
                 startActivity(intent);
             }
         });
