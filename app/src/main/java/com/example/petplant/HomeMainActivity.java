@@ -139,11 +139,11 @@ public class HomeMainActivity extends AppCompatActivity {
                         break;
                     case 1:
                         // 두 번째 페이지 버튼 클릭 시 이동할 액티비티
-                        intent = new Intent(HomeMainActivity.this, Home_removequest_introduce.class);
+                        intent = new Intent(HomeMainActivity.this, Home_smellquest.class);
                         break;
                     case 2:
                         // 세 번째 페이지 버튼 클릭 시 이동할 액티비티
-                        intent = new Intent(HomeMainActivity.this, Home_smellquest.class);
+                        intent = new Intent(HomeMainActivity.this, Home_removequest_introduce.class);
                         break;
                     default:
                         break;

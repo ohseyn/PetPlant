@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:gravity="center">
+
+
+    <!-- 문제 영역 -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#4D817F7F"
+        android:padding="16dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문제"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="방울토마토가 성장하며 피운 꽃은,\n무슨 색 일까요?"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="#E0E0E0"
+            android:contentDescription="문제 image"/>
+    </LinearLayout>
+
+    <!-- 선택 버튼들 -->
+    <Button
+        android:id="@+id/Yellow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="노란색"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/option_button_selector"
+        android:textColor="#000000"
+        android:padding="12dp"
+        android:gravity="center"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/Pink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="분홍색"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/option_button_selector"
+        android:textColor="#000000"
+        android:padding="12dp"
+        android:gravity="center"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/Red"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="빨간색"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/option_button_selector"
+        android:textColor="#000000"
+        android:padding="12dp"
+        android:gravity="center"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/Blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="파란색"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/option_button_selector"
+        android:textColor="#000000"
+        android:padding="12dp"
+        android:gravity="center"
+        android:textSize="16sp"/>
+
+    <!-- 정답 확인하기 버튼 -->
+    <Button
+        android:id="@+id/CheckAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="정답 확인하기"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#E0E0E0"
+        android:textColor="#000000"
+        android:enabled="false"/>
+</LinearLayout>

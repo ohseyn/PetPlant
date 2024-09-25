@@ -1,14 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="16dp">
 
+    <!-- Back arrow and header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Back Arrow -->
+        <Button
+            android:id="@+id/back_home"
+            android:layout_width="29dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_back_arrow"
+            android:contentDescription="Back" />
+
+        <!-- Header Text -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="글 작성하기"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <!-- Question text -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="오늘 저에게서 어떤 향이 났나요?"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Dashed box for text input -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/dashed_border"
+    android:gravity="center">
+
+    <!-- Character Design Text -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="smell"
-        tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="299dp"
-        tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="향"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="Character Design"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
+    </FrameLayout>
+
+
+<EditText
+android:id="@+id/inputEditText"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="ex. 푸릇푸릇한 냄새가 났어!"
+android:background="@android:color/white"
+android:textColorHint="@android:color/darker_gray"
+android:gravity="top"
+android:minHeight="120dp"
+android:maxLength="200"
+android:padding="16dp"
+android:layout_marginTop="16dp"
+android:layout_marginBottom="16dp"
+android:inputType="textMultiLine" />
+
+
+<TextView
+android:id="@+id/charCountTextView"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="0/200"
+android:textSize="12sp"
+android:textColor="@android:color/darker_gray"
+android:gravity="end" />
+
+
+    <Button
+        android:id="@+id/nextButton3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@android:color/darker_gray"
+        android:text="다음"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        tools:ignore="TextContrastCheck" />
+    </LinearLayout>
