@@ -16,7 +16,7 @@ import java.io.IOException;
 public class smellquest_clearanswer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waterquest_clear_answer);
+        setContentView(R.layout.activity_smellquest_clear_answer);
 
         String photoPath = getIntent().getStringExtra("photoPath");
         if (photoPath != null) {
