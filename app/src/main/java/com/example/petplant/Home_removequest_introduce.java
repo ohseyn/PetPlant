@@ -76,8 +76,8 @@ public class Home_removequest_introduce extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
 
-        Button button = findViewById(R.id.do_quest2);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button do_quest2 = findViewById(R.id.do_quest2);
+        do_quest2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 requestPermissions();
@@ -248,7 +248,7 @@ public class Home_removequest_introduce extends AppCompatActivity {
         byte[] data = baos.toByteArray();
         timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         // Firestore에 저장된 userImageUrl 경로로 이미지 업로드
-        StorageReference imageRef = storageRef.child("Images/removerquest" + user.getUid()+ timeStamp);
+        StorageReference imageRef = storageRef.child("Images/removequest" + user.getUid()+ timeStamp);
         UploadTask uploadTask = imageRef.putBytes(data);
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -269,7 +269,7 @@ public class Home_removequest_introduce extends AppCompatActivity {
                         Intent thisIntent = getIntent();
                         Map<String, Object> activity = new HashMap<>();
                         String description = "removequest" +timeStamp+"_"+user.getUid();
-                        activity.put("activityDescription","removequest"); //waterquest, removequest, smellquest
+                        activity.put("activityDescription","request"); //waterquest, removequest, smellquest
                         activity.put("imageUrI", ImageUrl);
                         activity.put("plantName", thisIntent.getStringExtra("plantName")); // Reference to the plant document
                         activity.put("textActivity", "");
