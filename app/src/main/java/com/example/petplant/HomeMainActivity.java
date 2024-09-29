@@ -150,6 +150,7 @@ public class HomeMainActivity extends AppCompatActivity {
                 }
 
                 if (intent != null) {
+                    intent.putExtra("plantName",plantName);
                     startActivity(intent);
                 }
             }
