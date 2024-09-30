@@ -14,9 +14,8 @@ public class reward_quiz2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward_quiz2);
 
-        Button go_qiuz2 = (Button) findViewById(R.id.go_quiz2);
+        Button go_qiuz2 = findViewById(R.id.go_quiz2);
         go_qiuz2.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), remove_oxquiz_start.class);
@@ -24,15 +23,16 @@ public class reward_quiz2 extends AppCompatActivity {
             }
         });
 
-        Button complete2 = (Button) findViewById(R.id.complete2);
+        Button complete2 = findViewById(R.id.complete2);
         complete2.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), home_waterrequest_complete.class);
+                // 두 번째 퀘스트 완료 상태를 HomeMainActivity에 전달
+                Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
+                intent.putExtra("completed2", true);  // 두 번째 퀘스트 완료 전달
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
     }
-
 }

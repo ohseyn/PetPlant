@@ -31,6 +31,10 @@ public class PageItem {
         return buttonText;
     }
 
+    public void setButtonText(String buttonText) {
+        this.buttonText = buttonText;
+    }
+
     public int getImageResource() {
         return imageResource;
     }

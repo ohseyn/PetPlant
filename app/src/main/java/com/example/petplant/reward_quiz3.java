@@ -1,5 +1,7 @@
 package com.example.petplant;
 
+import static com.example.petplant.R.layout.activity_reward_qiuz3;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,15 +14,16 @@ public class reward_quiz3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reward_qiuz3);
+        setContentView(activity_reward_qiuz3);
 
 
         Button complete3 = (Button) findViewById(R.id.complete3);
         complete3.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), home_waterrequest_complete.class);
+                Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
+                intent.putExtra("completed3", true);  // 두 번째 퀘스트 완료 상태 전달
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
