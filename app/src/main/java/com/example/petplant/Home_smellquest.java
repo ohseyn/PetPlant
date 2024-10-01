@@ -116,6 +116,8 @@ public class Home_smellquest extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadImageToStorage(null);
+                Intent intent = new Intent(getApplicationContext(),smellquest_message.class);
+                startActivity(intent);
             }
         });
 

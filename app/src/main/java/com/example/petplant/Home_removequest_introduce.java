@@ -76,8 +76,8 @@ public class Home_removequest_introduce extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
 
-        Button do_quest2 = findViewById(R.id.do_quest2);
-        do_quest2.setOnClickListener(new View.OnClickListener() {
+        Button button = findViewById(R.id.do_quest2);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 requestPermissions();
@@ -195,10 +195,10 @@ public class Home_removequest_introduce extends AppCompatActivity {
                         Log.d(TAG, "Image selected: " + selectedImageUri.toString());
 
                         uploadImageToStorage(selectedImageUri);
-//                        Intent intent;
-//                        intent = new Intent(this, waterquest_message.class);
-//                        intent.putExtra("photoPath", selectedImageUri.toString());
-//                        startActivity(intent);
+                        Intent intent;
+                        intent = new Intent(this, removequest_message.class);
+                        intent.putExtra("photoPath", selectedImageUri.toString());
+                        startActivity(intent);
 
                     } else {
                         Log.e(TAG, "No image selected");
@@ -269,7 +269,7 @@ public class Home_removequest_introduce extends AppCompatActivity {
                         Intent thisIntent = getIntent();
                         Map<String, Object> activity = new HashMap<>();
                         String description = "removequest" +timeStamp+"_"+user.getUid();
-                        activity.put("activityDescription","request"); //waterquest, removequest, smellquest
+                        activity.put("activityDescription","removequest"); //waterquest, removequest, smellquest
                         activity.put("imageUrI", ImageUrl);
                         activity.put("plantName", thisIntent.getStringExtra("plantName")); // Reference to the plant document
                         activity.put("textActivity", "");

@@ -195,10 +195,10 @@ public class Home_waterquestintroduce extends AppCompatActivity {
                         Log.d(TAG, "Image selected: " + selectedImageUri.toString());
 
                         uploadImageToStorage(selectedImageUri);
-//                        Intent intent;
-//                        intent = new Intent(this, waterquest_message.class);
-//                        intent.putExtra("photoPath", selectedImageUri.toString());
-//                        startActivity(intent);
+                        Intent intent;
+                       intent = new Intent(this, waterquest_message.class);
+                       intent.putExtra("photoPath", selectedImageUri.toString());
+                       startActivity(intent);
 
                     } else {
                         Log.e(TAG, "No image selected");
