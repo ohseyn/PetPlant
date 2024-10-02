@@ -31,8 +31,7 @@ public class OnboardingActivity extends AppCompatActivity {
 
         // 페이지 목록 설정
         List<OnboardingPage> pages = new ArrayList<>();
-        pages.add(new OnboardingPage("식물의 특징", "이 식물은 햇빛을 좋아하고 물을 많이 필요로 합니다."));
-        pages.add(new OnboardingPage("식물 가이드", "이제 이 식물을 키우기 위한 가이드를 확인해 보세요."));
+        pages.add(new OnboardingPage("식물의 특징", "방울토마토는 비타민이 풍부한\n영양 만점 열매채소입니다.\n생으로 먹기도 하고, 파스타나 샐러드 등\n다양한 요리 재료로 쓰기도 합니다.\n가꾸기 쉽고 건강하게 잘 자라기 때문에\n다양한 장소에서 가꿀 수 있습니다."));
 
         OnboardingPagerAdapter adapter = new OnboardingPagerAdapter(pages);
         viewPager.setAdapter(adapter);
@@ -126,11 +125,9 @@ public class OnboardingActivity extends AppCompatActivity {
         public Object instantiateItem(View container, int position) {
             View view = getLayoutInflater().inflate(R.layout.onboarding_page, null);
 
-            TextView title = view.findViewById(R.id.changeabletitle);
             TextView content = view.findViewById(R.id.changeablecontent);
 
             OnboardingPage page = pages.get(position);
-            title.setText(page.title);
             content.setText(page.content);
 
             ((ViewPager) container).addView(view);

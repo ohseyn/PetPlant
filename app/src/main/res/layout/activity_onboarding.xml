@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/onboarding_back"
     android:padding="16dp">
 
     <!-- 페이지 인디케이터 -->
@@ -12,15 +13,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="페이지 인디케이터">
+        android:layout_marginBottom="16dp">
 
         <View
             android:id="@+id/page1"
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:layout_weight="1"
-            android:background="@android:color/holo_blue_light"
+            android:background="#02AE7A"
             android:layout_margin="4dp"
             android:contentDescription="첫 번째 페이지 인디케이터"/>
 
@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:layout_weight="1"
-            android:background="@android:color/darker_gray"
+            android:background="#B7E1CE"
             android:layout_margin="4dp"
             android:contentDescription="두 번째 페이지 인디케이터"/>
 
@@ -38,9 +38,18 @@
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:layout_weight="1"
-            android:background="@android:color/darker_gray"
+            android:background="#B7E1CE"
             android:layout_margin="4dp"
             android:contentDescription="세 번째 페이지 인디케이터"/>
+
+        <View
+            android:id="@+id/page4"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_weight="1"
+            android:background="#B7E1CE"
+            android:layout_margin="4dp"
+            android:contentDescription="네 번째 페이지 인디케이터"/>
     </LinearLayout>
 
     <!-- 안내 텍스트 -->
@@ -48,17 +57,16 @@
         android:id="@+id/info_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="나와 함께할 반려식물을 알아봅시다."
-        android:textSize="16sp"
+        android:text="나와 함께할\n반려 식물을 골라주세요."
+        android:textSize="20sp"
         android:layout_gravity="start"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="온보딩 설명 텍스트" />
+        android:layout_marginBottom="16dp" />
 
     <!-- ViewPager -->
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="wrap_content"
-        android:layout_height="552dp"
+        android:layout_height="496dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="온보딩 페이지 전환 뷰" />
 
@@ -67,6 +75,7 @@
         android:id="@+id/choose_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#02AE7A"
         android:contentDescription="선택하기 버튼"
         android:text="선택하기" />
 </LinearLayout>
