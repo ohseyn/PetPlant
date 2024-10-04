@@ -51,15 +51,15 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/login_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="284dp"
+        android:layout_width="339dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="288dp"
         android:hint="이메일을 입력하세요"
         android:inputType="textEmailAddress"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,TextSizeCheck" />
 
@@ -90,8 +90,8 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/login_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="340dp"
+        android:layout_height="44dp"
         android:layout_marginBottom="4dp"
         android:hint="비밀번호를 입력하세요"
         android:inputType="textPassword"

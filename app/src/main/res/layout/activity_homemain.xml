@@ -13,70 +13,54 @@
         android:id="@+id/home_plantName"
         android:layout_width="139dp"
         android:layout_height="25dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="16dp"
         android:text="왕큰방울이와"
         android:textAlignment="viewEnd"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        tools:layout_editor_absoluteY="59dp"
+        tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/inbox"
-        android:layout_width="43dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="35dp"
-        android:background="@drawable/mynaui_inbox"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.984"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-    <Button
-        android:id="@+id/home"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/user_home"
         android:layout_width="35dp"
         android:layout_height="32dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="58dp"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/mynaui_home"
+        android:layout_marginStart="188dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/mynaui_home2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/profile"
-        app:layout_constraintStart_toEndOf="@+id/inbox"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-    <Button
-        android:id="@+id/profile"
-        android:layout_width="40dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="35dp"
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/user_inbox"
+        android:layout_width="35dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="668dp"
+        android:background="@drawable/mynaui_inbox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/profile2"
+        android:layout_width="32dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/mynaui_user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.986"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="412dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="-10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/appbar"
-        tools:ignore="ContentDescription,MissingConstraints,ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/tomato_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="126dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="127dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -157,7 +141,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tomato_home"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/store"
         android:layout_width="32dp"
         android:layout_height="30dp"
@@ -170,7 +154,7 @@
         app:layout_constraintVertical_bias="0.024"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bell"
         android:layout_width="32dp"
         android:layout_height="30dp"
@@ -183,7 +167,7 @@
         app:layout_constraintVertical_bias="0.024"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/guide"
         android:layout_width="72dp"
         android:layout_height="62dp"
@@ -195,18 +179,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.197"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/suit_regular"
-        android:text="활동기록"
-        android:textColor="#8B8B8B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/inbox"
-        tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -227,14 +199,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top" />
-
-    <ImageView
-        android:layout_width="415dp"
-        android:layout_height="118dp"
-        android:layout_marginTop="664dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/navigationbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

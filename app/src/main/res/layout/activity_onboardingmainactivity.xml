@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/onboarding_back">
 
     <TextView
         android:id="@+id/info_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="나와 함께할 반려식물을 알아봅시다."
-        android:textSize="16sp"
         android:layout_gravity="start"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="온보딩 설명 텍스트" />
+        android:contentDescription="온보딩 설명 텍스트"
+        android:text="나와 함께할\n반려식물을 골라주세요."
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="66dp" />
 
+    <Button
+        android:layout_width="39dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/ic_back"
+        android:backgroundTint="@color/colorTextSecondary"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-4dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
