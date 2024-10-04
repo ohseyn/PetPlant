@@ -14,14 +14,14 @@
         android:layout_width="212dp"
         android:layout_height="196dp"
         android:layout_marginStart="99dp"
-        android:layout_marginTop="83dp"
         android:layout_marginEnd="99dp"
         android:layout_marginBottom="212dp"
         app:layout_constraintBottom_toTopOf="@+id/answer1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.383" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/answer1"
@@ -38,7 +38,8 @@
         app:layout_constraintHorizontal_bias="0.763"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64" />
+        app:layout_constraintVertical_bias="0.64"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/answer2"
@@ -55,7 +56,8 @@
         app:layout_constraintHorizontal_bias="0.761"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintVertical_bias="0.7"
+        tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck" />
 
     <ImageView
         android:layout_width="19dp"
@@ -81,19 +83,25 @@
         android:layout_width="78dp"
         android:layout_height="152dp"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="292dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/tomato_character_home"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="263dp" />
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
+        android:layout_marginTop="456dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.923"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle187"
-        tools:layout_editor_absoluteY="423dp" />
+        tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/choose_button"
@@ -110,45 +118,54 @@
         app:layout_constraintHorizontal_bias="0.761"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintVertical_bias="0.7"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
         android:layout_width="243dp"
         android:layout_height="84dp"
+        android:layout_marginTop="248dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle185"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="245dp" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="264dp"
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:text="물이 너무\n시원하고 맛있어요!"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="195dp"
-        tools:layout_editor_absoluteY="263dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.781"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/next_button"
         android:layout_width="377dp"
         android:layout_height="46dp"
-        android:layout_marginTop="648dp"
+        android:layout_marginTop="700dp"
         android:backgroundTint="#46C140"
         android:text="다음"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/imageView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/good"
-        tools:layout_editor_absoluteY="60dp"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

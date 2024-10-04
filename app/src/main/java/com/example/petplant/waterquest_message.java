@@ -3,10 +3,13 @@ package com.example.petplant;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +23,7 @@ public class waterquest_message extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waterquest_message);
+        // 노치 처리 코드
 
         photoPath = getIntent().getStringExtra("photoPath");
         if (photoPath != null) {

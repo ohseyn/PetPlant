@@ -56,31 +56,6 @@
     <!-- 이름 입력 박스 -->
 
     <!-- 시작하기 버튼 -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="90dp"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:id="@+id/profile_image"
-            android:layout_width="171dp"
-            android:layout_height="182dp"
-            android:layout_gravity="center"
-            android:background="@drawable/profile_frame" />
-
-        <Button
-            android:id="@+id/edit_button"
-            android:layout_width="40dp"
-            android:layout_height="37dp"
-            android:layout_gravity="center"
-            android:background="@drawable/edit"
-            android:backgroundTint="#FFFFFF"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-    </FrameLayout>
 
     <EditText
         android:id="@+id/name_input"
@@ -107,13 +82,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:layout_width="39dp"
-        android:layout_height="38dp"
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="32dp"
+        android:layout_height="30dp"
         android:background="@drawable/ic_back"
-        android:backgroundTint="@color/colorTextSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="171dp"
+            android:layout_height="182dp"
+            android:layout_gravity="center"
+            android:background="@drawable/profile_frame"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/edit_button"
+            android:layout_width="40dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

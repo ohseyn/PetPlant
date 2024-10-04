@@ -13,39 +13,43 @@
         android:id="@+id/home_plantName"
         android:layout_width="139dp"
         android:layout_height="25dp"
+        android:layout_marginTop="76dp"
         android:layout_marginEnd="16dp"
         android:text="왕큰방울이와"
         android:textAlignment="viewEnd"
         android:textStyle="bold"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="59dp"
+        app:layout_constraintHorizontal_bias="0.964"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/user_home"
-        android:layout_width="35dp"
-        android:layout_height="32dp"
+        android:layout_width="32dp"
+        android:layout_height="30dp"
         android:layout_marginStart="188dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/mynaui_home2"
+        android:background="@drawable/mynaui_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/user_inbox"
+        android:id="@+id/inbox"
         android:layout_width="35dp"
         android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="668dp"
-        android:background="@drawable/mynaui_inbox"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/mynaui_inbox2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/profile2"
+        android:id="@+id/profile"
         android:layout_width="32dp"
         android:layout_height="30dp"
         android:layout_marginEnd="40dp"
@@ -135,7 +139,6 @@
         android:layout_height="179dp"
         android:layout_marginTop="26dp"
         android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/inbox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tomato_home"
@@ -151,7 +154,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
+        app:layout_constraintVertical_bias="0.01"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -164,7 +167,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
+        app:layout_constraintVertical_bias="0.009"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -192,7 +195,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.023640662" />
+        app:layout_constraintGuide_percent="0.0" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
