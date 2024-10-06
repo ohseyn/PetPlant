@@ -1,74 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@drawable/onboarding_back"
+    android:padding="16dp"
+    android:weightSum="10">
 
     <!-- 페이지 인디케이터 -->
+
+    <!-- 안내 텍스트 -->
+
+    <!-- 텍스트 입력 박스 -->
+
+    <!-- 다음 버튼 -->
+
     <LinearLayout
         android:id="@+id/page_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="48dp"
+        android:layout_weight="1"
+        android:contentDescription="페이지 인디케이터"
         android:gravity="center"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="페이지 인디케이터">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <View
             android:id="@+id/page1"
             android:layout_width="0dp"
             android:layout_height="4dp"
-            android:layout_weight="1"
-            android:background="@android:color/darker_gray"
             android:layout_margin="4dp"
-            android:contentDescription="첫 번째 페이지 인디케이터"/>
+            android:layout_weight="1"
+            android:background="#B7E1CE"
+            android:contentDescription="첫 번째 페이지 인디케이터" />
 
         <View
             android:id="@+id/page2"
             android:layout_width="0dp"
             android:layout_height="4dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_blue_light"
             android:layout_margin="4dp"
-            android:contentDescription="두 번째 페이지 인디케이터"/>
+            android:layout_weight="1"
+            android:background="#02AE7A"
+            android:contentDescription="두 번째 페이지 인디케이터" />
 
         <View
             android:id="@+id/page3"
             android:layout_width="0dp"
             android:layout_height="4dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_blue_light"
             android:layout_margin="4dp"
-            android:contentDescription="세 번째 페이지 인디케이터"/>
+            android:layout_weight="1"
+            android:background="#B7E1CE"
+            android:contentDescription="세 번째 페이지 인디케이터" />
     </LinearLayout>
 
-    <!-- 안내 텍스트 -->
     <TextView
-        android:id="@+id/second_info_text"
+        android:layout_width="234dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="84dp"
+        android:layout_weight="2"
+        android:text="앞으로 함께 할 반려 식물의\n이름을 지어주세요."
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="266dp"
+        android:layout_height="36dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="260dp"
+        android:layout_weight="1"
+        android:text="반려식물 이름 설정"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="나와 함께할 반려 식물의 이름을 정해봅시다."
-        android:textSize="16sp"
         android:layout_gravity="start"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="두 번째 화면 설명 텍스트" />
+        android:layout_marginTop="296dp"
+        android:text="*초성, 띄어쓰기, 특수문자는 입력할 수 없어요."
+        android:textColor="#999999"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 텍스트 입력 박스 -->
     <EditText
         android:id="@+id/name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="이름을 입력해 주세요"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="324dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="한글 1~5자로 입력해주세요."
         android:padding="12dp"
-        android:background="@drawable/edit_text_background" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 다음 버튼 -->
     <Button
         android:id="@+id/next_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="다음 버튼"
-        android:text="다음" />
-</LinearLayout>
+        android:layout_marginTop="648dp"
+        android:backgroundTint="#02AE7A"
+        android:text="다음"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="39dp"
+        android:layout_height="38dp"
+        android:background="@drawable/ic_back"
+        android:backgroundTint="@color/colorTextSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

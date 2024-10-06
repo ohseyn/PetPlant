@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="@drawable/smell_back"
     android:padding="16dp">
 
     <!-- Back arrow and header -->
@@ -21,7 +21,8 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
             android:background="@drawable/ic_back_arrow"
-            android:contentDescription="Back" />
+            android:contentDescription="Back"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <!-- Header Text -->
         <TextView
@@ -105,7 +106,7 @@ android:gravity="end" />
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
-        android:background="@android:color/darker_gray"
+        android:backgroundTint="#F7608F"
         android:text="다음"
         android:textColor="@android:color/white"
         android:textSize="16sp"

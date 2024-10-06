@@ -40,7 +40,7 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bell2"
             android:layout_width="32dp"
             android:layout_height="30dp"
@@ -398,10 +398,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/user_home"
-                android:layout_width="35dp"
-                android:layout_height="32dp"
+                android:layout_width="32dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="188dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/mynaui_home"
@@ -409,23 +409,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-            <Button
-                android:id="@+id/user_inbox"
-                android:layout_width="43dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/mynaui_inbox"
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/inbox"
+                android:layout_width="35dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/mynaui_inbox2"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-            <Button
-                android:id="@+id/profile2"
-                android:layout_width="40dp"
-                android:layout_height="35dp"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/profile"
+                android:layout_width="32dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="40dp"
-                android:layout_marginBottom="35dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/mynaui_user"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
