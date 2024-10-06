@@ -77,7 +77,7 @@ public class profile extends AppCompatActivity {
             }
         });
 
-        Button user_inbox = findViewById(R.id.user_inbox);
+        Button user_inbox = findViewById(R.id.inbox);
         user_inbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

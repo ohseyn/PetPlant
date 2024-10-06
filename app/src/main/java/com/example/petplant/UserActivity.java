@@ -3,26 +3,26 @@ package com.example.petplant;
 import com.google.firebase.Timestamp;
 
 public class UserActivity {
-    private String documentId;  // 문서 ID
-    private String userName;    // 사용자 이름
-    private String activityDescription; // 활동 설명
-    private Timestamp timestamp;   // 활동 시간 (Firestore의 Timestamp 타입)
-    private String imageUri;    // 이미지 URI (대소문자 확인)
-    private String textActivity; // 활동 텍스트 설명
-    private String userId;      // 사용자 ID
-    private String plantName;   // 식물 이름
-    private int likes;          // 좋아요 수
+    private String documentId;
+    private String userName;
+    private String activityDescription;
+    private Timestamp timestamp;
+    private String imageUrI;    // 필드명을 Firestore에 맞춰서 수정
+    private String textActivity;
+    private String userId;
+    private String plantName;
+    private int likes;
 
-    // 빈 생성자 (Firebase에서 객체로 매핑할 때 필요)
+    // 빈 생성자
     public UserActivity() {}
 
     // 생성자
-    public UserActivity(String documentId, String userName, String activityDescription, Timestamp timestamp, String imageUri, String textActivity, String userId, String plantName, int likes) {
+    public UserActivity(String documentId, String userName, String activityDescription, Timestamp timestamp, String imageUrI, String textActivity, String userId, String plantName, int likes) {
         this.documentId = documentId;
         this.userName = userName;
         this.activityDescription = activityDescription;
         this.timestamp = timestamp;
-        this.imageUri = imageUri;
+        this.imageUrI = imageUrI;  // 필드명 수정
         this.textActivity = textActivity;
         this.userId = userId;
         this.plantName = plantName;
@@ -46,8 +46,8 @@ public class UserActivity {
         return timestamp;
     }
 
-    public String getImageUri() {
-        return imageUri;
+    public String getImageUrI() {
+        return imageUrI;  // 필드명 수정
     }
 
     public String getTextActivity() {
@@ -83,8 +83,8 @@ public class UserActivity {
         this.timestamp = timestamp;
     }
 
-    public void setImageUri(String imageUri) {
-        this.imageUri = imageUri;
+    public void setImageUrI(String imageUrI) {
+        this.imageUrI = imageUrI;  // 필드명 수정
     }
 
     public void setTextActivity(String textActivity) {

@@ -62,10 +62,10 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         }
 
         // 이미지 로드
-        if (activity.getImageUri() != null && !activity.getImageUri().isEmpty()) {
+        if (activity.getImageUrI() != null && !activity.getImageUrI().isEmpty()) {
             holder.imageActivity.setVisibility(View.VISIBLE);  // 이미지가 있으면 보여줌
             Glide.with(holder.itemView.getContext())
-                    .load(activity.getImageUri())
+                    .load(activity.getImageUrI())
                     .into(holder.imageActivity);
         } else {
             holder.imageActivity.setVisibility(View.GONE);  // 이미지가 없으면 숨김
