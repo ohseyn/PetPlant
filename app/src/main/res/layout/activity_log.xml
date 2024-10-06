@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityLogActivity">
+
+    <!-- TabLayout -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_friends_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="친구들의 활동" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_my_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 활동" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <!-- 날짜 및 이전/다음 버튼 -->
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2024.05.16(목)"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center" />
+
+    <ImageButton
+        android:id="@+id/buttonPrevious"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_left"
+        app:layout_constraintTop_toTopOf="@id/textDate"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/buttonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintTop_toTopOf="@id/textDate"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- RecyclerView for Activity Log -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_activities"
+        android:layout_width="412dp"
+        android:layout_height="547dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/inbox"
+        app:layout_constraintTop_toBottomOf="@id/textDate"
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints" />
+
+    <!-- Bottom Navigation Buttons -->
+
+    <Button
+        android:id="@+id/inbox"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/mynaui_inbox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/go_profile"
+        android:layout_width="31dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/mynaui_user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/go_home"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/mynaui_home2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

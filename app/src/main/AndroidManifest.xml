@@ -131,6 +131,21 @@
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".ActivityLogActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".ActivityLogAdapter"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".UserActivity"
+            android:exported="true">
+        </activity>
+
 
         <activity
             android:name=".home_waterrequest_complete"
@@ -236,10 +251,6 @@
 
         <activity
             android:name=".PopupActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".ActivityLog"
             android:exported="true" />
 
         <receiver

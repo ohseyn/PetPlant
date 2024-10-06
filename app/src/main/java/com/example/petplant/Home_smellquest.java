@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -142,7 +143,7 @@ public class Home_smellquest extends AppCompatActivity {
         activity.put("imageUrI", "");
         activity.put("plantName", thisIntent.getStringExtra("plantName")); // Reference to the plant document
         activity.put("textActivity", textActivity);
-        activity.put("timestamp", timeStamp);
+        activity.put("timestamp", Timestamp.now());
         activity.put("userId", user.getUid().toString());
 
         db.collection("activities").document(description)  // description을 문서 ID로 설정

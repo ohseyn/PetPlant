@@ -82,7 +82,7 @@ public class HomeMainActivity extends AppCompatActivity {
         inbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), inbox_friend.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityLogActivity.class);
                 startActivity(intent);
             }
         });
