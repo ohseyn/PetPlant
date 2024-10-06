@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 기본 색상 정의 -->
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="statusBarColor">#00000000</color>
-    <!-- 추가로 사용할 색상들 -->
-    <color name="colorTextPrimary">#FFFFFF</color>
-    <color name="colorTextSecondary">#000000</color>
+    <color name="water_color">#3F90E3</color>
+    <color name="smell_color">#F7608F</color>
+    <color name="remove_color">#46C140</color>
 </resources>

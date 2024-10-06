@@ -77,14 +77,6 @@ public class profile extends AppCompatActivity {
             }
         });
 
-        Button user_inbox = findViewById(R.id.user_inbox);
-        user_inbox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), inbox_friend.class);
-                startActivity(intent);
-            }
-        });
 
         Button edit_profile = findViewById(R.id.user_edit);
         edit_profile.setOnClickListener(new View.OnClickListener() {

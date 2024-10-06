@@ -62,7 +62,7 @@ public class removequest_message extends AppCompatActivity {
     }
 
     public void onButtonClick(View view) {
-        Intent intent = new Intent(this, waterquest_clear_answer.class);
+        Intent intent = new Intent(this, reward_removequest.class);
         intent.putExtra("photoPath", photoPath);
         startActivity(intent);
     }

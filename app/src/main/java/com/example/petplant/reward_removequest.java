@@ -7,12 +7,12 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class reward_quiz2 extends AppCompatActivity {
+public class reward_removequest extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reward_quiz2);
+        setContentView(R.layout.activity_reward_removequest);
 
         Button go_qiuz2 = findViewById(R.id.go_quiz2);
         go_qiuz2.setOnClickListener(new View.OnClickListener() {

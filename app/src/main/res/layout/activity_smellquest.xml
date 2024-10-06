@@ -12,27 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <!-- Back Arrow -->
-        <Button
-            android:id="@+id/back_home"
-            android:layout_width="29dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/ic_back_arrow"
-            android:contentDescription="Back"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <!-- Header Text -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="글 작성하기"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-    </LinearLayout>
+        android:gravity="center_vertical"/>
 
     <!-- Question text -->
     <TextView
@@ -53,15 +33,6 @@
     android:gravity="center">
 
     <!-- Character Design Text -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="향"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:gravity="center"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="8dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -100,6 +71,7 @@ android:textColor="@android:color/darker_gray"
 android:gravity="end" />
 
 
+
     <Button
         android:id="@+id/nextButton3"
         android:layout_width="match_parent"
@@ -107,7 +79,7 @@ android:gravity="end" />
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="#F7608F"
-        android:text="다음"
+        android:text="완료"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         tools:ignore="TextContrastCheck" />

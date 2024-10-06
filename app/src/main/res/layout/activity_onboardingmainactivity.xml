@@ -7,7 +7,6 @@
     android:background="@drawable/onboarding_back">
 
     <TextView
-        android:id="@+id/info_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -15,14 +14,15 @@
         android:text="나와 함께할\n반려식물을 골라주세요."
         android:textSize="20sp"
         tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="66dp" />
+        tools:layout_editor_absoluteY="66dp"
+        tools:ignore="MissingConstraints" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="39dp"
         android:layout_height="38dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/ic_back"
-        android:backgroundTint="@color/colorTextSecondary"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
         tools:layout_editor_absoluteX="-4dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

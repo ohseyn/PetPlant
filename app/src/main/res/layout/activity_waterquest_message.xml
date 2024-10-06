@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_back"
+    android:background="@drawable/waterback"
     tools:context=".MainActivity">
 
 
@@ -103,23 +103,6 @@
         app:srcCompat="@drawable/rectangle187"
         tools:ignore="MissingConstraints" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/choose_button"
-        android:layout_width="238dp"
-        android:layout_height="33dp"
-        android:background="@drawable/button_round"
-        android:backgroundTint="#FFFFFF"
-        android:fontFamily="@font/suit_bold"
-        android:onClick="onButtonClick"
-        android:text="목이 마를 땐 언제든 불러!"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.761"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7"
-        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
         android:layout_width="243dp"
@@ -150,15 +133,18 @@
         android:layout_width="377dp"
         android:layout_height="46dp"
         android:layout_marginTop="700dp"
-        android:backgroundTint="#46C140"
-        android:text="다음"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck" />
+        android:backgroundTint="@drawable/button_background"
+        android:text="대화 마치기"
+        android:textColor="#FFFFFF"
+        android:enabled="false"
+        android:onClick="onButtonClick"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="TouchTargetSizeCheck" />
+
 
     <ImageView
-        android:id="@+id/imageView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -167,5 +153,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/good"
         tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/talk_balloon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="580dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.039"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/text_balloon"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/responseText"
+        android:layout_width="53dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="592dp"
+        android:fontFamily="@font/tmoneyroundwindregular"
+        android:text="좋아요!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

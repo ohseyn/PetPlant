@@ -1,6 +1,6 @@
 package com.example.petplant;
 
-import static com.example.petplant.R.layout.activity_reward_qiuz3;
+import static com.example.petplant.R.layout.activity_reward_smellquest;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +9,12 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class reward_quiz3 extends AppCompatActivity {
+public class reward_smellquest extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(activity_reward_qiuz3);
+        setContentView(activity_reward_smellquest);
 
 
         Button complete3 = (Button) findViewById(R.id.complete3);

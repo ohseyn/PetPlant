@@ -64,7 +64,6 @@ public class Home_smellquest extends AppCompatActivity {
         inputEditText = findViewById(R.id.inputEditText);
         charCountTextView = findViewById(R.id.charCountTextView);
         nextButton3 = findViewById(R.id.nextButton3);
-        back_home = findViewById(R.id.back_home);
 
         // Set initial character count
         charCountTextView.setText("0/" + MAX_CHAR_COUNT);
@@ -102,15 +101,7 @@ public class Home_smellquest extends AppCompatActivity {
                 uploadImageToStorage(null);
             }
         });
-
-        Button back_home = findViewById(R.id.back_home);
-        back_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
-                startActivity(intent);
-            }
-        });
+        ;
 
         Button nextButton3 = findViewById(R.id.nextButton3);
         nextButton3.setOnClickListener(new View.OnClickListener() {

@@ -15,7 +15,8 @@ public class waterquiz_correct extends AppCompatActivity {
 
     public void onButtonClick(View view)
     {
-        Intent intent = new Intent(this, home_waterrequest_complete.class);
+        Intent intent = new Intent(this, HomeMainActivity.class);
+
         startActivity(intent);
     }
 

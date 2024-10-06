@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bell"
         android:layout_width="29dp"
         android:layout_height="27dp"
@@ -257,7 +257,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/go_profile"
         android:layout_width="31dp"
         android:layout_height="30dp"
@@ -268,7 +268,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/go_home"
         android:layout_width="34dp"
         android:layout_height="32dp"
@@ -279,7 +279,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/inbox"
         android:layout_width="34dp"
         android:layout_height="32dp"

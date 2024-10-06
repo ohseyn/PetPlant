@@ -67,7 +67,7 @@
                 android:layout_height="146dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/detail"
-                app:civ_border_color="@color/colorTextPrimary"
+                app:civ_border_color="#ffffff"
                 app:civ_border_overlay="true"
                 app:civ_border_width="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -404,7 +404,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="188dp"
                 android:layout_marginBottom="32dp"
-                android:background="@drawable/mynaui_home"
+                android:background="@drawable/mynaui_home2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -423,11 +423,11 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/profile"
-                android:layout_width="32dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="32dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="32dp"
-                android:background="@drawable/mynaui_user"
+                android:background="@drawable/mynaui_user2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
