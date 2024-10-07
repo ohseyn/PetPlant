@@ -66,11 +66,6 @@ public class SecondOnboardingActivity extends AppCompatActivity {
     private void updatePageIndicator(int position) {
         for (int i = 0; i < pageIndicator.getChildCount(); i++) {
             View indicator = pageIndicator.getChildAt(i);
-            if (i == position) {
-                indicator.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
-            } else {
-                indicator.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-            }
         }
     }
 

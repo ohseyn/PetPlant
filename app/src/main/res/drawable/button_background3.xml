@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false" android:color="#A7E0A4"/> <!-- 비활성화된 상태  -->
+    <item android:state_enabled="true" android:color="#46C140"/>  <!-- 활성화된 상태  -->
+</selector>

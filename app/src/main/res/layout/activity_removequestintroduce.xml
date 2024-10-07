@@ -5,21 +5,21 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/removequestback"
     tools:context=".Home_waterquestintroduce">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E8F5E9"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-63dp">
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="51dp">
 
 
         <TextView
-            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -34,11 +34,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="-25dp"
             android:layout_marginTop="40dp"
+            android:layout_marginBottom="-25dp"
             android:text="활동하는 모습을 사진으로 남겨봅시다."
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/instructions_description"
@@ -54,11 +55,11 @@
         <FrameLayout
             android:id="@+id/video_placeholder"
             android:layout_width="332dp"
-            android:layout_height="245dp"
+            android:layout_height="344dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="20dp"
-            android:background="#C8E6C9">
+            android:background="#46C140">
 
             <!-- 동영상이 들어갈 자리입니다 -->
             <!-- 여기에 VideoView나 다른 동영상 플레이어를 추가할 수 있습니다 -->
@@ -69,10 +70,10 @@
             android:id="@+id/instructions_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="30dp"
-            android:layout_gravity="center_horizontal"
-            android:text="    방울토마토는 자라면서 곁순이 생깁니다."
+            android:text="방울토마토는 물이 많이 필요한 식물입니다."
             android:textColor="#000000"
             android:textSize="14sp" />
 
@@ -81,19 +82,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="      방울토마토의 원줄기가 양분을 잘 공급받아\n            자라도록, 원줄기 옆에 생기는 싹인\n
-                         곁순을 땁니다."
+            android:text="방울토마토 화분의 겉 흙이 말랐을 때,\n물을 흠뻑 줍니다."
+            android:gravity="center"
             android:textColor="#000000"
             android:textSize="14sp" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/do_quest2"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/do_quest_remove"
         android:layout_width="372dp"
         android:layout_height="54dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/button_round"
+        android:background="@drawable/button_border3"
+        android:backgroundTint="#46C140"
         android:onClick="onButtonClick"
         android:text="사진 찍으러 가기"
         android:textColor="#FFFFFF"
@@ -104,5 +106,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

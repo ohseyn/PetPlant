@@ -19,9 +19,9 @@ import java.io.IOException;
 
 public class smellquest_message extends AppCompatActivity {
     private String photoPath;
-    private Button answer1, answer2, nextButton;
-    private TextView responseText; // "좋아요!"를 표시할 TextView
-    private ImageView talkBalloon; // 이미지 표시를 위한 ImageView
+    private Button smell_answer1, smell_answer2, next_button_smell;
+    private TextView responseText_smell; // "좋아요!"를 표시할 TextView
+    private ImageView talkBalloon_smell; // 이미지 표시를 위한 ImageView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +29,14 @@ public class smellquest_message extends AppCompatActivity {
         setContentView(R.layout.activity_smellquest_message);
 
         // UI 요소 초기화
-        answer1 = findViewById(R.id.answer1);
-        answer2 = findViewById(R.id.answer2);
-        nextButton = findViewById(R.id.next_button2);
-        responseText = findViewById(R.id.responseText); // TextView 연결
-        talkBalloon = findViewById(R.id.talk_balloon); // ImageView 연결
+        smell_answer1 = findViewById(R.id.smell_answer1);
+        smell_answer2 = findViewById(R.id.smell_answer2);
+        next_button_smell = findViewById(R.id.next_button_smell);
+        responseText_smell = findViewById(R.id.responseText_smell); // TextView 연결
+        talkBalloon_smell = findViewById(R.id.talk_balloon_smell); // ImageView 연결
 
         // "대화마치기" 버튼 비활성화 (처음엔 연한 색으로 설정)
-        nextButton.setEnabled(false);
+        next_button_smell.setEnabled(false);
 
         // 사진 경로 가져오기
         photoPath = getIntent().getStringExtra("photoPath");
@@ -48,25 +48,25 @@ public class smellquest_message extends AppCompatActivity {
         }
 
         // answer1 클릭 리스너 설정
-        answer1.setOnClickListener(new View.OnClickListener() {
+        smell_answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectButton(answer1);
+                selectButton(smell_answer1);
                 showResponseTextAndImage(); // "좋아요!" 메시지와 이미지를 표시
             }
         });
 
         // answer2 클릭 리스너 설정
-        answer2.setOnClickListener(new View.OnClickListener() {
+        smell_answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectButton(answer2);
+                selectButton(smell_answer2);
                 showResponseTextAndImage(); // "좋아요!" 메시지와 이미지를 표시
             }
         });
 
         // next_button 클릭 리스너 설정
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        next_button_smell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonClick(v);  // 버튼 클릭 시 reward_quiz로 이동
@@ -77,14 +77,14 @@ public class smellquest_message extends AppCompatActivity {
     // 버튼 선택 시 호출되는 메서드
     private void selectButton(Button selectedButton) {
         // answer1과 answer2의 배경을 초기화
-        resetButtonBorder(answer1);
-        resetButtonBorder(answer2);
+        resetButtonBorder(smell_answer1);
+        resetButtonBorder(smell_answer2);
 
         // 선택된 버튼에 테두리 색상 적용
         setButtonBorder(selectedButton, R.color.smell_color);
 
         // "대화마치기" 버튼 활성화
-        nextButton.setEnabled(true);  // 활성화되면 색상이 진해짐
+        next_button_smell.setEnabled(true);  // 활성화되면 색상이 진해짐
     }
 
     // 버튼의 테두리 색상 변경
@@ -101,8 +101,8 @@ public class smellquest_message extends AppCompatActivity {
 
     // "좋아요!" 메시지와 이미지를 표시하는 메서드
     private void showResponseTextAndImage() {
-        responseText.setVisibility(View.VISIBLE); // 텍스트 보이기
-        talkBalloon.setVisibility(View.VISIBLE); // 이미지 보이기
+        responseText_smell.setVisibility(View.VISIBLE); // 텍스트 보이기
+        talkBalloon_smell.setVisibility(View.VISIBLE); // 이미지 보이기
     }
 
     // 이미지 회전 메서드
@@ -141,7 +141,7 @@ public class smellquest_message extends AppCompatActivity {
     // "대화마치기" 버튼 클릭 시 호출되는 메서드
     public void onButtonClick(View view) {
         // next_button이 활성화된 후에만 reward_quiz로 이동
-        if (nextButton.isEnabled()) {
+        if (next_button_smell.isEnabled()) {
             Intent intent = new Intent(this, reward_smellquest.class); // reward_quiz 액티비티로 이동
             intent.putExtra("photoPath", photoPath); // 필요시 데이터 전달
             startActivity(intent); // reward_quiz 액티비티 시작

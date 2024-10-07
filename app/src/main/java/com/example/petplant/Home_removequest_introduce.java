@@ -77,7 +77,7 @@ public class Home_removequest_introduce extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
 
-        Button button = findViewById(R.id.do_quest2);
+        Button button = findViewById(R.id.do_quest_remove);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

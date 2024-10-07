@@ -1,54 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp">
 
     <!-- 캐릭터 이름 -->
+
+    <ImageView
+        android:id="@+id/onboarding_back"
+        android:layout_width="428dp"
+        android:layout_height="546dp"
+        android:layout_marginTop="-10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/onboardingrectangle" />
+
+    <!-- 캐릭터 난이도 -->
+
+    <!-- 동적으로 바뀔 텍스트 (특징/가이드) -->
+
     <TextView
         android:id="@+id/charactername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="방울 토마토"
+        android:layout_marginTop="20dp"
         android:background="@drawable/onboarding_rectangle"
+        android:gravity="center"
+        android:text="방울 토마토"
         android:textSize="19sp"
         android:textStyle="bold"
-        android:textAlignment="center"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp" />
-
-    <!-- 캐릭터 이미지 -->
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/characterimage"
-        android:layout_width="128dp"
-        android:layout_height="209dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/tomato_character_home" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/tomato_character_home"
+        tools:ignore="MissingConstraints" />
 
-    <!-- 캐릭터 난이도 -->
     <ImageView
         android:id="@+id/characterdifficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="332dp"
         android:src="@drawable/stars"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp" />
-
-    <!-- 동적으로 바뀔 텍스트 (특징/가이드) -->
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/changeablecontent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="방울토마토는 비타민이 풍부한\n영양 만점 열매채소입니다.\n생으로 먹기도 하고, 파스타나 샐러드 등\n다양한 요리 재료로 쓰기도 합니다.\n가꾸기 쉽고 건강하게 잘 자라기 때문에\n다양한 장소에서 가꿀 수 있습니다."
-        android:textSize="16sp"
         android:layout_gravity="center"
+        android:layout_marginTop="364dp"
         android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:text="방울토마토는 비타민이 풍부한\n영양 만점 열매채소입니다.\n생으로 먹기도 하고, 파스타나 샐러드 등\n다양한 요리 재료로 쓰기도 합니다.\n가꾸기 쉽고 건강하게 잘 자라기 때문에\n다양한 장소에서 가꿀 수 있습니다."
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

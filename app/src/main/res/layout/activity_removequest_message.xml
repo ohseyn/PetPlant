@@ -5,37 +5,180 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_back"
     tools:context=".MainActivity">
+
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="217dp"
-        android:layout_height="171dp"
+        android:layout_width="212dp"
+        android:layout_height="196dp"
         android:layout_marginStart="99dp"
-        android:layout_marginTop="83dp"
         android:layout_marginEnd="99dp"
         android:layout_marginBottom="212dp"
-        app:layout_constraintBottom_toTopOf="@+id/answer2"
+        app:layout_constraintBottom_toTopOf="@+id/remove_answer1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.383" />
 
-    <Button
-        android:id="@+id/answer2"
-        android:layout_width="300dp"
-        android:layout_height="37dp"
-        android:layout_centerInParent="true"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/remove_answer1"
+        android:layout_width="238dp"
+        android:layout_height="33dp"
         android:background="@drawable/button_round"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/suit_bold"
         android:onClick="onButtonClick"
-        android:text="앞으로도 열심히 곁순을 제거해줄게."
+        android:text="다음에도 시원하고 맛있는 물을 줄게."
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.765"
+        app:layout_constraintHorizontal_bias="0.763"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.639" />
+        app:layout_constraintVertical_bias="0.64"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/remove_answer2"
+        android:layout_width="238dp"
+        android:layout_height="33dp"
+        android:background="@drawable/button_round"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/suit_bold"
+        android:onClick="onButtonClick"
+        android:text="목이 마를 땐 언제든 불러!"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.761"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7"
+        tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck" />
+
+    <ImageView
+        android:layout_width="19dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.512"
+        app:srcCompat="@drawable/water_diamond" />
+
+    <ImageView
+        android:layout_width="139dp"
+        android:layout_height="185dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.551"
+        app:srcCompat="@drawable/water" />
+
+    <ImageView
+        android:layout_width="78dp"
+        android:layout_height="152dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="292dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/tomato_character_home"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="456dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/rectangle187"
+        tools:ignore="MissingConstraints" />
+
+
+    <ImageView
+        android:layout_width="243dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="248dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/rectangle185"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="264dp"
+        android:fontFamily="@font/tmoneyroundwindextrabold"
+        android:text="물이 너무\n시원하고 맛있어요!"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.781"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <Button
+        android:id="@+id/next_button_remove"
+        android:layout_width="377dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="700dp"
+        android:backgroundTint="@drawable/button_background3"
+        android:enabled="false"
+        android:onClick="onButtonClick"
+        android:text="대화 마치기"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/good"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/talk_balloon_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="580dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.039"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/text_balloon"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/responseText_remove"
+        android:layout_width="53dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="592dp"
+        android:fontFamily="@font/tmoneyroundwindregular"
+        android:text="좋아요!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

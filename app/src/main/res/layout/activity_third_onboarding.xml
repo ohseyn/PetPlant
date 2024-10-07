@@ -71,10 +71,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/start_button"
+        android:id="@+id/start_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="648dp"
+        android:layout_marginTop="692dp"
         android:backgroundTint="#02AE7A"
         android:text="시작하기"
         app:layout_constraintEnd_toEndOf="parent"

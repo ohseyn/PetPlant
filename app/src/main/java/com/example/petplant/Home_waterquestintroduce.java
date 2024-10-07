@@ -71,7 +71,7 @@ public class Home_waterquestintroduce extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         // do_quest 버튼을 클릭하면 카메라를 호출
-        Button button = findViewById(R.id.do_quest);
+        Button button = findViewById(R.id.do_quest_water);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

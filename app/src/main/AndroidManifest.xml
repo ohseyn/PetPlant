@@ -30,7 +30,7 @@
         </activity>
 
         <activity
-            android:name=".LoginMainActivity"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,23 +75,19 @@
             android:exported="true">
         </activity>
 
+
         <activity
-            android:name=".smellquest_clearanswer"
+            android:name=".reward_waterquest"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".reward_quiz"
+            android:name=".reward_smellquest"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".reward_quiz2"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".reward_quiz3"
+            android:name=".reward_removequest"
             android:exported="true">
         </activity>
 
@@ -105,15 +101,6 @@
             android:exported="true">
         </activity>
 
-        <activity
-            android:name=".waterquest_clear_answer"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".removequest_clear_answer"
-            android:exported="true">
-        </activity>
 
 
         <activity
@@ -147,10 +134,6 @@
         </activity>
 
 
-        <activity
-            android:name=".home_waterrequest_complete"
-            android:exported="true">
-        </activity>
 
         <activity
             android:name=".inbox_user"
@@ -234,7 +217,7 @@
 
 
         <activity
-            android:name=".Login"
+            android:name=".LoginMainActivity"
             android:exported="true">
         </activity>
 

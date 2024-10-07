@@ -1,6 +1,8 @@
 package com.example.petplant;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,22 +16,22 @@ public class reward_removequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward_removequest);
 
-        Button go_qiuz2 = findViewById(R.id.go_quiz2);
-        go_qiuz2.setOnClickListener(new View.OnClickListener() {
+        Button go_quiz = findViewById(R.id.go_quiz_removequest);
+        go_quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), remove_oxquiz_start.class);
+                Intent intent = new Intent(getApplicationContext(), water_oxquiz_start.class);
                 startActivity(intent);
             }
         });
 
-        Button complete2 = findViewById(R.id.complete2);
-        complete2.setOnClickListener(new View.OnClickListener() {
+        Button complete = findViewById(R.id.complete_removequest);
+        complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 두 번째 퀘스트 완료 상태를 HomeMainActivity에 전달
+                // 완료 버튼을 누르면 HomeMainActivity로 돌아가면서 완료 상태를 전달
                 Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
-                intent.putExtra("completed2", true);  // 두 번째 퀘스트 완료 전달
+                intent.putExtra("completed", true); // 완료 상태 전달
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

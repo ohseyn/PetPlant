@@ -99,7 +99,10 @@
         android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@id/loginButton"
         tools:ignore="MissingConstraints,TextSizeCheck"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="0dp"

@@ -1,23 +1,21 @@
 package com.example.petplant;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class OnboardingActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
-    private LinearLayout pageIndicator;
     private Button chooseButton;
 
     @Override
@@ -26,7 +24,6 @@ public class OnboardingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_onboarding);
 
         viewPager = findViewById(R.id.viewPager);
-        pageIndicator = findViewById(R.id.page_indicator);
         chooseButton = findViewById(R.id.choose_button);
 
         // 페이지 목록 설정
@@ -36,59 +33,24 @@ public class OnboardingActivity extends AppCompatActivity {
         OnboardingPagerAdapter adapter = new OnboardingPagerAdapter(pages);
         viewPager.setAdapter(adapter);
 
-        // 페이지 변화 리스너
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
-
-            @Override
-            public void onPageSelected(int position) {
-                // 인디케이터는 고정되며 슬라이드 시 변경되지 않음
-                if (position == pages.size() - 1) {
-                    chooseButton.setText("선택하기");
-                } else {
-                    chooseButton.setText("선택하기");
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {}
-        });
-
-        // 버튼 클릭 리스너
+        // 버튼 클릭 리스너: 마지막 페이지일 때만 두 번째 온보딩으로 이동
         chooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() < pages.size() - 1) {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 } else {
-                    startSecondOnboarding();
+                    startSecondOnboarding();  // 두 번째 온보딩으로 이동하는 메서드 호출
                 }
             }
         });
-
-        // 초기 페이지 인디케이터 설정 (슬라이드 시 변경되지 않음)
-        updatePageIndicator(0);
-    }
-
-    // 페이지 인디케이터 업데이트
-    private void updatePageIndicator(int position) {
-        // 인디케이터는 고정되어 있으며, 슬라이드할 때 변경되지 않음
-        for (int i = 0; i < pageIndicator.getChildCount(); i++) {
-            View indicator = pageIndicator.getChildAt(i);
-            if (i == position) {
-                indicator.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
-            } else {
-                indicator.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-            }
-        }
     }
 
     // 두 번째 온보딩 화면으로 이동
     private void startSecondOnboarding() {
         Intent intent = new Intent(OnboardingActivity.this, SecondOnboardingActivity.class);
         startActivity(intent);
-        finish();
+        finish();  // 현재 액티비티를 종료
     }
 
     // 페이지 정보 클래스
@@ -126,9 +88,19 @@ public class OnboardingActivity extends AppCompatActivity {
             View view = getLayoutInflater().inflate(R.layout.onboarding_page, null);
 
             TextView content = view.findViewById(R.id.changeablecontent);
+            ImageView onboardingBack = view.findViewById(R.id.onboarding_back); // 여기서 onboarding_back을 참조
 
             OnboardingPage page = pages.get(position);
             content.setText(page.content);
+
+            // "onboarding_back" 클릭 시 "선택하기" 버튼 활성화 및 색상 변경
+            onboardingBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    chooseButton.setEnabled(true);
+                    chooseButton.setBackgroundColor(Color.parseColor("#02AE7A"));
+                }
+            });
 
             ((ViewPager) container).addView(view);
             return view;

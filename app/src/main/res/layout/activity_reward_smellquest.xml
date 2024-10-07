@@ -11,7 +11,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/complete3"
+        android:id="@+id/complete_smell"
         android:layout_width="368dp"
         android:layout_height="44dp"
         android:layout_centerInParent="true"
@@ -68,7 +68,7 @@
         android:layout_marginTop="512dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:gravity="center"
-        android:text="가꾸기 활동을 멋지게 끝냈어요.\n\n보상으로                    을 줄게요!"
+        android:text="친해지기 활동을 멋지게 끝냈어요.\n\n보상으로                    을 줄게요!"
         android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

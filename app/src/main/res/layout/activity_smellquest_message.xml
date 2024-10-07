@@ -10,7 +10,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/answer1"
+        android:id="@+id/smell_answer1"
         android:layout_width="238dp"
         android:layout_height="33dp"
         android:background="@drawable/button_round"
@@ -28,7 +28,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/answer2"
+        android:id="@+id/smell_answer2"
         android:layout_width="238dp"
         android:layout_height="33dp"
         android:background="@drawable/button_round"
@@ -114,7 +114,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/next_button2"
+        android:id="@+id/next_button_smell"
         android:layout_width="377dp"
         android:layout_height="46dp"
         android:layout_marginTop="700dp"
@@ -128,30 +128,30 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
-        android:id="@+id/talk_balloon"
+        android:id="@+id/talk_balloon_smell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="580dp"
+        android:layout_marginTop="368dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.039"
+        app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/text_balloon"
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/responseText"
-        android:layout_width="53dp"
-        android:layout_height="22dp"
+        android:id="@+id/responseText_smell"
+        android:layout_width="71dp"
+        android:layout_height="27dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="592dp"
+        android:layout_marginTop="384dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:text="고마워요!"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

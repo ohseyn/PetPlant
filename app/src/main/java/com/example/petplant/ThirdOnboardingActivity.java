@@ -46,7 +46,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
 
     private ImageView profileImage;
     private EditText nameInput;
-    private Button editButton, startButton;
+    private Button editButton, start_home;
     private Uri imageUri;
     private String profileImageUrl;  // URL을 저장할 변수
 
@@ -68,7 +68,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
         profileImage = findViewById(R.id.profile_image);
         nameInput = findViewById(R.id.name_input);
         editButton = findViewById(R.id.edit_button);
-        startButton = findViewById(R.id.start_button);
+        start_home = findViewById(R.id.start_home);
 
         // '편집' 버튼 클릭 리스너 (갤러리 열기)
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +79,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
         });
 
         // '시작하기' 버튼 클릭 리스너 (Firestore와 Storage에 데이터 저장)
-        startButton.setOnClickListener(new View.OnClickListener() {
+        start_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveProfileData(plantName);
@@ -196,9 +196,9 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
         }
     }
 
-    // 프로필 화면으로 이동
+
     private void startProfileActivity() {
-        Intent intent = new Intent(ThirdOnboardingActivity.this, HomeMainActivity.class);  // profile 액티비티로 이동
+        Intent intent = new Intent(ThirdOnboardingActivity.this, HomeMainActivity.class);
         intent.putExtra("profileImageUri", profileImageUrl);  // 프로필 이미지 URI 전달
         intent.putExtra("name", nameInput.getText().toString());
         intent.putExtra("plantName", getIntent().getStringExtra("plantName"));

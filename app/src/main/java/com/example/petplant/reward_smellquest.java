@@ -17,8 +17,8 @@ public class reward_smellquest extends AppCompatActivity {
         setContentView(activity_reward_smellquest);
 
 
-        Button complete3 = (Button) findViewById(R.id.complete3);
-        complete3.setOnClickListener(new View.OnClickListener() {
+        Button complete_smell = (Button) findViewById(R.id.complete_smell);
+        complete_smell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
