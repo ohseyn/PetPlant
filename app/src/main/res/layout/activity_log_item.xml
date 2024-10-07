@@ -16,74 +16,58 @@
 
         <!-- 사용자 이름 및 활동 설명 -->
 
+        <!-- 활동 이미지와 시간 -->
+
         <TextView
             android:id="@+id/textUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="사용자 이름"
+            android:layout_marginTop="36dp"
+            android:text="식물 이름"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="1dp" />
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/plantSort"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="11dp"
             android:text="활동 제목"
             android:textColor="@android:color/black"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/plantName"
-            app:layout_constraintStart_toEndOf="@+id/textUserName"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
-
-        <!-- 활동 이미지와 시간 -->
 
         <TextView
             android:id="@+id/plantSort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginBottom="17dp"
+            android:layout_marginTop="16dp"
             android:text="방울토마토"
             android:textColor="@android:color/black"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageActivity"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDescription"
             tools:ignore="MissingConstraints" />
 
         <!-- 활동 이미지 -->
 
         <!-- 회색 박스들 (반응 예시) -->
 
-        <TextView
-            android:id="@+id/plantName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:layout_marginBottom="14dp"
-            android:text="토랑이"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageActivity"
-            app:layout_constraintStart_toEndOf="@+id/plantSort"
-            tools:ignore="MissingConstraints" />
-
         <ImageView
             android:id="@+id/imageActivity"
             android:layout_width="125dp"
             android:layout_height="120dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
             android:scaleType="centerCrop"
             android:src="@drawable/guideimage1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textUserName"
             tools:ignore="MissingConstraints" />
 
         <LinearLayout
