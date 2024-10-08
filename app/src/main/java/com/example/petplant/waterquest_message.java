@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.graphics.drawable.GradientDrawable;
 import android.media.ExifInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,11 +41,18 @@ public class waterquest_message extends AppCompatActivity {
 
         // 사진 경로 가져오기
         photoPath = getIntent().getStringExtra("photoPath");
+        Log.d("waterquest_message", "Photo path: " + photoPath);  // 로그로 경로 확인
         if (photoPath != null) {
             ImageView imageView = findViewById(R.id.imageView);
             Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
-            Bitmap rotatedBitmap = rotateImageIfRequired(bitmap, photoPath);
-            imageView.setImageBitmap(rotatedBitmap);
+
+            // 이미지가 null인지 체크
+            if (bitmap == null) {
+                Log.e("waterquest_message", "Bitmap is null, check the photo path or storage permission.");
+            } else {
+                Bitmap rotatedBitmap = rotateImageIfRequired(bitmap, photoPath);
+                imageView.setImageBitmap(rotatedBitmap);
+            }
         }
 
         // answer1 클릭 리스너 설정

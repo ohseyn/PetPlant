@@ -4,10 +4,21 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-07T12:46:14.112496600Z">
+        <DropdownSelection timestamp="2024-10-08T16:21:03.247815Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\82108\.android\avd\Pixel_3_XL_API_35.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=LGMX320L5LFIZPJVBI" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
+      </SelectionState>
+      <SelectionState runConfigName="Home_waterquestintroduce">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2024-10-08T16:36:25.803416500Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=LGMX320L5LFIZPJVBI" />
             </handle>
           </Target>
         </DropdownSelection>
