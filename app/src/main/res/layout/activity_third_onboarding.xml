@@ -103,18 +103,28 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            app:cardCornerRadius="110dp"
+        android:layout_gravity="center"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="true"
+        android:clipToOutline="true">
+
         <ImageView
             android:id="@+id/profile_image"
-            android:layout_width="171dp"
-            android:layout_height="182dp"
-            android:layout_gravity="center"
             android:background="@drawable/profile_frame"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+        android:contentDescription="Profile image" />
+    </androidx.cardview.widget.CardView>
 
-        <androidx.appcompat.widget.AppCompatButton
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/edit_button"
             android:layout_width="40dp"
             android:layout_height="37dp"
