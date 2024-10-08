@@ -277,7 +277,7 @@ public class Home_waterquestintroduce extends AppCompatActivity {
         activity.put("imageUrI", imageUrl);
         activity.put("plantName", thisIntent.getStringExtra("plantName")); // Reference to the plant document
         activity.put("textActivity", "");
-        activity.put("timestamp", timeStamp);
+        activity.put("timestamp", Timestamp.now());
         activity.put("userId", user.getUid());
 
         db.collection("activities").document(description)  // description을 문서 ID로 설정
