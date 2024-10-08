@@ -1,6 +1,8 @@
 package com.example.petplant;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +72,61 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         } else {
             holder.imageActivity.setVisibility(View.GONE);  // 이미지가 없으면 숨김
         }
+
+        // 클릭 이벤트 처리 - activity에 따라 다이얼로그를 띄움
+        holder.itemView.setOnClickListener(v -> {
+            if (activity.getActivityDescription().equals("waterquest") ||
+                    activity.getActivityDescription().equals("removequest")) {
+                // 사진이 있는 활동 (waterquest, removequest)
+                showPictureDialog(holder.itemView.getContext(), activity);
+            } else if (activity.getActivityDescription().equals("smellquest")) {
+                // 텍스트만 있는 활동 (smellquest)
+                showTextDialog(holder.itemView.getContext(), activity);
+            }
+        });
+    }
+
+    // 사진이 있는 다이얼로그를 띄우는 메서드
+    private void showPictureDialog(Context context, UserActivity activity) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.activity_detail_picture);  // 사진이 있는 레이아웃
+
+        TextView title = dialog.findViewById(R.id.textActivityTitle);
+        TextView plantName = dialog.findViewById(R.id.plantName);
+        TextView time = dialog.findViewById(R.id.textActivityTime);
+        ImageView imageActivity = dialog.findViewById(R.id.imageActivity);
+
+        title.setText(activity.getActivityDescription());
+        plantName.setText(activity.getPlantName());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault());
+        time.setText(sdf.format(activity.getTimestamp().toDate()));
+
+        if (activity.getImageUrI() != null && !activity.getImageUrI().isEmpty()) {
+            Glide.with(context).load(activity.getImageUrI()).into(imageActivity);
+        } else {
+            imageActivity.setImageResource(R.drawable.guideimage1);  // 기본 이미지 설정
+        }
+
+        dialog.show();
+    }
+
+    // 텍스트만 있는 다이얼로그를 띄우는 메서드
+    private void showTextDialog(Context context, UserActivity activity) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.activity_detail_dialog);  // 텍스트만 있는 레이아웃
+
+        TextView title = dialog.findViewById(R.id.textActivityTitle);
+        TextView plantName = dialog.findViewById(R.id.plantName);
+        TextView time = dialog.findViewById(R.id.textActivityTime);
+        TextView description = dialog.findViewById(R.id.textActivityDescription);
+
+        title.setText(activity.getActivityDescription());
+        plantName.setText(activity.getPlantName());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault());
+        time.setText(sdf.format(activity.getTimestamp().toDate()));
+        description.setText(activity.getTextActivity());
+
+        dialog.show();
     }
 
     @Override
