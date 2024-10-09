@@ -3,4 +3,10 @@
         <!-- 상태바를 완전히 투명하게 설정 -->
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+    <style name="CustomTabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabBackground">@drawable/tab_selector</item> <!-- 위에서 정의한 tab_selector.xml을 사용 -->
+        <item name="tabIndicatorColor">@color/selected_tab_color</item> <!-- 선택된 탭의 인디케이터 색상 -->
+        <item name="tabSelectedTextColor">@color/selected_tab_text_color</item> <!-- 선택된 탭의 텍스트 색상 -->
+        <item name="tabTextColor">@color/unselected_tab_text_color</item> <!-- 선택되지 않은 탭의 텍스트 색상 -->
+    </style>
 </resources>

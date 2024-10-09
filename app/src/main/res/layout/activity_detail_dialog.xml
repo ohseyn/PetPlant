@@ -4,14 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/rectangle_pink"
     android:padding="16dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textActivityDescription"
         tools:ignore="MissingConstraints">
 
         <View
@@ -91,12 +94,15 @@
 
     <TextView
         android:id="@+id/textActivityDescription"
-        android:layout_width="382dp"
-        android:layout_height="382dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="386dp"
+        android:layout_height="386dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="활동 설명이 여기에 표시됩니다."
         android:textColor="@android:color/black"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plantName"
         tools:ignore="MissingConstraints" />
