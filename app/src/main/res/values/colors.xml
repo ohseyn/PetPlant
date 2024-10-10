@@ -3,4 +3,8 @@
     <color name="water_color">#3F90E3</color>
     <color name="smell_color">#F7608F</color>
     <color name="remove_color">#46C140</color>
+    <color name="selected_tab_color">#E1F3EB</color>
+    <color name="selected_tab_text_color">#02AE7A</color>
+    <color name="unselected_tab_text_color">#999999</color>
+    <color name="unselected_tab_color">#FFFFFF</color>
 </resources>

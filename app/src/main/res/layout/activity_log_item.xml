@@ -9,14 +9,11 @@
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="403dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/rectangle_green"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <!-- 사용자 이름 및 활동 설명 -->
-
-        <!-- 활동 이미지와 시간 -->
 
         <TextView
             android:id="@+id/textUserName"
