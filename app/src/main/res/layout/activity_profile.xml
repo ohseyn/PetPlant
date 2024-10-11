@@ -194,7 +194,7 @@
                             android:id="@+id/friendCount"
                             android:layout_width="93dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="32dp"
+                            android:layout_marginBottom="28dp"
                             android:text="친구 수: 0"
                             android:textAlignment="center"
                             android:textSize="16sp"
