@@ -1,5 +1,7 @@
 package com.example.petplant;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,17 +13,28 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -32,7 +45,9 @@ public class profile extends AppCompatActivity {
     private CircleImageView profileImage;
     private TextView name, plantName, friendCount;
     private Button addFriendButton, logoutButton;
-
+    private CardView friendCard;
+    private CollectionReference postsCollectionRef;
+    ArrayList<String> friends = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +58,16 @@ public class profile extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         // UI 요소 연결
-        profileImage = findViewById(R.id.profileImageView);
+        profileImage = findViewById(R.id.friendProfileImageView);
         name = findViewById(R.id.name);
         plantName = findViewById(R.id.plantName);
         friendCount = findViewById(R.id.friendCount); // 친구 수 표시
         addFriendButton = findViewById(R.id.addFriendButton); // 친구 추가 버튼
+        friendCard = findViewById(R.id.friendCardView1);
 
         // Firebase에서 프로필 정보를 가져와 설정
         getProfileImageFromFirebase();
+        getFriends();
         getFriendCount();
 
         // 친구 추가 버튼 클릭 시 친구 추가 다이얼로그 표시
@@ -73,6 +90,22 @@ public class profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        CardView friendCard = findViewById(R.id.friendCardView1); // friendCard 초기화
+        friendCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (friends != null && !friends.isEmpty()) { // 리스트가 비어있지 않은지 확인
+                    Log.d("friends", friends.get(0)); // 친구 목록 출력
+                } else {
+                    Log.d("friends", "No friends available"); // 친구가 없을 때 로그
+                }
+
+                Intent intent = new Intent(getApplicationContext(), FriendList.class);
+                intent.putExtra("friends", friends);
                 startActivity(intent);
             }
         });
@@ -170,7 +203,68 @@ public class profile extends AppCompatActivity {
                         }
                     }
                 });
+
+
+
+
+
+        
+
     }
+    private void getFriends() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        db.collection("users")
+                .document(userId)
+                .collection("friends")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                friends.add(document.getString("userId"));
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+//        // Get a reference to the 'friends' subcollection within the user's document
+//        CollectionReference friendsCollectionRef = db.collection("users")
+//                .document(userUid)
+//                .collection("friends");
+//        friendsCollectionRef.get()
+//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                        if (!queryDocumentSnapshots.isEmpty()) {
+//                            for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+//                                // Get the 'userId' field from each friend document
+//                                String friendId = document.getString("userId");
+//                                friends.add(friendId);
+//                            }
+//                            // Access the friends list here
+//                            if (!friends.isEmpty()) {
+//                                Log.d("friends", friends.get(0));
+//                            } else {
+//                                Log.d("Friends", "No friends found.");
+//                            }
+//                        } else {
+//                            Log.d("Friends", "No friends found.");
+//                        }
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.e("Firestore Error", "Error getting friends", e);
+//                    }
+//                });
+    }
+
 
     // 친구 수 가져오기
     private void getFriendCount() {

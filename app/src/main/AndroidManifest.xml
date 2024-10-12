@@ -39,7 +39,8 @@
 
         </activity>
 
-
+        <activity android:name=".FriendList">
+        </activity>
         <activity
             android:name=".SecondOnboardingActivity"
             android:exported="true">

@@ -104,7 +104,7 @@
             app:layout_constraintTop_toBottomOf="@+id/see_all_review_toolbar">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImageView"
+                android:id="@+id/friendProfileImageView"
                 android:layout_width="148dp"
                 android:layout_height="146dp"
                 android:src="@drawable/detail"
@@ -123,7 +123,7 @@
                 android:background="@android:drawable/ic_menu_edit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileImageView"
+                app:layout_constraintTop_toBottomOf="@+id/friendProfileImageView"
                 tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
@@ -161,7 +161,7 @@
                     android:layout_height="110dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="25dp"
-                    app:layout_constraintEnd_toStartOf="@+id/cardView"
+                    app:layout_constraintEnd_toStartOf="@+id/friendCardView"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -209,7 +209,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
+                    android:id="@+id/friendCardView"
                     android:layout_width="170dp"
                     android:layout_height="110dp"
                     android:layout_marginEnd="20dp"
