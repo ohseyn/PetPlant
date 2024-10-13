@@ -9,7 +9,6 @@
     android:background="@drawable/login_back"
     tools:context=".Login">
 
-
     <ImageView
         android:id="@+id/ilogo"
         android:layout_width="wrap_content"

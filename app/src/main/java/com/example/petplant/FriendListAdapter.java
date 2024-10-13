@@ -74,4 +74,10 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
     public int getItemCount() {
         return localDataSet.size();
     }
+
+    // 검색 결과 업데이트
+    public void updateList(ArrayList<Map<String, String>> newList) {
+        localDataSet = newList;
+        notifyDataSetChanged();
+    }
 }
