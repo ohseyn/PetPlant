@@ -121,9 +121,6 @@
         android:contentDescription="Profile image" />
     </androidx.cardview.widget.CardView>
 
-
-
-
     <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/edit_button"
             android:layout_width="40dp"

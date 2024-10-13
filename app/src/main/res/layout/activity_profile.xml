@@ -25,7 +25,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/see_all_review_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -123,7 +122,8 @@
                     android:layout_marginEnd="25dp"
                     app:layout_constraintEnd_toStartOf="@+id/friendCardView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="UnknownIdInLayout">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -191,7 +191,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:srcCompat="@android:drawable/stat_sys_upload"
-                            tools:layout_editor_absoluteY="16dp" />
+                            tools:layout_editor_absoluteY="16dp"
+                            tools:ignore="MissingConstraints" />
 
                         <TextView
                             android:id="@+id/friendCount"
@@ -333,7 +334,8 @@
                                     android:textColor="#000000"
                                     android:textSize="20sp"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    tools:layout_editor_absoluteX="-10dp" />
+                                    tools:layout_editor_absoluteX="-10dp"
+                                    tools:ignore="MissingConstraints" />
 
                                 <ImageButton
                                     android:id="@+id/menuButton3"
