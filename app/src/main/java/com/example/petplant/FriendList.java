@@ -68,7 +68,8 @@ public class FriendList extends AppCompatActivity {
             if (!query.isEmpty()) {
                 searchFriend(query);
             } else {
-                Toast.makeText(FriendList.this, "친구 이름을 입력하세요.", Toast.LENGTH_SHORT).show();
+                // 검색어가 비어있을 경우 전체 목록을 다시 보여줌
+                adapter.updateList(friendsInfo);
             }
             return true;
         });
@@ -142,6 +143,12 @@ public class FriendList extends AppCompatActivity {
 
     // 친구 이름으로 검색하는 기능
     private void searchFriend(String friendName) {
+        if (friendName.isEmpty()) {
+            // 검색어가 비어 있으면 전체 친구 목록을 다시 보여줌
+            adapter.updateList(friendsInfo);
+            return;
+        }
+
         ArrayList<Map<String, String>> filteredList = new ArrayList<>();
         for (Map<String, String> friend : friendsInfo) {
             if (friend.get("name").toLowerCase().contains(friendName.toLowerCase())) {
