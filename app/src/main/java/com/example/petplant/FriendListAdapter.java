@@ -22,7 +22,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
     private ArrayList<Map<String,String>> localDataSet;
 
-    //===== 뷰홀더 클래스 =====================================================
+    // 뷰홀더 클래스
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView nameTextView;
         private TextView plantTextView;
@@ -37,14 +37,11 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
             return Arrays.asList(nameTextView, plantTextView, profileImageView);
         }
     }
-    //========================================================================
 
-    //----- 생성자 --------------------------------------
     // 생성자를 통해서 데이터를 전달받도록 함
     public FriendListAdapter (ArrayList<Map<String,String>> dataSet) {
         localDataSet = dataSet;
     }
-    //--------------------------------------------------
 
     @NonNull
     @Override   // ViewHolder 객체를 생성하여 리턴한다.
@@ -72,9 +69,6 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
         holder.nameTextView.setText(name); // 이름 설정
         holder.plantTextView.setText(plantName); // 식물 이름 설정
     }
-
-
-
 
     @Override   // 전체 데이터의 갯수를 리턴한다.
     public int getItemCount() {
