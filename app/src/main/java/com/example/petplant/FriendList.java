@@ -133,8 +133,9 @@ public class FriendList extends AppCompatActivity {
                             friendData.put("name", userName);
                             friendData.put("plantName", userPlantName);
                             friendData.put("profileImageUri", profileImageUri);
-                            friendsInfo.add(friendData);
+                            friendData.put("isFriend", "true"); // 친구 여부
 
+                            friendsInfo.add(friendData);
                             // RecyclerView 갱신
                             adapter.notifyDataSetChanged();
                         } else {

@@ -69,6 +69,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
         String plantName = friendData.get("plantName"); // 식물 이름 가져오기
         String profileImageUri = friendData.get("profileImageUri"); // 프로필 이미지 URI 가져오기
         String friendId = friendData.get("id");
+        String isFriend = friendData.get("isFriend"); // 친구 여부 가져오기
 
         // Glide를 사용하여 이미지 로드
         Glide.with(holder.itemView.getContext())
@@ -115,20 +116,16 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
                     String intro = documentSnapshot.getString("intro");
-                    if (intro != null && !intro.isEmpty()) {
-                        introTextView.setText(intro);
-                    } else {
-                        introTextView.setText("소개글이 없습니다.");
-                    }
+                    introTextView.setText(intro != null && !intro.isEmpty() ? intro : "소개글이 없습니다.");
                 });
 
         // 이미 친구라면 삭제 버튼, 아니라면 친구 신청 버튼 설정
         if ("true".equals(friendData.get("isFriend"))) {
             actionButton.setText("친구 끊기");
-            actionButton.setOnClickListener(v -> removeFriend(friendData.get("id")));
+            actionButton.setOnClickListener(v -> removeFriend(friendId));
         } else {
             actionButton.setText("친구 신청");
-            actionButton.setOnClickListener(v -> sendFriendRequest(friendData.get("id")));
+            actionButton.setOnClickListener(v -> sendFriendRequest(friendId));
         }
 
         builder.setView(dialogView);
