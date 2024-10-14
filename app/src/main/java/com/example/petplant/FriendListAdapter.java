@@ -50,7 +50,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
                 .inflate(R.layout.activity_friend_item, parent, false);
         FriendListAdapter.ViewHolder viewHolder = new FriendListAdapter.ViewHolder(view);
 
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override   // ViewHolder안의 내용을 position에 해당되는 데이터로 교체한다.

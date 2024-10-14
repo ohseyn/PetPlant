@@ -42,7 +42,7 @@ public class profile extends AppCompatActivity {
     private FirebaseAuth auth;
     private CircleImageView profileImage;
     private TextView name, plantName, classname, friendCount;
-    private Button addFriendButton, logoutButton;
+    private Button logoutButton;
     private CardView friendCard;
     private ArrayList<String> friends = new ArrayList<>();
 
@@ -61,20 +61,21 @@ public class profile extends AppCompatActivity {
         classname = findViewById(R.id.classname);
         plantName = findViewById(R.id.plantName);
         friendCount = findViewById(R.id.friendCount); // 친구 수 표시
-        addFriendButton = findViewById(R.id.addFriendButton); // 친구 추가 버튼
+        //addFriendButton = findViewById(R.id.addFriendButton); // 친구 추가 버튼
         friendCard = findViewById(R.id.friendCardView1);
 
         // Firebase에서 프로필 이미지와 이름 가져오기
         getProfileImageFromFirebase();
         getFriendCount();
+        getFriendIds();
 
-        // 친구 추가 버튼 클릭 시 다이얼로그 표시
-        addFriendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddFriendDialog();
-            }
-        });
+//        // 친구 추가 버튼 클릭 시 다이얼로그 표시
+//        addFriendButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showAddFriendDialog();
+//            }
+//        });
 
         // 프로필 수정 버튼 클릭 시 profile_edit으로 이동
         Button user_edit = findViewById(R.id.user_edit);
@@ -92,13 +93,12 @@ public class profile extends AppCompatActivity {
             public void onClick(View view) {
                 if (friends != null && !friends.isEmpty()) {
                     Log.d("friends", friends.get(0)); // 친구 목록 출력
+                    Intent intent = new Intent(getApplicationContext(), FriendList.class);
+                    intent.putExtra("friends", friends);
+                    startActivity(intent);
                 } else {
                     Log.d("friends", "No friends available"); // 친구가 없을 때 로그
                 }
-
-                Intent intent = new Intent(getApplicationContext(), FriendList.class);
-                intent.putExtra("friends", friends);
-                startActivity(intent);
             }
         });
 
@@ -166,60 +166,78 @@ public class profile extends AppCompatActivity {
                 });
     }
 
-    // 친구 추가 다이얼로그 표시
-    private void showAddFriendDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("친구 추가");
+//    // 친구 추가 다이얼로그 표시
+//    private void showAddFriendDialog() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("친구 추가");
+//
+//        final EditText input = new EditText(this);
+//        input.setInputType(InputType.TYPE_CLASS_TEXT);
+//        input.setHint("친구 이름을 입력하세요");
+//        builder.setView(input);
+//
+//        builder.setPositiveButton("추가", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                String friendName = input.getText().toString();
+//                if (!friendName.isEmpty()) {
+//                    sendFriendRequest(friendName); // 친구 요청 전송
+//                } else {
+//                    Toast.makeText(profile.this, "친구 이름을 입력하세요.", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//
+//        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        });
+//
+//        builder.show();
+//    }
+//
+//    // 친구 추가 요청 보내기
+//    private void sendFriendRequest(String friendName) {
+//        String currentUserId = auth.getCurrentUser().getUid();
+//
+//        Map<String, Object> friendRequest = new HashMap<>();
+//        friendRequest.put("from", currentUserId);
+//        friendRequest.put("status", "pending");
+//
+//        db.collection("users")
+//                .whereEqualTo("name", friendName)
+//                .get()
+//                .addOnCompleteListener(task -> {
+//                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+//                        String recipientUserId = task.getResult().getDocuments().get(0).getId();
+//                        db.collection("users").document(recipientUserId)
+//                                .collection("friendRequests")
+//                                .document(currentUserId)
+//                                .set(friendRequest)
+//                                .addOnSuccessListener(aVoid -> Toast.makeText(profile.this, "친구 요청을 보냈습니다!", Toast.LENGTH_SHORT).show())
+//                                .addOnFailureListener(e -> Toast.makeText(profile.this, "친구 요청을 보내는 데 실패했습니다.", Toast.LENGTH_SHORT).show());
+//                    } else {
+//                        Toast.makeText(profile.this, "친구를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//    }
 
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        input.setHint("친구 이름을 입력하세요");
-        builder.setView(input);
-
-        builder.setPositiveButton("추가", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String friendName = input.getText().toString();
-                if (!friendName.isEmpty()) {
-                    sendFriendRequest(friendName); // 친구 요청 전송
-                } else {
-                    Toast.makeText(profile.this, "친구 이름을 입력하세요.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
-
-    // 친구 추가 요청 보내기
-    private void sendFriendRequest(String friendName) {
-        String currentUserId = auth.getCurrentUser().getUid();
-
-        Map<String, Object> friendRequest = new HashMap<>();
-        friendRequest.put("from", currentUserId);
-        friendRequest.put("status", "pending");
-
+    // Firebase에서 친구 ID 가져오기
+    private void getFriendIds() {
         db.collection("users")
-                .whereEqualTo("name", friendName)
+                .document(auth.getCurrentUser().getUid())
+                .collection("friends")
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                        String recipientUserId = task.getResult().getDocuments().get(0).getId();
-                        db.collection("users").document(recipientUserId)
-                                .collection("friendRequests")
-                                .document(currentUserId)
-                                .set(friendRequest)
-                                .addOnSuccessListener(aVoid -> Toast.makeText(profile.this, "친구 요청을 보냈습니다!", Toast.LENGTH_SHORT).show())
-                                .addOnFailureListener(e -> Toast.makeText(profile.this, "친구 요청을 보내는 데 실패했습니다.", Toast.LENGTH_SHORT).show());
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            friends.add(document.getId());  // 친구들의 ID를 리스트에 추가
+                        }
+                        getFriendCount();
                     } else {
-                        Toast.makeText(profile.this, "친구를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
+                        Log.d("ProfileActivity", "Error getting friend IDs: ", task.getException());
                     }
                 });
     }

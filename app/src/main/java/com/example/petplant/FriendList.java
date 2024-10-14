@@ -116,9 +116,9 @@ public class FriendList extends AppCompatActivity {
 //        }
     }
 
-    // Firestore에서 친구 정보 가져오기
+    // Firebase에서 친구 정보 가져오기
     private void getFriendsFromFirestore(ArrayList<String> friends) {
-        friendsInfo.clear();
+        friendsInfo.clear(); // 기존 친구 목록 초기화
         for (String friendId : friends) {
             db.collection("users").document(friendId)
                     .get()
@@ -133,11 +133,14 @@ public class FriendList extends AppCompatActivity {
                             friendData.put("plantName", userPlantName);
                             friendData.put("profileImageUri", profileImageUri);
                             friendsInfo.add(friendData);
-                            adapter.notifyDataSetChanged();  // RecyclerView 갱신
+
+                            // RecyclerView 갱신
+                            adapter.notifyDataSetChanged();
                         } else {
                             Log.d("FriendList", "친구 정보를 찾을 수 없습니다.");
                         }
-                    });
+                    })
+                    .addOnFailureListener(e -> Log.d("FriendList", "Error: " + e.getMessage()));
         }
     }
 
