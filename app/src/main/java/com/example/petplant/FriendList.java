@@ -58,7 +58,7 @@ public class FriendList extends AppCompatActivity {
         // RecyclerView 설정
         RecyclerView recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new FriendListAdapter(friendsInfo);
+        adapter = new FriendListAdapter(friendsInfo, this);
         recyclerView.setAdapter(adapter);
 
         // 검색 기능
@@ -129,6 +129,7 @@ public class FriendList extends AppCompatActivity {
                             String profileImageUri = documentSnapshot.getString("profileImageUrl");
 
                             Map<String, String> friendData = new HashMap<>();
+                            friendData.put("id", documentSnapshot.getId());
                             friendData.put("name", userName);
                             friendData.put("plantName", userPlantName);
                             friendData.put("profileImageUri", profileImageUri);

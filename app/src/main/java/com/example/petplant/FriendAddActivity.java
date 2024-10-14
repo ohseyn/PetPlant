@@ -36,7 +36,7 @@ public class FriendAddActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rv_add_friend);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new FriendListAdapter(allUsers);
+        adapter = new FriendListAdapter(allUsers, this);
         recyclerView.setAdapter(adapter);
 
         searchBar.setOnEditorActionListener((v, actionId, event) -> {
