@@ -88,19 +88,24 @@ public class profile extends AppCompatActivity {
         });
 
         // 친구 목록 카드뷰 클릭 시 친구 목록 화면으로 이동
-        friendCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (friends != null && !friends.isEmpty()) {
-                    Log.d("friends", friends.get(0)); // 친구 목록 출력
-                    Intent intent = new Intent(getApplicationContext(), FriendList.class);
-                    intent.putExtra("friends", friends);
-                    startActivity(intent);
-                } else {
-                    Log.d("friends", "No friends available"); // 친구가 없을 때 로그
-                }
-            }
+        friendCard.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), FriendList.class);
+            intent.putExtra("friends", friends); // 친구가 없더라도 빈 리스트 전달
+            startActivity(intent);
         });
+//        friendCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (friends != null && !friends.isEmpty()) {
+//                    Log.d("friends", friends.get(0)); // 친구 목록 출력
+//                    Intent intent = new Intent(getApplicationContext(), FriendList.class);
+//                    intent.putExtra("friends", friends);
+//                    startActivity(intent);
+//                } else {
+//                    Log.d("friends", "No friends available"); // 친구가 없을 때 로그
+//                }
+//            }
+//        });
 
         // 인박스 버튼 클릭 시 인박스 화면으로 이동
         Button user_inbox = findViewById(R.id.inbox);

@@ -63,9 +63,11 @@ public class FriendAddActivity extends AppCompatActivity {
                             String profileImageUri = document.getString("profileImageUrl");
 
                             Map<String, String> userData = new HashMap<>();
+                            userData.put("id", document.getId());
                             userData.put("name", userName);
                             userData.put("plantName", userPlantName);
                             userData.put("profileImageUri", profileImageUri);
+                            userData.put("isFriend", "false"); // 친구 여부 false로 설정
                             allUsers.add(userData);
                         }
                         adapter.notifyDataSetChanged();

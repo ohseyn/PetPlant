@@ -76,8 +76,11 @@ public class FriendList extends AppCompatActivity {
 
         // Intent로 전달된 친구 목록 가져오기
         ArrayList<String> friends = getIntent().getStringArrayListExtra("friends");
-        if (friends != null) {
+        if (friends != null && !friends.isEmpty()) {
             getFriendsFromFirestore(friends);
+        } else {
+            Log.d("FriendList", "No friends available.");
+            // 친구 추가 화면으로 바로 이동하는 대신 빈 목록을 유지하여 처리
         }
 
 //        // Intent에서 friends 배열 받기
