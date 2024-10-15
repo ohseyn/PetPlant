@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -16,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class FriendRequestsActivity extends AppCompatActivity {
 
@@ -24,6 +26,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
     private RecyclerView friendRequestsRecyclerView;
     private FriendRequestAdapter friendRequestsAdapter;
     private List<FriendRequest> friendRequestList;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,28 @@ public class FriendRequestsActivity extends AppCompatActivity {
         // Firebase 초기화
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+
+        // TabLayout 초기화
+        tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 1) {  // '친구신청 알림' 탭일 경우
+                    loadFriendRequests();
+                } else {
+                    // 다른 탭에 따른 다른 알림 데이터를 로드 (예: 스티커 알림)
+                    friendRequestList.clear();
+                    friendRequestsAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
 
         // RecyclerView 초기화
         friendRequestsRecyclerView = findViewById(R.id.friendRequestsRecyclerView);
@@ -51,8 +76,11 @@ public class FriendRequestsActivity extends AppCompatActivity {
         });
         friendRequestsRecyclerView.setAdapter(friendRequestsAdapter);
 
-        // 친구 요청 로드
-        loadFriendRequests();
+        // 처음에는 '친구신청 알림' 탭을 선택
+        TabLayout.Tab initialTab = tabLayout.getTabAt(1);
+        if (initialTab != null) {
+            initialTab.select();
+        }
     }
 
     // 친구 요청 목록 로드
@@ -67,13 +95,25 @@ public class FriendRequestsActivity extends AppCompatActivity {
                         // Firestore 문서 ID를 requestId로 설정
                         friendRequest.setRequestId(snapshot.getId());
 
+                        // timestamp가 null이 아닌지 확인
+                        Long timeRequested = snapshot.getLong("timestamp");
+                        if (timeRequested != null) {
+                            friendRequest.setTimeSinceRequest(getTimeSince(timeRequested));
+                        } else {
+                            friendRequest.setTimeSinceRequest("시간 정보 없음");
+                        }
+
                         // 친구 요청 보낸 사람의 이름을 가져오기
                         db.collection("users").document(friendRequest.getFrom())
                                 .get()
                                 .addOnSuccessListener(documentSnapshot -> {
                                     if (documentSnapshot.exists()) {
                                         String userName = documentSnapshot.getString("name");
+                                        String profileImageUrl = documentSnapshot.getString("profileImageUrl");
+
                                         friendRequest.setFrom(userName);  // 사용자 이름 설정
+                                        friendRequest.setProfileImage(profileImageUrl);  // 프로필 이미지 설정
+
                                         friendRequestList.add(friendRequest);
                                         friendRequestsAdapter.notifyDataSetChanged();
                                     }
@@ -81,6 +121,27 @@ public class FriendRequestsActivity extends AppCompatActivity {
                     }
                 })
                 .addOnFailureListener(e -> Log.d("FriendRequests", "Error loading friend requests", e));
+    }
+
+    // 시간 차 계산 메서드 (n초 전, n분 전, n시간 전, n일 전)
+    private String getTimeSince(long timestamp) {
+        long currentTime = System.currentTimeMillis(); // 현재 시간
+        long diff = currentTime - timestamp; // 시간차 계산
+
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+        long hours = TimeUnit.MILLISECONDS.toHours(diff);
+        long days = TimeUnit.MILLISECONDS.toDays(diff);
+
+        if (seconds < 60) {
+            return seconds + "초 전";
+        } else if (minutes < 60) {
+            return minutes + "분 전";
+        } else if (hours < 24) {
+            return hours + "시간 전";
+        } else {
+            return days + "일 전";
+        }
     }
 
     // 친구 요청 수락
@@ -94,17 +155,14 @@ public class FriendRequestsActivity extends AppCompatActivity {
         String currentUserId = auth.getCurrentUser().getUid();
         CollectionReference usersRef = db.collection("users");
 
-        // 친구 목록에 추가할 데이터를 정의
-        // 친구의 id와 username을 저장하는 예시
+        // 친구 목록에 추가
         usersRef.document(currentUserId).collection("friends").document(requestId)
-                .set(new Friend(requestId))  // Friend는 별도의 클래스 (아래 코드 참고)
+                .set(new Friend(requestId))
                 .addOnSuccessListener(aVoid -> {
-                    // 친구 요청 보낸 유저의 친구 목록에도 현재 유저 추가
                     usersRef.document(requestId).collection("friends").document(currentUserId)
                             .set(new Friend(currentUserId))
                             .addOnSuccessListener(aVoid1 -> {
                                 Log.d("FriendRequestsActivity", "Friend request accepted successfully.");
-                                // 친구 요청 삭제
                                 removeFriendRequest(requestId);
                             });
                 })
@@ -121,11 +179,13 @@ public class FriendRequestsActivity extends AppCompatActivity {
     private void removeFriendRequest(String requestId) {
         String currentUserId = auth.getCurrentUser().getUid();
 
-        FirebaseFirestore.getInstance()
-                .collection("users").document(currentUserId).collection("friendRequests")
+        db.collection("users").document(currentUserId).collection("friendRequests")
                 .document(requestId)
                 .delete()
-                .addOnSuccessListener(aVoid -> Log.d("FriendRequestsActivity", "Friend request removed successfully"))
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("FriendRequestsActivity", "Friend request removed successfully");
+                    loadFriendRequests(); // 새로고침
+                })
                 .addOnFailureListener(e -> Log.e("FriendRequestsActivity", "Error removing friend request", e));
     }
 }

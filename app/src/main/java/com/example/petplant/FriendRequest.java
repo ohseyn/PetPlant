@@ -4,6 +4,8 @@ public class FriendRequest {
     private String from;
     private String status;
     private String requestId;  // Firestore의 문서 ID를 저장할 필드
+    private String timeSinceRequest;  // 시간을 저장할 필드
+    private String profileImage;
 
     // 기본 생성자 (Firestore에서 객체로 매핑할 때 필요)
     public FriendRequest() {}
@@ -33,5 +35,21 @@ public class FriendRequest {
 
     public void setRequestId(String requestId) {
         this.requestId = requestId;
+    }
+
+    public String getTimeSinceRequest() {
+        return timeSinceRequest;
+    }
+
+    public void setTimeSinceRequest(String timeSinceRequest) {
+        this.timeSinceRequest = timeSinceRequest;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }
