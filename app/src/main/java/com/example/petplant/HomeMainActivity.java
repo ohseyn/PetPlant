@@ -42,6 +42,7 @@ public class HomeMainActivity extends AppCompatActivity {
     FirebaseUser user;
     String name;
     String plantName;
+    Long coin;
     String profileUIri;
 
     private ViewPager2 viewPager;
@@ -50,6 +51,7 @@ public class HomeMainActivity extends AppCompatActivity {
     private TextView speechBubble;
     private TextView timeTextView;
     private TextView character_name;
+    private TextView shop_coin;
     private Handler handler = new Handler();
     private Runnable timeUpdater;
 
@@ -70,7 +72,8 @@ public class HomeMainActivity extends AppCompatActivity {
         character = findViewById(R.id.tomato_home);
         speechBubble = findViewById(R.id.speechbubble);
         viewPager = findViewById(R.id.viewPager);
-        timeTextView = findViewById(R.id.timeTextView); // 새로운 텍스트뷰 (일 단위로 업데이트되는 텍스트)
+        timeTextView = findViewById(R.id.timeTextView);
+        shop_coin = findViewById(R.id.coin);
 
         GetData(); // 데이터 가져오기
 
@@ -113,6 +116,7 @@ public class HomeMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ShopActivity.class);
+                intent.putExtra("coin", coin);
                 startActivity(intent);
             }
         });
@@ -238,7 +242,7 @@ public class HomeMainActivity extends AppCompatActivity {
         if (getIntent().getBooleanExtra("completed3", false)) {
             pageAdapter.updateButtonText(2, "완료");
             saveQuestStatus(2);
-            Log.d("QuestStatus", "Quest 2 completed");// 두 번째 퀘스트 완료 상태 저장
+            Log.d("QuestStatus", "Quest 2 completed");// 세 번째 퀘스트 완료 상태 저장
         }
     }
 
@@ -259,6 +263,13 @@ public class HomeMainActivity extends AppCompatActivity {
                     Log.d("TAG", "Current data: " + snapshot.getData());
 
                     // 데이터 업데이트 처리
+                    Long coin = snapshot.getLong("coin");
+                    if (coin != null) {
+                        shop_coin.setText(String.valueOf(coin)); // TextView에 코인 값 표시
+                    } else {
+                        shop_coin.setText("0"); // 코인 값이 없으면 0으로 설정
+                    }
+
                     name = snapshot.getString("name");
                     plantName = snapshot.getString("plantName");
                     character_name.setText(plantName + "와");

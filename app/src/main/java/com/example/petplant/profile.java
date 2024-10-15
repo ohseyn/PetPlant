@@ -61,7 +61,9 @@ public class profile extends AppCompatActivity {
         classname = findViewById(R.id.classname);
         plantName = findViewById(R.id.plantName);
         friendCount = findViewById(R.id.friendCount); // 친구 수 표시
+
         //addFriendButton = findViewById(R.id.addFriendButton); // 친구 추가 버튼
+
         friendCard = findViewById(R.id.friendCardView1);
 
         // Firebase에서 프로필 이미지와 이름 가져오기
@@ -112,7 +114,7 @@ public class profile extends AppCompatActivity {
         user_inbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), inbox_friend.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityLogActivity.class);
                 startActivity(intent);
             }
         });

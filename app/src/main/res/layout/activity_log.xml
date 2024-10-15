@@ -153,7 +153,7 @@
             android:layout_height="32dp"
             android:layout_marginStart="32dp"
             android:layout_marginBottom="32dp"
-            android:background="@drawable/mynaui_inbox2"
+            android:background="@drawable/mynaui_inbox"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -164,7 +164,7 @@
             android:layout_height="32dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="32dp"
-            android:background="@drawable/mynaui_user2"
+            android:background="@drawable/mynaui_user"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />

@@ -9,22 +9,6 @@
     tools:context=".HomeMainActivity">
 
 
-    <TextView
-        android:id="@+id/home_plantName"
-        android:layout_width="139dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="16dp"
-        android:text="왕큰방울이와"
-        android:textAlignment="viewEnd"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.964"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/user_home"
         android:layout_width="32dp"
@@ -50,14 +34,48 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/profile"
-        android:layout_width="32dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="32dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/mynaui_user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/coin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/coin"
+        android:fontFamily="@font/tmoneyroundwindextrabold"
+        android:gravity="center"
+        android:text="      0"
+        android:textSize="19dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/home_plantName"
+        android:layout_width="142dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="16dp"
+        android:text="왕큰방울이와"
+        android:fontFamily="@font/tmoneyroundwindregular"
+        android:textAlignment="viewEnd"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.964"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/tomato_home"
@@ -97,10 +115,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.691"
+        app:layout_constraintHorizontal_bias="0.713"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161" />
+        app:layout_constraintVertical_bias="0.146" />
 
     <TextView
         android:id="@+id/timeTextView"
@@ -112,10 +130,10 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintHorizontal_bias="0.977"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.147"
+        app:layout_constraintVertical_bias="0.131"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -128,10 +146,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161" />
+        app:layout_constraintVertical_bias="0.146" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -154,7 +172,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01"
+        app:layout_constraintVertical_bias="0.009"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -172,15 +190,17 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/guide"
-        android:layout_width="72dp"
-        android:layout_height="62dp"
-        android:layout_marginEnd="336dp"
+        android:layout_width="59dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="332dp"
         android:layout_marginBottom="35dp"
         android:background="@drawable/guide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.197"
+        app:layout_constraintVertical_bias="0.171"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.constraintlayout.widget.Guideline

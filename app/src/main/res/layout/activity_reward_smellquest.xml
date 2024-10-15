@@ -11,7 +11,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/complete_smell"
+        android:id="@+id/complete_smellquest"
         android:layout_width="368dp"
         android:layout_height="44dp"
         android:layout_centerInParent="true"
