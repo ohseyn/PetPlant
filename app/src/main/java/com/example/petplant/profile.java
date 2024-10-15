@@ -247,6 +247,13 @@ public class profile extends AppCompatActivity {
                 });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 친구 수를 다시 불러오기
+        getFriendCount();
+    }
+
     // Firebase에서 친구 수 가져오기
     private void getFriendCount() {
         db.collection("users").document(auth.getCurrentUser().getUid())

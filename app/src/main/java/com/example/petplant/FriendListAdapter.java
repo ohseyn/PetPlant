@@ -29,6 +29,8 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
     private ArrayList<Map<String,String>> localDataSet;
     private Context context; // Context를 클래스의 멤버 변수로 선언
+    private FirebaseFirestore db;
+    private FirebaseAuth auth;
 
     // 뷰홀더 클래스
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -50,6 +52,8 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
     public FriendListAdapter (ArrayList<Map<String,String>> dataSet, Context context) {
         localDataSet = dataSet;
         this.context = context;
+        this.db = FirebaseFirestore.getInstance();
+        this.auth = FirebaseAuth.getInstance();
     }
 
     @NonNull
@@ -112,7 +116,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
         // Firestore에서 소개글 불러오기
         String friendId = friendData.get("id"); // 친구의 UID로 가져옴
-        FirebaseFirestore.getInstance().collection("users").document(friendId)
+        db.collection("users").document(friendId)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
                     String intro = documentSnapshot.getString("intro");
@@ -122,10 +126,10 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
         // 이미 친구라면 삭제 버튼, 아니라면 친구 신청 버튼 설정
         if ("true".equals(friendData.get("isFriend"))) {
             actionButton.setText("친구 끊기");
-            actionButton.setOnClickListener(v -> removeFriend(friendId));
+            actionButton.setOnClickListener(v -> removeFriend(friendId, friendData));
         } else {
             actionButton.setText("친구 신청");
-            actionButton.setOnClickListener(v -> sendFriendRequest(friendId));
+            actionButton.setOnClickListener(v -> sendFriendRequest(friendId, friendData));
         }
 
         builder.setView(dialogView);
@@ -134,20 +138,27 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
     }
 
     // 친구 삭제 함수
-    private void removeFriend(String friendId) {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+    private void removeFriend(String friendId, Map<String, String> friendData) {
         String currentUserId = auth.getCurrentUser().getUid();
 
-        FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+        db.collection("users").document(currentUserId)
                 .collection("friends").document(friendId).delete()
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(context, "친구를 삭제했습니다.", Toast.LENGTH_SHORT).show();
+                    // 상대방 친구 목록에서 현재 유저 삭제
+                    db.collection("users").document(friendId)
+                            .collection("friends").document(currentUserId).delete()
+                            .addOnSuccessListener(aVoid2 -> {
+                                // 친구 삭제 후 즉시 목록과 친구 수 갱신
+                                localDataSet.remove(friendData);
+                                notifyDataSetChanged();
+                                updateFriendCount();
+                            });
                 });
     }
 
     // 친구 신청 함수
-    private void sendFriendRequest(String friendId) {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+    private void sendFriendRequest(String friendId, Map<String, String> friendData) {
         String currentUserId = auth.getCurrentUser().getUid();
 
         Map<String, Object> friendRequest = new HashMap<>();
@@ -158,6 +169,21 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
                 .collection("friendRequests").document(currentUserId).set(friendRequest)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(context, "친구 요청을 보냈습니다.", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    // 친구 수 업데이트 함수 (현재 유저의 친구 수를 갱신)
+    private void updateFriendCount() {
+        String currentUserId = auth.getCurrentUser().getUid();
+        db.collection("users").document(currentUserId)
+                .collection("friends")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        int count = task.getResult().size();
+                        // 친구 수가 갱신된 것을 반영 (필요한 곳에 반영할 수 있도록 처리)
+                        // 예: profile 화면에서 친구 수 업데이트
+                    }
                 });
     }
 
