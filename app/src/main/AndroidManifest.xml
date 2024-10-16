@@ -250,12 +250,12 @@
         <receiver
             android:name=".PopupReceiver"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.mureok.fileprovider"
-            android:exported="false"
+            android:exported="true"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"

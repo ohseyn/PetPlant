@@ -123,7 +123,6 @@ public class Home_smellquest extends AppCompatActivity {
         user = auth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
 
-
         Log.d("user",user.getUid());
         String textActivity = inputEditText.getText().toString();
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());

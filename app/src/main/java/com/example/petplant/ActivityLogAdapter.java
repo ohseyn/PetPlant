@@ -142,7 +142,7 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         public ActivityViewHolder(@NonNull View itemView) {
             super(itemView);
             textUserName = itemView.findViewById(R.id.textUserName);
-            textActivity = itemView.findViewById(R.id.textDescription);
+            textActivity = itemView.findViewById(R.id.textActivity);
             textTime = itemView.findViewById(R.id.textTime);
             imageActivity = itemView.findViewById(R.id.imageActivity);
             buttonLike = itemView.findViewById(R.id.buttonLike);
