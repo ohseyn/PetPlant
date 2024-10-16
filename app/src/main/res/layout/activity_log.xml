@@ -4,38 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E1F3EB"
+    android:background="@drawable/activity_back"
     tools:context=".ActivityLogActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/see_all_review_toolbar"
-        android:layout_width="412dp"
-        android:layout_height="48dp"
-        android:background="#FFFFFF"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetStartWithNavigation="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="활동기록"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.063"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/see_all_review_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/suit_bold"
-            android:includeFontPadding="false"
-            android:text="활동기록"
-            android:textColor="#040303"
-            android:textSize="15sp"
-            tools:layout_editor_absoluteX="177dp"
-            tools:layout_editor_absoluteY="13dp" />
-
-    </androidx.appcompat.widget.Toolbar>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bell2"
@@ -54,18 +36,22 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
+        style="@style/CustomTabLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.063"
+        app:tabBackground="@drawable/tab_selector"
         app:tabGravity="fill"
         app:tabIndicatorColor="#02AE7A"
         app:tabMode="fixed"
         app:tabSelectedTextColor="#02AE7A"
-        app:tabBackground="@drawable/tab_selector"
         app:tabTextAppearance="?attr/textAppearanceButton"
-        style="@style/CustomTabLayoutStyle"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="46dp">
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_friends_activity"
@@ -91,6 +77,7 @@
         android:text="2024.05.16(목)"
         android:textColor="@android:color/black"
         android:textSize="18sp"
+        android:fontFamily="@font/suit_regular"
         app:layout_constraintEnd_toStartOf="@+id/buttonNext"
         app:layout_constraintStart_toEndOf="@+id/buttonPrevious"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
@@ -102,7 +89,8 @@
         android:layout_marginTop="17dp"
         android:src="@drawable/ic_right"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/buttonPrevious"
@@ -111,12 +99,13 @@
         android:layout_marginTop="17dp"
         android:src="@drawable/ic_left"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_activities"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="391dp"
+        android:layout_height="530dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
