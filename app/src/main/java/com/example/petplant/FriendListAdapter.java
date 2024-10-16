@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.petplant.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -164,8 +165,9 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
         Map<String, Object> friendRequest = new HashMap<>();
         friendRequest.put("from", currentUserId);
         friendRequest.put("status", "pending");
+        friendRequest.put("timestamp", FieldValue.serverTimestamp());  // 서버 타임스탬프 추가
 
-        FirebaseFirestore.getInstance().collection("users").document(friendId)
+        db.collection("users").document(friendId)
                 .collection("friendRequests").document(currentUserId).set(friendRequest)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(context, "친구 요청을 보냈습니다.", Toast.LENGTH_SHORT).show();

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -96,9 +97,9 @@ public class FriendRequestsActivity extends AppCompatActivity {
                         friendRequest.setRequestId(snapshot.getId());
 
                         // timestamp가 null이 아닌지 확인
-                        Long timeRequested = snapshot.getLong("timestamp");
-                        if (timeRequested != null) {
-                            friendRequest.setTimeSinceRequest(getTimeSince(timeRequested));
+                        Timestamp timestamp = snapshot.getTimestamp("timestamp");  // Firestore에서 Timestamp 필드 읽기
+                        if (timestamp != null) {
+                            friendRequest.setTimeSinceRequest(getTimeSince(timestamp.toDate().getTime()));
                         } else {
                             friendRequest.setTimeSinceRequest("시간 정보 없음");
                         }
