@@ -192,6 +192,11 @@
         </activity>
 
         <activity
+            android:name=".DecorateActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
             android:name=".ItemAdapter"
             android:exported="true">
         </activity>

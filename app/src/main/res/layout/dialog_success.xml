@@ -10,9 +10,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="상품을 구매할까요?"
+        android:text="상품을 구매했어요"
         android:textSize="30sp"
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="구매한 상품은 ‘꾸미기’에서 사용할 수 있어요."
+        android:textSize="20sp"
         android:layout_marginBottom="20dp"
         android:gravity="center" />
 
@@ -49,28 +56,28 @@
     <LinearLayout
         android:layout_width="400dp"
         android:layout_height="97dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/cancelButton"
+            android:id="@+id/confirmButton2"
             android:layout_width="10dp"
             android:layout_height="65dp"
-            android:layout_marginEnd="10dp"
             android:layout_weight="1"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/button_border3"
-            android:text="취소"
             android:textColor="#02AE7A"
-            android:textSize="23sp" />
+            android:text="확인"
+            android:textSize="23sp"/>
 
         <Button
-            android:id="@+id/confirmButton"
+            android:id="@+id/decorateButton"
             android:layout_width="10dp"
             android:layout_height="70dp"
-            android:layout_marginStart="10dp"
             android:layout_weight="1"
+            android:layout_marginStart="10dp"
             android:backgroundTint="#02AE7A"
-            android:text="구매"
-            android:textSize="23sp" />
+            android:text="꾸미기"
+            android:textSize="23sp"/>
     </LinearLayout>
 </LinearLayout>

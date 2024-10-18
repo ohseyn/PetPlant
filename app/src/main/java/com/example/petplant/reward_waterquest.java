@@ -64,7 +64,7 @@ public class reward_waterquest extends AppCompatActivity {
                         // 현재 코인 값 가져오기
                         Long currentCoin = documentSnapshot.getLong("coin");
                         if (currentCoin == null) {
-                            currentCoin = 0L;  // 코인 값이 없으면 0으로 설정
+                            currentCoin = documentSnapshot.getLong("coin");  // 코인 값이 없으면 0으로 설정
                         }
 
                         // 15코인 추가

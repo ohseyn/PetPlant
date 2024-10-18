@@ -263,11 +263,12 @@ public class HomeMainActivity extends AppCompatActivity {
                     Log.d("TAG", "Current data: " + snapshot.getData());
 
                     // 데이터 업데이트 처리
-                    Long coin = snapshot.getLong("coin");
-                    if (coin != null) {
-                        shop_coin.setText(String.valueOf(coin)); // TextView에 코인 값 표시
+                    if (snapshot.contains("coin")) {
+                        Long coinValue = snapshot.getLong("coin");
+                        shop_coin.setText(String.valueOf(coinValue != null ? coinValue :coin));
                     } else {
-                        shop_coin.setText("0"); // 코인 값이 없으면 0으로 설정
+                        Log.d("TAG", "코인 값이 Firestore에 없습니다.");
+                        shop_coin.setText("0");
                     }
 
                     name = snapshot.getString("name");

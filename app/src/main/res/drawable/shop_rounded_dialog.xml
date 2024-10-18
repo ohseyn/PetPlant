@@ -1,0 +1,10 @@
+<!-- res/drawable/rounded_dialog.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 둥근 모서리를 설정합니다 -->
+    <corners android:radius="20dp" />
+
+    <!-- 배경 색상을 설정합니다 -->
+    <solid android:color="#FFFFFF" />
+
+    <!-- 테두리 (선) 색상과 두께 설정 --><!-- 원하는 테두리 색상 -->
+</shape>
