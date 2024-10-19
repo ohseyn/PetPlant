@@ -68,7 +68,7 @@ public class remove_quiz_IncorrectActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     // 완료 버튼을 누르면 HomeMainActivity로 돌아가면서 완료 상태를 전달
-                                    Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), Guide.class);
                                     intent.putExtra("coin", coin);
                                     intent.putExtra("completed", true); // 완료 상태 전달
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
