@@ -167,6 +167,16 @@
         </activity>
 
         <activity
+            android:name=".remove_quiz_CorrectActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".remove_quiz_IncorrectActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
             android:name=".FriendRequestsActivity"
             android:exported="true">
         </activity>

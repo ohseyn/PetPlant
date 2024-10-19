@@ -19,7 +19,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class water_quiz_IncorrectActivity extends AppCompatActivity {
+public class remove_quiz_IncorrectActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     FirebaseUser user;
@@ -28,7 +28,7 @@ public class water_quiz_IncorrectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_water_quiz_incorrect);
+        setContentView(R.layout.activity_rmeove_quiz_incorrect);
 
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();

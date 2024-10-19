@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/waterback"
+    android:background="@drawable/login_back"
     tools:context=".MainActivity">
 
 
@@ -17,7 +17,7 @@
         android:layout_height="44dp"
         android:layout_centerInParent="true"
         android:background="@drawable/button_border"
-        android:backgroundTint="#3F90E3"
+        android:backgroundTint="#46C140"
         android:fontFamily="@font/suit_extrabold"
         android:onClick="onButtonClick"
         android:text="가이드 확인하기"
@@ -83,7 +83,7 @@
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:gravity="center"
         android:text="5 코인"
-        android:textColor="#3F90E3"
+        android:textColor="#46C140"
         android:textSize="23dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +97,7 @@
         android:fontFamily="@font/suit_bold"
         android:gravity="center"
         android:text="질문에 답하기 활동"
-        android:textColor="#3F90E3"
+        android:textColor="#46C140"
         android:textSize="23dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.214"

@@ -19,7 +19,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class water_quiz_IncorrectActivity extends AppCompatActivity {
+public class remove_quiz_CorrectActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     FirebaseUser user;
@@ -28,14 +28,14 @@ public class water_quiz_IncorrectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_water_quiz_incorrect);
+        setContentView(R.layout.activity_remove_quiz_correct);
 
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        Button check_guide = findViewById(R.id.check_guide);
-        check_guide.setOnClickListener(new View.OnClickListener() {
+        Button go_home = findViewById(R.id.go_home);
+        go_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // 코인 업데이트
@@ -60,7 +60,7 @@ public class water_quiz_IncorrectActivity extends AppCompatActivity {
                         }
 
                         // 15코인 추가
-                        Long updatedCoin = currentCoin + 5;
+                        Long updatedCoin = currentCoin + 10;
 
                         // Firestore에 업데이트
                         docRef.update("coin", updatedCoin).addOnCompleteListener(new OnCompleteListener<Void>() {
