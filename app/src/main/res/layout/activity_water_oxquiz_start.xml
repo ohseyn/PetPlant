@@ -29,6 +29,7 @@
             android:textColor="#3F90E3"/>
 
         <TextView
+            android:id="@+id/questionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"

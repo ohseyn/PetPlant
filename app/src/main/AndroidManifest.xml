@@ -162,7 +162,7 @@
         </activity>
 
         <activity
-            android:name=".CorrectActivity"
+            android:name=".water_quiz_CorrectActivity"
             android:exported="true">
         </activity>
 
@@ -182,7 +182,7 @@
         </activity>
 
         <activity
-            android:name=".IncorrectActivity"
+            android:name=".water_quiz_IncorrectActivity"
             android:exported="true">
         </activity>
 

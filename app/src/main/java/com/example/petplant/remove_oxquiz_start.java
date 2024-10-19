@@ -52,9 +52,9 @@ public class remove_oxquiz_start extends AppCompatActivity {
                     String selectedAnswer = selectedButton.getText().toString();
                     Intent intent;
                     if (selectedAnswer.equals(CORRECT_ANSWER)) {
-                        intent = new Intent(remove_oxquiz_start.this, CorrectActivity.class);
+                        intent = new Intent(remove_oxquiz_start.this, water_quiz_CorrectActivity.class);
                     } else {
-                        intent = new Intent(remove_oxquiz_start.this, IncorrectActivity.class);
+                        intent = new Intent(remove_oxquiz_start.this, water_quiz_IncorrectActivity.class);
                     }
                     startActivity(intent);
                 }
