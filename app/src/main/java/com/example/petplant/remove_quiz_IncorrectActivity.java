@@ -28,7 +28,7 @@ public class remove_quiz_IncorrectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rmeove_quiz_incorrect);
+        setContentView(R.layout.activity_remove_quiz_incorrect);
 
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
