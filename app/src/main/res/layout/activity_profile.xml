@@ -32,7 +32,7 @@
                 android:includeFontPadding="false"
                 android:text="프로필"
                 android:textColor="#040303"
-                android:textSize="15sp"
+                android:textSize="22sp"
                 tools:layout_editor_absoluteX="177dp"
                 tools:layout_editor_absoluteY="13dp" />
 
@@ -41,29 +41,30 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bell2"
-            android:layout_width="32dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="48dp"
+            android:layout_height="47dp"
+            android:layout_marginEnd="19dp"
+            android:layout_marginBottom="35dp"
             android:background="@drawable/mynaui_bell"
-            android:backgroundTint="#7E8282"
-            app:iconTint="#898E8D"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.014"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="542dp"
+            android:layout_height="902dp"
+            android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/see_all_review_toolbar">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/friendProfileImageView"
-                android:layout_width="148dp"
-                android:layout_height="146dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/detail"
                 app:civ_border_color="#ffffff"
@@ -76,9 +77,9 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/user_edit"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="-24dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="-33dp"
                 android:background="@drawable/profile_edit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="김민재"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -101,23 +102,24 @@
                 android:id="@+id/classname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:text="화랑초 5학년 4반"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="5dp"
+                android:layout_width="548dp"
+                android:layout_height="534dp"
+                android:layout_marginTop="50dp"
                 app:layout_constraintTop_toBottomOf="@+id/classname"
-                tools:layout_editor_absoluteX="-16dp">
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="-3dp">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="170dp"
-                    android:layout_height="110dp"
+                    android:layout_width="220dp"
+                    android:layout_height="150dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="25dp"
                     app:layout_constraintEnd_toStartOf="@+id/friendCardView"
@@ -131,14 +133,13 @@
 
                         <ImageView
                             android:id="@+id/imageView8"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="54dp"
+                            android:layout_height="45dp"
                             android:layout_marginBottom="6dp"
-                            android:background="#DD8484"
                             app:layout_constraintBottom_toTopOf="@+id/plant"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:srcCompat="@android:drawable/stat_sys_upload" />
+                            app:srcCompat="@drawable/group877" />
 
                         <TextView
                             android:id="@+id/plant"
@@ -147,18 +148,19 @@
                             android:layout_marginBottom="7dp"
                             android:text="방울토마토"
                             android:textAlignment="center"
+                            android:textSize="20sp"
                             app:layout_constraintBottom_toTopOf="@+id/plantName"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />
 
                         <TextView
                             android:id="@+id/plantName"
-                            android:layout_width="93dp"
-                            android:layout_height="wrap_content"
+                            android:layout_width="147dp"
+                            android:layout_height="41dp"
                             android:layout_marginBottom="7dp"
                             android:text="왕큰방울이"
                             android:textAlignment="center"
-                            android:textSize="16sp"
+                            android:textSize="22sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -170,14 +172,12 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/friendCardView1"
-                    android:layout_width="170dp"
-                    android:layout_height="110dp"
+                    android:layout_width="220dp"
+                    android:layout_height="150dp"
                     android:layout_marginEnd="20dp"
                     android:clickable="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-
-                    >
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -185,26 +185,25 @@
 
                         <ImageView
                             android:id="@+id/imageView5"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="54dp"
+                            android:layout_height="45dp"
                             android:layout_marginTop="16dp"
-                            android:background="#DD8484"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:srcCompat="@android:drawable/stat_sys_upload"
-                            tools:layout_editor_absoluteY="16dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/group878"
                             tools:ignore="MissingConstraints"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            tools:layout_editor_absoluteY="16dp" />
 
 
                         <TextView
                             android:id="@+id/friendCount"
-                            android:layout_width="93dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
                             android:text="친구 수: 0"
                             android:textAlignment="center"
-                            android:textSize="16sp"
+                            android:textSize="22sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -216,9 +215,9 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="370dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="130dp"
+                    android:layout_width="500dp"
+                    android:layout_height="320dp"
+                    android:layout_marginTop="200dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -230,7 +229,7 @@
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardView2"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="80dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -246,7 +245,7 @@
                                     android:layout_marginStart="15dp"
                                     android:layout_marginTop="10dp"
                                     android:text="알람설정"
-                                    android:textSize="20sp"
+                                    android:textSize="22sp"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -267,7 +266,7 @@
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardView3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="80dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/cardView2">
@@ -283,7 +282,7 @@
                                     android:layout_marginStart="15dp"
                                     android:layout_marginTop="10dp"
                                     android:text="FAQ"
-                                    android:textSize="20sp"
+                                    android:textSize="22sp"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -304,7 +303,7 @@
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardView4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="80dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/cardView3">
@@ -321,10 +320,10 @@
                                     android:background="@android:color/transparent"
                                     android:text="로그아웃"
                                     android:textColor="#000000"
-                                    android:textSize="20sp"
+                                    android:textSize="22sp"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    tools:layout_editor_absoluteX="-10dp"
-                                    tools:ignore="MissingConstraints" />
+                                    tools:ignore="MissingConstraints"
+                                    tools:layout_editor_absoluteX="-10dp" />
 
                                 <ImageButton
                                     android:id="@+id/menuButton3"
@@ -343,7 +342,7 @@
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardView5"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="80dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/cardView4">
@@ -359,7 +358,7 @@
                                     android:layout_marginStart="15dp"
                                     android:layout_marginTop="10dp"
                                     android:text="회원탈퇴"
-                                    android:textSize="20sp"
+                                    android:textSize="22sp"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -385,8 +384,8 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="413dp"
-            android:layout_height="80dp"
+            android:layout_width="533dp"
+            android:layout_height="131dp"
             android:background="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -394,10 +393,10 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/user_home"
-                android:layout_width="32dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="188dp"
-                android:layout_marginBottom="32dp"
+                android:layout_width="38dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="248dp"
+                android:layout_marginBottom="52dp"
                 android:background="@drawable/mynaui_home2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -406,10 +405,10 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/inbox"
-                android:layout_width="35dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginBottom="32dp"
+                android:layout_width="40dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginBottom="52dp"
                 android:background="@drawable/mynaui_inbox2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -417,10 +416,10 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/profile"
-                android:layout_width="35dp"
-                android:layout_height="32dp"
+                android:layout_width="46dp"
+                android:layout_height="47dp"
                 android:layout_marginEnd="40dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="48dp"
                 android:background="@drawable/mynaui_user2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

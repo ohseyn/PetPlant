@@ -264,7 +264,7 @@ public class profile extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         int count = task.getResult().size();
-                        friendCount.setText("친구 수: " + count + "명");
+                        friendCount.setText("친구\n"+ count + "명");
                     } else {
                         Log.d("ProfileActivity", "Error getting friends: ", task.getException());
                     }
