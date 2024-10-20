@@ -11,58 +11,60 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="212dp"
-        android:layout_height="196dp"
+        android:layout_width="289dp"
+        android:layout_height="276dp"
         android:layout_marginStart="99dp"
         android:layout_marginEnd="99dp"
         android:layout_marginBottom="212dp"
         app:layout_constraintBottom_toTopOf="@+id/answer1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.383" />
+        app:layout_constraintVertical_bias="0.435" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/answer1"
-        android:layout_width="238dp"
-        android:layout_height="33dp"
+        android:layout_width="368dp"
+        android:layout_height="60dp"
         android:background="@drawable/button_round"
         android:backgroundTint="#FFFFFF"
-        android:fontFamily="@font/suit_bold"
+        android:fontFamily="@font/suit_regular"
         android:onClick="onButtonClick"
         android:text="다음에도 시원하고 맛있는 물을 줄게."
         android:textColor="#000000"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.763"
+        app:layout_constraintHorizontal_bias="0.796"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64"
+        app:layout_constraintVertical_bias="0.678"
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/answer2"
-        android:layout_width="238dp"
-        android:layout_height="33dp"
+        android:layout_width="368dp"
+        android:layout_height="60dp"
         android:background="@drawable/button_round"
         android:backgroundTint="#FFFFFF"
-        android:fontFamily="@font/suit_bold"
+        android:fontFamily="@font/suit_regular"
         android:onClick="onButtonClick"
         android:text="목이 마를 땐 언제든 불러!"
         android:textColor="#000000"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.761"
+        app:layout_constraintHorizontal_bias="0.795"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7"
+        app:layout_constraintVertical_bias="0.739"
         tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck" />
 
     <ImageView
-        android:layout_width="19dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="28dp"
+        android:layout_width="37dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -70,22 +72,23 @@
         app:srcCompat="@drawable/water_diamond" />
 
     <ImageView
-        android:layout_width="139dp"
-        android:layout_height="185dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="221dp"
+        android:layout_height="183dp"
+        android:layout_marginStart="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.551"
+        app:layout_constraintVertical_bias="0.57"
         app:srcCompat="@drawable/water" />
 
+
     <ImageView
-        android:layout_width="78dp"
-        android:layout_height="152dp"
+        android:layout_width="166dp"
+        android:layout_height="182dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="292dp"
+        android:layout_marginTop="476dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/tomato_character_home"
@@ -93,11 +96,11 @@
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="456dp"
+        android:layout_width="400dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="752dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintHorizontal_bias="0.885"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle187"
@@ -105,11 +108,11 @@
 
 
     <ImageView
-        android:layout_width="243dp"
-        android:layout_height="84dp"
-        android:layout_marginTop="248dp"
+        android:layout_width="310dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="440dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle185"
@@ -118,36 +121,37 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="264dp"
+        android:layout_marginTop="464dp"
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:text="물이 너무\n시원하고 맛있어요!"
-        android:textSize="20sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.781"
+        app:layout_constraintHorizontal_bias="0.815"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/next_button"
-        android:layout_width="377dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="700dp"
+        android:layout_width="490dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="1045dp"
         android:backgroundTint="@drawable/button_background"
-        android:text="대화 마치기"
-        android:textColor="#FFFFFF"
         android:enabled="false"
         android:onClick="onButtonClick"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:ignore="TouchTargetSizeCheck" />
-
+        android:text="대화 마치기"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_width="182dp"
+        android:layout_height="183dp"
+        android:layout_marginTop="168dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -156,29 +160,32 @@
 
     <ImageView
         android:id="@+id/talk_balloon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="113dp"
+        android:layout_height="63dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="580dp"
+        android:layout_marginTop="920dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.039"
+        app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/text_balloon"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/responseText"
-        android:layout_width="53dp"
-        android:layout_height="22dp"
+        android:layout_width="76dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="592dp"
+        android:layout_marginTop="936dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:text="좋아요!"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone" />
+        android:visibility="gone"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

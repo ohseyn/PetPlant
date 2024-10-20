@@ -10,6 +10,6 @@
         android:width="2dp"
         android:color="#46C140" />
     <!-- 버튼 모서리 둥글게 하기 (선택 사항) -->
-    <corners android:radius="30dp" /> <!-- 원하는 둥근 정도 설정 -->
+    <corners android:radius="50dp" /> <!-- 원하는 둥근 정도 설정 -->
 
 </shape>

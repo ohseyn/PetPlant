@@ -10,7 +10,7 @@ public class waterquiz_correct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waterquiz_correct);
+        setContentView(R.layout.activity_water_quiz_correct);
     }
 
     public void onButtonClick(View view)
