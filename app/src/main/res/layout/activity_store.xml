@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,8 +9,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/storebar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="541dp"
+        android:layout_height="89dp"
         android:background="@drawable/storebar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,22 +20,23 @@
 
     <TextView
         android:id="@+id/speechbubble"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/store_speechbubble"
+        android:layout_width="354dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="16dp"
 
+        android:background="@drawable/store_speechbubble"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/storebar"
-        app:layout_constraintVertical_bias="0.196"
+        app:layout_constraintVertical_bias="0.226"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/coin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="168dp"
+        android:layout_height="90dp"
         android:background="@drawable/coin"
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:gravity="center"
@@ -47,17 +47,16 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086"
+        app:layout_constraintVertical_bias="0.072"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/characterImage"
-        android:layout_width="138dp"
-        android:layout_height="208dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="196dp"
+        android:layout_height="275dp"
+        android:layout_marginTop="52dp"
         android:src="@drawable/tomato_character_home"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/speechbubble"
         tools:ignore="MissingConstraints" />
@@ -66,11 +65,14 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/characterImage"
-        app:tabIndicatorColor="#02AE7A"
+        app:tabGravity="fill"
+        app:tabBackground="@drawable/tab_selector2"
+        app:tabIndicatorColor="@android:color/transparent"
+        app:tabMaxWidth="0dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="#02AE7A"
         app:tabTextColor="#999999">
@@ -98,7 +100,7 @@
         android:includeFontPadding="false"
         android:text="상점"
         android:textColor="#000000"
-        android:textSize="18dp"
+        android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -107,7 +109,7 @@
         android:id="@+id/dress"
         android:layout_width="32dp"
         android:layout_height="30dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/paint"
         android:backgroundTint="#7E8282"
@@ -120,7 +122,7 @@
         android:id="@+id/back_profile"
         android:layout_width="32dp"
         android:layout_height="30dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/ic_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.042"
@@ -130,14 +132,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_width="540dp"
+        android:layout_height="753dp"
+        android:clipToPadding="false"
+        android:background="@drawable/rectangle67"
+        app:layout_constraintBottom_toTopOf="@id/buyButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
-        app:layout_constraintBottom_toTopOf="@id/buyButton"
-        android:padding="16dp"
-        android:clipToPadding="false"
         tools:listitem="@layout/item_shop" />
 
     <!-- 구매하기 버튼 -->
@@ -152,8 +154,8 @@
         android:textColor="@android:color/white"
         android:textSize="16sp"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/recyclerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,6 +52,11 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
         return itemList.size(); // 아이템 개수 리턴
     }
 
+    public void updateItemList(List<StoreItem> newList) {
+        this.itemList = newList;
+        notifyDataSetChanged();
+    }
+
     // 뷰홀더 클래스
     public static class StoreItemViewHolder extends RecyclerView.ViewHolder {
         public ImageView itemImage;

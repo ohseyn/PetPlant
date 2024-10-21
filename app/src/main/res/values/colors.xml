@@ -7,4 +7,6 @@
     <color name="selected_tab_text_color">#02AE7A</color>
     <color name="unselected_tab_text_color">#999999</color>
     <color name="unselected_tab_color">#FFFFFF</color>
+    <color name="selected_tab_color2">#FFFFFF</color>
+    <color name="unselected_tab_color2">#CCFFFFFF</color>
 </resources>
