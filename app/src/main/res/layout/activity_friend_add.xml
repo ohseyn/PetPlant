@@ -9,10 +9,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/back_profile"
-        android:layout_width="29dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="47dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="460dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/ic_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.03"
@@ -24,33 +25,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/suit_bold"
         android:includeFontPadding="false"
         android:text="친구 추가"
         android:textColor="#040303"
-        android:textSize="20dp"
+        android:textSize="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/search_bar"
-        android:layout_width="340dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="88dp"
+    <ImageView
+        android:layout_width="471dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="108dp"
         android:background="@drawable/rounded_edittext_background"
-        android:drawableLeft="@drawable/ic_search"
-        android:hint="   이름으로 친구를 찾아보세요"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="400dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="108dp"
+        android:background="@null"
+        android:hint="이름으로 친구를 찾아보세요."
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="133dp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_add_friend"
-        android:layout_width="411dp"
-        android:layout_height="578dp"
+        android:layout_width="500dp"
+        android:layout_height="1000dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

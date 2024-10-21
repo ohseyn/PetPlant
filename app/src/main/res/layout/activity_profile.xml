@@ -118,13 +118,14 @@
                 tools:layout_editor_absoluteX="-3dp">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="220dp"
-                    android:layout_height="150dp"
+                    android:layout_width="240dp"
+                    android:layout_height="170dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="25dp"
                     app:layout_constraintEnd_toStartOf="@+id/friendCardView"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:cardCornerRadius="16dp"
                     tools:ignore="UnknownIdInLayout">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -172,10 +173,11 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/friendCardView1"
-                    android:layout_width="220dp"
-                    android:layout_height="150dp"
+                    android:layout_width="240dp"
+                    android:layout_height="170dp"
                     android:layout_marginEnd="20dp"
                     android:clickable="true"
+                    app:cardCornerRadius="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -183,18 +185,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
+
                         <ImageView
                             android:id="@+id/imageView5"
                             android:layout_width="54dp"
                             android:layout_height="45dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="34dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/group878"
-                            tools:ignore="MissingConstraints"
-                            tools:layout_editor_absoluteY="16dp" />
-
+                            tools:ignore="MissingConstraints" />
 
                         <TextView
                             android:id="@+id/friendCount"
@@ -217,10 +218,11 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="500dp"
                     android:layout_height="320dp"
-                    android:layout_marginTop="200dp"
+                    android:layout_marginTop="190dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:cardCornerRadius="16dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -242,8 +244,8 @@
                                     android:id="@+id/menuText1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="15dp"
-                                    android:layout_marginTop="10dp"
+                                    android:layout_marginStart="30dp"
+                                    android:layout_marginTop="24dp"
                                     android:text="알람설정"
                                     android:textSize="22sp"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -251,8 +253,8 @@
 
                                 <ImageButton
                                     android:id="@+id/menuButton1"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
+                                    android:layout_width="54dp"
+                                    android:layout_height="79dp"
                                     android:background="#FFFFFF"
                                     android:contentDescription="Submit button for form"
                                     android:rotationY="180"
@@ -279,8 +281,8 @@
                                     android:id="@+id/menuText2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="15dp"
-                                    android:layout_marginTop="10dp"
+                                    android:layout_marginStart="30dp"
+                                    android:layout_marginTop="24dp"
                                     android:text="FAQ"
                                     android:textSize="22sp"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -288,8 +290,8 @@
 
                                 <ImageButton
                                     android:id="@+id/menuButton2"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
+                                    android:layout_width="54dp"
+                                    android:layout_height="80dp"
                                     android:background="#FFFFFF"
                                     android:contentDescription="Submit button for form"
                                     android:rotationY="180"
@@ -316,19 +318,19 @@
                                     android:id="@+id/logoutButton"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
+                                    android:layout_marginTop="16dp"
                                     android:background="@android:color/transparent"
                                     android:text="로그아웃"
                                     android:textColor="#000000"
                                     android:textSize="22sp"
                                     app:layout_constraintTop_toTopOf="parent"
                                     tools:ignore="MissingConstraints"
-                                    tools:layout_editor_absoluteX="-10dp" />
+                                    tools:layout_editor_absoluteX="-2dp" />
 
                                 <ImageButton
                                     android:id="@+id/menuButton3"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
+                                    android:layout_width="54dp"
+                                    android:layout_height="79dp"
                                     android:background="#FFFFFF"
                                     android:contentDescription="Submit button for form"
                                     android:rotationY="180"
@@ -355,8 +357,8 @@
                                     android:id="@+id/menuText4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="15dp"
-                                    android:layout_marginTop="10dp"
+                                    android:layout_marginStart="30dp"
+                                    android:layout_marginTop="24dp"
                                     android:text="회원탈퇴"
                                     android:textSize="22sp"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -364,8 +366,8 @@
 
                                 <ImageButton
                                     android:id="@+id/menuButton4"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
+                                    android:layout_width="54dp"
+                                    android:layout_height="80dp"
                                     android:background="#FFFFFF"
                                     android:contentDescription="Submit button for form"
                                     android:rotationY="180"

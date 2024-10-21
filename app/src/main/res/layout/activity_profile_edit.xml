@@ -11,21 +11,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/suit_bold"
         android:includeFontPadding="false"
         android:text="프로필"
         android:textColor="#040303"
-        android:textSize="15sp"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/back_profile"
-        android:layout_width="32dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="47dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="460dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/ic_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.042"
@@ -37,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="90dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,11 +47,11 @@
         tools:ignore="MissingConstraints">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="220dp"
-            android:layout_height="220dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             android:clipToOutline="true"
-            app:cardCornerRadius="110dp"
+            app:cardCornerRadius="150dp"
             app:cardElevation="0dp"
             app:cardUseCompatPadding="true">
 
@@ -76,32 +78,46 @@
 
     </FrameLayout>
 
+    <EditText
+        android:id="@+id/introduce_input"
+        android:layout_width="472dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="612dp"
+        android:background="@drawable/edit_text_background"
+        android:gravity="left"
+        android:hint="나를 소개하는 문구를 적어주세요."
+        android:padding="12dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="268dp"
+        android:layout_marginTop="384dp"
         android:fontFamily="@font/suit_regular"
         android:includeFontPadding="false"
         android:text="이름"
         android:textColor="#040303"
-        android:textSize="16dp"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/name_input"
-        android:layout_width="344dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="300dp"
+        android:layout_width="476dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="420dp"
         android:background="@drawable/edit_text_background"
         android:hint="한글 1~5자로 입력해 주세요."
         android:padding="12dp"
-        android:textSize="14dp"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -109,83 +125,70 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="268dp"
-        android:fontFamily="@font/suit_regular"
-        android:includeFontPadding="false"
-        android:text="(필수)"
-        android:textColor="#02AE7A"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="396dp"
-        android:fontFamily="@font/suit_regular"
-        android:includeFontPadding="false"
-        android:text="소개글"
-        android:textColor="#040303"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="428dp"
-        android:fontFamily="@font/suit_regular"
-        android:includeFontPadding="false"
-        android:text="친구들이 나를 알아보기 쉽도록 나를 표현해봐요."
-        android:textColor="#ACACAC"
-        android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/introduce_input"
-        android:layout_width="339dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="452dp"
-        android:background="@drawable/edit_text_background"
-        android:gravity="left"
-        android:hint="나를 소개하는 문구를 적어주세요."
-        android:padding="12dp"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="492dp"
         android:fontFamily="@font/suit_regular"
         android:includeFontPadding="false"
         android:text="*초성, 띄어쓰기, 특수문자는 입력할 수 없어요."
         android:textColor="#ACACAC"
-        android:textSize="12dp"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0.162"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="580dp"
+        android:fontFamily="@font/suit_regular"
+        android:includeFontPadding="false"
+        android:text="친구들이 나를 알아보기 쉽도록 나를 표현해봐요."
+        android:textColor="#ACACAC"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="552dp"
+        android:fontFamily="@font/suit_regular"
+        android:includeFontPadding="false"
+        android:text="소개글"
+        android:textColor="#040303"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="384dp"
+        android:fontFamily="@font/suit_regular"
+        android:includeFontPadding="false"
+        android:text="(필수)"
+        android:textColor="#02AE7A"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/edit_complete"
-        android:layout_width="362dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="704dp"
+        android:layout_width="471dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="1050dp"
         android:backgroundTint="#02AE7A"
         android:text="수정완료"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"

@@ -13,7 +13,7 @@
         android:id="@+id/page_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="80dp"
         android:layout_weight="1"
         android:contentDescription="페이지 인디케이터"
         android:gravity="center"
@@ -58,41 +58,54 @@
     <!-- 선택하기 버튼 -->
 
     <TextView
-        android:id="@+id/info_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_width="384dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="140dp"
         android:text="나와 함께할\n반려 식물을 골라주세요."
-        android:textSize="20sp"
+        android:textSize="26sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.005"
+        app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
-        android:layout_width="363dp"
-        android:layout_height="555dp"
-        android:layout_marginBottom="60dp"
+        android:layout_width="539dp"
+        android:layout_height="792dp"
+        android:layout_marginBottom="152dp"
         android:contentDescription="온보딩 페이지 전환 뷰"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/choose_button"
-        android:layout_width="377dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="692dp"
+        android:layout_width="471dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="1024dp"
         android:backgroundTint="@drawable/button_background_onboarding"
         android:enabled="false"
         android:onClick="onButtonClick"
         android:text="선택하기"
         android:textColor="#FFFFFF"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="47dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="460dp"
+        android:background="@drawable/ic_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
