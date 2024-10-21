@@ -115,7 +115,7 @@ public class HomeMainActivity extends AppCompatActivity {
         store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ShopActivity.class);
+                Intent intent = new Intent(getApplicationContext(), StoreActivity.class);
                 intent.putExtra("coin", coin);
                 startActivity(intent);
             }
