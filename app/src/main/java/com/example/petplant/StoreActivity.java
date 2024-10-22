@@ -1,9 +1,12 @@
 package com.example.petplant;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +23,7 @@ public class StoreActivity extends AppCompatActivity {
     private List<StoreItem> backgroundList, itemList;
     private Button buyButton;
     private ImageView characterImage;
+    private StoreItem selectedItem; // 선택한 아이템
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +62,18 @@ public class StoreActivity extends AppCompatActivity {
         itemList.add(new StoreItem("코주부 안경", R.drawable.guideimage1));
         itemList.add(new StoreItem("엔젤 링", R.drawable.guideimage1));
 
-        // 기본 배경 리스트 어댑터 설정
+        // 기본 리스트 어댑터 설정
         adapter = new StoreItemAdapter(this, backgroundList, item -> {
-            // 아이템을 클릭했을 때의 동작 정의 (미리보기 적용)
-            characterImage.setImageResource(item.getImageResource());
-            buyButton.setVisibility(Button.VISIBLE);
+            if (selectedItem == item) {
+                // 선택한 아이템을 다시 누르면 해제
+                selectedItem = null;
+                buyButton.setVisibility(Button.GONE); // 구매 버튼 숨기기
+            } else {
+                // 다른 아이템을 선택하면 구매 버튼 보이기
+                selectedItem = item;
+                characterImage.setImageResource(item.getImageResource());
+                buyButton.setVisibility(Button.VISIBLE);
+            }
         });
         recyclerView.setAdapter(adapter);
 
@@ -84,9 +95,21 @@ public class StoreActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });
+        // 구매 버튼 클릭 시 구매 확인 다이얼로그 표시
+        buyButton.setOnClickListener(v -> showBuyDialog(selectedItem));
     }
 
+    // 구매 다이얼로그
     private void showBuyDialog(StoreItem item) {
-        // 구매 다이얼로그 로직
+        new AlertDialog.Builder(this)
+                .setTitle("구매 확인")
+                .setMessage(item.getName() + "를(을) 구매하시겠습니까?")
+                .setPositiveButton("구매", (dialog, which) -> {
+                    Toast.makeText(StoreActivity.this, item.getName() + "를(을) 구매했습니다!", Toast.LENGTH_SHORT).show();
+                    buyButton.setVisibility(Button.GONE); // 구매 후 버튼 숨기기
+                })
+                .setNegativeButton("취소", (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
     }
 }
