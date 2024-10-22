@@ -83,10 +83,12 @@ public class ActivityLogActivity extends AppCompatActivity {
         // Firebase 초기화
         db = FirebaseFirestore.getInstance();
         currentDate = getCurrentDate();  // 초기 날짜 설정
+
         updateDateDisplay();  // 날짜 디스플레이 업데이트
 
         // 탭 선택 리스너 설정 (친구 활동 / 내 활동)
         TabLayout tabLayout = findViewById(R.id.tabLayout);
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

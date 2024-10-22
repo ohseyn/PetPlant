@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/rectangle_green"
+    android:background="@drawable/dialog_blue"
     android:padding="16dp">
 
     <LinearLayout
@@ -42,7 +42,7 @@
             android:layout_marginStart="8dp"
             android:text="+3"
             android:textColor="@android:color/darker_gray"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <ImageView
@@ -50,25 +50,25 @@
         android:layout_width="386dp"
         android:layout_height="386dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:scaleType="centerCrop"
         android:src="@drawable/guideimage1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.613"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plantName"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/plantName"
-        android:layout_width="60dp"
-        android:layout_height="25dp"
+        android:layout_width="207dp"
+        android:layout_height="28dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="81dp"
         android:text="식물 이름"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textUserName"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -77,10 +77,11 @@
         android:id="@+id/textUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:text="방울토마토"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textActivityTitle"
         tools:ignore="MissingConstraints" />
@@ -89,21 +90,24 @@
         android:id="@+id/textActivityTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:text="활동 제목"
-        android:textSize="18sp"
-        android:textStyle="bold"
         android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textActivityTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
         android:text="오전 10:30"
         android:textColor="@android:color/darker_gray"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

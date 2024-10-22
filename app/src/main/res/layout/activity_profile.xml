@@ -386,8 +386,8 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="533dp"
-            android:layout_height="131dp"
+            android:layout_width="543dp"
+            android:layout_height="130dp"
             android:background="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -395,10 +395,10 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/user_home"
-                android:layout_width="38dp"
-                android:layout_height="39dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:layout_marginStart="248dp"
-                android:layout_marginBottom="52dp"
+                android:layout_marginBottom="48dp"
                 android:background="@drawable/mynaui_home2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

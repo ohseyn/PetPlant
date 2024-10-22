@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:text="활동 종류"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
@@ -33,7 +33,7 @@
             android:layout_marginTop="44dp"
             android:text="활동 제목"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +58,7 @@
             android:layout_marginTop="37dp"
             android:text="방울토마토 /"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textActivityTitle"
             tools:ignore="MissingConstraints" />
@@ -71,7 +71,7 @@
             android:layout_marginTop="82dp"
             android:text="식물 이름"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/plantSort"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
@@ -120,7 +120,7 @@
             android:layout_marginEnd="8dp"
             android:text="오전 10:45"
             android:textColor="@android:color/darker_gray"
-            android:textSize="12sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />

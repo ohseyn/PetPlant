@@ -91,6 +91,8 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.activity_detail_picture);  // 사진이 있는 레이아웃
 
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         TextView title = dialog.findViewById(R.id.textActivityTitle);
         TextView plantName = dialog.findViewById(R.id.plantName);
         TextView time = dialog.findViewById(R.id.textActivityTime);
@@ -113,7 +115,9 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
     // 텍스트만 있는 다이얼로그를 띄우는 메서드
     private void showTextDialog(Context context, UserActivity activity) {
         Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.activity_detail_dialog);  // 텍스트만 있는 레이아웃
+        dialog.setContentView(R.layout.activity_detail_dialog);// 텍스트만 있는 레이아웃
+
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         TextView title = dialog.findViewById(R.id.textActivityTitle);
         TextView plantName = dialog.findViewById(R.id.plantName);

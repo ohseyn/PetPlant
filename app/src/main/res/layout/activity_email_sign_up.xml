@@ -10,6 +10,18 @@
     android:background="@drawable/friend_back"
     tools:context=".Register">
 
+    <ImageView
+        android:id="@+id/ilogo"
+        android:layout_width="271dp"
+        android:layout_height="244dp"
+        android:layout_marginBottom="704dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="MissingConstraints,NotSibling" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -42,17 +54,16 @@
 
     <Button
         android:id="@+id/signUpButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="471dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="#02AE7A"
         android:text="회원가입"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/loginNow"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.985"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintHorizontal_bias="0.351"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/loginNow"
@@ -61,15 +72,14 @@
         android:layout_margin="20dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
-        android:text="click to login"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:text="로그인 하러가기"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.833"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintVertical_bias="0.722" />
 
     <TextView
         android:layout_width="match_parent"
@@ -77,18 +87,19 @@
         android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="회원가입"
-        android:textSize="17dp"
+        android:textStyle="bold"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.012" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/back_profile"
-        android:layout_width="32dp"
-        android:layout_height="30dp"
+        android:layout_width="51dp"
+        android:layout_height="47dp"
         android:background="@drawable/ic_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -98,30 +109,31 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="8자리 이상 입력해 주세요."
+        android:layout_width="472dp"
+        android:layout_height="77dp"
+        android:layout_marginBottom="470dp"
+        android:hint="비밀번호를 입력하세요"
         android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.361"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.555"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,TextSizeCheck" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="이메일 주소를 입력해주세요"
-        android:textColorHint="#acacac"
+        android:layout_width="474dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="572dp"
+        android:hint="이메일을 입력하세요"
+        android:inputType="textEmailAddress"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.382"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.488"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck,TextSizeCheck"  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
