@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.StoreItemViewHolder>{
+public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.StoreItemViewHolder> {
 
     private Context context;
     private List<StoreItem> itemList;
     private OnItemClickListener onItemClickListener;
+    private int selectedPosition = RecyclerView.NO_POSITION; // 선택된 아이템 저장
 
     // 인터페이스 정의 (아이템 클릭 시 호출)
     public interface OnItemClickListener {
@@ -41,10 +42,21 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
     public void onBindViewHolder(@NonNull StoreItemViewHolder holder, int position) {
         StoreItem currentItem = itemList.get(position);
         holder.itemName.setText(currentItem.getName());
-        holder.itemImage.setImageResource(currentItem.getImageResource()); // 이미지 리소스 설정
+        holder.itemImage.setImageResource(currentItem.getImageResource());
 
-        // 아이템 클릭 리스너 설정
-        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(currentItem));
+        holder.itemView.setSelected(selectedPosition == position); // 선택된 아이템 강조
+
+        // 아이템 클릭 처리
+        holder.itemView.setOnClickListener(v -> {
+            if (selectedPosition == position) {
+                selectedPosition = RecyclerView.NO_POSITION; // 같은 아이템을 다시 클릭하면 선택 해제
+                onItemClickListener.onItemClick(null); // 선택 해제 신호 전달
+            } else {
+                selectedPosition = position; // 새로운 아이템 선택
+                onItemClickListener.onItemClick(currentItem);
+            }
+            notifyDataSetChanged(); // UI 업데이트
+        });
     }
 
     @Override
@@ -64,8 +76,8 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
 
         public StoreItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemImage = itemView.findViewById(R.id.item_image); // 이미지 뷰 참조
-            itemName = itemView.findViewById(R.id.item_name);   // 텍스트 뷰 참조
+            itemImage = itemView.findViewById(R.id.item_image);
+            itemName = itemView.findViewById(R.id.item_name);
         }
     }
 }
