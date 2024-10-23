@@ -1,77 +1,129 @@
 package com.example.petplant;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class StoreActivity extends AppCompatActivity {
+
+    private FirebaseFirestore db;
+    private FirebaseAuth auth;
+    private Long coin;
 
     private RecyclerView recyclerView;
     private StoreItemAdapter adapter;
     private List<StoreItem> backgroundList, itemList;
     private Button buyButton;
     private ImageView characterImage;
-    private StoreItem selectedItem; // 선택한 아이템
-    private boolean isItemSelected = false; // 아이템이 선택되었는지 확인
+    private StoreItem selectedItem;
+    private TextView shopCoinTextView;
+
+    private int selectedItemPrice = 0;
+    private String selectedItemName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
+        Button back_profile = findViewById(R.id.back_profile);
+        back_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                // Firestore에서 유저의 코인 값을 가져와 Intent에 전달
+                db.collection("users").document(userId).get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            if (documentSnapshot.exists()) {
+                                Long coin = documentSnapshot.getLong("coin");
+                                if (coin == null) {
+                                    coin = 0L;  // 코인 값이 null일 경우 0으로 설정
+                                }
+                                Log.d("HomeMainActivity", "코인 값: " + coin);
+
+                                // Intent로 코인 값 전달
+                                Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
+                                intent.putExtra("coin", coin);
+                                startActivity(intent);
+                            } else {
+                                Log.e("HomeMainActivity", "유저 데이터가 존재하지 않습니다.");
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            Log.e("HomeMainActivity", "Firestore 에러: ", e);
+                        });
+            }
+        });
+
+        // Firestore와 Auth 초기화
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+
+        // View 초기화
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-
-        // 2행 4열의 그리드 레이아웃 설정
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 
         characterImage = findViewById(R.id.characterImage);
         buyButton = findViewById(R.id.buyButton);
-        buyButton.setVisibility(View.GONE); // 초기 상태에서는 구매 버튼 숨김
+        buyButton.setVisibility(View.GONE);
+        shopCoinTextView = findViewById(R.id.coin);
 
-        // 배경과 아이템 리스트 초기화
+        // Intent로 전달된 코인 값 받아오기
+        coin = getIntent().getLongExtra("coin", 0L);
+
+        // 코인 값 UI에 표시
+        updateCoinTextView();
+
+        // 아이템 리스트 초기화
         backgroundList = getBackgroundItems();
         itemList = getCharacterItems();
 
-        // 기본 리스트 어댑터 설정
         adapter = new StoreItemAdapter(this, backgroundList, item -> {
             if (selectedItem == item) {
-                selectedItem = null; // 같은 아이템을 다시 누르면 선택 해제
-                isItemSelected = false;
-                buyButton.setVisibility(View.GONE); // 구매 버튼 숨기기
+                selectedItem = null;
+                selectedItemPrice = 0;
+                selectedItemName = "";
+                buyButton.setVisibility(View.GONE);
             } else {
                 selectedItem = item;
-                isItemSelected = true;
-                characterImage.setImageResource(item.getImageResource()); // 아이템 선택 시 미리보기 적용
-                buyButton.setVisibility(View.VISIBLE); // 구매 버튼 보이기
+                selectedItemPrice = item.getPrice();
+                selectedItemName = item.getName();
+                characterImage.setImageResource(item.getImageResource());
+                buyButton.setVisibility(View.VISIBLE);
             }
         });
         recyclerView.setAdapter(adapter);
 
-        // 탭 레이아웃 설정
+        // TabLayout 설정
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0) { // 배경 탭 선택 시
+                if (tab.getPosition() == 0) {
                     adapter.updateItemList(backgroundList);
-                } else { // 아이템 탭 선택 시
+                } else {
                     adapter.updateItemList(itemList);
                 }
             }
@@ -83,91 +135,125 @@ public class StoreActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        // 구매 버튼 클릭 시 구매 확인 다이얼로그 표시
+        // 구매 버튼 클릭 리스너 설정
         buyButton.setOnClickListener(v -> {
             if (selectedItem != null) {
-                showBuyDialog(selectedItem);
+                if (coin >= selectedItemPrice) {
+                    showBuyDialog();
+                } else {
+                    Toast.makeText(StoreActivity.this, "코인이 부족합니다.", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(StoreActivity.this, "아이템을 선택해주세요.", Toast.LENGTH_SHORT).show();
             }
         });
-
-//        // 리스트 초기화 (배경 리스트)
-//        backgroundList = new ArrayList<>();
-//        backgroundList.add(new StoreItem("보라색 배경", R.drawable.guideimage1));
-//        backgroundList.add(new StoreItem("맑은 날", R.drawable.guideimage1));
-//        backgroundList.add(new StoreItem("봄날", R.drawable.guideimage1));
-//        backgroundList.add(new StoreItem("어두운 배경", R.drawable.guideimage1));
-//        backgroundList.add(new StoreItem("오아시스", R.drawable.guideimage1));
-//        backgroundList.add(new StoreItem("무대", R.drawable.guideimage1));
-//        backgroundList.add(new StoreItem("길거리", R.drawable.guideimage1));
-//        backgroundList.add(new StoreItem("눈 오는 날", R.drawable.guideimage1));
-//
-//        // 아이템 리스트 초기화
-//        itemList = new ArrayList<>();
-//        itemList.add(new StoreItem("멋쟁이 안경", R.drawable.guideimage1));
-//        itemList.add(new StoreItem("굵은 수염", R.drawable.guideimage1));
-//        itemList.add(new StoreItem("귀여운 리본", R.drawable.guideimage1));
-//        itemList.add(new StoreItem("반려 인형", R.drawable.guideimage1));
-//        itemList.add(new StoreItem("운동화", R.drawable.guideimage1));
-//        itemList.add(new StoreItem("머리핀", R.drawable.guideimage1));
-//        itemList.add(new StoreItem("코주부 안경", R.drawable.guideimage1));
-//        itemList.add(new StoreItem("엔젤 링", R.drawable.guideimage1));
     }
 
-    // 배경 리스트 설정
+    // 배경 아이템 리스트 생성
     private List<StoreItem> getBackgroundItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("보라색 배경", R.drawable.guideimage1));
-        list.add(new StoreItem("맑은 날", R.drawable.guideimage1));
-        list.add(new StoreItem("봄날", R.drawable.guideimage1));
-        list.add(new StoreItem("어두운 배경", R.drawable.guideimage1));
-        list.add(new StoreItem("오아시스", R.drawable.guideimage1));
-        list.add(new StoreItem("무대", R.drawable.guideimage1));
-        list.add(new StoreItem("길거리", R.drawable.guideimage1));
-        list.add(new StoreItem("눈 오는 날", R.drawable.guideimage1));
+        list.add(new StoreItem("보라색 배경", R.drawable.guideimage1, 60));
+        list.add(new StoreItem("맑은 날", R.drawable.guideimage1, 70));
+        list.add(new StoreItem("봄날", R.drawable.guideimage1, 80));
+        list.add(new StoreItem("어두운 배경", R.drawable.guideimage1, 90));
+        list.add(new StoreItem("오아시스", R.drawable.guideimage1, 100));
+        list.add(new StoreItem("무대", R.drawable.guideimage1, 40));
+        list.add(new StoreItem("길거리", R.drawable.guideimage1, 50));
+        list.add(new StoreItem("눈 오는 날", R.drawable.guideimage1, 30));
         return list;
     }
 
-    // 아이템 리스트 설정
+    // 캐릭터 아이템 리스트 생성
     private List<StoreItem> getCharacterItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("멋쟁이 안경", R.drawable.guideimage1));
-        list.add(new StoreItem("굵은 수염", R.drawable.guideimage1));
-        list.add(new StoreItem("귀여운 리본", R.drawable.guideimage1));
-        list.add(new StoreItem("반려 인형", R.drawable.guideimage1));
-        list.add(new StoreItem("운동화", R.drawable.guideimage1));
-        list.add(new StoreItem("머리핀", R.drawable.guideimage1));
-        list.add(new StoreItem("코주부 안경", R.drawable.guideimage1));
-        list.add(new StoreItem("엔젤 링", R.drawable.guideimage1));
+        list.add(new StoreItem("멋쟁이 안경", R.drawable.guideimage1, 100));
+        list.add(new StoreItem("굵은 수염", R.drawable.guideimage1, 120));
+        list.add(new StoreItem("귀여운 리본", R.drawable.guideimage1, 150));
+        list.add(new StoreItem("반려 인형", R.drawable.guideimage1, 130));
+        list.add(new StoreItem("운동화", R.drawable.guideimage1, 140));
+        list.add(new StoreItem("머리핀", R.drawable.guideimage1, 160));
+        list.add(new StoreItem("코주부 안경", R.drawable.guideimage1, 110));
+        list.add(new StoreItem("엔젤 링", R.drawable.guideimage1, 180));
         return list;
     }
 
-    // 구매 다이얼로그
-    private void showBuyDialog(StoreItem item) {
-        new AlertDialog.Builder(this)
-                .setTitle("구매 확인")
-                .setMessage(item.getName() + "를(을) 구매하시겠습니까?")
-                .setPositiveButton("구매", (dialog, which) -> {
-                    // 여기서 Firestore 연동
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    Map<String, Object> purchase = new HashMap<>();
-                    purchase.put("itemName", item.getName());
-                    purchase.put("itemImage", item.getImageResource());
+    // 구매 다이얼로그 표시
+    private void showBuyDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.dialog_purchase_confirmation, null);
 
-                    // Firestore에 저장
-                    db.collection("purchases")
-                            .add(purchase)
-                            .addOnSuccessListener(documentReference -> {
-                                Toast.makeText(StoreActivity.this, "구매가 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                                buyButton.setVisibility(View.GONE); // 구매 후 버튼 숨기기
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(StoreActivity.this, "구매 저장에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                            });
-                })
-                .setNegativeButton("취소", (dialog, which) -> dialog.dismiss())
-                .create()
-                .show();
+        ImageView itemImage = dialogLayout.findViewById(R.id.itemImage);
+        TextView itemName = dialogLayout.findViewById(R.id.itemName);
+        TextView itemPrice = dialogLayout.findViewById(R.id.itemPrice);
+        Button confirmButton = dialogLayout.findViewById(R.id.confirmButton);
+        Button cancelButton = dialogLayout.findViewById(R.id.cancelButton);
+
+        itemImage.setImageResource(selectedItem.getImageResource());
+        itemName.setText(selectedItemName);
+        itemPrice.setText(selectedItemPrice + " 코인");
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogLayout)
+                .create();
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.shop_rounded_dialog);
+
+        confirmButton.setOnClickListener(v -> {
+            coin -= selectedItemPrice;
+            updateCoinTextView(); // 코인 값 즉시 업데이트
+            updateCoinsInFirestore();
+            dialog.dismiss();
+            showSuccessDialog();
+        });
+
+        cancelButton.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+    // 구매 성공 다이얼로그 표시
+    private void showSuccessDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.dialog_success, null);
+
+        ImageView itemImage = dialogLayout.findViewById(R.id.itemImage);
+        TextView itemName = dialogLayout.findViewById(R.id.itemName);
+        Button decorateButton = dialogLayout.findViewById(R.id.decorateButton);
+        Button confirmButton2 = dialogLayout.findViewById(R.id.confirmButton2);
+
+        itemImage.setImageResource(selectedItem.getImageResource());
+        itemName.setText(selectedItemName);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogLayout)
+                .create();
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.shop_rounded_dialog);
+
+        decorateButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DecorateActivity.class);
+            intent.putExtra("selectedItem", selectedItem);
+            startActivity(intent);
+            dialog.dismiss();
+        });
+
+        confirmButton2.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+    // Firestore에 코인 업데이트
+    private void updateCoinsInFirestore() {
+        DocumentReference docRef = db.collection("users")
+                .document(auth.getCurrentUser().getUid());
+
+        docRef.update("coin", coin)
+                .addOnSuccessListener(aVoid -> Log.d("StoreActivity", "코인 업데이트 성공"))
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "코인 업데이트 실패", Toast.LENGTH_SHORT).show()
+                );
+    }
+
+    // 코인 값 업데이트 함수
+    private void updateCoinTextView() {
+        shopCoinTextView.setText(String.valueOf(coin));
     }
 }

@@ -111,15 +111,38 @@ public class HomeMainActivity extends AppCompatActivity {
             }
         });
 
+
         Button store = findViewById(R.id.store);
         store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), StoreActivity.class);
-                intent.putExtra("coin", coin);
-                startActivity(intent);
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                // Firestore에서 유저의 코인 값을 가져와 Intent에 전달
+                db.collection("users").document(userId).get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            if (documentSnapshot.exists()) {
+                                Long coin = documentSnapshot.getLong("coin");
+                                if (coin == null) {
+                                    coin = 0L;  // 코인 값이 null일 경우 0으로 설정
+                                }
+                                Log.d("HomeMainActivity", "코인 값: " + coin);
+
+                                // Intent로 코인 값 전달
+                                Intent intent = new Intent(getApplicationContext(), StoreActivity.class);
+                                intent.putExtra("coin", coin);
+                                startActivity(intent);
+                            } else {
+                                Log.e("HomeMainActivity", "유저 데이터가 존재하지 않습니다.");
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            Log.e("HomeMainActivity", "Firestore 에러: ", e);
+                        });
             }
         });
+
 
         Button guide = findViewById(R.id.guide);
         guide.setOnClickListener(new View.OnClickListener() {
