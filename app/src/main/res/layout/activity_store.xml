@@ -7,10 +7,25 @@
     android:background="@drawable/store_background"
     tools:context=".StoreActivity">
 
+    <TextView
+        android:id="@+id/store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/suit_bold"
+        android:includeFontPadding="false"
+        android:text="상점"
+        android:textColor="#000000"
+        android:textSize="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/storebar"
-        android:layout_width="541dp"
-        android:layout_height="89dp"
+        android:layout_width="547dp"
+        android:layout_height="103dp"
         android:background="@drawable/storebar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,31 +45,32 @@
 
     <TextView
         android:id="@+id/coin"
-        android:layout_width="168dp"
-        android:layout_height="90dp"
+        android:layout_width="185dp"
+        android:layout_height="102dp"
         android:background="@drawable/coin"
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:gravity="center"
-        android:text="      0"
-        android:textSize="19dp"
+        android:text="        0"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.072"
+        app:layout_constraintVertical_bias="0.084"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/characterImage"
         android:layout_width="196dp"
         android:layout_height="275dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/tomato_character_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/speechbubble"
         tools:ignore="MissingConstraints" />
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -63,6 +79,7 @@
         android:layout_marginTop="72dp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/characterImage"
         app:tabBackground="@drawable/tab_selector2"
@@ -86,45 +103,33 @@
             android:text="아이템" />
     </com.google.android.material.tabs.TabLayout>
 
-    <TextView
-        android:id="@+id/store"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="18dp"
-        android:fontFamily="@font/suit_bold"
-        android:includeFontPadding="false"
-        android:text="상점"
-        android:textColor="#000000"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/dress"
-        android:layout_width="32dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="47dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/paint"
         android:backgroundTint="#7E8282"
         app:iconTint="#898E8D"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.014"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/back_profile"
-        android:layout_width="32dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="47dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="476dp"
+        android:layout_marginBottom="35dp"
         android:background="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        app:layout_constraintVertical_bias="0.014"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -134,7 +139,7 @@
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout"
         tools:listitem="@layout/item_shop" />
