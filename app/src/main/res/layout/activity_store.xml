@@ -12,24 +12,20 @@
         android:layout_width="541dp"
         android:layout_height="89dp"
         android:background="@drawable/storebar"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/speechbubble"
         android:layout_width="354dp"
         android:layout_height="108dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="240dp"
         android:background="@drawable/store_speechbubble"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/storebar"
-        app:layout_constraintVertical_bias="0.226"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -64,7 +60,8 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/characterImage"
@@ -131,30 +128,29 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:clipToPadding="false"
+        android:layout_width="540dp"
+        android:layout_height="310dp"
         android:background="@drawable/rectangle67"
-        app:layout_constraintBottom_toTopOf="@id/buyButton"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
         tools:listitem="@layout/item_shop" />
 
-    <!-- 구매하기 버튼 -->
     <Button
         android:id="@+id/buyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#02AE7A"
         android:text="구매하기"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/characterImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
