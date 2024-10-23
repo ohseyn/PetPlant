@@ -21,7 +21,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StoreActivity extends AppCompatActivity {
 
@@ -201,6 +203,7 @@ public class StoreActivity extends AppCompatActivity {
             coin -= selectedItemPrice;
             updateCoinTextView(); // 코인 값 즉시 업데이트
             updateCoinsInFirestore();
+            savePurchasedItemToFirestore(); // 아이템 저장
             dialog.dismiss();
             showSuccessDialog();
         });
@@ -238,6 +241,24 @@ public class StoreActivity extends AppCompatActivity {
         confirmButton2.setOnClickListener(v -> dialog.dismiss());
 
         dialog.show();
+    }
+
+    private void savePurchasedItemToFirestore() {
+        String userId = auth.getCurrentUser().getUid();
+
+        Map<String, Object> purchasedItem = new HashMap<>();
+        purchasedItem.put("itemName", selectedItem.getName());
+        purchasedItem.put("itemImage", selectedItem.getImageResource());
+        purchasedItem.put("itemPrice", selectedItem.getPrice());
+
+        db.collection("users").document(userId).collection("purchases")
+                .add(purchasedItem)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(StoreActivity.this, "아이템이 저장되었습니다!", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(StoreActivity.this, "저장 실패: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
     // Firestore에 코인 업데이트
