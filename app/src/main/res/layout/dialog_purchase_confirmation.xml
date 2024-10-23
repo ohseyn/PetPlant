@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="상품을 구매할까요?"
-        android:textSize="30sp"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="20dp"
         android:gravity="center" />
@@ -30,25 +31,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="아이템 이름"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="4dp" />
 
     <!-- 아이템 가격 -->
+
+
     <TextView
         android:id="@+id/itemPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="150 코인"
-        android:textSize="16sp"
-        android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginTop="16dp"
+        android:text="150 코인"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="-71dp"
+        android:layout_marginTop="-37dp"
+        android:background="@drawable/dialog_coin" />
 
     <LinearLayout
         android:layout_width="400dp"
         android:layout_height="97dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="horizontal">
 
