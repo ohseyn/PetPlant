@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/store_background"
-    tools:context=".StoreActivity">
+    android:background="@drawable/store_background">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/storebar"

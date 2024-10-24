@@ -1,11 +1,13 @@
 package com.example.petplant;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,23 +41,26 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StoreItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StoreItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         StoreItem currentItem = itemList.get(position);
         holder.itemName.setText(currentItem.getName());
         holder.itemImage.setImageResource(currentItem.getImageResource());
 
-        holder.itemView.setSelected(selectedPosition == position); // 선택된 아이템 강조
+        // 구매한 아이템인지 여부에 따라 표시 다르게 처리
+        if (currentItem.isPurchased()) {
+            holder.itemView.setAlpha(0.5f);  // 구매한 아이템은 반투명 처리
+            holder.itemName.setText("구매됨");
+        } else {
+            holder.itemView.setAlpha(1.0f);
+        }
 
         // 아이템 클릭 처리
         holder.itemView.setOnClickListener(v -> {
             if (selectedPosition == position) {
-                selectedPosition = RecyclerView.NO_POSITION; // 같은 아이템을 다시 클릭하면 선택 해제
-                onItemClickListener.onItemClick(null); // 선택 해제 신호 전달
+                onItemClickListener.onItemClick(currentItem); // 선택 해제 신호 전달
             } else {
-                selectedPosition = position; // 새로운 아이템 선택
-                onItemClickListener.onItemClick(currentItem);
+                Toast.makeText(context, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
             }
-            notifyDataSetChanged(); // UI 업데이트
         });
     }
 
