@@ -18,10 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StoreActivity extends AppCompatActivity {
 
@@ -92,7 +95,6 @@ public class StoreActivity extends AppCompatActivity {
 
         // Intent로 전달된 코인 값 받아오기
         coin = getIntent().getLongExtra("coin", 0L);
-
         // 코인 값 UI에 표시
         updateCoinTextView();
 
@@ -101,18 +103,29 @@ public class StoreActivity extends AppCompatActivity {
         itemList = getCharacterItems();
 
         adapter = new StoreItemAdapter(this, backgroundList, item -> {
-            if (selectedItem == item) {
+            if (selectedItem != null && selectedItem.equals(item)) {
+                // 이미 선택된 아이템을 다시 선택한 경우 해제
                 selectedItem = null;
                 selectedItemPrice = 0;
                 selectedItemName = "";
                 buyButton.setVisibility(View.GONE);
             } else {
+                // 새로운 아이템을 선택한 경우
                 selectedItem = item;
                 selectedItemPrice = item.getPrice();
                 selectedItemName = item.getName();
                 characterImage.setImageResource(item.getImageResource());
-                buyButton.setVisibility(View.VISIBLE);
+
+                // 이미 구매한 아이템인지 확인
+                if (item.isPurchased()) {
+                    buyButton.setVisibility(View.GONE);
+                    Toast.makeText(this, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    buyButton.setVisibility(View.VISIBLE);
+                }
             }
+            // 선택된 상태 업데이트
+            adapter.notifyDataSetChanged();
         });
         recyclerView.setAdapter(adapter);
 
@@ -135,6 +148,9 @@ public class StoreActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {}
         });
 
+        // Firestore에서 구매한 아이템 정보 불러오기
+        loadPurchasedItems();
+
         // 구매 버튼 클릭 리스너 설정
         buyButton.setOnClickListener(v -> {
             if (selectedItem != null) {
@@ -147,6 +163,32 @@ public class StoreActivity extends AppCompatActivity {
                 Toast.makeText(StoreActivity.this, "아이템을 선택해주세요.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void loadPurchasedItems() {
+        String userId = auth.getCurrentUser().getUid();
+
+        db.collection("users").document(userId).collection("purchases")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        String purchasedItemName = documentSnapshot.getString("itemName");
+                        for (StoreItem item : itemList) {
+                            if (item.getName().equals(purchasedItemName)) {
+                                item.setPurchased(true);  // 구매한 아이템 표시
+                            }
+                        }
+                        for (StoreItem item : backgroundList) {
+                            if (item.getName().equals(purchasedItemName)) {
+                                item.setPurchased(true);  // 구매한 배경 표시
+                            }
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("StoreActivity", "구매한 아이템 정보를 가져오는 중 오류 발생", e);
+                });
     }
 
     // 배경 아이템 리스트 생성
@@ -201,6 +243,7 @@ public class StoreActivity extends AppCompatActivity {
             coin -= selectedItemPrice;
             updateCoinTextView(); // 코인 값 즉시 업데이트
             updateCoinsInFirestore();
+            savePurchasedItemToFirestore(); // 아이템 저장
             dialog.dismiss();
             showSuccessDialog();
         });
@@ -238,6 +281,50 @@ public class StoreActivity extends AppCompatActivity {
         confirmButton2.setOnClickListener(v -> dialog.dismiss());
 
         dialog.show();
+    }
+
+    private void savePurchasedItemToFirestore() {
+        String userId = auth.getCurrentUser().getUid();
+
+        Map<String, Object> purchasedItem = new HashMap<>();
+        purchasedItem.put("itemName", selectedItem.getName());
+        purchasedItem.put("itemImage", selectedItem.getImageResource());
+        purchasedItem.put("itemPrice", selectedItem.getPrice());
+
+        db.collection("users").document(userId).collection("purchases")
+                .add(purchasedItem)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(StoreActivity.this, "아이템이 저장되었습니다!", Toast.LENGTH_SHORT).show();
+                    selectedItem.setPurchased(true);  // 구매 상태 업데이트
+                    // 인벤토리 상태 업데이트
+                    updateInventoryUI();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(StoreActivity.this, "저장 실패: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void updateInventoryUI() {
+        String userId = auth.getCurrentUser().getUid();
+
+        db.collection("users").document(userId).collection("purchases")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        String purchasedItemName = documentSnapshot.getString("itemName");
+                        for (StoreItem item : itemList) {
+                            if (item.getName().equals(purchasedItemName)) {
+                                item.setPurchased(true);  // 구매한 아이템을 표시하도록 상태 설정
+                            }
+                        }
+                    }
+
+                    // RecyclerView 갱신
+                    adapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("StoreActivity", "구매한 아이템 정보를 가져오는 중 오류 발생", e);
+                });
     }
 
     // Firestore에 코인 업데이트
