@@ -3,12 +3,8 @@ package com.example.petplant;
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -31,17 +27,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class Home_smellquest extends AppCompatActivity {
+public class looking_text extends AppCompatActivity {
     private String currentPhotoPath;
     private FirebaseStorage storage;
     private StorageReference storageRef;
@@ -58,7 +51,7 @@ public class Home_smellquest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smellquest); // Replace with your layout file name
+        setContentView(R.layout.activity_lookingquest); // Replace with your layout file name
 
         // Initialize views
         inputEditText = findViewById(R.id.inputEditText);
@@ -108,7 +101,7 @@ public class Home_smellquest extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadImageToStorage(null);
-                Intent intent = new Intent(getApplicationContext(),smellquest_message.class);
+                Intent intent = new Intent(getApplicationContext(),looking_message.class);
                 startActivity(intent);
             }
         });
@@ -128,8 +121,8 @@ public class Home_smellquest extends AppCompatActivity {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         Intent thisIntent = getIntent();
         Map<String, Object> activity = new HashMap<>();
-        String description = "smellquest" +timeStamp+"_"+user.getUid();
-        activity.put("activityDescription","smellquest"); //waterquest, removequest, smellquest
+        String description = "lookingquest" +timeStamp+"_"+user.getUid();
+        activity.put("activityDescription","lookingquest"); //waterquest, removequest, smellquest
         activity.put("imageUrI", "");
         activity.put("plantName", thisIntent.getStringExtra("plantName")); // Reference to the plant document
         activity.put("textActivity", textActivity);
@@ -153,7 +146,7 @@ public class Home_smellquest extends AppCompatActivity {
                                             DocumentSnapshot document = task.getResult();
                                             if (document.exists()) {
                                                 // 문서가 성공적으로 가져와졌을 때, Intent를 실행
-                                                Intent intent = new Intent(getApplicationContext(), smellquest_message.class);
+                                                Intent intent = new Intent(getApplicationContext(), looking_message.class);
                                                 startActivity(intent);
                                             } else {
                                                 Log.w(TAG, "No such document");

@@ -76,10 +76,16 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         // 클릭 이벤트 처리 - activity에 따라 다이얼로그를 띄움
         holder.itemView.setOnClickListener(v -> {
             if (activity.getActivityDescription().equals("waterquest") ||
+                    activity.getActivityDescription().equals("artificialquest") ||
+                    activity.getActivityDescription().equals("sandquest") ||
                     activity.getActivityDescription().equals("removequest")) {
                 // 사진이 있는 활동 (waterquest, removequest)
                 showPictureDialog(holder.itemView.getContext(), activity);
-            } else if (activity.getActivityDescription().equals("smellquest")) {
+
+            } else if (activity.getActivityDescription().equals("smellquest") ||
+                    activity.getActivityDescription().equals("lookingquest")||
+                activity.getActivityDescription().equals("touchingquest") ||
+                activity.getActivityDescription().equals("talkingquest")){
                 // 텍스트만 있는 활동 (smellquest)
                 showTextDialog(holder.itemView.getContext(), activity);
             }

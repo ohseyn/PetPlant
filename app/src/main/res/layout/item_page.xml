@@ -12,23 +12,25 @@
         android:src="@drawable/grow" />
 
     <!-- 이미지 위의 버튼 -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/do_quest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="177dp"
+        android:layout_height="72dp"
         android:background="@drawable/button_round"
+        android:backgroundTint="#3F90E3"
         android:fontFamily="@font/suit_extrabold"
         android:onClick="onButtonClick"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
         android:text="하러 가기 >"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp" />
+        app:layout_constraintVertical_bias="0.85" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

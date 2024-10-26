@@ -77,22 +77,32 @@
         </activity>
 
         <activity
-            android:name=".Home_waterquestintroduce"
+            android:name=".waterquest_introduce"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".Home_removequest_introduce"
+            android:name=".sand_introduce"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".Home_smellquest"
+            android:name=".removequest_introduce"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".smellquest_text"
             android:exported="true">
         </activity>
 
         <activity
             android:name=".smellquest_message"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".sandquest_message"
             android:exported="true">
         </activity>
 
@@ -113,6 +123,11 @@
         </activity>
 
         <activity
+            android:name=".reward_sandquest"
+            android:exported="true">
+        </activity>
+
+        <activity
             android:name=".waterquest_message"
             android:exported="true">
         </activity>
@@ -122,10 +137,58 @@
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".looking_message"
+            android:exported="true">
+        </activity>
 
+        <activity
+            android:name=".looking_text"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".reward_looking"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".touching_message"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".touching_text"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".reward_touching"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".talking_message"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".talking_text"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".reward_talking"
+            android:exported="true">
+        </activity>
 
         <activity
             android:name=".water_oxquiz_start"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".sand_oxquiz_start"
             android:exported="true">
         </activity>
 
@@ -136,6 +199,11 @@
 
         <activity
             android:name=".waterquiz_correct"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".sand_quiz_CorrectActivity"
             android:exported="true">
         </activity>
 
@@ -188,6 +256,11 @@
 
         <activity
             android:name=".remove_quiz_IncorrectActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".sand_quiz_IncorrectActivity"
             android:exported="true">
         </activity>
 

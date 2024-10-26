@@ -17,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,11 +29,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class HomeMainActivity extends AppCompatActivity {
     FirebaseFirestore db;
@@ -155,9 +151,14 @@ public class HomeMainActivity extends AppCompatActivity {
 
         // ViewPager 설정
         List<PageItem> pageItems = new ArrayList<>();
-        pageItems.add(new PageItem("가꾸기 활동", "물주기", "+15C", "하러 가기 >", R.drawable.grow));
-        pageItems.add(new PageItem("더 보살피기 활동", "곁순 제거하기", "+15C", "하러 가기 >", R.drawable.exceed));
+        pageItems.add(new PageItem("가꾸기 활동", "물 주기", "+15C", "하러 가기 >", R.drawable.grow));
+        pageItems.add(new PageItem("가꾸기 활동", "곁순 제거하기", "+15C", "하러 가기 >", R.drawable.exceed));
+        pageItems.add(new PageItem("더 보살피기 활동", "인공수정 하기", "+15C", "하러 가기 >", R.drawable.grow));
+        pageItems.add(new PageItem("더 보살피기 활동", "비료 주기", "+15C", "하러 가기 >", R.drawable.exceed));
         pageItems.add(new PageItem("친해지기 활동", "향 맡아보기", "+15C", "하러 가기 >", R.drawable.friendly));
+        pageItems.add(new PageItem("친해지기 활동", "바라보기", "+15C", "하러 가기 >", R.drawable.friendly));
+        pageItems.add(new PageItem("친해지기 활동", "쓰다듬고 만지기", "+15C", "하러 가기 >", R.drawable.friendly));
+        pageItems.add(new PageItem("친해지기 활동", "말 걸기", "+15C", "하러 가기 >", R.drawable.friendly));
         pageAdapter = new PageAdapter(this, pageItems, new PageAdapter.OnItemClickListener() {
             @Override
             public void onButtonClick(int position) {
@@ -165,13 +166,28 @@ public class HomeMainActivity extends AppCompatActivity {
 
                 switch (position) {
                     case 0:
-                        intent = new Intent(HomeMainActivity.this, Home_waterquestintroduce.class);
+                        intent = new Intent(HomeMainActivity.this, waterquest_introduce.class);
                         break;
                     case 1:
-                        intent = new Intent(HomeMainActivity.this, Home_removequest_introduce.class);
+                        intent = new Intent(HomeMainActivity.this, removequest_introduce.class);
                         break;
                     case 2:
-                        intent = new Intent(HomeMainActivity.this, Home_smellquest.class);
+                        intent = new Intent(HomeMainActivity.this, artificial_introduce.class);
+                        break;
+                    case 3:
+                        intent = new Intent(HomeMainActivity.this, sand_introduce.class);
+                        break;
+                    case 4:
+                        intent = new Intent(HomeMainActivity.this, smellquest_text.class);
+                        break;
+                    case 5:
+                        intent = new Intent(HomeMainActivity.this, looking_text.class);
+                        break;
+                    case 6:
+                        intent = new Intent(HomeMainActivity.this, touching_text.class);
+                        break;
+                    case 7:
+                        intent = new Intent(HomeMainActivity.this, talking_text.class);
                         break;
                     default:
                         break;
@@ -244,6 +260,26 @@ public class HomeMainActivity extends AppCompatActivity {
             pageAdapter.updateButtonText(2, "완료");
             Log.d("QuestStatus", "Quest 2 loaded as completed");
         }
+        if (sharedPreferences.getBoolean("quest3", false)) {
+            pageAdapter.updateButtonText(3, "완료");
+            Log.d("QuestStatus", "Quest 3 loaded as completed");
+        }
+        if (sharedPreferences.getBoolean("quest4", false)) {
+            pageAdapter.updateButtonText(4, "완료");
+            Log.d("QuestStatus", "Quest 4 loaded as completed");
+        }
+        if (sharedPreferences.getBoolean("quest5", false)) {
+            pageAdapter.updateButtonText(5, "완료");
+            Log.d("QuestStatus", "Quest 5 loaded as completed");
+        }
+        if (sharedPreferences.getBoolean("quest6", false)) {
+            pageAdapter.updateButtonText(6, "완료");
+            Log.d("QuestStatus", "Quest 6 loaded as completed");
+        }
+        if (sharedPreferences.getBoolean("quest7", false)) {
+            pageAdapter.updateButtonText(7, "완료");
+            Log.d("QuestStatus", "Quest 7 loaded as completed");
+        }
     }
 
     // Intent를 통해 전달받은 완료 상태를 처리하고 SharedPreferences에 저장
@@ -256,7 +292,6 @@ public class HomeMainActivity extends AppCompatActivity {
             saveQuestStatus(0);
             Log.d("QuestStatus", "Quest 0 completed");// 첫 번째 퀘스트 완료 상태 저장
         }
-
         if (getIntent().getBooleanExtra("completed2", false)) {
             pageAdapter.updateButtonText(1, "완료");
             saveQuestStatus(1);
@@ -265,7 +300,32 @@ public class HomeMainActivity extends AppCompatActivity {
         if (getIntent().getBooleanExtra("completed3", false)) {
             pageAdapter.updateButtonText(2, "완료");
             saveQuestStatus(2);
-            Log.d("QuestStatus", "Quest 2 completed");// 세 번째 퀘스트 완료 상태 저장
+            Log.d("QuestStatus", "Quest 3 completed");// 두 번째 퀘스트 완료 상태 저장
+        }
+        if (getIntent().getBooleanExtra("completed4", false)) {
+            pageAdapter.updateButtonText(3, "완료");
+            saveQuestStatus(3);
+            Log.d("QuestStatus", "Quest 4 completed");// 두 번째 퀘스트 완료 상태 저장
+        }
+        if (getIntent().getBooleanExtra("completed5", false)) {
+            pageAdapter.updateButtonText(4, "완료");
+            saveQuestStatus(4);
+            Log.d("QuestStatus", "Quest 5 completed");// 세 번째 퀘스트 완료 상태 저장
+        }
+        if (getIntent().getBooleanExtra("completed6", false)) {
+            pageAdapter.updateButtonText(5, "완료");
+            saveQuestStatus(5);
+            Log.d("QuestStatus", "Quest 6 completed");// 세 번째 퀘스트 완료 상태 저장
+        }
+        if (getIntent().getBooleanExtra("completed7", false)) {
+            pageAdapter.updateButtonText(6, "완료");
+            saveQuestStatus(6);
+            Log.d("QuestStatus", "Quest 7 completed");// 세 번째 퀘스트 완료 상태 저장
+        }
+        if (getIntent().getBooleanExtra("completed8", false)) {
+            pageAdapter.updateButtonText(7, "완료");
+            saveQuestStatus(7);
+            Log.d("QuestStatus", "Quest 8 completed");// 세 번째 퀘스트 완료 상태 저장
         }
     }
 

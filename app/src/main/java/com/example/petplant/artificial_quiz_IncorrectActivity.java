@@ -19,7 +19,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class reward_smellquest extends AppCompatActivity {
+public class artificial_quiz_IncorrectActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     FirebaseUser user;
@@ -28,14 +28,14 @@ public class reward_smellquest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reward_smellquest);
+        setContentView(R.layout.activity_artificial_quiz_incorrect);
 
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        Button complete_smellquest = findViewById(R.id.complete_smellquest);
-        complete_smellquest.setOnClickListener(new View.OnClickListener() {
+        Button check_guide = findViewById(R.id.check_guide);
+        check_guide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // 코인 업데이트
@@ -56,11 +56,11 @@ public class reward_smellquest extends AppCompatActivity {
                         // 현재 코인 값 가져오기
                         Long currentCoin = documentSnapshot.getLong("coin");
                         if (currentCoin == null) {
-                            currentCoin = 0L;  // 코인 값이 없으면 0으로 설정
+                            currentCoin = documentSnapshot.getLong("coin");  // 코인 값이 없으면 0으로 설정
                         }
 
                         // 15코인 추가
-                        Long updatedCoin = currentCoin + 15;
+                        Long updatedCoin = currentCoin + 5;
 
                         // Firestore에 업데이트
                         docRef.update("coin", updatedCoin).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -68,9 +68,9 @@ public class reward_smellquest extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     // 완료 버튼을 누르면 HomeMainActivity로 돌아가면서 완료 상태를 전달
-                                    Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), Guide.class);
                                     intent.putExtra("coin", coin);
-                                    intent.putExtra("completed5", true); // 완료 상태 전달
+                                    intent.putExtra("completed2", true); // 완료 상태 전달
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                 } else {

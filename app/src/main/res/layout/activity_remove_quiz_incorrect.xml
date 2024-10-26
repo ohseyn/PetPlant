@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_back"
+    android:background="@drawable/waterback"
     tools:context=".MainActivity">
 
 
@@ -17,7 +17,7 @@
         android:layout_height="75dp"
         android:layout_centerInParent="true"
         android:background="@drawable/button_border3"
-        android:backgroundTint="#46C140"
+        android:backgroundTint="#3F90E3"
         android:fontFamily="@font/suit_extrabold"
         android:onClick="onButtonClick"
         android:text="가이드 확인하기"
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rectangle94"
+        app:srcCompat="@drawable/group592"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -82,7 +82,7 @@
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:gravity="center"
         android:text="5 코인"
-        android:textColor="#46C140"
+        android:textColor="#3F90E3"
         android:textSize="33sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
@@ -97,7 +97,7 @@
         android:fontFamily="@font/suit_bold"
         android:gravity="center"
         android:text="질문에 답하기 활동"
-        android:textColor="#46C140"
+        android:textColor="#3F90E3"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.429"

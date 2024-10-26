@@ -21,7 +21,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="오늘 저에게서 어떤 향이 났나요?"
+        android:text="오늘 저의 모습은 어땠나요?"
         android:textColor="@android:color/black"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -34,6 +34,7 @@
         android:layout_height="266dp"
         android:background="@drawable/stamp5"
         android:gravity="center">
+
         <!-- Character Design Text -->
 
         <TextView
@@ -55,7 +56,7 @@
         android:layout_marginBottom="16dp"
         android:background="@android:color/white"
         android:gravity="top"
-        android:hint="ex. 푸릇푸릇한 냄새가 났어!"
+        android:hint="ex. 열매가 동그랗고 빨갰어!"
         android:inputType="textMultiLine"
         android:maxLength="200"
         android:minHeight="120dp"

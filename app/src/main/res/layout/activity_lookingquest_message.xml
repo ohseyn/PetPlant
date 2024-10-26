@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="112dp"
         android:fontFamily="@font/tmoneyroundwindextrabold"
-        android:text="저한테서\n이런 향이 나는군요!"
+        android:text="저는\n이런 모습이군요!"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.81"
@@ -34,14 +34,14 @@
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/smell_answer2"
+        android:id="@+id/looking_answer2"
         android:layout_width="368dp"
         android:layout_height="60dp"
         android:background="@drawable/button_round"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/suit_regular"
         android:onClick="onButtonClick"
-        android:text="네 향을 맡으니까 엄청 상쾌해"
+        android:text="잘 성장하는 모습을 보니 뿌듯해"
         android:textColor="#000000"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,14 +78,14 @@
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/smell_answer1"
+        android:id="@+id/looking_answer1"
         android:layout_width="368dp"
         android:layout_height="60dp"
         android:background="@drawable/button_round"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/suit_regular"
         android:onClick="onButtonClick"
-        android:text="싱그럽고 맡기 좋은 향이었어"
+        android:text="동그랗고 귀여웠어!"
         android:textColor="#000000"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -97,7 +97,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/next_button_smell"
+        android:id="@+id/next_button_looking"
         android:layout_width="490dp"
         android:layout_height="80dp"
         android:layout_marginTop="1045dp"
@@ -114,7 +114,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
-        android:id="@+id/talk_balloon_smell"
+        android:id="@+id/talk_balloon_looking"
         android:layout_width="162dp"
         android:layout_height="73dp"
         android:layout_marginStart="16dp"
@@ -127,7 +127,7 @@
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/responseText_smell"
+        android:id="@+id/responseText_looking"
         android:layout_width="105dp"
         android:layout_height="38dp"
         android:layout_marginStart="16dp"

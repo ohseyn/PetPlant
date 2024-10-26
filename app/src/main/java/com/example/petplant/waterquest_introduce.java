@@ -27,7 +27,6 @@ import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,7 +44,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class Home_waterquestintroduce extends AppCompatActivity {
+public class waterquest_introduce extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSIONS_CODE = 100;
     private Uri photoURI;
@@ -289,7 +288,7 @@ public class Home_waterquestintroduce extends AppCompatActivity {
 
                         // Firestore에 데이터 저장이 완료되었을 때 waterquest_message로 이동
                         Log.d(TAG, "Navigating to waterquest_message...");
-                        Intent intent = new Intent(Home_waterquestintroduce.this, waterquest_message.class);
+                        Intent intent = new Intent(waterquest_introduce.this, waterquest_message.class);
                         intent.putExtra("photoPath", currentPhotoPath);  // 사진 경로 전달
                         startActivity(intent);  // waterquest_message로 이동
                     }

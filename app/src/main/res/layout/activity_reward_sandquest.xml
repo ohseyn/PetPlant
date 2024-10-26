@@ -5,20 +5,20 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/waterback"
+    android:background="@drawable/login_back"
     tools:context=".MainActivity">
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/go_quiz_removequest"
+        android:id="@+id/go_quiz_sandquest"
         android:layout_width="490dp"
         android:layout_height="75dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/button_border"
+        android:background="@drawable/button_border3"
         android:fontFamily="@font/suit_extrabold"
         android:onClick="onButtonClick"
         android:text="질문에 답하러 가기 +20C"
-        android:textColor="#3F90E3"
+        android:textColor="#46C140"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,12 +28,12 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/complete_removequest"
+        android:id="@+id/complete_sandquest"
         android:layout_width="490dp"
         android:layout_height="75dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/button_border"
-        android:backgroundTint="#3F90E3"
+        android:background="@drawable/button_border3"
+        android:backgroundTint="#46C140"
         android:fontFamily="@font/suit_extrabold"
         android:onClick="onButtonClick"
         android:text="홈으로 가기"
@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/group592"
+        app:srcCompat="@drawable/rectangle94"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -83,7 +83,7 @@
         android:layout_marginTop="736dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:gravity="center"
-        android:text="가꾸기 활동을 멋지게 끝냈어요.\n\n보상으로                    을 줄게요!"
+        android:text="더 보살피기 활동을 멋지게 끝냈어요.\n\n보상으로                    을 줄게요!"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +97,7 @@
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:gravity="center"
         android:text="15 코인"
-        android:textColor="#3F90E3"
+        android:textColor="#46C140"
         android:textSize="33sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.465"
@@ -111,8 +111,8 @@
         android:layout_marginTop="113dp"
         android:fontFamily="@font/suit_bold"
         android:gravity="center"
-        android:text="곁순 제거 활동"
-        android:textColor="#3F90E3"
+        android:text="비료 주기 활동"
+        android:textColor="#46C140"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.395"

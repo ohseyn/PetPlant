@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-public class remove_oxquiz_start extends AppCompatActivity {
+public class artificial_oxquiz_start extends AppCompatActivity {
 
     private Button btnCheckAnswer;
     private Button selectedButton = null;
@@ -25,15 +25,15 @@ public class remove_oxquiz_start extends AppCompatActivity {
     private static final String REWARD_TEXT = "보상받기";
 
     // 색상 값
-    private static final String SELECTED_COLOR = "#BCDAF2"; // 정답 버튼 배경색
-    private static final String BORDER_COLOR = "#3F90E3";   // 정답 버튼 테두리 색상
+    private static final String SELECTED_COLOR = "#A7E0A4"; // 정답 버튼 배경색
+    private static final String BORDER_COLOR = "#46C140";   // 정답 버튼 테두리 색상
     private static final String WRONG_BACKGROUND_COLOR = "#FEECEA"; // 오답 버튼 배경색
     private static final String WRONG_BORDER_COLOR = "#FF453C";      // 오답 버튼 테두리 색상
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_remove_oxquiz_start);
+        setContentView(R.layout.activity_artificial_oxquiz_start);
 
         // TextView와 버튼 초기화
         questionTextView = findViewById(R.id.questionTextView);
@@ -91,9 +91,9 @@ public class remove_oxquiz_start extends AppCompatActivity {
                     // 다음 화면으로 이동
                     Intent intent;
                     if (selectedButton.getText().toString().equals(CORRECT_ANSWER)) {
-                        intent = new Intent(remove_oxquiz_start.this, remove_quiz_CorrectActivity.class);
+                        intent = new Intent(artificial_oxquiz_start.this, artificial_quiz_CorrectActivity.class);
                     } else {
-                        intent = new Intent(remove_oxquiz_start.this, remove_quiz_IncorrectActivity.class);
+                        intent = new Intent(artificial_oxquiz_start.this, artificial_quiz_IncorrectActivity.class);
                     }
                     startActivity(intent);
                 }

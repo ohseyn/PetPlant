@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/waterback"
+    android:background="@drawable/login_back"
     tools:context=".MainActivity">
 
 
@@ -16,7 +16,7 @@
         android:layout_marginStart="99dp"
         android:layout_marginEnd="99dp"
         android:layout_marginBottom="212dp"
-        app:layout_constraintBottom_toTopOf="@+id/remove_answer1"
+        app:layout_constraintBottom_toTopOf="@+id/sand_answer1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,14 +24,14 @@
         app:layout_constraintVertical_bias="0.435"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/remove_answer1"
+        android:id="@+id/sand_answer1"
         android:layout_width="368dp"
         android:layout_height="60dp"
         android:background="@drawable/button_round"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/suit_regular"
         android:onClick="onButtonClick"
-        android:text="다음에도 시원하고 맛있는 물을 줄게."
+        android:text="다음에도 달달하고 맛있는 비료를 줄게."
         android:textColor="#000000"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,14 +43,14 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/remove_answer2"
+        android:id="@+id/sand_answer2"
         android:layout_width="368dp"
         android:layout_height="60dp"
         android:background="@drawable/button_round"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/suit_regular"
         android:onClick="onButtonClick"
-        android:text="목이 마를 땐 언제든 불러!"
+        android:text="배가 고플 땐 언제든 불러!"
         android:textColor="#000000"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -123,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="464dp"
         android:fontFamily="@font/tmoneyroundwindextrabold"
-        android:text="물이 너무\n시원하고 맛있어요!"
+        android:text="비료가 너무\n달달하고 맛있어요!"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.815"
@@ -132,11 +132,11 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/next_button_remove"
+        android:id="@+id/next_button_sand"
         android:layout_width="490dp"
         android:layout_height="80dp"
         android:layout_marginTop="1045dp"
-        android:backgroundTint="@drawable/button_background"
+        android:backgroundTint="@drawable/button_background3"
         android:enabled="false"
         android:onClick="onButtonClick"
         android:text="대화 마치기"
@@ -159,7 +159,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/talk_balloon_remove"
+        android:id="@+id/talk_balloon_sand"
         android:layout_width="113dp"
         android:layout_height="63dp"
         android:layout_marginStart="16dp"
@@ -172,7 +172,7 @@
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/responseText_remove"
+        android:id="@+id/responseText_sand"
         android:layout_width="76dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
