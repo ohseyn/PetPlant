@@ -52,14 +52,15 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
             holder.itemName.setText("구매됨");
         } else {
             holder.itemView.setAlpha(1.0f);
+            holder.itemName.setText(currentItem.getName()); // 원래 이름 표시
         }
 
-        // 아이템 클릭 처리
+        // 아이템 클릭 시 처리
         holder.itemView.setOnClickListener(v -> {
-            if (selectedPosition == position) {
-                onItemClickListener.onItemClick(currentItem); // 선택 해제 신호 전달
-            } else {
+            if (currentItem.isPurchased()) {
                 Toast.makeText(context, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                onItemClickListener.onItemClick(currentItem); // 구매되지 않은 경우에만 선택 이벤트 처리
             }
         });
     }

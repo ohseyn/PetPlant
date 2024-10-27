@@ -49,6 +49,16 @@ public class StoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_store);
 
         Button back_profile = findViewById(R.id.back_profile);
+        Button dressButton = findViewById(R.id.dress);
+
+        dressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DressActivity.class);
+                startActivity(intent);
+            }
+        });
+
         back_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,31 +112,53 @@ public class StoreActivity extends AppCompatActivity {
         backgroundList = getBackgroundItems();
         itemList = getCharacterItems();
 
+        // 선택된 아이템이 구매된 상태인지 확인 후 토스트 메시지 출력
         adapter = new StoreItemAdapter(this, backgroundList, item -> {
-            if (selectedItem != null && selectedItem.equals(item)) {
-                // 이미 선택된 아이템을 다시 선택한 경우 해제
-                selectedItem = null;
-                selectedItemPrice = 0;
-                selectedItemName = "";
-                buyButton.setVisibility(View.GONE);
+            if (item.isPurchased()) {
+                Toast.makeText(this, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
+                selectedItem = null; // 선택된 아이템 초기화
+                buyButton.setVisibility(View.GONE); // 구매 버튼 숨기기
             } else {
-                // 새로운 아이템을 선택한 경우
-                selectedItem = item;
-                selectedItemPrice = item.getPrice();
-                selectedItemName = item.getName();
-                characterImage.setImageResource(item.getImageResource());
-
-                // 이미 구매한 아이템인지 확인
-                if (item.isPurchased()) {
+                // 새로 선택된 아이템이거나 구매되지 않은 경우
+                if (selectedItem != null && selectedItem.equals(item)) {
+                    selectedItem = null;
                     buyButton.setVisibility(View.GONE);
-                    Toast.makeText(this, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
                 } else {
+                    selectedItem = item;
+                    selectedItemPrice = item.getPrice();
+                    selectedItemName = item.getName();
+                    characterImage.setImageResource(item.getImageResource());
                     buyButton.setVisibility(View.VISIBLE);
                 }
             }
-            // 선택된 상태 업데이트
             adapter.notifyDataSetChanged();
         });
+
+//        adapter = new StoreItemAdapter(this, backgroundList, item -> {
+//            if (selectedItem != null && selectedItem.equals(item)) {
+//                // 이미 선택된 아이템을 다시 선택한 경우 해제
+//                selectedItem = null;
+//                selectedItemPrice = 0;
+//                selectedItemName = "";
+//                buyButton.setVisibility(View.GONE);
+//            } else {
+//                // 새로운 아이템을 선택한 경우
+//                selectedItem = item;
+//                selectedItemPrice = item.getPrice();
+//                selectedItemName = item.getName();
+//                characterImage.setImageResource(item.getImageResource());
+//
+//                // 이미 구매한 아이템인지 확인
+//                if (item.isPurchased()) {
+//                    buyButton.setVisibility(View.GONE);
+//                    Toast.makeText(this, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    buyButton.setVisibility(View.VISIBLE);
+//                }
+//            }
+//            // 선택된 상태 업데이트
+//            adapter.notifyDataSetChanged();
+//        });
         recyclerView.setAdapter(adapter);
 
         // TabLayout 설정
@@ -208,14 +240,14 @@ public class StoreActivity extends AppCompatActivity {
     // 캐릭터 아이템 리스트 생성
     private List<StoreItem> getCharacterItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("멋쟁이 안경", R.drawable.guideimage1, 100));
-        list.add(new StoreItem("굵은 수염", R.drawable.guideimage1, 120));
-        list.add(new StoreItem("귀여운 리본", R.drawable.guideimage1, 150));
-        list.add(new StoreItem("반려 인형", R.drawable.guideimage1, 130));
-        list.add(new StoreItem("운동화", R.drawable.guideimage1, 140));
-        list.add(new StoreItem("머리핀", R.drawable.guideimage1, 160));
-        list.add(new StoreItem("코주부 안경", R.drawable.guideimage1, 110));
-        list.add(new StoreItem("엔젤 링", R.drawable.guideimage1, 180));
+        list.add(new StoreItem("멋쟁이 안경", R.drawable.tomato_glass, 100));
+        list.add(new StoreItem("굵은 수염", R.drawable.tomato_mustache, 120));
+        list.add(new StoreItem("멋쟁이 신사", R.drawable.tomato_gentle, 150));
+        list.add(new StoreItem("귀도리 모자", R.drawable.tomato_hat, 130));
+        list.add(new StoreItem("책가방", R.drawable.tomato_bag, 140));
+        list.add(new StoreItem("리본", R.drawable.tomato_bow, 160));
+        list.add(new StoreItem("잎사귀 우산", R.drawable.tomato_leaf, 110));
+        list.add(new StoreItem("선글라스", R.drawable.tomato_sunglasses, 180));
         return list;
     }
 
