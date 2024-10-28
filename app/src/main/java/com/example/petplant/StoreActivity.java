@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +40,7 @@ public class StoreActivity extends AppCompatActivity {
     private ImageView characterImage;
     private StoreItem selectedItem;
     private TextView shopCoinTextView;
+    private ConstraintLayout storeLayout; // 배경을 변경할 레이아웃
 
     private int selectedItemPrice = 0;
     private String selectedItemName = "";
@@ -48,6 +50,7 @@ public class StoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
+        storeLayout = findViewById(R.id.storeLayout); // 레이아웃을 변수에 저장
         Button back_profile = findViewById(R.id.back_profile);
         Button dressButton = findViewById(R.id.dress);
 
@@ -127,7 +130,13 @@ public class StoreActivity extends AppCompatActivity {
                     selectedItem = item;
                     selectedItemPrice = item.getPrice();
                     selectedItemName = item.getName();
-                    characterImage.setImageResource(item.getImageResource());
+
+                    // 선택한 아이템이 배경인지 아이템인지에 따라 다르게 표시
+                    if (backgroundList.contains(item)) {
+                        storeLayout.setBackgroundResource(item.getImageResource());
+                    } else {
+                        characterImage.setImageResource(item.getImageResource());
+                    }
                     buyButton.setVisibility(View.VISIBLE);
                 }
             }
@@ -226,9 +235,9 @@ public class StoreActivity extends AppCompatActivity {
     // 배경 아이템 리스트 생성
     private List<StoreItem> getBackgroundItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("보라색 배경", R.drawable.guideimage1, 60));
+        list.add(new StoreItem("보라색 배경", R.drawable.background_night, 60));
         list.add(new StoreItem("맑은 날", R.drawable.guideimage1, 70));
-        list.add(new StoreItem("봄날", R.drawable.guideimage1, 80));
+        list.add(new StoreItem("봄날", R.drawable.background_spring, 80));
         list.add(new StoreItem("어두운 배경", R.drawable.guideimage1, 90));
         list.add(new StoreItem("오아시스", R.drawable.guideimage1, 100));
         list.add(new StoreItem("무대", R.drawable.guideimage1, 40));
