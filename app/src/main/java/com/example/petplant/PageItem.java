@@ -1,30 +1,35 @@
 package com.example.petplant;
 
 public class PageItem {
+    private String category;
     private String title;
-    private String description;
-    private String reward;
+    private String point;
     private String buttonText;
-    private int imageResource;
+    private int imageResource;    // 배경 이미지 리소스
+    private int buttonColorResId; // 버튼 색상 리소스
+    private int textColorResId;
 
-    public PageItem(String title, String description, String reward, String buttonText, int imageResource) {
+    public PageItem(String category, String title, String point, String buttonText,
+                    int imageResource, int buttonColorResId, int textColorResId) {
+        this.category = category;
         this.title = title;
-        this.description = description;
-        this.reward = reward;
+        this.point = point;
         this.buttonText = buttonText;
         this.imageResource = imageResource;
+        this.buttonColorResId = buttonColorResId;
+        this.textColorResId = textColorResId;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getReward() {
-        return reward;
+    public String getPoint() {
+        return point;
     }
 
     public String getButtonText() {
@@ -37,5 +42,13 @@ public class PageItem {
 
     public int getImageResource() {
         return imageResource;
+    }
+
+    public int getButtonColorResId() {
+        return buttonColorResId;
+    }
+
+    public int getTextColorResId() {
+        return textColorResId;
     }
 }

@@ -1,36 +1,60 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="12dp"
+    android:elevation="4dp">
 
     <!-- 배경 이미지 -->
     <ImageView
         android:id="@+id/backgroundImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/grow" />
+        android:layout_width="497dp"
+        android:layout_height="237dp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/blue" />
 
-    <!-- 이미지 위의 버튼 -->
-    <androidx.appcompat.widget.AppCompatButton
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="30dp"
+            android:text="가꾸기 활동"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="390dp"
+        android:layout_marginTop="30dp"
+        android:text="+15C"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center"
+        android:text="왕큰방울이에게 물주기"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        android:layout_marginBottom="20dp" />
+
+    <!-- 버튼 (이미지 중앙 아래에 겹치기) -->
+    <Button
         android:id="@+id/do_quest"
-        android:layout_width="177dp"
-        android:layout_height="72dp"
-        android:background="@drawable/button_round"
-        android:backgroundTint="#3F90E3"
-        android:fontFamily="@font/suit_extrabold"
-        android:onClick="onButtonClick"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
+        android:layout_width="163dp"
+        android:layout_height="67dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@android:color/holo_blue_bright"
         android:text="하러 가기 >"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textSize="22sp"
+        android:textColor="@android:color/white" />
+</FrameLayout>

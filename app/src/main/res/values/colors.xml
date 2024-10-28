@@ -9,4 +9,7 @@
     <color name="unselected_tab_color">#FFFFFF</color>
     <color name="selected_tab_color2">#FFFFFF</color>
     <color name="unselected_tab_color2">#CCFFFFFF</color>
+    <color name="blue">#3F90E3</color>
+    <color name="green">#46C140</color>
+    <color name="pink">#F7608F</color>
 </resources>
