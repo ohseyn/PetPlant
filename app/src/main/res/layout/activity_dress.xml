@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/dressLayout"
     android:background="@drawable/store_background"
     tools:context=".DressActivity">
 
@@ -115,6 +116,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/applyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#02AE7A"
+        android:text="적용하기"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/characterImage" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/back_store"
         android:layout_width="32dp"
@@ -130,7 +145,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="540dp"
-        android:layout_height="753dp"
+        android:layout_height="310dp"
         android:clipToPadding="false"
         android:background="@drawable/rectangle67"
         app:layout_constraintEnd_toEndOf="parent"
