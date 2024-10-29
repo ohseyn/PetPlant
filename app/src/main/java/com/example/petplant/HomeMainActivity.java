@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -40,6 +41,7 @@ public class HomeMainActivity extends AppCompatActivity {
     private PageAdapter pageAdapter;
     private ViewPager2 viewPager;
     private ImageView character;
+    private ConstraintLayout homeLayout;
     private TextView speechBubble;
     private TextView timeTextView;
     private TextView character_name;
@@ -72,6 +74,7 @@ public class HomeMainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         timeTextView = findViewById(R.id.timeTextView);
         shop_coin = findViewById(R.id.coin);
+        homeLayout = findViewById(R.id.main); // 메인 레이아웃
 
         // SharedPreferences 초기화
         sharedPreferences = getSharedPreferences("QuestPreferences", Context.MODE_PRIVATE);
@@ -91,6 +94,7 @@ public class HomeMainActivity extends AppCompatActivity {
         // Firebase에서 데이터 가져오기
         if (user != null) {
             GetData();
+            loadSelectedDesign(); // 선택된 디자인을 불러와서 적용
         } else {
             Log.e("HomeMainActivity", "User is not logged in");
         }
@@ -249,5 +253,27 @@ public class HomeMainActivity extends AppCompatActivity {
                 pageAdapter.updateButtonText(i, "완료");
             }
         }
+    }
+
+    private void loadSelectedDesign() {
+        // Firestore에서 사용자 선택 배경과 아이템 불러오기
+        String userId = user.getUid();
+        db.collection("users").document(userId)
+                .addSnapshotListener((snapshot, e) -> {
+                    if (snapshot != null && snapshot.exists()) {
+                        Long selectedImageLong = snapshot.getLong("selectedImage");
+                        String selectedItem = snapshot.getString("selectedItem");
+
+                        if (selectedImageLong != null) {
+                            int selectedImage = selectedImageLong.intValue();
+
+                            if (selectedItem != null && selectedItem.contains("배경")) {
+                                homeLayout.setBackgroundResource(selectedImage);
+                            } else if (selectedItem != null) {
+                                character.setImageResource(selectedImage);
+                            }
+                        }
+                    }
+                });
     }
 }

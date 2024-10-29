@@ -122,25 +122,36 @@ public class StoreActivity extends AppCompatActivity {
                 selectedItem = null; // 선택된 아이템 초기화
                 buyButton.setVisibility(View.GONE); // 구매 버튼 숨기기
             } else {
-                // 새로 선택된 아이템이거나 구매되지 않은 경우
-                if (selectedItem != null && selectedItem.equals(item)) {
-                    selectedItem = null;
-                    buyButton.setVisibility(View.GONE);
+                selectedItem = item;
+                selectedItemPrice = item.getPrice();
+                selectedItemName = item.getName();
+                if (backgroundList.contains(item)) {
+                    storeLayout.setBackgroundResource(item.getImageResource());
                 } else {
-                    selectedItem = item;
-                    selectedItemPrice = item.getPrice();
-                    selectedItemName = item.getName();
-
-                    // 선택한 아이템이 배경인지 아이템인지에 따라 다르게 표시
-                    if (backgroundList.contains(item)) {
-                        storeLayout.setBackgroundResource(item.getImageResource());
-                    } else {
-                        characterImage.setImageResource(item.getImageResource());
-                    }
-                    buyButton.setVisibility(View.VISIBLE);
+                    characterImage.setImageResource(item.getImageResource());
                 }
+                buyButton.setVisibility(View.VISIBLE);
             }
             adapter.notifyDataSetChanged();
+//                // 새로 선택된 아이템이거나 구매되지 않은 경우
+//                if (selectedItem != null && selectedItem.equals(item)) {
+//                    selectedItem = null;
+//                    buyButton.setVisibility(View.GONE);
+//                } else {
+//                    selectedItem = item;
+//                    selectedItemPrice = item.getPrice();
+//                    selectedItemName = item.getName();
+//
+//                    // 선택한 아이템이 배경인지 아이템인지에 따라 다르게 표시
+//                    if (backgroundList.contains(item)) {
+//                        storeLayout.setBackgroundResource(item.getImageResource());
+//                    } else {
+//                        characterImage.setImageResource(item.getImageResource());
+//                    }
+//                    buyButton.setVisibility(View.VISIBLE);
+//                }
+//            }
+//            adapter.notifyDataSetChanged();
         });
 
 //        adapter = new StoreItemAdapter(this, backgroundList, item -> {
@@ -313,14 +324,13 @@ public class StoreActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.shop_rounded_dialog);
 
         decorateButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, DecorateActivity.class);
+            Intent intent = new Intent(this, DressActivity.class);
             intent.putExtra("selectedItem", selectedItem);
             startActivity(intent);
             dialog.dismiss();
         });
 
         confirmButton2.setOnClickListener(v -> dialog.dismiss());
-
         dialog.show();
     }
 
