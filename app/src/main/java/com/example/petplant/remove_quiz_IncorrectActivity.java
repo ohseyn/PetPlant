@@ -60,7 +60,7 @@ public class remove_quiz_IncorrectActivity extends AppCompatActivity {
                         }
 
                         // 15코인 추가
-                        Long updatedCoin = currentCoin + 5;
+                        Long updatedCoin = currentCoin + 20;
 
                         // Firestore에 업데이트
                         docRef.update("coin", updatedCoin).addOnCompleteListener(new OnCompleteListener<Void>() {
