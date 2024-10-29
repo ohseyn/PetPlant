@@ -202,6 +202,7 @@ public class StoreActivity extends AppCompatActivity {
 
         // Firestore에서 구매한 아이템 정보 불러오기
         loadPurchasedItems();
+        loadSelectedDesign();
 
         // 구매 버튼 클릭 리스너 설정
         buyButton.setOnClickListener(v -> {
@@ -240,6 +241,26 @@ public class StoreActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> {
                     Log.e("StoreActivity", "구매한 아이템 정보를 가져오는 중 오류 발생", e);
+                });
+    }
+
+    private void loadSelectedDesign() {
+        String userId = auth.getCurrentUser().getUid();
+        db.collection("users").document(userId)
+                .addSnapshotListener((snapshot, e) -> {
+                    if (snapshot != null && snapshot.exists()) {
+                        Long selectedImageLong = snapshot.getLong("selectedImage");
+                        String selectedItem = snapshot.getString("selectedItem");
+
+                        if (selectedImageLong != null) {
+                            int selectedImage = selectedImageLong.intValue();
+                            if (selectedItem != null && selectedItem.contains("배경")) {
+                                storeLayout.setBackgroundResource(selectedImage);
+                            } else if (selectedItem != null) {
+                                characterImage.setImageResource(selectedImage);
+                            }
+                        }
+                    }
                 });
     }
 
