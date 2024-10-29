@@ -20,7 +20,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DressActivity extends AppCompatActivity {
     private FirebaseFirestore db;
@@ -31,6 +33,7 @@ public class DressActivity extends AppCompatActivity {
     private List<StoreItem> backgroundList = new ArrayList<>();
     private List<StoreItem> itemList = new ArrayList<>();
     private StoreItemAdapter adapter;
+    private StoreItem selectedBackground;
     private StoreItem selectedItem;
 
     @Override
@@ -49,10 +52,11 @@ public class DressActivity extends AppCompatActivity {
         loadPurchasedItems();
 
         adapter = new StoreItemAdapter(this, new ArrayList<>(), item -> {
-            selectedItem = item;
             if (backgroundList.contains(item)) {
+                selectedBackground = item;
                 dressLayout.setBackgroundResource(item.getImageResource());
             } else {
+                selectedItem = item;
                 characterImage.setImageResource(item.getImageResource());
             }
             findViewById(R.id.applyButton).setVisibility(View.VISIBLE);
@@ -60,8 +64,8 @@ public class DressActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         findViewById(R.id.applyButton).setOnClickListener(v -> {
-            if (selectedItem != null) {
-                saveDesignToFirestore(selectedItem);
+            if (selectedBackground != null || selectedItem != null) {
+                saveDesignToFirestore(selectedBackground, selectedItem);
                 Toast.makeText(this, "디자인이 저장되었습니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -105,10 +109,22 @@ public class DressActivity extends AppCompatActivity {
                 });
     }
 
-    private void saveDesignToFirestore(StoreItem item) {
+    private void saveDesignToFirestore(StoreItem background, StoreItem item) {
         String userId = auth.getCurrentUser().getUid();
-        db.collection("users").document(userId)
-                .update("selectedItem", item.getName(), "selectedImage", item.getImageResource())
-                .addOnSuccessListener(aVoid -> Log.d("DressActivity", "디자인이 저장되었습니다."));
+
+        if (background != null) {
+            db.collection("users").document(userId)
+                    .update("selectedBackground", background.getName(), "selectedBackgroundImage", background.getImageResource())
+                    .addOnSuccessListener(aVoid -> Log.d("DressActivity", "배경 디자인이 저장되었습니다."));
+        }
+        if (item != null) {
+            db.collection("users").document(userId)
+                    .update("selectedItem", item.getName(), "selectedItemImage", item.getImageResource())
+                    .addOnSuccessListener(aVoid -> Log.d("DressActivity", "아이템 디자인이 저장되었습니다."));
+        }
+//        String userId = auth.getCurrentUser().getUid();
+//        db.collection("users").document(userId)
+//                .update("selectedItem", item.getName(), "selectedImage", item.getImageResource())
+//                .addOnSuccessListener(aVoid -> Log.d("DressActivity", "디자인이 저장되었습니다."));
     }
 }

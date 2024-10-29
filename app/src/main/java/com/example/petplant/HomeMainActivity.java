@@ -325,27 +325,33 @@ public class HomeMainActivity extends AppCompatActivity {
                 Log.e("HomeMainActivity", "Firestore 에러: ", e));
     }
 
-
-
-
     private void loadSelectedDesign() {
         // Firestore에서 사용자 선택 배경과 아이템 불러오기
         String userId = user.getUid();
         db.collection("users").document(userId)
                 .addSnapshotListener((snapshot, e) -> {
                     if (snapshot != null && snapshot.exists()) {
-                        Long selectedImageLong = snapshot.getLong("selectedImage");
-                        String selectedItem = snapshot.getString("selectedItem");
+                        Long selectedBackground = snapshot.getLong("selectedBackgroundImage");
+                        Long selectedItemImage = snapshot.getLong("selectedItemImage");
 
-                        if (selectedImageLong != null) {
-                            int selectedImage = selectedImageLong.intValue();
-
-                            if (selectedItem != null && selectedItem.contains("배경")) {
-                                homeLayout.setBackgroundResource(selectedImage);
-                            } else if (selectedItem != null) {
-                                character.setImageResource(selectedImage);
-                            }
+                        if (selectedBackground != null) {
+                            homeLayout.setBackgroundResource(selectedBackground.intValue());
                         }
+                        if (selectedItemImage != null) {
+                            character.setImageResource(selectedItemImage.intValue());
+                        }
+//                        Long selectedImageLong = snapshot.getLong("selectedImage");
+//                        String selectedItem = snapshot.getString("selectedItem");
+//
+//                        if (selectedImageLong != null) {
+//                            int selectedImage = selectedImageLong.intValue();
+//
+//                            if (selectedItem != null && selectedItem.contains("배경")) {
+//                                homeLayout.setBackgroundResource(selectedImage);
+//                            } else if (selectedItem != null) {
+//                                character.setImageResource(selectedImage);
+//                            }
+//                        }
                     }
                 });
     }

@@ -38,7 +38,7 @@ public class StoreActivity extends AppCompatActivity {
     private List<StoreItem> backgroundList, itemList;
     private Button buyButton;
     private ImageView characterImage;
-    private StoreItem selectedItem;
+    private StoreItem selectedBackground, selectedItem;
     private TextView shopCoinTextView;
     private ConstraintLayout storeLayout; // 배경을 변경할 레이아웃
 
@@ -120,14 +120,16 @@ public class StoreActivity extends AppCompatActivity {
             if (item.isPurchased()) {
                 Toast.makeText(this, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
                 selectedItem = null; // 선택된 아이템 초기화
+                selectedBackground = null;
                 buyButton.setVisibility(View.GONE); // 구매 버튼 숨기기
             } else {
-                selectedItem = item;
                 selectedItemPrice = item.getPrice();
                 selectedItemName = item.getName();
                 if (backgroundList.contains(item)) {
+                    selectedBackground = item;
                     storeLayout.setBackgroundResource(item.getImageResource());
                 } else {
+                    selectedItem = item;
                     characterImage.setImageResource(item.getImageResource());
                 }
                 buyButton.setVisibility(View.VISIBLE);
@@ -206,7 +208,7 @@ public class StoreActivity extends AppCompatActivity {
 
         // 구매 버튼 클릭 리스너 설정
         buyButton.setOnClickListener(v -> {
-            if (selectedItem != null) {
+            if ((selectedBackground != null || selectedItem != null) && coin >= selectedItemPrice){
                 if (coin >= selectedItemPrice) {
                     showBuyDialog();
                 } else {
@@ -249,17 +251,25 @@ public class StoreActivity extends AppCompatActivity {
         db.collection("users").document(userId)
                 .addSnapshotListener((snapshot, e) -> {
                     if (snapshot != null && snapshot.exists()) {
-                        Long selectedImageLong = snapshot.getLong("selectedImage");
-                        String selectedItem = snapshot.getString("selectedItem");
+                        Long selectedBackground = snapshot.getLong("selectedBackgroundImage");
+                        Long selectedItemImage = snapshot.getLong("selectedItemImage");
+//                        Long selectedImageLong = snapshot.getLong("selectedImage");
+//                        String selectedItem = snapshot.getString("selectedItem");
 
-                        if (selectedImageLong != null) {
-                            int selectedImage = selectedImageLong.intValue();
-                            if (selectedItem != null && selectedItem.contains("배경")) {
-                                storeLayout.setBackgroundResource(selectedImage);
-                            } else if (selectedItem != null) {
-                                characterImage.setImageResource(selectedImage);
-                            }
+                        if (selectedBackground != null) {
+                            storeLayout.setBackgroundResource(selectedBackground.intValue());
                         }
+                        if (selectedItemImage != null) {
+                            characterImage.setImageResource(selectedItemImage.intValue());
+                        }
+//                        if (selectedImageLong != null) {
+//                            int selectedImage = selectedImageLong.intValue();
+//                            if (selectedItem != null && selectedItem.contains("배경")) {
+//                                storeLayout.setBackgroundResource(selectedImage);
+//                            } else if (selectedItem != null) {
+//                                characterImage.setImageResource(selectedImage);
+//                            }
+//                        }
                     }
                 });
     }
@@ -303,7 +313,7 @@ public class StoreActivity extends AppCompatActivity {
         Button confirmButton = dialogLayout.findViewById(R.id.confirmButton);
         Button cancelButton = dialogLayout.findViewById(R.id.cancelButton);
 
-        itemImage.setImageResource(selectedItem.getImageResource());
+        itemImage.setImageResource(selectedItem != null ? selectedItem.getImageResource() : selectedBackground.getImageResource());
         itemName.setText(selectedItemName);
         itemPrice.setText(selectedItemPrice + " 코인");
 
