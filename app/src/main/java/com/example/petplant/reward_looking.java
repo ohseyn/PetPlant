@@ -67,12 +67,12 @@ public class reward_looking extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     // 완료 버튼을 누르면 HomeMainActivity로 돌아가면서 완료 상태를 전달
-                                    Intent resultIntent = new Intent(reward_looking.this, HomeMainActivity.class);
-                                    resultIntent.putExtra("questPosition", 5); // 현재 퀘스트 위치 전달 (예시로 5번째 퀘스트)
-                                    resultIntent.putExtra("isCompleted", true);
-                                    resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                    startActivity(resultIntent);
-                                    finish(); // 액티비티 종료
+                                    Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
+                                    intent.putExtra("coin", coin);
+                                    intent.putExtra("questPosition", 5); // 4번째 퀘스트의 예시 위치
+                                    intent.putExtra("isCompleted", true);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
                                 } else {
                                     Log.e("Firestore", "Error updating coin", task.getException());
                                 }

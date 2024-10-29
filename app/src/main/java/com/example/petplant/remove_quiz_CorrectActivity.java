@@ -70,7 +70,8 @@ public class remove_quiz_CorrectActivity extends AppCompatActivity {
                                     // 완료 버튼을 누르면 HomeMainActivity로 돌아가면서 완료 상태를 전달
                                     Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
                                     intent.putExtra("coin", coin);
-                                    intent.putExtra("completed", true); // 완료 상태 전달
+                                    intent.putExtra("questPosition", 1); // 4번째 퀘스트의 예시 위치
+                                    intent.putExtra("isCompleted", true);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                 } else {

@@ -33,7 +33,6 @@ public class reward_smellquest extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-
         Button complete_smellquest = findViewById(R.id.complete_smellquest);
         complete_smellquest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,10 +66,11 @@ public class reward_smellquest extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    // 완료 버튼을 누르면 HomeMainActivity로 돌아가면서 완료 상태를 전달
+                                    // HomeMainActivity로 돌아가며 모든 퀘스트 완료 상태 전달
                                     Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
                                     intent.putExtra("coin", coin);
-                                    intent.putExtra("completed5", true); // 완료 상태 전달
+                                    intent.putExtra("questPosition", 4); // 4번째 퀘스트의 예시 위치
+                                    intent.putExtra("isCompleted", true);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                 } else {

@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -55,6 +56,8 @@ public class HomeMainActivity extends AppCompatActivity {
     private Long coin;
     private String profileUIri;
 
+    private List<PageItem> pageItems;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +82,7 @@ public class HomeMainActivity extends AppCompatActivity {
         // SharedPreferences 초기화
         sharedPreferences = getSharedPreferences("QuestPreferences", Context.MODE_PRIVATE);
 
+
         // 버튼 이벤트 설정
         setButtonListeners();
 
@@ -100,7 +104,13 @@ public class HomeMainActivity extends AppCompatActivity {
         }
 
         // 퀘스트 상태 불러오기
-        loadQuestStatus();
+        Intent intent = getIntent();
+        for (int i = 0; i < 8; i++) {
+            boolean isCompleted = intent.getBooleanExtra("completed" + i, false);
+            if (isCompleted) {
+                saveQuestCompletion(i);
+            }
+        }
     }
 
     private void setButtonListeners() {
@@ -141,7 +151,23 @@ public class HomeMainActivity extends AppCompatActivity {
         pageAdapter = new PageAdapter(pageItems, this::handlePageItemClick);
         viewPager.setAdapter(pageAdapter);
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            int questPosition = intent.getIntExtra("questPosition", -1);
+            boolean isCompleted = intent.getBooleanExtra("isCompleted", false);
+
+            if (isCompleted && questPosition != -1) {
+                // 데이터 모델에서 버튼 상태 업데이트
+                pageItems.get(questPosition).setButtonText("완료");
+                pageItems.get(questPosition).setButtonEnabled(false);
+
+                // 어댑터에 변경사항 반영
+                pageAdapter.notifyItemChanged(questPosition);
+            }
+        }
     }
+
 
     private void handlePageItemClick(int position) {
         Intent intent = null;
@@ -178,20 +204,65 @@ public class HomeMainActivity extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
             int questPosition = data.getIntExtra("questPosition", -1);
             boolean isCompleted = data.getBooleanExtra("isCompleted", false);
+
             if (isCompleted && questPosition != -1) {
-                pageAdapter.updateButtonText(questPosition, "완료");
+                // 데이터 모델에서 버튼 상태 업데이트
+                PageItem completedItem = pageItems.get(questPosition);
+                completedItem.setButtonText("완료");
+                completedItem.setButtonEnabled(false);
+
+                // 뷰 홀더를 직접 찾아 상태 변경 (뷰가 화면에 있는 경우)
+                RecyclerView recyclerView = findViewById(R.id.viewPager);
+                RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(questPosition);
+
+                if (viewHolder != null && viewHolder instanceof PageAdapter.PageViewHolder) {
+                    PageAdapter.PageViewHolder pageViewHolder = (PageAdapter.PageViewHolder) viewHolder;
+                    pageViewHolder.actionButton.setText("완료");
+                    pageViewHolder.actionButton.setEnabled(false);
+                } else {
+                    // 전체 어댑터 항목 강제 갱신
+                    runOnUiThread(() -> {
+                        pageAdapter.notifyDataSetChanged();
+                    });
+                }
+
+                // SharedPreferences에 완료 상태 저장
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("quest" + questPosition, true);
                 editor.apply();
             }
         }
     }
+
+
+
+    private void loadQuestStatus() {
+        for (int i = 0; i < 8; i++) {
+            if (sharedPreferences.getBoolean("quest" + i, false)) {
+                // 완료된 퀘스트 버튼 상태 업데이트
+                pageAdapter.updateButtonState(i, "완료", false);
+            }
+        }
+    }
+
+
+    private void saveQuestCompletion(int questPosition) {
+        pageAdapter.updateButtonState(questPosition, "완료", false);
+        pageAdapter.notifyItemChanged(questPosition); // 필요한 아이템만 갱신
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("quest" + questPosition, true);
+        editor.apply();
+    }
+
 
     private void openStore() {
         String userId = user.getUid();
@@ -227,33 +298,35 @@ public class HomeMainActivity extends AppCompatActivity {
 
     private void GetData() {
         DocumentReference docRef = db.collection("users").document(user.getUid());
-        docRef.addSnapshotListener((snapshot, e) -> {
-            if (snapshot != null && snapshot.exists()) {
-                name = snapshot.getString("name");
-                plantName = snapshot.getString("plantName");
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                name = documentSnapshot.getString("name");
+                plantName = documentSnapshot.getString("plantName");
                 character_name.setText(plantName + "와");
-                shop_coin.setText(String.valueOf(snapshot.getLong("coin")));
 
-                String path = snapshot.getString("userImageUrl");
+                coin = documentSnapshot.getLong("coin");
+                shop_coin.setText(String.valueOf(coin));
+
+                String path = documentSnapshot.getString("userImageUrl");
                 if (path != null) {
                     FirebaseStorage.getInstance().getReference().child(path)
                             .getDownloadUrl()
-                            .addOnSuccessListener(uri -> profileUIri = uri.toString())
-                            .addOnFailureListener(exception -> Log.d("TAG", exception.toString()));
+                            .addOnSuccessListener(uri -> {
+                                profileUIri = uri.toString();
+                                setupViewPager(); // 데이터 로드 후 ViewPager 설정
+                            })
+                            .addOnFailureListener(exception ->
+                                    Log.d("HomeMainActivity", exception.toString()));
+                } else {
+                    setupViewPager(); // 이미지가 없는 경우에도 ViewPager 설정
                 }
-
-                setupViewPager();
             }
-        });
+        }).addOnFailureListener(e ->
+                Log.e("HomeMainActivity", "Firestore 에러: ", e));
     }
 
-    private void loadQuestStatus() {
-        for (int i = 0; i < 8; i++) {
-            if (sharedPreferences.getBoolean("quest" + i, false)) {
-                pageAdapter.updateButtonText(i, "완료");
-            }
-        }
-    }
+
+
 
     private void loadSelectedDesign() {
         // Firestore에서 사용자 선택 배경과 아이템 불러오기
