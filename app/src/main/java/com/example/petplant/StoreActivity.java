@@ -293,14 +293,14 @@ public class StoreActivity extends AppCompatActivity {
     // 배경 아이템 리스트 생성
     private List<StoreItem> getBackgroundItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("보라색 배경", R.drawable.background_night, 60));
-        list.add(new StoreItem("맑은 날", R.drawable.guideimage1, 70));
-        list.add(new StoreItem("봄날", R.drawable.background_spring, 80));
-        list.add(new StoreItem("어두운 배경", R.drawable.guideimage1, 90));
-        list.add(new StoreItem("오아시스", R.drawable.guideimage1, 100));
-        list.add(new StoreItem("무대", R.drawable.guideimage1, 40));
-        list.add(new StoreItem("길거리", R.drawable.guideimage1, 50));
-        list.add(new StoreItem("눈 오는 날", R.drawable.guideimage1, 30));
+        list.add(new StoreItem("기본", R.drawable.background_default, 0));
+        list.add(new StoreItem("겨울", R.drawable.background_winter, 70));
+        list.add(new StoreItem("해질녘", R.drawable.background_evening, 80));
+        list.add(new StoreItem("여름", R.drawable.background_summer, 90));
+        list.add(new StoreItem("봄날", R.drawable.background_spring, 100));
+        list.add(new StoreItem("밤하늘", R.drawable.background_night, 40));
+        list.add(new StoreItem("무지개", R.drawable.background_rainbow, 50));
+        list.add(new StoreItem("가을", R.drawable.background_fall, 30));
         return list;
     }
 
