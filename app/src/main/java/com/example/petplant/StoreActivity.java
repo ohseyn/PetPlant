@@ -123,16 +123,32 @@ public class StoreActivity extends AppCompatActivity {
                 selectedBackground = null;
                 buyButton.setVisibility(View.GONE); // 구매 버튼 숨기기
             } else {
-                selectedItemPrice = item.getPrice();
-                selectedItemName = item.getName();
-                if (backgroundList.contains(item)) {
-                    selectedBackground = item;
-                    storeLayout.setBackgroundResource(item.getImageResource());
+                // 선택된 아이템이 이미 선택된 상태인지 확인
+                if (selectedBackground != null && selectedBackground.equals(item)) {
+                    // 선택된 배경을 다시 클릭할 경우 해제
+                    selectedBackground = null;
+                    loadSelectedDesign(); // 저장된 배경 이미지로 복원
+                } else if (selectedItem != null && selectedItem.equals(item)) {
+                    // 선택된 캐릭터 아이템을 다시 클릭할 경우 해제
+                    selectedItem = null;
+                    loadSelectedDesign(); // 저장된 캐릭터 이미지로 복원
                 } else {
-                    selectedItem = item;
-                    characterImage.setImageResource(item.getImageResource());
+                    // 새로 선택된 경우
+                    selectedItemPrice = item.getPrice();
+                    selectedItemName = item.getName();
+                    if (backgroundList.contains(item)) {
+                        selectedBackground = item;
+                        storeLayout.setBackgroundResource(item.getImageResource());
+                        selectedItem = null; // 캐릭터 아이템 초기화
+                    } else {
+                        selectedItem = item;
+                        characterImage.setImageResource(item.getImageResource());
+                        selectedBackground = null; // 배경 초기화
+                    }
                 }
-                buyButton.setVisibility(View.VISIBLE);
+
+                // 구매 버튼 가시성 설정
+                buyButton.setVisibility((selectedBackground != null || selectedItem != null) ? View.VISIBLE : View.GONE);
             }
             adapter.notifyDataSetChanged();
 //                // 새로 선택된 아이템이거나 구매되지 않은 경우
