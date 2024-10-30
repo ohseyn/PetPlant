@@ -293,28 +293,28 @@ public class StoreActivity extends AppCompatActivity {
     // 배경 아이템 리스트 생성
     private List<StoreItem> getBackgroundItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("기본", R.drawable.background_default, 0));
-        list.add(new StoreItem("겨울", R.drawable.background_winter, 70));
-        list.add(new StoreItem("해질녘", R.drawable.background_evening, 80));
-        list.add(new StoreItem("여름", R.drawable.background_summer, 90));
-        list.add(new StoreItem("봄날", R.drawable.background_spring, 100));
-        list.add(new StoreItem("밤하늘", R.drawable.background_night, 40));
-        list.add(new StoreItem("무지개", R.drawable.background_rainbow, 50));
-        list.add(new StoreItem("가을", R.drawable.background_fall, 30));
+        list.add(new StoreItem("기본", R.drawable.background_default, 0, "background"));
+        list.add(new StoreItem("겨울", R.drawable.background_winter, 70, "background"));
+        list.add(new StoreItem("해질녘", R.drawable.background_evening, 80, "background"));
+        list.add(new StoreItem("여름", R.drawable.background_summer, 90, "background"));
+        list.add(new StoreItem("봄날", R.drawable.background_spring, 100, "background"));
+        list.add(new StoreItem("밤하늘", R.drawable.background_night, 40, "background"));
+        list.add(new StoreItem("무지개", R.drawable.background_rainbow, 50, "background"));
+        list.add(new StoreItem("가을", R.drawable.background_fall, 30, "background"));
         return list;
     }
 
     // 캐릭터 아이템 리스트 생성
     private List<StoreItem> getCharacterItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("멋쟁이 안경", R.drawable.tomato_glass, 100));
-        list.add(new StoreItem("굵은 수염", R.drawable.tomato_mustache, 120));
-        list.add(new StoreItem("멋쟁이 신사", R.drawable.tomato_gentle, 150));
-        list.add(new StoreItem("귀도리 모자", R.drawable.tomato_hat, 130));
-        list.add(new StoreItem("책가방", R.drawable.tomato_bag, 140));
-        list.add(new StoreItem("리본", R.drawable.tomato_bow, 160));
-        list.add(new StoreItem("잎사귀 우산", R.drawable.tomato_leaf, 110));
-        list.add(new StoreItem("선글라스", R.drawable.tomato_sunglasses, 180));
+        list.add(new StoreItem("멋쟁이 안경", R.drawable.tomato_glass, 100, "item"));
+        list.add(new StoreItem("굵은 수염", R.drawable.tomato_mustache, 120, "item"));
+        list.add(new StoreItem("멋쟁이 신사", R.drawable.tomato_gentle, 150, "item"));
+        list.add(new StoreItem("귀도리 모자", R.drawable.tomato_hat, 130, "item"));
+        list.add(new StoreItem("책가방", R.drawable.tomato_bag, 140, "item"));
+        list.add(new StoreItem("리본", R.drawable.tomato_bow, 160, "item"));
+        list.add(new StoreItem("잎사귀 우산", R.drawable.tomato_leaf, 110, "item"));
+        list.add(new StoreItem("선글라스", R.drawable.tomato_sunglasses, 180, "item"));
         return list;
     }
 
@@ -329,9 +329,16 @@ public class StoreActivity extends AppCompatActivity {
         Button confirmButton = dialogLayout.findViewById(R.id.confirmButton);
         Button cancelButton = dialogLayout.findViewById(R.id.cancelButton);
 
-        itemImage.setImageResource(selectedItem != null ? selectedItem.getImageResource() : selectedBackground.getImageResource());
-        itemName.setText(selectedItemName);
-        itemPrice.setText(selectedItemPrice + " 코인");
+        // 선택된 아이템이나 배경에 따라 이미지와 이름 설정
+        if (selectedItem != null) {
+            itemImage.setImageResource(selectedItem.getImageResource());
+            itemName.setText(selectedItem.getName());
+            itemPrice.setText(selectedItem.getPrice() + " 코인");
+        } else if (selectedBackground != null) {
+            itemImage.setImageResource(selectedBackground.getImageResource());
+            itemName.setText(selectedBackground.getName());
+            itemPrice.setText(selectedBackground.getPrice() + " 코인");
+        }
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(dialogLayout)
@@ -340,11 +347,14 @@ public class StoreActivity extends AppCompatActivity {
 
         confirmButton.setOnClickListener(v -> {
             coin -= selectedItemPrice;
-            updateCoinTextView(); // 코인 값 즉시 업데이트
+            updateCoinTextView();
             updateCoinsInFirestore();
             savePurchasedItemToFirestore(); // 아이템 저장
             dialog.dismiss();
             showSuccessDialog();
+            selectedItem = null; // 구매 후 선택 초기화
+            selectedBackground = null; // 구매 후 선택 초기화
+            buyButton.setVisibility(View.GONE);
         });
 
         cancelButton.setOnClickListener(v -> dialog.dismiss());
@@ -362,8 +372,14 @@ public class StoreActivity extends AppCompatActivity {
         Button decorateButton = dialogLayout.findViewById(R.id.decorateButton);
         Button confirmButton2 = dialogLayout.findViewById(R.id.confirmButton2);
 
-        itemImage.setImageResource(selectedItem.getImageResource());
-        itemName.setText(selectedItemName);
+        // 선택된 아이템이나 배경이 null이 아닌 경우에만 이미지를 설정
+        if (selectedItem != null) {
+            itemImage.setImageResource(selectedItem.getImageResource());
+            itemName.setText(selectedItemName);
+        } else if (selectedBackground != null) {
+            itemImage.setImageResource(selectedBackground.getImageResource());
+            itemName.setText(selectedItemName);
+        }
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(dialogLayout)
@@ -372,7 +388,11 @@ public class StoreActivity extends AppCompatActivity {
 
         decorateButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, DressActivity.class);
-            intent.putExtra("selectedItem", selectedItem);
+            if (selectedItem != null) {
+                intent.putExtra("selectedItem", selectedItem);
+            } else if (selectedBackground != null) {
+                intent.putExtra("selectedBackground", selectedBackground);
+            }
             startActivity(intent);
             dialog.dismiss();
         });
@@ -383,18 +403,31 @@ public class StoreActivity extends AppCompatActivity {
 
     private void savePurchasedItemToFirestore() {
         String userId = auth.getCurrentUser().getUid();
-
         Map<String, Object> purchasedItem = new HashMap<>();
-        purchasedItem.put("itemName", selectedItem.getName());
-        purchasedItem.put("itemImage", selectedItem.getImageResource());
-        purchasedItem.put("itemPrice", selectedItem.getPrice());
+
+        if (selectedItem != null) {
+            purchasedItem.put("itemName", selectedItem.getName());
+            purchasedItem.put("itemImage", selectedItem.getImageResource());
+            purchasedItem.put("itemPrice", selectedItem.getPrice());
+            purchasedItem.put("type", "item"); // item으로 설정
+        } else if (selectedBackground != null) {
+            purchasedItem.put("itemName", selectedBackground.getName());
+            purchasedItem.put("itemImage", selectedBackground.getImageResource());
+            purchasedItem.put("itemPrice", selectedBackground.getPrice());
+            purchasedItem.put("type", "background"); // background로 설정
+        } else {
+            return;
+        }
 
         db.collection("users").document(userId).collection("purchases")
                 .add(purchasedItem)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(StoreActivity.this, "아이템이 저장되었습니다!", Toast.LENGTH_SHORT).show();
-                    selectedItem.setPurchased(true);  // 구매 상태 업데이트
-                    // 인벤토리 상태 업데이트
+                    if (selectedItem != null) {
+                        selectedItem.setPurchased(true);
+                    } else if (selectedBackground != null) {
+                        selectedBackground.setPurchased(true);
+                    }
                     updateInventoryUI();
                 })
                 .addOnFailureListener(e -> {

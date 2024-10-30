@@ -73,6 +73,7 @@ public class HomeMainActivity extends AppCompatActivity {
         // View 바인딩
         character_name = findViewById(R.id.home_plantName);
         character = findViewById(R.id.tomato_home);
+        character.setImageResource(R.drawable.tomato_character_home);  // 기본 이미지 설정
         speechBubble = findViewById(R.id.speechbubble);
         viewPager = findViewById(R.id.viewPager);
         timeTextView = findViewById(R.id.timeTextView);

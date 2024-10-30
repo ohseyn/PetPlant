@@ -94,15 +94,16 @@ public class DressActivity extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots) {
-                        StoreItem item = new StoreItem(
-                                document.getString("itemName"),
-                                document.getLong("itemImage").intValue(),
-                                document.getLong("itemPrice").intValue()
-                        );
-                        if (item.getName().contains("배경")) {
-                            backgroundList.add(item);
-                        } else {
-                            itemList.add(item);
+                        String itemName = document.getString("itemName");
+                        int itemImage = document.getLong("itemImage").intValue();
+                        int itemPrice = document.getLong("itemPrice").intValue();
+                        String itemType = document.getString("type"); // Firestore에 저장된 type 필드 확인
+
+                        StoreItem item = new StoreItem(itemName, itemImage, itemPrice, itemType);
+                        if (item.isBackground()) {
+                            backgroundList.add(item); // 배경일 경우 backgroundList에 추가
+                        } else if (item.isItem()) {
+                            itemList.add(item); // 아이템일 경우 itemList에 추가
                         }
                     }
                     adapter.updateItemList(backgroundList);
