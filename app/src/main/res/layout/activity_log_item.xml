@@ -2,12 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardViewActivity"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="20dp"
-    app:cardElevation="4dp"
-    android:id="@+id/cardViewActivity">
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -79,37 +79,58 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints">
 
             <View
+                android:id="@+id/viewSticker1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@android:color/darker_gray" />
+                android:background="@android:color/darker_gray"
+                android:visibility="gone" /> <!-- 기본적으로 숨김 -->
 
             <View
+                android:id="@+id/viewSticker2"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
-                android:background="@android:color/darker_gray" />
+                android:background="@android:color/darker_gray"
+                android:visibility="gone" /> <!-- 기본적으로 숨김 -->
 
-            <View
+            <FrameLayout
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
-                android:background="@android:color/darker_gray" />
+                android:visibility="gone"
+                android:id="@+id/frameSticker">
 
-            <TextView
-                android:id="@+id/textPlus"
+                <!-- 스티커 이미지 -->
+                <ImageView
+                    android:id="@+id/imageSticker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+                <!-- 회색 배경 위의 카운팅 텍스트 -->
+                <TextView
+                    android:id="@+id/textSticker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/darker_gray"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+            </FrameLayout>
+
+            <ImageButton
+                android:id="@+id/buttonLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:text="+3"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18sp" />
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/mynaui_smile" />
         </LinearLayout>
 
         <TextView

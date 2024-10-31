@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -115,10 +116,10 @@ public class HomeMainActivity extends AppCompatActivity {
     }
 
     private void setButtonListeners() {
-        Button inbox = findViewById(R.id.inbox);
+        ImageButton inbox = findViewById(R.id.inbox);
         inbox.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ActivityLogActivity.class)));
 
-        Button profile = findViewById(R.id.profile);
+        ImageButton profile = findViewById(R.id.profile);
         profile.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), profile.class);
             intent.putExtra("name", name);
@@ -127,13 +128,13 @@ public class HomeMainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Button bell = findViewById(R.id.bell);
+        ImageButton bell = findViewById(R.id.bell);
         bell.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), FriendRequestsActivity.class)));
 
-        Button store = findViewById(R.id.store);
+        ImageButton store = findViewById(R.id.store);
         store.setOnClickListener(view -> openStore());
 
-        Button guide = findViewById(R.id.guide);
+        ImageButton guide = findViewById(R.id.guide);
         guide.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), Guide.class)));
     }
 

@@ -1,6 +1,7 @@
 package com.example.petplant;
 
 import com.google.firebase.Timestamp;
+import java.util.List;
 
 public class UserActivity {
     private String documentId;
@@ -12,12 +13,13 @@ public class UserActivity {
     private String userId;
     private String plantName;
     private int likes;
+    private List<Sticker> stickers; // 추가된 스티커 목록 필드
 
     // 빈 생성자
     public UserActivity() {}
 
     // 생성자
-    public UserActivity(String documentId, String userName, String activityDescription, Timestamp timestamp, String imageUrI, String textActivity, String userId, String plantName, int likes) {
+    public UserActivity(String documentId, String userName, String activityDescription, Timestamp timestamp, String imageUrI, String textActivity, String userId, String plantName, int likes, List<Sticker> stickers) {
         this.documentId = documentId;
         this.userName = userName;
         this.activityDescription = activityDescription;
@@ -27,6 +29,7 @@ public class UserActivity {
         this.userId = userId;
         this.plantName = plantName;
         this.likes = likes;
+        this.stickers = stickers; // 스티커 초기화
     }
 
     // Getter 메서드들
@@ -36,6 +39,10 @@ public class UserActivity {
 
     public String getUserName() {
         return userName;
+    }
+
+    public List<Sticker> getStickers() {
+        return stickers; // 스티커 반환
     }
 
     public String getActivityDescription() {
@@ -101,5 +108,9 @@ public class UserActivity {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public void setStickers(List<Sticker> stickers) {
+        this.stickers = stickers; // 스티커 목록 설정
     }
 }

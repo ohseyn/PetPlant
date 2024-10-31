@@ -109,4 +109,12 @@
         app:layout_constraintTop_toBottomOf="@+id/plantName"
         tools:ignore="MissingConstraints" />
 
+    <!-- 스티커를 표시할 LinearLayout 추가 -->
+    <LinearLayout
+        android:id="@+id/stickerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

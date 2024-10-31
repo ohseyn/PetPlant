@@ -1,5 +1,6 @@
 package com.example.petplant;
 
+import com.example.petplant.R;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.app.Activity;
@@ -149,6 +150,9 @@ public class ActivityLogActivity extends AppCompatActivity {
                     if (activity != null) {
                         activity.setDocumentId(snapshot.getId());
                         activityList.add(activity);  // 리스트에 추가
+
+                        loadStickersForActivity(activity, snapshot.getId()); // 스티커 로드 호출
+                        activityList.add(activity);
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -161,6 +165,20 @@ public class ActivityLogActivity extends AppCompatActivity {
         }).addOnFailureListener(e -> {
             Log.e(TAG, "Firestore 데이터 로드 실패", e);
         });
+    }
+    private void loadStickersForActivity(UserActivity activity, String activityId) {
+        db.collection("activities").document(activityId).collection("stickers")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<Sticker> stickers = new ArrayList<>();
+                    for (DocumentSnapshot stickerSnapshot : queryDocumentSnapshots.getDocuments()) {
+                        Sticker sticker = stickerSnapshot.toObject(Sticker.class);
+                        if (sticker != null) {
+                            stickers.add(sticker);
+                        }
+                    }
+                    activity.setStickers(stickers); // UserActivity에 스티커 설정
+                });
     }
 
     // 선택한 날짜의 자정 (00:00:00) Timestamp를 반환

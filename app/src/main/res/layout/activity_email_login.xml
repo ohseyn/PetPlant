@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/ilogo"
-        android:layout_width="271dp"
-        android:layout_height="244dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="704dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,8 +49,8 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/login_email"
-        android:layout_width="474dp"
-        android:layout_height="66dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="572dp"
         android:hint="이메일을 입력하세요"
         android:inputType="textEmailAddress"
@@ -89,8 +89,8 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="471dp"
-        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#02AE7A"
         android:text="로그인"
@@ -102,8 +102,8 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/login_password"
-        android:layout_width="472dp"
-        android:layout_height="77dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:hint="비밀번호를 입력하세요"
         android:inputType="textPassword"

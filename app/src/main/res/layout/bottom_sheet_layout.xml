@@ -1,0 +1,81 @@
+<!-- res/layout/bottom_sheet_layout.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:rowCount="2"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/sticker1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/sticker1"
+            android:contentDescription="Sticker 1" />
+
+        <ImageView
+            android:id="@+id/sticker2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/sticker2"
+            android:contentDescription="Sticker 2" />
+
+        <ImageView
+            android:id="@+id/sticker3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/sticker3"
+            android:contentDescription="Sticker 3" />
+
+        <ImageView
+            android:id="@+id/sticker4"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/sticker4"
+            android:contentDescription="Sticker 4" />
+
+        <ImageView
+            android:id="@+id/sticker5"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/sticker5"
+            android:contentDescription="Sticker 5" />
+
+        <ImageView
+            android:id="@+id/sticker6"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/sticker6"
+            android:contentDescription="Sticker 6" />
+
+        <ImageView
+            android:id="@+id/sticker7"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/sticker7"
+            android:contentDescription="Sticker 7" />
+
+        <ImageView
+            android:id="@+id/sticker8"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:contentDescription="Sticker 8"
+            android:src="@drawable/sticker8" />
+
+    </GridLayout>
+</LinearLayout>
