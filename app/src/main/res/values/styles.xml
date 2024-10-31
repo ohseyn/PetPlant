@@ -11,6 +11,4 @@
         <item name="tabTextColor">@color/unselected_tab_text_color</item><!-- 선택되지 않은 탭의 텍스트 색상 -->
         <item name="android:textSize">30sp</item>
     </style>
-
-
 </resources>
