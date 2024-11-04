@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="500dp"
+    android:layout_height="350dp"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center_horizontal"
+    android:background="@drawable/shop_rounded_dialog">
+
+    <TextView
+        android:id="@+id/questionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="왕큰방울이의 열매가 열렸나요?"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="60dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/notYetButton"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="아직이에요"
+            android:textSize="18sp"
+            android:background="@drawable/button_border3"
+            android:textColor="#02AE7A"
+            android:layout_marginEnd="10dp" />
+
+        <Button
+            android:id="@+id/confirmedButton"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="열렸어요"
+            android:textSize="18sp"
+            android:backgroundTint="#02AE7A"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</LinearLayout>

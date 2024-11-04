@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -205,8 +207,6 @@ public class HomeMainActivity extends AppCompatActivity {
         }
     }
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -244,8 +244,6 @@ public class HomeMainActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void loadQuestStatus() {
         for (int i = 0; i < 8; i++) {
             if (sharedPreferences.getBoolean("quest" + i, false)) {
@@ -255,7 +253,6 @@ public class HomeMainActivity extends AppCompatActivity {
         }
     }
 
-
     private void saveQuestCompletion(int questPosition) {
         pageAdapter.updateButtonState(questPosition, "완료", false);
         pageAdapter.notifyItemChanged(questPosition); // 필요한 아이템만 갱신
@@ -263,7 +260,6 @@ public class HomeMainActivity extends AppCompatActivity {
         editor.putBoolean("quest" + questPosition, true);
         editor.apply();
     }
-
 
     private void openStore() {
         String userId = user.getUid();
@@ -290,6 +286,8 @@ public class HomeMainActivity extends AppCompatActivity {
             long currentDate = System.currentTimeMillis();
             long daysSinceSignUp = (currentDate - signUpDate) / (1000 * 60 * 60 * 24);
             timeTextView.setText(" " + (daysSinceSignUp + 1)); // UI에 경과 일수 표시
+            // 특정 일수에 다이얼로그 표시
+            checkAndShowDialog(daysSinceSignUp + 1);
         } else {
             Log.e("HomeMainActivity", "가입일 정보가 없습니다.");
         }
@@ -318,6 +316,97 @@ public class HomeMainActivity extends AppCompatActivity {
 //        };
         handler.post(timeUpdater);
         loadQuestStatus();
+    }
+
+    // 1인 부분 10으로 나중에 바꿔야 함
+    private void checkAndShowDialog(long daysSinceSignUp) {
+        if (daysSinceSignUp == 1 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
+            showProgressDialog(daysSinceSignUp);
+        }
+    }
+
+    private void showProgressDialog(long daysSinceSignUp) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_question, null);
+        builder.setView(dialogView);
+
+        TextView questionTitle = dialogView.findViewById(R.id.questionTitle);
+        Button notYetButton = dialogView.findViewById(R.id.notYetButton);
+        Button confirmedButton = dialogView.findViewById(R.id.confirmedButton);
+        //String message = "";
+
+        switch ((int) daysSinceSignUp) {
+            case 1:
+                questionTitle.setText("왕큰방울이의 꽃이 폈나요?");
+                break;
+            case 27:
+                questionTitle.setText("왕큰방울이의 열매가 열렸나요?");
+                break;
+            case 37:
+                questionTitle.setText("왕큰방울이의 열매가 주황색으로 익었나요?");
+                break;
+            case 47:
+                questionTitle.setText("왕큰방울이의 열매가 빨갛게 익었나요?");
+                break;
+        }
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        notYetButton.setOnClickListener(v -> {
+            dialog.dismiss();
+            showNegativeDialog();
+        });
+
+        confirmedButton.setOnClickListener(v -> {
+            dialog.dismiss();
+            showPositiveDialog();
+        });
+
+//        builder.setTitle(message)
+//                .setPositiveButton("피었어요/열렸어요", (dialog, which) -> {
+//                    // 버튼 로직 추가: 완료 처리 등
+//                    Log.d("HomeMainActivity", "사용자가 열림/피었음을 확인했습니다.");
+//                })
+//                .setNegativeButton("아직이에요", (dialog, which) -> {
+//                    showConfirmationDialog(); // 확인 다이얼로그 호출
+//                })
+//                .show();
+    }
+
+    private void showPositiveDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_positive, null);
+        builder.setView(dialogView);
+
+        Button positiveConfirmButton = dialogView.findViewById(R.id.positiveConfirmButton);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        positiveConfirmButton.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    private void showNegativeDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_negative, null);
+        builder.setView(dialogView);
+
+        Button negativeConfirmButton = dialogView.findViewById(R.id.negativeConfirmButton);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        negativeConfirmButton.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    private void showConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("왕큰방울이의 성장을 기다리는 중입니다.")
+                .setMessage("다음 날 다시 확인해보세요.")
+                .setPositiveButton("확인", (dialog, which) -> {
+                    // 다음날 다이얼로그가 다시 뜨도록 설정
+                    Log.d("HomeMainActivity", "사용자가 확인을 누르고 다이얼로그 종료");
+                })
+                .show();
     }
 
     private void GetData() {
