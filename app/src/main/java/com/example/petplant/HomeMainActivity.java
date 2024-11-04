@@ -84,7 +84,6 @@ public class HomeMainActivity extends AppCompatActivity {
         // SharedPreferences 초기화
         sharedPreferences = getSharedPreferences("QuestPreferences", Context.MODE_PRIVATE);
 
-
         // 버튼 이벤트 설정
         setButtonListeners();
 
@@ -286,6 +285,16 @@ public class HomeMainActivity extends AppCompatActivity {
         }
     }
 
+    private void calculateDaysSinceSignUp(Long signUpDate) {
+        if (signUpDate != null) {
+            long currentDate = System.currentTimeMillis();
+            long daysSinceSignUp = (currentDate - signUpDate) / (1000 * 60 * 60 * 24);
+            timeTextView.setText(" " + (daysSinceSignUp + 1)); // UI에 경과 일수 표시
+        } else {
+            Log.e("HomeMainActivity", "가입일 정보가 없습니다.");
+        }
+    }
+
     private void startTimer() {
         long startTime = System.currentTimeMillis();
         timeUpdater = () -> {
@@ -308,6 +317,20 @@ public class HomeMainActivity extends AppCompatActivity {
 
                 coin = documentSnapshot.getLong("coin");
                 shop_coin.setText(String.valueOf(coin));
+
+                // 가입일 확인 및 저장
+                Long signUpDate = documentSnapshot.getLong("signUpDate");
+                if (signUpDate == null) {
+                    // 가입일이 없으면 현재 시간을 저장
+                    long currentTime = System.currentTimeMillis();
+                    docRef.update("signUpDate", currentTime)
+                            .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "가입일이 저장되었습니다."))
+                            .addOnFailureListener(e -> Log.e("HomeMainActivity", "가입일 저장 실패", e));
+                    signUpDate = currentTime;
+                }
+
+                // 경과 일수 계산 및 표시
+                calculateDaysSinceSignUp(signUpDate); // 수정된 호출 부분
 
                 String path = documentSnapshot.getString("userImageUrl");
                 if (path != null) {
@@ -342,18 +365,6 @@ public class HomeMainActivity extends AppCompatActivity {
                         if (selectedItemImage != null) {
                             character.setImageResource(selectedItemImage.intValue());
                         }
-//                        Long selectedImageLong = snapshot.getLong("selectedImage");
-//                        String selectedItem = snapshot.getString("selectedItem");
-//
-//                        if (selectedImageLong != null) {
-//                            int selectedImage = selectedImageLong.intValue();
-//
-//                            if (selectedItem != null && selectedItem.contains("배경")) {
-//                                homeLayout.setBackgroundResource(selectedImage);
-//                            } else if (selectedItem != null) {
-//                                character.setImageResource(selectedImage);
-//                            }
-//                        }
                     }
                 });
     }
