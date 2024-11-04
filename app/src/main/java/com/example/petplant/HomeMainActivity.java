@@ -296,13 +296,26 @@ public class HomeMainActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-        long startTime = System.currentTimeMillis();
-        timeUpdater = () -> {
-            long elapsedTimeMillis = System.currentTimeMillis() - startTime;
-            long elapsedDays = elapsedTimeMillis / (1000 * 60 * 60 * 24);
-            timeTextView.setText(" " + (elapsedDays + 1));
-            handler.postDelayed(timeUpdater, 1000);
-        };
+        // 현재 시간
+        long currentTimeMillis = System.currentTimeMillis();
+
+        // 자정까지 남은 시간 계산
+        long millisInADay = 24 * 60 * 60 * 1000;
+        long nextMidnightMillis = ((currentTimeMillis / millisInADay) + 1) * millisInADay;
+        long delayUntilMidnight = nextMidnightMillis - currentTimeMillis;
+
+        // 자정에 경과 일수 업데이트
+        handler.postDelayed(() -> {
+            GetData(); // 자정에 데이터를 다시 가져와 경과 일수 업데이트
+            startTimer(); // 다음 자정을 위해 타이머 다시 설정
+        }, delayUntilMidnight);
+//        long startTime = System.currentTimeMillis();
+//        timeUpdater = () -> {
+//            long elapsedTimeMillis = System.currentTimeMillis() - startTime;
+//            long elapsedDays = elapsedTimeMillis / (1000 * 60 * 60 * 24);
+//            timeTextView.setText(" " + (elapsedDays + 1));
+//            handler.postDelayed(timeUpdater, 1000);
+//        };
         handler.post(timeUpdater);
         loadQuestStatus();
     }
