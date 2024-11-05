@@ -3,7 +3,6 @@ package com.example.petplant;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -14,24 +13,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -347,203 +339,204 @@ public class HomeMainActivity extends AppCompatActivity {
         boolean notYetPressed = preferences.getBoolean("notYetPressed", false);
 
         if (daysSinceSignUp == 2 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
-            if (lastShownDate != daysSinceSignUp || notYetPressed) { // 같은 날 다이얼로그가 이미 표시되지 않았는지 확인
-                showProgressDialog(daysSinceSignUp);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putLong("lastShownDate", daysSinceSignUp);
-                editor.putBoolean("notYetPressed", false);
-                editor.apply();
+
+                if (lastShownDate != daysSinceSignUp || notYetPressed) { // 같은 날 다이얼로그가 이미 표시되지 않았는지 확인
+                    showProgressDialog(daysSinceSignUp);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putLong("lastShownDate", daysSinceSignUp);
+                    editor.putBoolean("notYetPressed", false);
+                    editor.apply();
+                }
             }
         }
-    }
 
-    private void showProgressDialog(long daysSinceSignUp) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_question, null);
-        builder.setView(dialogView);
+        private void showProgressDialog(long daysSinceSignUp) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_question, null);
+            builder.setView(dialogView);
 
-        TextView questionTitle = dialogView.findViewById(R.id.questionTitle);
-        Button notYetButton = dialogView.findViewById(R.id.notYetButton);
-        Button confirmedButton = dialogView.findViewById(R.id.confirmedButton);
-        //String message = "";
+            TextView questionTitle = dialogView.findViewById(R.id.questionTitle);
+            Button notYetButton = dialogView.findViewById(R.id.notYetButton);
+            Button confirmedButton = dialogView.findViewById(R.id.confirmedButton);
+            //String message = "";
 
-        switch ((int) daysSinceSignUp) {
-            // 2를 10으로 바꿔야 함
-            case 2:
-                questionTitle.setText("왕큰방울이의 꽃이 폈나요?");
-                break;
-            case 27:
-                questionTitle.setText("왕큰방울이의 열매가 열렸나요?");
-                break;
-            case 37:
-                questionTitle.setText("왕큰방울이의 열매가 주황색으로 익었나요?");
-                break;
-            case 47:
-                questionTitle.setText("왕큰방울이의 열매가 빨갛게 익었나요?");
-                break;
+            switch ((int) daysSinceSignUp) {
+                // 2를 10으로 바꿔야 함
+                case 2:
+                    questionTitle.setText("왕큰방울이의 꽃이 폈나요?");
+                    break;
+                case 27:
+                    questionTitle.setText("왕큰방울이의 열매가 열렸나요?");
+                    break;
+                case 37:
+                    questionTitle.setText("왕큰방울이의 열매가 주황색으로 익었나요?");
+                    break;
+                case 47:
+                    questionTitle.setText("왕큰방울이의 열매가 빨갛게 익었나요?");
+                    break;
+            }
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            notYetButton.setOnClickListener(v -> {
+                dialog.dismiss();
+                showNegativeDialog();
+            });
+
+            confirmedButton.setOnClickListener(v -> {
+                dialog.dismiss();
+                showPositiveDialog();
+            });
         }
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        private void showPositiveDialog() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_positive, null);
+            builder.setView(dialogView);
 
-        notYetButton.setOnClickListener(v -> {
-            dialog.dismiss();
-            showNegativeDialog();
-        });
+            Button positiveConfirmButton = dialogView.findViewById(R.id.positiveConfirmButton);
+            AlertDialog dialog = builder.create();
+            dialog.show();
 
-        confirmedButton.setOnClickListener(v -> {
-            dialog.dismiss();
-            showPositiveDialog();
-        });
-    }
-
-    private void showPositiveDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_positive, null);
-        builder.setView(dialogView);
-
-        Button positiveConfirmButton = dialogView.findViewById(R.id.positiveConfirmButton);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-        positiveConfirmButton.setOnClickListener(v -> {
-            updateCharacterImage();  // 캐릭터 이미지 업데이트 및 Firestore 저장
-            dialog.dismiss();
-        });
-    }
-
-    private void updateCharacterImage() {
-        String userId = user.getUid();
-        int newCharacterImage;
-
-        // 경과 일수에 따라 캐릭터 이미지 변경
-        switch ((int) daysSinceSignUp) {
-            // 2를 10으로 바꿔야 함
-            case 2:
-                newCharacterImage = R.drawable.tomato_character_flower; // 꽃 상태 이미지
-                break;
-            case 27:
-                newCharacterImage = R.drawable.tomato_character_home; // 열매(초기)
-                break;
-            case 37:
-                newCharacterImage = R.drawable.tomato_character_home; // 열매(중기)
-                break;
-            case 47:
-                newCharacterImage = R.drawable.tomato_character_home; // 열매(말기)
-                break;
-            default:
-                return;
+            positiveConfirmButton.setOnClickListener(v -> {
+                updateCharacterImage();  // 캐릭터 이미지 업데이트 및 Firestore 저장
+                dialog.dismiss();
+            });
         }
 
-        character.setImageResource(newCharacterImage);
-
-        // Firestore에 변경된 캐릭터 이미지 저장
-        db.collection("users").document(userId)
-                .update("selectedCharacterImage", newCharacterImage)
-                .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "캐릭터 이미지가 업데이트되었습니다."))
-                .addOnFailureListener(e -> Log.e("HomeMainActivity", "캐릭터 이미지 업데이트 실패", e));
-    }
-
-    private void showNegativeDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_negative, null);
-        builder.setView(dialogView);
-
-        Button negativeConfirmButton = dialogView.findViewById(R.id.negativeConfirmButton);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-        negativeConfirmButton.setOnClickListener(v -> {
-            dialog.dismiss();
-
-            // 부정 응답을 기록하기 위해 SharedPreferences 업데이트
+        private void updateCharacterImage() {
             String userId = user.getUid();
-            String preferencesKey = "DialogPreferences_" + userId;
-            SharedPreferences preferences = getSharedPreferences(preferencesKey, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
+            int newCharacterImage;
 
-            // 'notYetPressed' 상태를 true로 설정
-            editor.putBoolean("notYetPressed", true);
-            editor.apply();
-        });
-    }
-
-    private void showConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("왕큰방울이의 성장을 기다리는 중입니다.")
-                .setMessage("다음 날 다시 확인해보세요.")
-                .setPositiveButton("확인", (dialog, which) -> {
-                    // 다음날 다이얼로그가 다시 뜨도록 설정
-                    Log.d("HomeMainActivity", "사용자가 확인을 누르고 다이얼로그 종료");
-                })
-                .show();
-    }
-
-    private void GetData() {
-        DocumentReference docRef = db.collection("users").document(user.getUid());
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-                name = documentSnapshot.getString("name");
-                plantName = documentSnapshot.getString("plantName");
-                character_name.setText(plantName + "와");
-
-                coin = documentSnapshot.getLong("coin");
-                shop_coin.setText(String.valueOf(coin));
-
-                // 가입일 확인 및 저장
-                Long signUpDate = documentSnapshot.getLong("signUpDate");
-                Log.d("HomeMainActivity", "signUpDate from Firestore: " + signUpDate); // 로그 추가
-
-                if (signUpDate == null || signUpDate == 0) {
-                    // 가입일이 없으면 현재 시간을 저장
-                    long currentTime = System.currentTimeMillis();
-                    docRef.update("signUpDate", currentTime)
-                            .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "가입일이 저장되었습니다."))
-                            .addOnFailureListener(e -> Log.e("HomeMainActivity", "가입일 저장 실패", e));
-                    signUpDate = currentTime;
-                } else {
-                    // 이미 저장된 가입일을 SharedPreferences에 저장
-                    sharedPreferences.edit().putLong("signUpDate", signUpDate).apply();
-                }
-
-                // 경과 일수 계산 및 표시
-                calculateDaysSinceSignUp(signUpDate); // 수정된 호출 부분
-
-                String path = documentSnapshot.getString("userImageUrl");
-                if (path != null) {
-                    FirebaseStorage.getInstance().getReference().child(path)
-                            .getDownloadUrl()
-                            .addOnSuccessListener(uri -> {
-                                profileUIri = uri.toString();
-                                setupViewPager(); // 데이터 로드 후 ViewPager 설정
-                            })
-                            .addOnFailureListener(exception ->
-                                    Log.d("HomeMainActivity", exception.toString()));
-                } else {
-                    setupViewPager(); // 이미지가 없는 경우에도 ViewPager 설정
-                }
+            // 경과 일수에 따라 캐릭터 이미지 변경
+            switch ((int) daysSinceSignUp) {
+                // 2를 10으로 바꿔야 함
+                case 2:
+                    newCharacterImage = R.drawable.tomato_character_flower; // 꽃 상태 이미지
+                    break;
+                case 27:
+                    newCharacterImage = R.drawable.tomato_character_home; // 열매(초기)
+                    break;
+                case 37:
+                    newCharacterImage = R.drawable.tomato_character_home; // 열매(중기)
+                    break;
+                case 47:
+                    newCharacterImage = R.drawable.tomato_character_home; // 열매(말기)
+                    break;
+                default:
+                    return;
             }
-        }).addOnFailureListener(e ->
-                Log.e("HomeMainActivity", "Firestore 에러: ", e));
-    }
 
-    private void loadSelectedDesign() {
-        // Firestore에서 사용자 선택 배경과 아이템 불러오기
-        String userId = user.getUid();
-        db.collection("users").document(userId)
-                .get()
-                .addOnSuccessListener(snapshot -> {
-                    if (snapshot != null && snapshot.exists()) {
-                        Long selectedBackground = snapshot.getLong("selectedBackgroundImage");
-                        Long selectedItemImage = snapshot.getLong("selectedItemImage");
+            character.setImageResource(newCharacterImage);
 
-                        if (selectedBackground != null) {
-                            homeLayout.setBackgroundResource(selectedBackground.intValue());
-                        }
-                        if (selectedItemImage != null) {
-                            character.setImageResource(selectedItemImage.intValue());
-                        }
+            // Firestore에 변경된 캐릭터 이미지 저장
+            db.collection("users").document(userId)
+                    .update("selectedCharacterImage", newCharacterImage)
+                    .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "캐릭터 이미지가 업데이트되었습니다."))
+                    .addOnFailureListener(e -> Log.e("HomeMainActivity", "캐릭터 이미지 업데이트 실패", e));
+        }
+
+        private void showNegativeDialog() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_negative, null);
+            builder.setView(dialogView);
+
+            Button negativeConfirmButton = dialogView.findViewById(R.id.negativeConfirmButton);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            negativeConfirmButton.setOnClickListener(v -> {
+                dialog.dismiss();
+
+                // 부정 응답을 기록하기 위해 SharedPreferences 업데이트
+                String userId = user.getUid();
+                String preferencesKey = "DialogPreferences_" + userId;
+                SharedPreferences preferences = getSharedPreferences(preferencesKey, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+
+                // 'notYetPressed' 상태를 true로 설정
+                editor.putBoolean("notYetPressed", true);
+                editor.apply();
+            });
+        }
+
+        private void showConfirmationDialog() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("왕큰방울이의 성장을 기다리는 중입니다.")
+                    .setMessage("다음 날 다시 확인해보세요.")
+                    .setPositiveButton("확인", (dialog, which) -> {
+                        // 다음날 다이얼로그가 다시 뜨도록 설정
+                        Log.d("HomeMainActivity", "사용자가 확인을 누르고 다이얼로그 종료");
+                    })
+                    .show();
+        }
+
+        private void GetData() {
+            DocumentReference docRef = db.collection("users").document(user.getUid());
+            docRef.get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.exists()) {
+                    name = documentSnapshot.getString("name");
+                    plantName = documentSnapshot.getString("plantName");
+                    character_name.setText(plantName + "와");
+
+                    coin = documentSnapshot.getLong("coin");
+                    shop_coin.setText(String.valueOf(coin));
+
+                    // 가입일 확인 및 저장
+                    Long signUpDate = documentSnapshot.getLong("signUpDate");
+                    Log.d("HomeMainActivity", "signUpDate from Firestore: " + signUpDate); // 로그 추가
+
+                    if (signUpDate == null || signUpDate == 0) {
+                        // 가입일이 없으면 현재 시간을 저장
+                        long currentTime = System.currentTimeMillis();
+                        docRef.update("signUpDate", currentTime)
+                                .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "가입일이 저장되었습니다."))
+                                .addOnFailureListener(e -> Log.e("HomeMainActivity", "가입일 저장 실패", e));
+                        signUpDate = currentTime;
+                    } else {
+                        // 이미 저장된 가입일을 SharedPreferences에 저장
+                        sharedPreferences.edit().putLong("signUpDate", signUpDate).apply();
                     }
-                });
+
+                    // 경과 일수 계산 및 표시
+                    calculateDaysSinceSignUp(signUpDate); // 수정된 호출 부분
+
+                    String path = documentSnapshot.getString("userImageUrl");
+                    if (path != null) {
+                        FirebaseStorage.getInstance().getReference().child(path)
+                                .getDownloadUrl()
+                                .addOnSuccessListener(uri -> {
+                                    profileUIri = uri.toString();
+                                    setupViewPager(); // 데이터 로드 후 ViewPager 설정
+                                })
+                                .addOnFailureListener(exception ->
+                                        Log.d("HomeMainActivity", exception.toString()));
+                    } else {
+                        setupViewPager(); // 이미지가 없는 경우에도 ViewPager 설정
+                    }
+                }
+            }).addOnFailureListener(e ->
+                    Log.e("HomeMainActivity", "Firestore 에러: ", e));
+        }
+
+        private void loadSelectedDesign() {
+            // Firestore에서 사용자 선택 배경과 아이템 불러오기
+            String userId = user.getUid();
+            db.collection("users").document(userId)
+                    .get()
+                    .addOnSuccessListener(snapshot -> {
+                        if (snapshot != null && snapshot.exists()) {
+                            Long selectedBackground = snapshot.getLong("selectedBackgroundImage");
+                            Long selectedItemImage = snapshot.getLong("selectedItemImage");
+
+                            if (selectedBackground != null) {
+                                homeLayout.setBackgroundResource(selectedBackground.intValue());
+                            }
+                            if (selectedItemImage != null) {
+                                character.setImageResource(selectedItemImage.intValue());
+                            }
+                        }
+                    });
+        }
     }
-}

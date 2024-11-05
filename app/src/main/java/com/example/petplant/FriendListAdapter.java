@@ -13,7 +13,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.petplant.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -59,16 +58,16 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
     @NonNull
     @Override   // ViewHolder 객체를 생성하여 리턴한다.
-    public FriendListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_friend_item, parent, false);
-        FriendListAdapter.ViewHolder viewHolder = new FriendListAdapter.ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
 
         return new ViewHolder(view);
     }
 
     @Override   // ViewHolder안의 내용을 position에 해당되는 데이터로 교체한다.
-    public void onBindViewHolder(@NonNull FriendListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Map<String, String> friendData = localDataSet.get(position); // Map 형태의 데이터 가져오기
         String name = friendData.get("name"); // 이름 가져오기
         String plantName = friendData.get("plantName"); // 식물 이름 가져오기
