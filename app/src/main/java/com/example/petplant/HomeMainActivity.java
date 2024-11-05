@@ -344,12 +344,14 @@ public class HomeMainActivity extends AppCompatActivity {
         String preferencesKey = "DialogPreferences_" + userId; // 계정별로 구분되는 SharedPreferences 이름
         SharedPreferences preferences = getSharedPreferences(preferencesKey, Context.MODE_PRIVATE);
         long lastShownDate = preferences.getLong("lastShownDate", -1);
+        boolean notYetPressed = preferences.getBoolean("notYetPressed", false);
 
         if (daysSinceSignUp == 2 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
-            if (lastShownDate != daysSinceSignUp) { // 같은 날 다이얼로그가 이미 표시되지 않았는지 확인
+            if (lastShownDate != daysSinceSignUp || notYetPressed) { // 같은 날 다이얼로그가 이미 표시되지 않았는지 확인
                 showProgressDialog(daysSinceSignUp);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putLong("lastShownDate", daysSinceSignUp);
+                editor.putBoolean("notYetPressed", false);
                 editor.apply();
             }
         }
@@ -451,7 +453,19 @@ public class HomeMainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        negativeConfirmButton.setOnClickListener(v -> dialog.dismiss());
+        negativeConfirmButton.setOnClickListener(v -> {
+            dialog.dismiss();
+
+            // 부정 응답을 기록하기 위해 SharedPreferences 업데이트
+            String userId = user.getUid();
+            String preferencesKey = "DialogPreferences_" + userId;
+            SharedPreferences preferences = getSharedPreferences(preferencesKey, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+
+            // 'notYetPressed' 상태를 true로 설정
+            editor.putBoolean("notYetPressed", true);
+            editor.apply();
+        });
     }
 
     private void showConfirmationDialog() {
