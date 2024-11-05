@@ -332,7 +332,6 @@ public class HomeMainActivity extends AppCompatActivity {
         loadQuestStatus();
     }
 
-    // 2인 부분 10으로 나중에 바꿔야 함
     private void checkAndShowDialog(long daysSinceSignUp) {
         if (user == null) {
             Log.e("HomeMainActivity", "User not authenticated.");
@@ -346,12 +345,12 @@ public class HomeMainActivity extends AppCompatActivity {
         long lastShownDate = preferences.getLong("lastShownDate", -1);
         boolean notYetPressed = preferences.getBoolean("notYetPressed", false);
 
-        if (daysSinceSignUp == 2 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
+        if (notYetPressed || daysSinceSignUp == 10 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
             if (lastShownDate != daysSinceSignUp || notYetPressed) { // 같은 날 다이얼로그가 이미 표시되지 않았는지 확인
                 showProgressDialog(daysSinceSignUp);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putLong("lastShownDate", daysSinceSignUp);
-                editor.putBoolean("notYetPressed", false);
+                //editor.putBoolean("notYetPressed", false);
                 editor.apply();
             }
         }
@@ -368,8 +367,7 @@ public class HomeMainActivity extends AppCompatActivity {
         //String message = "";
 
         switch ((int) daysSinceSignUp) {
-            // 2를 10으로 바꿔야 함
-            case 2:
+            case 10:
                 questionTitle.setText("왕큰방울이의 꽃이 폈나요?");
                 break;
             case 27:
@@ -418,8 +416,7 @@ public class HomeMainActivity extends AppCompatActivity {
 
         // 경과 일수에 따라 캐릭터 이미지 변경
         switch ((int) daysSinceSignUp) {
-            // 2를 10으로 바꿔야 함
-            case 2:
+            case 10:
                 newCharacterImage = R.drawable.tomato_character_flower; // 꽃 상태 이미지
                 break;
             case 27:
