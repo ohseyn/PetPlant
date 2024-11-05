@@ -36,7 +36,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 public class HomeMainActivity extends AppCompatActivity {
     private FirebaseFirestore db;
@@ -53,12 +55,11 @@ public class HomeMainActivity extends AppCompatActivity {
     private Handler handler = new Handler();
     private Runnable timeUpdater;
     private SharedPreferences sharedPreferences;
-
+    private long daysSinceSignUp; // 경과 일수 변수 추가
     private String name;
     private String plantName;
     private Long coin;
     private String profileUIri;
-
     private List<PageItem> pageItems;
 
     @Override
@@ -170,7 +171,6 @@ public class HomeMainActivity extends AppCompatActivity {
             }
         }
     }
-
 
     private void handlePageItemClick(int position) {
         Intent intent = null;
@@ -284,7 +284,25 @@ public class HomeMainActivity extends AppCompatActivity {
     private void calculateDaysSinceSignUp(Long signUpDate) {
         if (signUpDate != null) {
             long currentDate = System.currentTimeMillis();
-            long daysSinceSignUp = (currentDate - signUpDate) / (1000 * 60 * 60 * 24);
+
+            // Calendar 인스턴스를 생성하여 시간 부분 제거
+            Calendar signUpCalendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+            signUpCalendar.setTimeInMillis(signUpDate);
+            signUpCalendar.set(Calendar.HOUR_OF_DAY, 0);
+            signUpCalendar.set(Calendar.MINUTE, 0);
+            signUpCalendar.set(Calendar.SECOND, 0);
+            signUpCalendar.set(Calendar.MILLISECOND, 0);
+
+            Calendar currentCalendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+            currentCalendar.setTimeInMillis(currentDate);
+            currentCalendar.set(Calendar.HOUR_OF_DAY, 0);
+            currentCalendar.set(Calendar.MINUTE, 0);
+            currentCalendar.set(Calendar.SECOND, 0);
+            currentCalendar.set(Calendar.MILLISECOND, 0);
+
+            long daysSinceSignUp = (currentCalendar.getTimeInMillis() - signUpCalendar.getTimeInMillis()) / (1000 * 60 * 60 * 24);
+
+            Log.d("HomeMainActivity", "daysSinceSignUp calculated: " + daysSinceSignUp);
             timeTextView.setText(" " + (daysSinceSignUp + 1)); // UI에 경과 일수 표시
             // 특정 일수에 다이얼로그 표시
             checkAndShowDialog(daysSinceSignUp + 1);
@@ -304,24 +322,36 @@ public class HomeMainActivity extends AppCompatActivity {
 
         // 자정에 경과 일수 업데이트
         handler.postDelayed(() -> {
-            GetData(); // 자정에 데이터를 다시 가져와 경과 일수 업데이트
+            runOnUiThread(() -> {
+                GetData(); // 자정에 데이터를 다시 가져와 경과 일수 업데이트
+                calculateDaysSinceSignUp(sharedPreferences.getLong("signUpDate", 0L)); // 경과 일수 갱신
+            });
             startTimer(); // 다음 자정을 위해 타이머 다시 설정
         }, delayUntilMidnight);
-//        long startTime = System.currentTimeMillis();
-//        timeUpdater = () -> {
-//            long elapsedTimeMillis = System.currentTimeMillis() - startTime;
-//            long elapsedDays = elapsedTimeMillis / (1000 * 60 * 60 * 24);
-//            timeTextView.setText(" " + (elapsedDays + 1));
-//            handler.postDelayed(timeUpdater, 1000);
-//        };
         handler.post(timeUpdater);
         loadQuestStatus();
     }
 
-    // 1인 부분 10으로 나중에 바꿔야 함
+    // 2인 부분 10으로 나중에 바꿔야 함
     private void checkAndShowDialog(long daysSinceSignUp) {
-        if (daysSinceSignUp == 1 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
-            showProgressDialog(daysSinceSignUp);
+        if (user == null) {
+            Log.e("HomeMainActivity", "User not authenticated.");
+            return;
+        }
+
+        // 계정별 SharedPreferences 키 생성
+        String userId = user.getUid();
+        String preferencesKey = "DialogPreferences_" + userId; // 계정별로 구분되는 SharedPreferences 이름
+        SharedPreferences preferences = getSharedPreferences(preferencesKey, Context.MODE_PRIVATE);
+        long lastShownDate = preferences.getLong("lastShownDate", -1);
+
+        if (daysSinceSignUp == 2 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
+            if (lastShownDate != daysSinceSignUp) { // 같은 날 다이얼로그가 이미 표시되지 않았는지 확인
+                showProgressDialog(daysSinceSignUp);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putLong("lastShownDate", daysSinceSignUp);
+                editor.apply();
+            }
         }
     }
 
@@ -336,7 +366,8 @@ public class HomeMainActivity extends AppCompatActivity {
         //String message = "";
 
         switch ((int) daysSinceSignUp) {
-            case 1:
+            // 2를 10으로 바꿔야 함
+            case 2:
                 questionTitle.setText("왕큰방울이의 꽃이 폈나요?");
                 break;
             case 27:
@@ -362,16 +393,6 @@ public class HomeMainActivity extends AppCompatActivity {
             dialog.dismiss();
             showPositiveDialog();
         });
-
-//        builder.setTitle(message)
-//                .setPositiveButton("피었어요/열렸어요", (dialog, which) -> {
-//                    // 버튼 로직 추가: 완료 처리 등
-//                    Log.d("HomeMainActivity", "사용자가 열림/피었음을 확인했습니다.");
-//                })
-//                .setNegativeButton("아직이에요", (dialog, which) -> {
-//                    showConfirmationDialog(); // 확인 다이얼로그 호출
-//                })
-//                .show();
     }
 
     private void showPositiveDialog() {
@@ -383,7 +404,42 @@ public class HomeMainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        positiveConfirmButton.setOnClickListener(v -> dialog.dismiss());
+        positiveConfirmButton.setOnClickListener(v -> {
+            updateCharacterImage();  // 캐릭터 이미지 업데이트 및 Firestore 저장
+            dialog.dismiss();
+        });
+    }
+
+    private void updateCharacterImage() {
+        String userId = user.getUid();
+        int newCharacterImage;
+
+        // 경과 일수에 따라 캐릭터 이미지 변경
+        switch ((int) daysSinceSignUp) {
+            // 2를 10으로 바꿔야 함
+            case 2:
+                newCharacterImage = R.drawable.tomato_character_flower; // 꽃 상태 이미지
+                break;
+            case 27:
+                newCharacterImage = R.drawable.tomato_character_home; // 열매(초기)
+                break;
+            case 37:
+                newCharacterImage = R.drawable.tomato_character_home; // 열매(중기)
+                break;
+            case 47:
+                newCharacterImage = R.drawable.tomato_character_home; // 열매(말기)
+                break;
+            default:
+                return;
+        }
+
+        character.setImageResource(newCharacterImage);
+
+        // Firestore에 변경된 캐릭터 이미지 저장
+        db.collection("users").document(userId)
+                .update("selectedCharacterImage", newCharacterImage)
+                .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "캐릭터 이미지가 업데이트되었습니다."))
+                .addOnFailureListener(e -> Log.e("HomeMainActivity", "캐릭터 이미지 업데이트 실패", e));
     }
 
     private void showNegativeDialog() {
@@ -422,13 +478,18 @@ public class HomeMainActivity extends AppCompatActivity {
 
                 // 가입일 확인 및 저장
                 Long signUpDate = documentSnapshot.getLong("signUpDate");
-                if (signUpDate == null) {
+                Log.d("HomeMainActivity", "signUpDate from Firestore: " + signUpDate); // 로그 추가
+
+                if (signUpDate == null || signUpDate == 0) {
                     // 가입일이 없으면 현재 시간을 저장
                     long currentTime = System.currentTimeMillis();
                     docRef.update("signUpDate", currentTime)
                             .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "가입일이 저장되었습니다."))
                             .addOnFailureListener(e -> Log.e("HomeMainActivity", "가입일 저장 실패", e));
                     signUpDate = currentTime;
+                } else {
+                    // 이미 저장된 가입일을 SharedPreferences에 저장
+                    sharedPreferences.edit().putLong("signUpDate", signUpDate).apply();
                 }
 
                 // 경과 일수 계산 및 표시
@@ -456,7 +517,8 @@ public class HomeMainActivity extends AppCompatActivity {
         // Firestore에서 사용자 선택 배경과 아이템 불러오기
         String userId = user.getUid();
         db.collection("users").document(userId)
-                .addSnapshotListener((snapshot, e) -> {
+                .get()
+                .addOnSuccessListener(snapshot -> {
                     if (snapshot != null && snapshot.exists()) {
                         Long selectedBackground = snapshot.getLong("selectedBackgroundImage");
                         Long selectedItemImage = snapshot.getLong("selectedItemImage");

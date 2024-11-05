@@ -123,9 +123,5 @@ public class DressActivity extends AppCompatActivity {
                     .update("selectedItem", item.getName(), "selectedItemImage", item.getImageResource())
                     .addOnSuccessListener(aVoid -> Log.d("DressActivity", "아이템 디자인이 저장되었습니다."));
         }
-//        String userId = auth.getCurrentUser().getUid();
-//        db.collection("users").document(userId)
-//                .update("selectedItem", item.getName(), "selectedImage", item.getImageResource())
-//                .addOnSuccessListener(aVoid -> Log.d("DressActivity", "디자인이 저장되었습니다."));
     }
 }
