@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import java.util.TimeZone;
 
 public class HomeMainActivity extends AppCompatActivity {
@@ -265,10 +266,29 @@ public class HomeMainActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> Log.e("HomeMainActivity", "Firestore 에러: ", e));
     }
 
+    private final String[] randomTexts = {
+            "오늘도 화이팅!",
+            "물이 맛있어요!",
+            "햇빛이 좋아요!",
+            "함께라서 행복해!",
+            "잎이 자라고 있어요!",
+            "항상 고마워요!",
+            "즐거운 하루에요!",
+            "오늘도 좋은날이에요!"
+    };
+
     private void toggleSpeechBubble() {
+        // 현재 텍스트가 보이지 않는 상태이면 랜덤 텍스트를 선택하여 표시
         if (speechBubble.getVisibility() == View.GONE) {
+            // 랜덤 텍스트 선택
+            int randomIndex = new Random().nextInt(randomTexts.length);
+            String randomText = randomTexts[randomIndex];
+
+            // 텍스트 설정 및 표시
+            speechBubble.setText(randomText);
             speechBubble.setVisibility(View.VISIBLE);
         } else {
+            // 텍스트 숨기기
             speechBubble.setVisibility(View.GONE);
         }
     }
