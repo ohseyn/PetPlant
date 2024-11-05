@@ -269,6 +269,8 @@ public class StoreActivity extends AppCompatActivity {
                     if (snapshot != null && snapshot.exists()) {
                         Long selectedBackground = snapshot.getLong("selectedBackgroundImage");
                         Long selectedItemImage = snapshot.getLong("selectedItemImage");
+//                        Long selectedImageLong = snapshot.getLong("selectedImage");
+//                        String selectedItem = snapshot.getString("selectedItem");
 
                         if (selectedBackground != null) {
                             storeLayout.setBackgroundResource(selectedBackground.intValue());
@@ -276,6 +278,14 @@ public class StoreActivity extends AppCompatActivity {
                         if (selectedItemImage != null) {
                             characterImage.setImageResource(selectedItemImage.intValue());
                         }
+//                        if (selectedImageLong != null) {
+//                            int selectedImage = selectedImageLong.intValue();
+//                            if (selectedItem != null && selectedItem.contains("배경")) {
+//                                storeLayout.setBackgroundResource(selectedImage);
+//                            } else if (selectedItem != null) {
+//                                characterImage.setImageResource(selectedImage);
+//                            }
+//                        }
                     }
                 });
     }

@@ -3,9 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/removequestback">
 
 
     <androidx.viewpager2.widget.ViewPager2
@@ -14,14 +13,14 @@
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ImageButton
         android:id="@+id/back_home"
-        android:layout_width="32dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/ic_back"
         app:layout_constraintEnd_toEndOf="parent"
