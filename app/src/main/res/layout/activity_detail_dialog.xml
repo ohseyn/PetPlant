@@ -8,61 +8,41 @@
     android:padding="16dp">
 
     <LinearLayout
-        android:id="@+id/stickerLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textActivityDescription"
         tools:ignore="MissingConstraints">
 
         <View
-            android:id="@+id/viewSticker1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@android:color/darker_gray"
-            android:visibility="gone" /> <!-- 기본적으로 숨김 -->
+            android:background="@android:color/darker_gray" />
 
         <View
-            android:id="@+id/viewSticker2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
-            android:background="@android:color/darker_gray"
-            android:visibility="gone" /> <!-- 기본적으로 숨김 -->
+            android:background="@android:color/darker_gray" />
 
-        <FrameLayout
+        <View
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
-            android:visibility="gone"
-            android:id="@+id/frameSticker">
+            android:background="@android:color/darker_gray" />
 
-            <!-- 스티커 이미지 -->
-            <ImageView
-                android:id="@+id/imageSticker"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
-
-            <!-- 회색 배경 위의 카운팅 텍스트 -->
-            <TextView
-                android:id="@+id/textSticker"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
-        </FrameLayout>
-
-        <ImageButton
-            android:id="@+id/buttonLike"
+        <TextView
+            android:id="@+id/textPlus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/mynaui_smile" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:text="+3"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <TextView
@@ -129,5 +109,12 @@
         app:layout_constraintTop_toBottomOf="@+id/plantName"
         tools:ignore="MissingConstraints" />
 
+    <!-- 스티커를 표시할 LinearLayout 추가 -->
+    <LinearLayout
+        android:id="@+id/stickerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

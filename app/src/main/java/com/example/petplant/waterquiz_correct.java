@@ -3,7 +3,6 @@ package com.example.petplant;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class waterquiz_correct extends AppCompatActivity {

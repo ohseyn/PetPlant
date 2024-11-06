@@ -32,7 +32,6 @@ public class StoreActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private Long coin;
-
     private RecyclerView recyclerView;
     private StoreItemAdapter adapter;
     private List<StoreItem> backgroundList, itemList;
@@ -41,7 +40,6 @@ public class StoreActivity extends AppCompatActivity {
     private StoreItem selectedBackground, selectedItem;
     private TextView shopCoinTextView;
     private ConstraintLayout storeLayout; // 배경을 변경할 레이아웃
-
     private int selectedItemPrice = 0;
     private String selectedItemName = "";
 
@@ -269,8 +267,6 @@ public class StoreActivity extends AppCompatActivity {
                     if (snapshot != null && snapshot.exists()) {
                         Long selectedBackground = snapshot.getLong("selectedBackgroundImage");
                         Long selectedItemImage = snapshot.getLong("selectedItemImage");
-//                        Long selectedImageLong = snapshot.getLong("selectedImage");
-//                        String selectedItem = snapshot.getString("selectedItem");
 
                         if (selectedBackground != null) {
                             storeLayout.setBackgroundResource(selectedBackground.intValue());
@@ -278,14 +274,6 @@ public class StoreActivity extends AppCompatActivity {
                         if (selectedItemImage != null) {
                             characterImage.setImageResource(selectedItemImage.intValue());
                         }
-//                        if (selectedImageLong != null) {
-//                            int selectedImage = selectedImageLong.intValue();
-//                            if (selectedItem != null && selectedItem.contains("배경")) {
-//                                storeLayout.setBackgroundResource(selectedImage);
-//                            } else if (selectedItem != null) {
-//                                characterImage.setImageResource(selectedImage);
-//                            }
-//                        }
                     }
                 });
     }

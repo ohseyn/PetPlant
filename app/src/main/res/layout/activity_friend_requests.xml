@@ -9,12 +9,18 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/see_all_review_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="412dp"
+        android:layout_height="48dp"
         android:background="#FFFFFF"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintBottom_toTopOf="@+id/tabLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintHeight_percent="0.063"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/see_all_review_title"
@@ -22,26 +28,29 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/suit_bold"
+            android:includeFontPadding="false"
             android:text="알림"
             android:textColor="#040303"
-            android:textSize="22sp" />
+            android:textSize="15sp"
+            tools:layout_editor_absoluteX="177dp"
+            tools:layout_editor_absoluteY="13dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        style="@style/CustomTabLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabBackground="@drawable/tab_selector"
-        android:layout_marginRight="11.9dp"
         app:tabGravity="fill"
         app:tabIndicatorColor="#02AE7A"
         app:tabMode="fixed"
         app:tabSelectedTextColor="#02AE7A"
+        app:tabBackground="@drawable/tab_selector"
         app:tabTextAppearance="?attr/textAppearanceButton"
-        tools:ignore="MissingConstraints,NotSibling"
-        tools:layout_editor_absoluteY="64dp">
+        style="@style/CustomTabLayoutStyle"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="46dp">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/sticker_notification"
@@ -58,8 +67,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/friendRequestsRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,18 +78,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_width="413dp"
+        android:layout_height="80dp"
         android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/user_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
             android:layout_marginStart="188dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/mynaui_home2"
@@ -87,10 +97,10 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/inbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="32dp"
             android:layout_marginStart="32dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/mynaui_inbox2"
@@ -98,10 +108,10 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="32dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/mynaui_user2"

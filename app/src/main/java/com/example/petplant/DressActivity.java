@@ -1,9 +1,12 @@
 package com.example.petplant;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +20,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DressActivity extends AppCompatActivity {
     private FirebaseFirestore db;
@@ -76,14 +81,10 @@ public class DressActivity extends AppCompatActivity {
                     adapter.updateItemList(itemList);
                 }
             }
-
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
+            public void onTabUnselected(TabLayout.Tab tab) {}
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
+            public void onTabReselected(TabLayout.Tab tab) {}
         });
     }
 
@@ -122,6 +123,5 @@ public class DressActivity extends AppCompatActivity {
                     .update("selectedItem", item.getName(), "selectedItemImage", item.getImageResource())
                     .addOnSuccessListener(aVoid -> Log.d("DressActivity", "아이템 디자인이 저장되었습니다."));
         }
-
     }
 }
