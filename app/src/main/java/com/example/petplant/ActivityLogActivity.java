@@ -1,9 +1,7 @@
 package com.example.petplant;
 
-import com.example.petplant.R;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,9 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -57,7 +53,7 @@ public class ActivityLogActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        Log.d("바보","체크");
         Button profile = findViewById(R.id.profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +69,7 @@ public class ActivityLogActivity extends AppCompatActivity {
         activityList = new ArrayList<>();
         adapter = new ActivityLogAdapter(activityList, activity -> {
             // 좋아요 혹은 스티커와 같은 반응을 처리하는 리스너
+            Log.d("바보","체크");
             handleReaction(activity);
         });
         recyclerViewActivities.setAdapter(adapter);
@@ -148,11 +145,12 @@ public class ActivityLogActivity extends AppCompatActivity {
                 for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
                     UserActivity activity = snapshot.toObject(UserActivity.class);
                     if (activity != null) {
-                        activity.setDocumentId(snapshot.getId());
-                        activityList.add(activity);  // 리스트에 추가
 
-                        loadStickersForActivity(activity, snapshot.getId()); // 스티커 로드 호출
-                        activityList.add(activity);
+                        activity.setDocumentId(snapshot.getId());
+                        activity.setCurrentTab(currentTab);
+                        activityList.add(activity);  // 리스트에 추가
+//                        loadStickersForActivity(activity, snapshot.getId()); // 스티커 로드 호출
+//                        activityList.add(activity);
                     }
                 }
                 adapter.notifyDataSetChanged();
