@@ -72,6 +72,31 @@
         </activity>
 
         <activity
+            android:name=".Sticker"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".StickerRequest"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".StickerRequestAdapter"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".ActivityViewHolder"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".ActivityLogAdapter"
+            android:exported="true">
+        </activity>
+
+        <activity
             android:name=".HomeMainActivity"
             android:exported="true">
         </activity>

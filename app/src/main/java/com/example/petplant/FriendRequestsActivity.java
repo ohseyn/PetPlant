@@ -12,21 +12,25 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class FriendRequestsActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private FirebaseAuth auth;
-    private RecyclerView friendRequestsRecyclerView;
+    private RecyclerView recyclerView;
     private FriendRequestAdapter friendRequestsAdapter;
+    private StickerRequestAdapter stickerAdapter;
     private List<FriendRequest> friendRequestList;
+    private List<StickerRequest> stickerRequestList;
     private TabLayout tabLayout;
 
     @Override
@@ -40,30 +44,15 @@ public class FriendRequestsActivity extends AppCompatActivity {
 
         // TabLayout 초기화
         tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                if (position == 1) {  // '친구신청 알림' 탭일 경우
-                    loadFriendRequests();
-                } else {
-                    // 다른 탭에 따른 다른 알림 데이터를 로드 (예: 스티커 알림)
-                    friendRequestList.clear();
-                    friendRequestsAdapter.notifyDataSetChanged();
-                }
-            }
+        recyclerView = findViewById(R.id.friendRequestsRecyclerView);
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {}
-        });
-
-        // RecyclerView 초기화
-        friendRequestsRecyclerView = findViewById(R.id.friendRequestsRecyclerView);
-        friendRequestsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // 두 가지 데이터 리스트 준비
         friendRequestList = new ArrayList<>();
+        stickerRequestList = new ArrayList<>();
+
+        // Adapter를 초기화
         friendRequestsAdapter = new FriendRequestAdapter(friendRequestList, new FriendRequestAdapter.OnFriendRequestActionListener() {
             @Override
             public void onAccept(String requestUserId) {
@@ -75,10 +64,32 @@ public class FriendRequestsActivity extends AppCompatActivity {
                 declineFriendRequest(requestUserId);
             }
         });
-        friendRequestsRecyclerView.setAdapter(friendRequestsAdapter);
+
+        stickerAdapter = new StickerRequestAdapter(stickerRequestList);
+
+        // 탭 선택 리스너 설정
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 1) {  // '친구신청 알림' 탭
+                    loadFriendRequests();
+                    recyclerView.setAdapter(friendRequestsAdapter);
+                } else {  // '스티커 알림' 탭
+                    loadStickerRequests(auth.getUid());
+                    recyclerView.setAdapter(stickerAdapter);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
 
         // 처음에는 '친구신청 알림' 탭을 선택
-        TabLayout.Tab initialTab = tabLayout.getTabAt(1);
+        TabLayout.Tab initialTab = tabLayout.getTabAt(0);
         if (initialTab != null) {
             initialTab.select();
         }
@@ -122,6 +133,60 @@ public class FriendRequestsActivity extends AppCompatActivity {
                     }
                 })
                 .addOnFailureListener(e -> Log.d("FriendRequests", "Error loading friend requests", e));
+    }
+    private void loadStickerRequests(String userUid) {
+        DocumentReference userDocRef = db.collection("users").document(userUid);
+
+        userDocRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                List<Map<String, Object>> activityRequest = (List<Map<String, Object>>) documentSnapshot.get("activityRequest");
+
+                if (activityRequest != null && !activityRequest.isEmpty()) {
+                    stickerRequestList.clear();
+                    for (Map<String, Object> activity : activityRequest) {
+                        String userName = (String) activity.get("userName");  // 사용자 이름
+                        String stickerType = (String) activity.get("kind");  // 스티커 종류
+
+                        // StickerRequest 객체 생성 (이름과 스티커 종류만 필요)
+                        StickerRequest stickerRequest = new StickerRequest(userName, stickerType);
+                        stickerRequestList.add(stickerRequest);
+                    }
+                    stickerAdapter.notifyDataSetChanged();
+                } else {
+                    Log.d("loadStickerRequests", "No sticker requests found.");
+                }
+            } else {
+                Log.e("loadStickerRequests", "User document does not exist.");
+            }
+        }).addOnFailureListener(e -> {
+            Log.e("loadStickerRequests", "Error getting user document: " + e.getMessage());
+        });
+    }
+
+
+
+    private int getStickerDrawableResId(String kind) {
+        // 스티커 종류에 따라 리소스 ID 반환
+        switch (kind) {
+            case "sticker1":
+                return R.drawable.sticker1;
+            case "sticker2":
+                return R.drawable.sticker2;
+            case "sticker3":
+                return R.drawable.sticker3;
+            case "sticker4":
+                return R.drawable.sticker4;
+            case "sticker5":
+                return R.drawable.sticker5;
+            case "sticker6":
+                return R.drawable.sticker6;
+            case "sticker7":
+                return R.drawable.sticker7;
+            case "sticker8":
+                return R.drawable.sticker8;
+            default:
+                return R.drawable.sticker1;
+        }
     }
 
     // 시간 차 계산 메서드 (n초 전, n분 전, n시간 전, n일 전)

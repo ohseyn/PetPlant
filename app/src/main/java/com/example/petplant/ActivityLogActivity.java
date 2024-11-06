@@ -1,7 +1,9 @@
 package com.example.petplant;
 
+import com.example.petplant.R;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 

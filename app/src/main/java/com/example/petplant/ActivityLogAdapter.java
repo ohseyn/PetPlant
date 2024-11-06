@@ -17,11 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -226,32 +228,32 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
 
         // Firestore 배열에 객체를 추가
         docRef.update("stickers", FieldValue.arrayUnion(newSticker))
-        .addOnSuccessListener(aVoid -> {
-            // 성공적으로 업데이트된 경우
-            Log.d("FirestoreExample", "스티커가 추가되었습니다.");
-            DocumentReference userDocRef = db.collection("users").document(user.getUid());
-            // 사용자 이름을 Firestore에서 가져오기
-            userDocRef.get().addOnSuccessListener(documentSnapshot -> {
-                if (documentSnapshot.exists()) {
-                    // 사용자 이름을 가져옴
-                    String userNames = documentSnapshot.getString("name");
-                    if (userNames != null) {
-                        // 이름이 있을 경우, activity 데이터를 추가
-                        requestActivity(userNames,sticker,activity.getUserId());
-                    } else {
-                        Log.e("requestActivity", "User name is not found.");
-                    }
-                } else {
-                    Log.e("requestActivity", "User document does not exist.");
-                }
-            }).addOnFailureListener(e -> {
-                Log.e("requestActivity", "Error getting user document: " + e.getMessage());
-            });
-        })
-        .addOnFailureListener(e -> {
-            // 오류가 발생한 경우
-            Log.e("FirestoreExample", "스티커 추가 실패: " + e.getMessage());
-        });
+                .addOnSuccessListener(aVoid -> {
+                    // 성공적으로 업데이트된 경우
+                    Log.d("FirestoreExample", "스티커가 추가되었습니다.");
+                    DocumentReference userDocRef = db.collection("users").document(user.getUid());
+                    // 사용자 이름을 Firestore에서 가져오기
+                    userDocRef.get().addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            // 사용자 이름을 가져옴
+                            String userNames = documentSnapshot.getString("name");
+                            if (userNames != null) {
+                                // 이름이 있을 경우, activity 데이터를 추가
+                                requestActivity(userNames,sticker,activity.getUserId());
+                            } else {
+                                Log.e("requestActivity", "User name is not found.");
+                            }
+                        } else {
+                            Log.e("requestActivity", "User document does not exist.");
+                        }
+                    }).addOnFailureListener(e -> {
+                        Log.e("requestActivity", "Error getting user document: " + e.getMessage());
+                    });
+                })
+                .addOnFailureListener(e -> {
+                    // 오류가 발생한 경우
+                    Log.e("FirestoreExample", "스티커 추가 실패: " + e.getMessage());
+                });
 
     }
     private void requestActivity(String userName, String kind, String userUid) {

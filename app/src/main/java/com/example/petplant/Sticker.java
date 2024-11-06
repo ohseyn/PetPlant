@@ -29,7 +29,7 @@ public class Sticker {
     }
 
     public void setStickerUserId(String userId) {
-       this.stickerUserId = userId;
+        this.stickerUserId = userId;
     }
 
 

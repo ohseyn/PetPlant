@@ -9,8 +9,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/see_all_review_toolbar"
-        android:layout_width="412dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#FFFFFF"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
@@ -78,8 +78,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="413dp"
-        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
         android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
