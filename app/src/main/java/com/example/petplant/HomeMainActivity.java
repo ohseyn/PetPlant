@@ -365,7 +365,7 @@ public class HomeMainActivity extends AppCompatActivity {
         long lastShownDate = preferences.getLong("lastShownDate", -1);
         boolean notYetPressed = preferences.getBoolean("notYetPressed", false);
 
-        if (notYetPressed || daysSinceSignUp == 10 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
+        if (notYetPressed || daysSinceSignUp == 3 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
             if (lastShownDate != daysSinceSignUp || notYetPressed) { // 같은 날 다이얼로그가 이미 표시되지 않았는지 확인
                 showProgressDialog(daysSinceSignUp);
                 SharedPreferences.Editor editor = preferences.edit();
@@ -387,7 +387,7 @@ public class HomeMainActivity extends AppCompatActivity {
         //String message = "";
 
         switch ((int) daysSinceSignUp) {
-            case 10:
+            case 3:
                 questionTitle.setText("왕큰방울이의 꽃이 폈나요?");
                 break;
             case 27:
@@ -432,33 +432,50 @@ public class HomeMainActivity extends AppCompatActivity {
 
     private void updateCharacterImage() {
         String userId = user.getUid();
-        int newCharacterImage;
+        int baseCharacterImage;
 
         // 경과 일수에 따라 캐릭터 이미지 변경
         switch ((int) daysSinceSignUp) {
-            case 10:
-                newCharacterImage = R.drawable.tomato_character_flower; // 꽃 상태 이미지
+            case 3:
+                baseCharacterImage = R.drawable.tomato_character_flower; // 꽃 상태 이미지
                 break;
             case 27:
-                newCharacterImage = R.drawable.tomato_character_home; // 열매(초기)
+                baseCharacterImage = R.drawable.tomato_character_home; // 열매(초기)
                 break;
             case 37:
-                newCharacterImage = R.drawable.tomato_character_home; // 열매(중기)
+                baseCharacterImage = R.drawable.tomato_character_home; // 열매(중기)
                 break;
             case 47:
-                newCharacterImage = R.drawable.tomato_character_home; // 열매(말기)
+                baseCharacterImage = R.drawable.tomato_character_home; // 열매(말기)
                 break;
             default:
+                baseCharacterImage = R.drawable.tomato_character_home; // 모종 상태
                 return;
         }
 
-        character.setImageResource(newCharacterImage);
+        //character.setImageResource(baseCharacterImage);
 
         // Firestore에 변경된 캐릭터 이미지 저장
         db.collection("users").document(userId)
-                .update("selectedCharacterImage", newCharacterImage)
+                .update("characterBaseImage", baseCharacterImage, "characterState", (int) daysSinceSignUp)
                 .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "캐릭터 이미지가 업데이트되었습니다."))
                 .addOnFailureListener(e -> Log.e("HomeMainActivity", "캐릭터 이미지 업데이트 실패", e));
+
+        // 적용된 아이템이 있다면 Firestore에서 불러와 함께 적용
+        db.collection("users").document(userId)
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    if (snapshot != null && snapshot.exists()) {
+                        Long itemResource = snapshot.getLong("selectedItemImage");
+                        if (itemResource != null) {
+                            // 아이템이 적용된 캐릭터 이미지로 설정
+                            character.setImageResource(itemResource.intValue());
+                        } else {
+                            // 기본 상태 이미지로 설정
+                            character.setImageResource(baseCharacterImage);
+                        }
+                    }
+                });
     }
 
     private void showNegativeDialog() {
@@ -546,19 +563,24 @@ public class HomeMainActivity extends AppCompatActivity {
 
     private void loadSelectedDesign() {
         // Firestore에서 사용자 선택 배경과 아이템 불러오기
-        String userId = user.getUid();
+        String userId = auth.getCurrentUser().getUid();
         db.collection("users").document(userId)
-                .get()
-                .addOnSuccessListener(snapshot -> {
+                .addSnapshotListener((snapshot, e) -> {
                     if (snapshot != null && snapshot.exists()) {
                         Long selectedBackground = snapshot.getLong("selectedBackgroundImage");
                         Long selectedItemImage = snapshot.getLong("selectedItemImage");
+                        Long characterBaseImage = snapshot.getLong("characterBaseImage");
 
+                        // 배경 적용
                         if (selectedBackground != null) {
                             homeLayout.setBackgroundResource(selectedBackground.intValue());
                         }
+
+                        // 아이템이 있는 경우 아이템 이미지 적용, 아니면 기본 캐릭터 상태 이미지
                         if (selectedItemImage != null) {
                             character.setImageResource(selectedItemImage.intValue());
+                        } else if (characterBaseImage != null) {
+                            character.setImageResource(characterBaseImage.intValue());
                         }
                     }
                 });
