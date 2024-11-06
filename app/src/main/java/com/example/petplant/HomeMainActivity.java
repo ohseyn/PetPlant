@@ -426,6 +426,7 @@ public class HomeMainActivity extends AppCompatActivity {
 
         positiveConfirmButton.setOnClickListener(v -> {
             updateCharacterImage();  // 캐릭터 이미지 업데이트 및 Firestore 저장
+            loadSelectedDesign();
             dialog.dismiss();
         });
     }
@@ -458,7 +459,11 @@ public class HomeMainActivity extends AppCompatActivity {
         // Firestore에 변경된 캐릭터 이미지 저장
         db.collection("users").document(userId)
                 .update("characterBaseImage", baseCharacterImage, "characterState", (int) daysSinceSignUp)
-                .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "캐릭터 이미지가 업데이트되었습니다."))
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("HomeMainActivity", "캐릭터 기본 이미지와 상태가 Firestore에 업데이트되었습니다.");
+                    // Firestore에서 데이터를 다시 로드하여 즉시 반영되도록 함
+                    loadSelectedDesign();
+                })
                 .addOnFailureListener(e -> Log.e("HomeMainActivity", "캐릭터 이미지 업데이트 실패", e));
 
         // 적용된 아이템이 있다면 Firestore에서 불러와 함께 적용
@@ -574,14 +579,19 @@ public class HomeMainActivity extends AppCompatActivity {
                         // 배경 적용
                         if (selectedBackground != null) {
                             homeLayout.setBackgroundResource(selectedBackground.intValue());
+                            Log.d("HomeMainActivity", "Background Apply");
                         }
 
                         // 아이템이 있는 경우 아이템 이미지 적용, 아니면 기본 캐릭터 상태 이미지
                         if (selectedItemImage != null) {
                             character.setImageResource(selectedItemImage.intValue());
+                            Log.d("HomeMainActivity", "Item Apply");
                         } else if (characterBaseImage != null) {
                             character.setImageResource(characterBaseImage.intValue());
+                            Log.d("HomeMainActivity", "Default character Apply");
                         }
+                    } else {
+                        Log.e("HomeMainActivity", "Firestore Data load fail: snapshot : null or non exist.");
                     }
                 });
     }
