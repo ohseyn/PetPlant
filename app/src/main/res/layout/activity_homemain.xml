@@ -6,40 +6,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mainback"
-    tools:context=".HomeMainActivity">
+    tools:context=".HomeMainActivity"
+    tools:ignore="ExtraText">
 
 
     <ImageButton
         android:id="@+id/user_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="248dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/mynaui_home"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        app:layout_constraintEnd_toStartOf="@+id/profile"
+        app:layout_constraintStart_toEndOf="@+id/inbox"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
     <ImageButton
         android:id="@+id/profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/mynaui_user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        app:layout_constraintStart_toEndOf="@+id/user_home"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/inbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/mynaui_inbox2"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/user_home"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" /> />
 
     <TextView
         android:id="@+id/coin"
@@ -48,8 +51,8 @@
         android:background="@drawable/coin"
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:gravity="center"
-        android:text="        310"
-        android:textSize="25dp"
+        android:text="       310"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -62,7 +65,7 @@
         android:id="@+id/home_plantName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="112dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:text="왕큰방울이와"
@@ -70,31 +73,36 @@
         android:textColor="#000000"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintHorizontal_bias="0.973"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+    />
 
     <ImageView
         android:id="@+id/tomato_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="126dp"
-        android:layout_marginTop="472dp"
-        android:layout_marginEnd="127dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/tomato_character_home"
         tools:ignore="ContentDescription,MissingConstraints,ImageContrastCheck" />
 
     <TextView
         android:id="@+id/speechbubble"
-        android:layout_width="257dp"
-        android:layout_height="102dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/character_bubble"
         android:visibility="gone"
+        android:textSize="16sp"
+        android:paddingTop="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.056"
@@ -164,13 +172,11 @@
         android:id="@+id/store"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="460dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/mynaui_store"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.019"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <ImageButton
@@ -178,13 +184,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/mynaui_bell"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.019"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"  />
 
     <ImageButton
         android:id="@+id/guide"
