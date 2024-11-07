@@ -3,65 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/dialog_pink"
+    android:paddingBottom="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="4dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textActivityDescription"
-        tools:ignore="MissingConstraints">
 
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:color/darker_gray" />
-
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:background="@android:color/darker_gray" />
-
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:background="@android:color/darker_gray" />
-
-        <TextView
-            android:id="@+id/textPlus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"
-            android:text="+3"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="방울토마토"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textActivityTitle"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
+<TextView
         android:id="@+id/plantName"
-        android:layout_width="207dp"
-        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="81dp"
         android:text="식물 이름"
@@ -69,6 +20,19 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textUserName"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="방울토마토  /"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textActivityTitle"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -98,23 +62,16 @@
 
     <TextView
         android:id="@+id/textActivityDescription"
-        android:layout_width="386dp"
-        android:layout_height="386dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:text="활동 설명이 여기에 표시됩니다."
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantName"
+        android:layout_marginStart="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="130dp"
         tools:ignore="MissingConstraints" />
 
-    <!-- 스티커를 표시할 LinearLayout 추가 -->
-    <LinearLayout
-        android:id="@+id/stickerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,20 +10,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/suit_bold"
         android:gravity="center"
         android:text="활동기록"
         android:textColor="@android:color/black"
-        android:textSize="22sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ImageButton
         android:id="@+id/bell2"
-        android:layout_width="48dp"
-        android:layout_height="47dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="35dp"
         android:background="@drawable/mynaui_bell"
@@ -38,8 +38,8 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         style="@style/CustomTabLayoutStyle"
-        android:layout_width="540dp"
-        android:layout_height="72dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -74,12 +74,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="87dp"
         android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="88dp"
         android:fontFamily="@font/suit_regular"
         android:gravity="center"
         android:text="2024.05.16(목)"
         android:textColor="@android:color/black"
-        android:textSize="22sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/buttonNext"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toEndOf="@+id/buttonPrevious"
@@ -109,59 +110,76 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_activities"
-        android:layout_width="533dp"
-        android:layout_height="776dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
+        android:layout_width="match_parent"
+        android:layout_height="430dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textDate"
-        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"
         tools:ignore="MissingConstraints" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="550dp"
-        android:layout_height="125dp"
-        android:background="#FFFFFF"
+
+    <ImageButton
+        android:id="@+id/user_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/mynaui_home2"
+        app:layout_constraintStart_toStartOf="@+id/inbox"
+        app:layout_constraintEnd_toEndOf="@+id/profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/inbox"
+        app:layout_constraintEnd_toEndOf="@+id/profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="15dp"
+        android:text="홈"
+        android:textColor="#8B8B8B"/>
+
+    <ImageButton
+        android:id="@+id/profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/mynaui_user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginEnd="30dp"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/user_home"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="248dp"
-            android:layout_marginBottom="48dp"
-            android:background="@drawable/mynaui_home2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="15dp"
+        android:text="프로필"
+        android:textColor="#8B8B8B"/>
 
+    <ImageButton
+        android:id="@+id/inbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/mynaui_inbox"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" /> />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/inbox"
-            android:layout_width="40dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginBottom="52dp"
-            android:background="@drawable/mynaui_inbox"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="21dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="15dp"
+        android:text="활동기록"
+        android:textColor="#02AE7A"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/profile"
-            android:layout_width="46dp"
-            android:layout_height="47dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="48dp"
-            android:background="@drawable/mynaui_user"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>

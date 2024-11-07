@@ -8,8 +8,8 @@
     <!-- 배경 이미지 -->
     <ImageView
         android:id="@+id/backgroundImage"
-        android:layout_width="497dp"
-        android:layout_height="237dp"
+        android:layout_width="338dp"
+        android:layout_height="180dp"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
@@ -20,40 +20,41 @@
             android:id="@+id/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
             android:text="가꾸기 활동"
             android:textColor="@android:color/holo_blue_dark"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
     <TextView
         android:id="@+id/points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="390dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="290dp"
+        android:layout_marginTop="10dp"
         android:text="+15C"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:layout_gravity="center_horizontal|center"
         android:text="왕큰방울이에게 물주기"
         android:textColor="@android:color/black"
-        android:textSize="25sp"
-        android:layout_marginBottom="20dp" />
+        android:textSize="22sp"/>
 
     <!-- 버튼 (이미지 중앙 아래에 겹치기) -->
     <Button
         android:id="@+id/do_quest"
-        android:layout_width="163dp"
-        android:layout_height="67dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@android:color/holo_blue_bright"
         android:textColor="@android:color/white"
-        android:textSize="22sp" />
+        android:textSize="20sp" />
 </FrameLayout>

@@ -9,40 +9,81 @@
     tools:context=".HomeMainActivity"
     tools:ignore="ExtraText">
 
+    <ImageView
+        android:background="@drawable/appbar"
+         android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/navigationbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/user_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/mynaui_home"
+        app:layout_constraintStart_toStartOf="@+id/inbox"
+        app:layout_constraintEnd_toEndOf="@+id/profile"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/profile"
-        app:layout_constraintStart_toEndOf="@+id/inbox"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/inbox"
+        app:layout_constraintEnd_toEndOf="@+id/profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="15dp"
+        android:text="홈"
+        android:textColor="#02AE7A"/>
 
     <ImageButton
         android:id="@+id/profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/mynaui_user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/user_home"
+        android:layout_marginEnd="30dp"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="15dp"
+        android:text="프로필"
+        android:textColor="#8B8B8B"/>
 
     <ImageButton
         android:id="@+id/inbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/mynaui_inbox2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/user_home"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" /> />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="21dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="15dp"
+        android:text="활동기록"
+        android:textColor="#8B8B8B"/>
 
     <TextView
         android:id="@+id/coin"
@@ -51,33 +92,34 @@
         android:background="@drawable/coin"
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:gravity="center"
-        android:text="       310"
+        android:paddingLeft="30dp"
+        android:paddingBottom="3dp"
+        android:text="310"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084"
+        app:layout_constraintVertical_bias="0.09"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/home_plantName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="16dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:text="왕큰방울이와"
         android:textAlignment="viewEnd"
         android:textColor="#000000"
-        android:textSize="25sp"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
         tools:ignore="MissingConstraints" />
-    />
 
     <ImageView
         android:id="@+id/tomato_home"
@@ -88,7 +130,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.38"
         app:srcCompat="@drawable/tomato_character_home"
         tools:ignore="ContentDescription,MissingConstraints,ImageContrastCheck" />
 
@@ -103,6 +145,8 @@
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
         android:textAlignment="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.056"
@@ -118,13 +162,13 @@
         android:fontFamily="@font/tmoneyroundwindregular"
         android:text="함께한 지"
         android:textColor="#000000"
-        android:textSize="25sp"
+        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.686"
+        app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintVertical_bias="0.15" />
 
     <TextView
         android:id="@+id/timeTextView"
@@ -133,13 +177,13 @@
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:text="0"
         android:textColor="#00B561"
-        android:textSize="43sp"
+        android:textSize="41sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
+        app:layout_constraintHorizontal_bias="0.79"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139"
+        app:layout_constraintVertical_bias="0.135"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -149,13 +193,13 @@
         android:fontFamily="@font/tmoneyroundwindregular"
         android:text="일 째"
         android:textColor="#000000"
-        android:textSize="25sp"
+        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintVertical_bias="0.15" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -172,8 +216,8 @@
         android:id="@+id/store"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/mynaui_store"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -183,8 +227,8 @@
         android:id="@+id/bell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/mynaui_bell"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -194,8 +238,6 @@
         android:id="@+id/guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="332dp"
-        android:layout_marginBottom="35dp"
         android:background="@drawable/guide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

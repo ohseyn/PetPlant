@@ -139,7 +139,6 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         TextView plantName = dialog.findViewById(R.id.plantName);
         TextView time = dialog.findViewById(R.id.textActivityTime);
         ImageView imageActivity = dialog.findViewById(R.id.imageActivity);
-        LinearLayout stickerLayout = dialog.findViewById(R.id.stickerLayout);
 
         title.setText(activity.getActivityDescription());
         plantName.setText(activity.getPlantName());
@@ -153,14 +152,13 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         }
 
         if (activity.getStickers() != null && !activity.getStickers().isEmpty()) {
-            stickerLayout.removeAllViews(); // 이전 뷰 제거
+             // 이전 뷰 제거
 
             for (Sticker sticker : activity.getStickers()) {
                 // 새로운 뷰를 생성하여 스티커 추가
                 ImageView stickerView = new ImageView(context);
                 stickerView.setLayoutParams(new LinearLayout.LayoutParams(40, 40)); // 크기 설정
                 stickerView.setBackgroundResource(sticker.getDrawableResourceId()); // 스티커 리소스 설정
-                stickerLayout.addView(stickerView); // 스티커를 레이아웃에 추가
             }
         }
 
@@ -175,7 +173,7 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         TextView plantName = dialog.findViewById(R.id.plantName);
         TextView time = dialog.findViewById(R.id.textActivityTime);
         TextView description = dialog.findViewById(R.id.textActivityDescription);
-        LinearLayout stickerLayout = dialog.findViewById(R.id.stickerLayout);
+
 
         title.setText(activity.getActivityDescription());
         plantName.setText(activity.getPlantName());
@@ -185,14 +183,14 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
 
         // 스티커 추가
         if (activity.getStickers() != null && !activity.getStickers().isEmpty()) {
-            stickerLayout.removeAllViews(); // 이전 뷰 제거
+             // 이전 뷰 제거
 
             for (Sticker sticker : activity.getStickers()) {
                 // 새로운 뷰를 생성하여 스티커 추가
                 ImageView stickerView = new ImageView(context);
                 stickerView.setLayoutParams(new LinearLayout.LayoutParams(40, 40)); // 크기 설정
                 stickerView.setBackgroundResource(sticker.getDrawableResourceId()); // 스티커 리소스 설정
-                stickerLayout.addView(stickerView); // 스티커를 레이아웃에 추가
+
             }
         }
 
@@ -201,16 +199,12 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
 
 
     private void addStickersToDialog(Dialog dialog, UserActivity activity) {
-        LinearLayout stickerContainer = dialog.findViewById(R.id.stickerLayout);
-        stickerContainer.removeAllViews(); // 기존 스티커 제거
-
         List<Sticker> stickers = activity.getStickers();
         if (stickers != null) {
             for (Sticker sticker : stickers) {
                 ImageView stickerImageView = new ImageView(dialog.getContext());
                 stickerImageView.setImageResource(sticker.getDrawableResourceId()); // 스티커 이미지 설정
                 stickerImageView.setLayoutParams(new ViewGroup.LayoutParams(80, 80)); // 스티커 크기 설정
-                stickerContainer.addView(stickerImageView);
             }
         }
     }

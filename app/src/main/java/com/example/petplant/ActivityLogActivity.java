@@ -49,7 +49,7 @@ public class ActivityLogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
-        Button user_home = findViewById(R.id.user_home);
+        ImageButton user_home = findViewById(R.id.user_home);
         user_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +58,7 @@ public class ActivityLogActivity extends AppCompatActivity {
             }
         });
         Log.d("바보","체크");
-        Button profile = findViewById(R.id.profile);
+        ImageButton profile = findViewById(R.id.profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -241,7 +241,7 @@ public class ActivityLogActivity extends AppCompatActivity {
     }
 
     private String getCurrentDate() {
-        return new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        return new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault()).format(new Date());
     }
 
     private String getNextDate(String currentDate, int days) {

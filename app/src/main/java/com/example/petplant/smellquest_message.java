@@ -32,8 +32,7 @@ public class smellquest_message extends AppCompatActivity {
         smell_answer1 = findViewById(R.id.smell_answer1);
         smell_answer2 = findViewById(R.id.smell_answer2);
         next_button_smell = findViewById(R.id.next_button_smell);
-        responseText_smell = findViewById(R.id.responseText_smell); // TextView 연결
-        talkBalloon_smell = findViewById(R.id.talk_balloon_smell); // ImageView 연결
+        responseText_smell = findViewById(R.id.responseText_smell); // TextView 연결// ImageView 연결
 
         // "대화마치기" 버튼 비활성화 (처음엔 연한 색으로 설정)
         next_button_smell.setEnabled(false);
@@ -102,7 +101,6 @@ public class smellquest_message extends AppCompatActivity {
     // "좋아요!" 메시지와 이미지를 표시하는 메서드
     private void showResponseTextAndImage() {
         responseText_smell.setVisibility(View.VISIBLE); // 텍스트 보이기
-        talkBalloon_smell.setVisibility(View.VISIBLE); // 이미지 보이기
     }
 
     // 이미지 회전 메서드
