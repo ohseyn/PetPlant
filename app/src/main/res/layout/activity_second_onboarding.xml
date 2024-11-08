@@ -6,28 +6,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/onboarding_back"
-    android:padding="16dp"
-    android:weightSum="10">
+    android:padding="15dp">
 
-    <!-- 페이지 인디케이터 -->
-
-    <!-- 안내 텍스트 -->
-
-    <!-- 텍스트 입력 박스 -->
-
-    <!-- 다음 버튼 -->
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_back"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:id="@+id/page_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="55dp"
         android:layout_weight="1"
-        android:contentDescription="페이지 인디케이터"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -60,80 +56,59 @@
     </LinearLayout>
 
     <TextView
-        android:layout_width="384dp"
-        android:layout_height="81dp"
-        android:layout_marginTop="140dp"
-        android:text="앞으로 함께 할 반려 식물의\n이름을 지어주세요."
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="266dp"
-        android:layout_height="36dp"
-        android:layout_gravity="start"
-        android:layout_marginTop="436dp"
-        android:layout_weight="1"
-        android:text="반려식물 이름 설정"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.028"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="472dp"
+        android:text="앞으로 함께 할 반려 식물의\n이름을 지어주세요."
+        android:textSize="20sp"
+        android:fontFamily="@font/suit_bold"
+        app:layout_constraintTop_toBottomOf="@+id/page_indicator"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="반려식물 이름 설정"
+        android:textSize="18sp"
+        android:fontFamily="@font/suit_bold"
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        android:layout_marginTop="200dp"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="*초성, 띄어쓰기, 특수문자는 입력할 수 없어요."
         android:textColor="#999999"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="13sp"
+        app:layout_constraintTop_toBottomOf="@+id/text2"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
         android:id="@+id/name_input"
-        android:layout_width="494dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="508dp"
-        android:background="@drawable/edit_text_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textbox"
         android:hint="한글 1~5자로 입력해주세요."
-        android:padding="20dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="15dp"
+        android:paddingLeft="10dp"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/text3"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
         android:id="@+id/next_button"
-        android:layout_width="471dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="1024dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:backgroundTint="#02AE7A"
         android:text="다음"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="47dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="460dp"
-        android:background="@drawable/ic_back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

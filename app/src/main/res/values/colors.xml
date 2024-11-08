@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#3F90E3</color> <!-- 주요 색상 (예: 물 색상) -->
+    <color name="colorPrimaryDark">#3A82D0</color> <!-- 상태바 색상 -->
+
     <color name="water_color">#3F90E3</color>
     <color name="smell_color">#F7608F</color>
     <color name="remove_color">#46C140</color>

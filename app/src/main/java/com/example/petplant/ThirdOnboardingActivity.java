@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -47,6 +48,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
     private ImageView profileImage;
     private EditText nameInput;
     private Button editButton, start_home;
+    private ImageButton back;
     private Uri imageUri;
     private String profileImageUrl;  // URL을 저장할 변수
 
@@ -85,6 +87,9 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
                 saveProfileData(plantName);
             }
         });
+
+        ImageButton back = findViewById(R.id.back);
+        back.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SecondOnboardingActivity.class)));
     }
 
     // Firestore에 사용자 정보와 이미지 저장

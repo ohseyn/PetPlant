@@ -1,8 +1,10 @@
 <resources>
-    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
-        <!-- 상태바를 완전히 투명하게 설정 -->
-        <item name="android:windowTranslucentStatus">true</item>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimaryDark">#00000000</item>
     </style>
+
 
     <style name="CustomTabLayoutStyle" parent="Widget.Design.TabLayout">
         <item name="tabBackground">@drawable/tab_selector</item> <!-- 위에서 정의한 tab_selector.xml을 사용 -->

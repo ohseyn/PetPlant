@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="@+id/inbox"
         app:layout_constraintEnd_toEndOf="@+id/profile"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="17dp"
         android:text="홈"
         android:textColor="#02AE7A"/>
 
@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="17dp"
         android:text="프로필"
         android:textColor="#8B8B8B"/>
 
@@ -81,7 +81,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="21dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="17dp"
         android:text="활동기록"
         android:textColor="#8B8B8B"/>
 
@@ -95,13 +95,13 @@
         android:paddingLeft="30dp"
         android:paddingBottom="3dp"
         android:text="310"
-        android:textSize="18dp"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09"
+        app:layout_constraintVertical_bias="0.075"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -112,7 +112,7 @@
         android:text="왕큰방울이와"
         android:textAlignment="viewEnd"
         android:textColor="#000000"
-        android:textSize="23sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.943"
@@ -130,7 +130,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.38"
+        app:layout_constraintVertical_bias="0.45"
         app:srcCompat="@drawable/tomato_character_home"
         tools:ignore="ContentDescription,MissingConstraints,ImageContrastCheck" />
 
@@ -139,7 +139,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/character_bubble"
-        android:visibility="gone"
         android:textSize="16sp"
         android:paddingTop="20dp"
         android:layout_marginTop="16dp"
@@ -152,7 +151,8 @@
         app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.255"
+        app:layout_constraintVertical_bias="0.22"
+        android:visibility="gone"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -162,10 +162,10 @@
         android:fontFamily="@font/tmoneyroundwindregular"
         android:text="함께한 지"
         android:textColor="#000000"
-        android:textSize="23sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.64"
+        app:layout_constraintHorizontal_bias="0.69"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.15" />
@@ -177,13 +177,13 @@
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:text="0"
         android:textColor="#00B561"
-        android:textSize="41sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintHorizontal_bias="0.82"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.135"
+        app:layout_constraintVertical_bias="0.139"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -193,7 +193,7 @@
         android:fontFamily="@font/tmoneyroundwindregular"
         android:text="일 째"
         android:textColor="#000000"
-        android:textSize="23sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
@@ -244,7 +244,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.159"
+        app:layout_constraintVertical_bias="0.14"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.constraintlayout.widget.Guideline

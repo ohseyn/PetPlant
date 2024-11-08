@@ -144,10 +144,10 @@ public class HomeMainActivity extends AppCompatActivity {
     private void setupViewPager() {
         List<PageItem> pageItems = new ArrayList<>();
         String displayPlantName = (plantName != null) ? plantName : "식물";
-        pageItems.add(new PageItem("가꾸기 활동", displayPlantName + "에게 물 주기", "+15C", "하러 가기 >", R.drawable.blue, R.color.blue, R.color.blue));
-        pageItems.add(new PageItem("가꾸기 활동", displayPlantName + "의 곁순 제거해주기", "+15C", "하러 가기 >", R.drawable.blue, R.color.blue, R.color.blue));
-        pageItems.add(new PageItem("더 보살피기 활동", displayPlantName + "에게 인공수정 해주기", "+15C", "하러 가기 >", R.drawable.green, R.color.green, R.color.green));
-        pageItems.add(new PageItem("더 보살피기 활동", displayPlantName + "에게 비료 주기", "+15C", "하러 가기 >", R.drawable.green, R.color.green, R.color.green));
+        pageItems.add(new PageItem("가꾸기 활동", displayPlantName + "에게 물 주기", "+15C", "하러 가기 >", R.drawable.green, R.color.green, R.color.green));
+        pageItems.add(new PageItem("가꾸기 활동", displayPlantName + "의 곁순 제거해주기", "+15C", "하러 가기 >", R.drawable.green, R.color.green, R.color.green));
+        pageItems.add(new PageItem("더 보살피기 활동", displayPlantName + "에게 인공수정 해주기", "+15C", "하러 가기 >", R.drawable.blue, R.color.blue, R.color.blue));
+        pageItems.add(new PageItem("더 보살피기 활동", displayPlantName + "에게 비료 주기", "+15C", "하러 가기 >", R.drawable.blue, R.color.blue, R.color.blue));
         pageItems.add(new PageItem("친해지기 활동", displayPlantName + "의 향 맡아보기", "+15C", "하러 가기 >", R.drawable.pink, R.color.pink, R.color.pink));
         pageItems.add(new PageItem("친해지기 활동", displayPlantName + " 바라보기", "+15C", "하러 가기 >", R.drawable.pink, R.color.pink, R.color.pink));
         pageItems.add(new PageItem("친해지기 활동", displayPlantName + " 쓰다듬고 만지기", "+15C", "하러 가기 >", R.drawable.pink, R.color.pink, R.color.pink));

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ public class SecondOnboardingActivity extends AppCompatActivity {
 
     private LinearLayout pageIndicator;
     private Button nextButton;
+    private ImageButton back;
     private EditText nameInput;
 
     // Firestore 인스턴스 선언
@@ -39,9 +41,13 @@ public class SecondOnboardingActivity extends AppCompatActivity {
         pageIndicator = findViewById(R.id.page_indicator);
         nextButton = findViewById(R.id.next_button);
         nameInput = findViewById(R.id.name_input);
+        back = findViewById(R.id.back);
 
         // 페이지 인디케이터 업데이트
         updatePageIndicator(1);  // 두 번째 페이지로 설정
+
+        ImageButton back = findViewById(R.id.back);
+        back.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), OnboardingActivity.class)));
 
         // 버튼 클릭 리스너
         nextButton.setOnClickListener(new View.OnClickListener() {

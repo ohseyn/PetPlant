@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/removequestback"
-    tools:context=".waterquest_introduce">
+    tools:context=".waterquest_introduce"
+    android:padding="15dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,8 +92,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/do_quest_artificial"
-        android:layout_width="471dp"
-        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:background="@drawable/button_border3"
         android:backgroundTint="#46C140"
