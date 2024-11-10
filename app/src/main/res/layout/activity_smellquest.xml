@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/smell_back"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="15dp">
 
     <!-- Back arrow and header -->
     <LinearLayout
@@ -25,7 +25,7 @@
         android:gravity="center"
         android:text="오늘 저에게서 어떤 향이 났나요?"
         android:textColor="@android:color/black"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <!-- Dashed box for text input -->
@@ -71,14 +71,14 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nextButton3"
-        android:layout_width="390dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/button_border"
         android:backgroundTint="#F7608F"
         android:text="완료"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
-        android:textSize="17sp"
+        android:textSize="15sp"
         tools:ignore="TextContrastCheck" />
 </LinearLayout>

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="50dp">
 
         <TextView
             android:id="@+id/section_title"
@@ -21,15 +21,15 @@
             android:textStyle="bold" />
 
         <RelativeLayout
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:layout_centerInParent="true">
 
             <ImageView
                 android:id="@+id/tomato_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:scaleType="centerCrop" />
         </RelativeLayout>
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +22,7 @@ public class Guide extends AppCompatActivity {
 
         viewPager = findViewById(R.id.view_pager);
         pageIndicator = findViewById(R.id.page_indicator);
-        Button back_home = findViewById(R.id.back_home);
+        ImageButton back_home = findViewById(R.id.back_home);
         back_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

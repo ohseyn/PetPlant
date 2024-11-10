@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/smell_back"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="15dp">
 
     <!-- Back arrow and header -->
     <LinearLayout
@@ -16,53 +17,42 @@
 
     <!-- Question text -->
     <TextView
+        android:id="@+id/questtext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="오늘 저의 촉감은 어땠나요?"
+        android:text="오늘 저의 촉감이나 느낌은 어땠나요?"
         android:textColor="@android:color/black"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <!-- Dashed box for text input -->
-    <FrameLayout
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="50dp"
-        android:layout_width="266dp"
-        android:layout_height="266dp"
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/stamp5"
         android:gravity="center">
-
-        <!-- Character Design Text -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="Character Design"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="14sp" />
-    </FrameLayout>
+    </ImageView>
 
 
     <EditText
         android:id="@+id/inputEditText"
-        android:layout_width="509dp"
-        android:layout_height="266dp"
-        android:layout_marginTop="-50dp"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginTop="-30dp"
         android:layout_marginBottom="16dp"
         android:background="@android:color/white"
         android:gravity="top"
-        android:hint="ex. 잎사귀가 부드러웠어!"
+        android:hint="ex. 잎이 까실까실해."
         android:inputType="textMultiLine"
         android:maxLength="200"
         android:minHeight="120dp"
         android:padding="16dp"
         android:textColorHint="@android:color/darker_gray"
-        android:textSize="22sp" />
+        android:textSize="15sp" />
 
 
     <TextView
@@ -72,20 +62,23 @@
         android:gravity="end"
         android:text="0/200"
         android:textColor="@android:color/darker_gray"
-        android:textSize="22sp" />
+        android:textSize="15sp" />
 
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nextButton3"
-        android:layout_width="471dp"
-        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="250dp"
-        android:layout_marginBottom="24dp"
         android:background="@drawable/button_border"
         android:backgroundTint="#F7608F"
         android:text="완료"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
-        android:textSize="22sp"
+        android:textSize="15sp"
         tools:ignore="TextContrastCheck" />
 </LinearLayout>

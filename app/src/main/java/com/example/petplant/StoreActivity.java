@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,8 +50,8 @@ public class StoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_store);
 
         storeLayout = findViewById(R.id.storeLayout); // 레이아웃을 변수에 저장
-        Button back_profile = findViewById(R.id.back_profile);
-        Button dressButton = findViewById(R.id.dress);
+        ImageButton back_profile = findViewById(R.id.back_profile);
+        ImageButton dressButton = findViewById(R.id.dress);
 
         dressButton.setOnClickListener(new View.OnClickListener() {
             @Override

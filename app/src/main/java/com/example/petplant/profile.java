@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,7 +81,7 @@ public class profile extends AppCompatActivity {
 //        });
 
         // 프로필 수정 버튼 클릭 시 profile_edit으로 이동
-        Button user_edit = findViewById(R.id.user_edit);
+        ImageButton user_edit = findViewById(R.id.user_edit);
         user_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,7 +111,7 @@ public class profile extends AppCompatActivity {
 //        });
 
         // 인박스 버튼 클릭 시 인박스 화면으로 이동
-        Button user_inbox = findViewById(R.id.inbox);
+        ImageButton user_inbox = findViewById(R.id.inbox);
         user_inbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +121,7 @@ public class profile extends AppCompatActivity {
         });
 
         // 홈 버튼 클릭 시 홈 화면으로 이동
-        Button user_home = findViewById(R.id.user_home);
+        ImageButton user_home = findViewById(R.id.user_home);
         user_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

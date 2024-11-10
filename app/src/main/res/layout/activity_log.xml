@@ -10,15 +10,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/suit_bold"
         android:gravity="center"
         android:text="활동기록"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="13dp"/>
 
     <ImageButton
         android:id="@+id/bell2"
@@ -111,11 +111,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_activities"
         android:layout_width="match_parent"
-        android:layout_height="430dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textDate"
+        android:layout_height="560dp"
         android:layout_marginTop="30dp"
         android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textDate"
         tools:ignore="MissingConstraints" />
 
 
