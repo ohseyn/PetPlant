@@ -32,8 +32,7 @@ public class touching_message extends AppCompatActivity {
         touching_answer1 = findViewById(R.id.touching_answer1);
         touching_answer2 = findViewById(R.id.touching_answer2);
         next_button_touching = findViewById(R.id.next_button_touching);
-        responseText_touching = findViewById(R.id.responseText_touching); // TextView 연결
-        talkBalloon_touching = findViewById(R.id.talk_balloon_touching); // ImageView 연결
+        responseText_touching = findViewById(R.id.responseText); // TextView 연결
 
         // "대화마치기" 버튼 비활성화 (처음엔 연한 색으로 설정)
         next_button_touching.setEnabled(false);

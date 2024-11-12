@@ -33,8 +33,7 @@ public class artificialquest_message extends AppCompatActivity {
         artificial_answer1 = findViewById(R.id.artificial_answer1);
         artificial_answer2 = findViewById(R.id.artificial_answer2);
         nextButton_artificial = findViewById(R.id.next_button_artificial);
-        responseText_artificial = findViewById(R.id.responseText_artificial); // TextView 연결
-        talkBalloon_artificial = findViewById(R.id.talk_balloon_artificial); // ImageView 연결
+        responseText_artificial = findViewById(R.id.responseText); // TextView 연결// ImageView 연결
 
         // "대화마치기" 버튼 비활성화 (처음엔 연한 색으로 설정)
         nextButton_artificial.setEnabled(false);

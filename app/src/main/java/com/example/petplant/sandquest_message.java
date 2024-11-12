@@ -33,8 +33,7 @@ public class sandquest_message extends AppCompatActivity {
         sand_answer1 = findViewById(R.id.sand_answer1);
         sand_answer2 = findViewById(R.id.sand_answer2);
         nextButton_sand = findViewById(R.id.next_button_sand);
-        responseText_sand = findViewById(R.id.responseText_sand); // TextView 연결
-        talkBalloon_sand = findViewById(R.id.talk_balloon_sand); // ImageView 연결
+        responseText_sand = findViewById(R.id.responseText); // TextView 연결
 
         // "대화마치기" 버튼 비활성화 (처음엔 연한 색으로 설정)
         nextButton_sand.setEnabled(false);

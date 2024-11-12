@@ -32,8 +32,7 @@ public class removequest_message extends AppCompatActivity {
         remove_answer1 = findViewById(R.id.remove_answer1);
         remove_answer2 = findViewById(R.id.remove_answer2);
         next_button_remove = findViewById(R.id.next_button_remove);
-        responseText_remove = findViewById(R.id.responseText_remove); // TextView 연결
-        talkBalloon_remove = findViewById(R.id.talk_balloon_remove); // ImageView 연결
+        responseText_remove = findViewById(R.id.responseText); // TextView 연결
 
         // "대화마치기" 버튼 비활성화 (처음엔 연한 색으로 설정)
         next_button_remove.setEnabled(false);
@@ -102,7 +101,6 @@ public class removequest_message extends AppCompatActivity {
     // "좋아요!" 메시지와 이미지를 표시하는 메서드
     private void showResponseTextAndImage() {
         responseText_remove.setVisibility(View.VISIBLE); // 텍스트 보이기
-        talkBalloon_remove.setVisibility(View.VISIBLE); // 이미지 보이기
     }
 
     // 이미지 회전 메서드

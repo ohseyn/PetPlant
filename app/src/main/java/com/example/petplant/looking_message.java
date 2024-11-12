@@ -32,8 +32,7 @@ public class looking_message extends AppCompatActivity {
         looking_answer1 = findViewById(R.id.looking_answer1);
         looking_answer2 = findViewById(R.id.looking_answer2);
         next_button_looking = findViewById(R.id.next_button_looking);
-        responseText_looking = findViewById(R.id.responseText_looking); // TextView 연결
-        talkBalloon_looking = findViewById(R.id.talk_balloon_looking); // ImageView 연결
+        responseText_looking = findViewById(R.id.responseText); // TextView 연결
 
         // "대화마치기" 버튼 비활성화 (처음엔 연한 색으로 설정)
         next_button_looking.setEnabled(false);

@@ -32,8 +32,7 @@ public class talking_message extends AppCompatActivity {
         talking_answer1 = findViewById(R.id.talking_answer1);
         talking_answer2 = findViewById(R.id.talking_answer2);
         next_button_talking = findViewById(R.id.next_button_talking);
-        responseText_talking = findViewById(R.id.responseText_talking); // TextView 연결
-        talkBalloon_talking = findViewById(R.id.talk_balloon_talking); // ImageView 연결
+        responseText_talking = findViewById(R.id.responseText); // TextView 연결
 
         // "대화마치기" 버튼 비활성화 (처음엔 연한 색으로 설정)
         next_button_talking.setEnabled(false);
