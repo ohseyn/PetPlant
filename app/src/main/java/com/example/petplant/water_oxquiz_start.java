@@ -21,12 +21,12 @@ public class water_oxquiz_start extends AppCompatActivity {
     private TextView questionTextView;   // 질문 텍스트뷰
 
     // 정답 및 텍스트 설정
-    private static final String CORRECT_ANSWER = "노란색";
+    private static final String CORRECT_ANSWER = "흠뻑 줘야 한다";
     private static final String REWARD_TEXT = "보상받기";
 
     // 색상 값
-    private static final String SELECTED_COLOR = "#BCDAF2"; // 정답 버튼 배경색
-    private static final String BORDER_COLOR = "#3F90E3";   // 정답 버튼 테두리 색상
+    private static final String SELECTED_COLOR = "#F4FCF4"; // 정답 버튼 배경색
+    private static final String BORDER_COLOR = "#46C140";   // 정답 버튼 테두리 색상
     private static final String WRONG_BACKGROUND_COLOR = "#FEECEA"; // 오답 버튼 배경색
     private static final String WRONG_BORDER_COLOR = "#FF453C";      // 오답 버튼 테두리 색상
 
@@ -40,14 +40,13 @@ public class water_oxquiz_start extends AppCompatActivity {
         btnCheckAnswer = findViewById(R.id.btnCheckAnswer);
         btnCheckAnswer.setEnabled(false);  // 초기 비활성화
 
-        Button btnYellow = findViewById(R.id.btnYellow);
-        Button btnPink = findViewById(R.id.btnPink);
-        Button btnRed = findViewById(R.id.btnRed);
-        Button btnBlue = findViewById(R.id.btnBlue);
+        Button btn1 = findViewById(R.id.btn1);
+        Button btn2 = findViewById(R.id.btn2);
+
 
         // 정답 버튼 설정
-        if (btnYellow.getText().toString().equals(CORRECT_ANSWER)) {
-            correctButton = btnYellow;
+        if (btn1.getText().toString().equals(CORRECT_ANSWER)) {
+            correctButton = btn1;
         }
 
         // 버튼 클릭 리스너 설정
@@ -64,10 +63,8 @@ public class water_oxquiz_start extends AppCompatActivity {
         };
 
         // 각 버튼에 리스너 연결
-        btnYellow.setOnClickListener(optionClickListener);
-        btnPink.setOnClickListener(optionClickListener);
-        btnRed.setOnClickListener(optionClickListener);
-        btnBlue.setOnClickListener(optionClickListener);
+        btn1.setOnClickListener(optionClickListener);
+        btn2.setOnClickListener(optionClickListener);
 
         // 정답 확인 버튼 클릭 시 동작
         btnCheckAnswer.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +81,7 @@ public class water_oxquiz_start extends AppCompatActivity {
                     }
 
                     // 질문 텍스트 변경
-                    questionTextView.setText("방울토마토가 성장하며 피운 꽃은, \n \"노란색\" 입니다.");
+                    questionTextView.setText("방울토마토에게는 물을, \n \"흠뻑\" 주어야 해요.");
                     btnCheckAnswer.setText(REWARD_TEXT);  // 버튼 텍스트 변경
                     isFirstClick = false;
                 } else {
@@ -136,7 +133,7 @@ public class water_oxquiz_start extends AppCompatActivity {
 
     // 체크 아이콘 추가
     private void addCheckMark(Button button) {
-        Drawable checkMark = ContextCompat.getDrawable(this, R.drawable.ic_check);
+        Drawable checkMark = ContextCompat.getDrawable(this, R.drawable.ic_check_green);
         InsetDrawable insetDrawable = new InsetDrawable(checkMark, 30, 0, 0, 0);
         button.setCompoundDrawablesWithIntrinsicBounds(insetDrawable, null, null, null);
     }

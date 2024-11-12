@@ -4,17 +4,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="15dp"
     android:gravity="center"
-    android:background="@drawable/waterback">
+    android:background="@drawable/login_back">
 
 
     <!-- 문제 영역 -->
 
     <!-- 선택 버튼들 -->
     <LinearLayout
-        android:layout_width="500dp"
-        android:layout_height="506dp"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         android:background="@drawable/shop_rounded_dialog"
         android:gravity="center"
         android:orientation="vertical">
@@ -24,9 +24,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="질문"
-            android:textSize="18sp"
+            android:background="@drawable/quizbubble_green"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:textColor="#3F90E3"/>
+            android:textColor="#46C140"/>
 
         <TextView
             android:id="@+id/questionTextView"
@@ -34,78 +37,52 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:text="방울토마토가 성장하며 피운 꽃은,\n무슨 색 일까요?"
-            android:textSize="30sp" />
+            android:text="방울토마토에게는 물을,\n얼마만큼 줘야 할까요?"
+            android:textSize="20sp" />
 
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="#E0E0E0"
-            android:contentDescription="문제 image" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/quiz_water" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnYellow"
-        android:layout_width="505dp"
-        android:layout_height="65dp"
+        android:id="@+id/btn1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/button_quiz"
         android:gravity="center"
-        android:text="노란색"
+        android:text="흠뻑 줘야 한다"
         android:textColor="#000000"
         android:textSize="16sp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnPink"
-        android:layout_width="505dp"
-        android:layout_height="65dp"
+        android:id="@+id/btn2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/button_quiz"
         android:gravity="center"
-        android:text="분홍색"
+        android:text="조금만 줘야 한다"
         android:textColor="#000000"
         android:textSize="16sp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnRed"
-        android:layout_width="505dp"
-        android:layout_height="65dp"
-        android:text="빨간색"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/button_quiz"
-        android:textColor="#000000"
-        android:padding="12dp"
-        android:gravity="center"
-        android:textSize="16sp"/>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnBlue"
-        android:layout_width="505dp"
-        android:layout_height="65dp"
-        android:text="파란색"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/button_quiz"
-        android:textColor="#000000"
-        android:padding="12dp"
-        android:gravity="center"
-        android:textSize="16sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <!-- 정답 확인하기 버튼 -->
     <Button
         android:id="@+id/btnCheckAnswer"
-        android:layout_width="505dp"
-        android:layout_height="65dp"
-        android:backgroundTint="@drawable/button_background"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@drawable/button_background3"
         android:text="정답 확인하기"
         android:textColor="#FFFFFF"
         android:enabled="false"
-        android:onClick="onButtonClick"
-        android:layout_marginTop="150dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:onClick="onButtonClick" />
 </LinearLayout>

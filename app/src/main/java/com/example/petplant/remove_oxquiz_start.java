@@ -25,8 +25,8 @@ public class remove_oxquiz_start extends AppCompatActivity {
     private static final String REWARD_TEXT = "보상받기";
 
     // 색상 값
-    private static final String SELECTED_COLOR = "#BCDAF2"; // 정답 버튼 배경색
-    private static final String BORDER_COLOR = "#3F90E3";   // 정답 버튼 테두리 색상
+    private static final String SELECTED_COLOR = "#F4FCF4"; // 정답 버튼 배경색
+    private static final String BORDER_COLOR = "#46C140";   // 정답 버튼 테두리 색상
     private static final String WRONG_BACKGROUND_COLOR = "#FEECEA"; // 오답 버튼 배경색
     private static final String WRONG_BORDER_COLOR = "#FF453C";      // 오답 버튼 테두리 색상
 
