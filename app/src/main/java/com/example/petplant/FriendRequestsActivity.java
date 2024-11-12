@@ -1,7 +1,10 @@
 package com.example.petplant;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,6 +65,15 @@ public class FriendRequestsActivity extends AppCompatActivity {
             @Override
             public void onDecline(String requestUserId) {
                 declineFriendRequest(requestUserId);
+            }
+        });
+
+        ImageButton back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +32,7 @@ public class FriendAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_add);
 
-        Button back_profile = findViewById(R.id.back_profile);
+        ImageButton back_profile = findViewById(R.id.back_profile);
         back_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

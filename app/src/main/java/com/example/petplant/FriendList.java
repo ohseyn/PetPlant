@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +41,7 @@ public class FriendList extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        Button back_profile = findViewById(R.id.back_profile);
+        ImageButton back_profile = findViewById(R.id.back_profile);
         back_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +50,7 @@ public class FriendList extends AppCompatActivity {
             }
         });
 
-        Button friendPlus = findViewById(R.id.friend_plus);
+        ImageButton friendPlus = findViewById(R.id.friend_plus);
         friendPlus.setOnClickListener(view -> {
             Intent intent = new Intent(FriendList.this, FriendAddActivity.class);
             startActivity(intent);
