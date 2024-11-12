@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -19,7 +20,7 @@ public class artificial_oxquiz_start extends AppCompatActivity {
     private Button selectedButton = null;
     private Button correctButton = null; // 정답 버튼 추적
     private TextView questionTextView;   // 질문 텍스트뷰
-
+    private ImageView questionImageView;
     // 정답 및 텍스트 설정
     private static final String CORRECT_ANSWER = "노란색";
     private static final String REWARD_TEXT = "보상받기";
@@ -34,6 +35,8 @@ public class artificial_oxquiz_start extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artificial_oxquiz_start);
+
+        questionImageView = findViewById(R.id.imageView);
 
         // TextView와 버튼 초기화
         questionTextView = findViewById(R.id.questionTextView);
@@ -85,6 +88,7 @@ public class artificial_oxquiz_start extends AppCompatActivity {
 
                     // 질문 텍스트 변경
                     questionTextView.setText("방울토마토가 성장하며 피운 꽃은, \n \"노란색\" 입니다.");
+                    questionImageView.setImageResource(R.drawable.quizimage_flowercolor);
                     btnCheckAnswer.setText(REWARD_TEXT);  // 버튼 텍스트 변경
                     isFirstClick = false;
                 } else {
