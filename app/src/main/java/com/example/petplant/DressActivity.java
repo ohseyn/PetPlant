@@ -1,6 +1,9 @@
 package com.example.petplant;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -27,6 +31,7 @@ import java.util.Map;
 public class DressActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
+    private FirebaseUser user;
     private ConstraintLayout dressLayout;
     private ImageView characterImage;
     private RecyclerView recyclerView;
@@ -43,12 +48,16 @@ public class DressActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
+        registerReceiver(characterImageReceiver, new IntentFilter("UPDATE_CHARACTER_IMAGE"));
 
         dressLayout = findViewById(R.id.dressLayout);
         characterImage = findViewById(R.id.characterImage);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 
+        loadCharacterImage();
         loadPurchasedItems();
 
         adapter = new StoreItemAdapter(this, new ArrayList<>(), item -> {
@@ -57,6 +66,8 @@ public class DressActivity extends AppCompatActivity {
                 dressLayout.setBackgroundResource(item.getImageResource());
             } else {
                 selectedItem = item;
+                // onCreate 내에서 인텐트로 전달된 캐릭터 이미지 적용
+                int characterImageResource = getIntent().getIntExtra("characterImage", R.drawable.tomato_character_home);
                 characterImage.setImageResource(item.getImageResource());
             }
             findViewById(R.id.applyButton).setVisibility(View.VISIBLE);
@@ -86,6 +97,46 @@ public class DressActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });
+    }
+
+    private void loadCharacterImage() {
+        db.collection("users").document(user.getUid())
+                .addSnapshotListener((snapshot, e) -> {
+                    if (snapshot != null && snapshot.exists()) {
+                        String characterImageResourceString = snapshot.getString("characterBaseImage");
+//                        Long characterImageResource = snapshot.getLong("characterBaseImage");
+//                        if (characterImageResource != null) {
+//                            characterImage.setImageResource(characterImageResource.intValue());
+//                        }
+                        if (characterImageResourceString != null) {
+                            try {
+                                int characterImageResource = Integer.parseInt(characterImageResourceString);
+                                characterImage.setImageResource(characterImageResource);
+                                Log.d("DressActivity", "Character Image Loaded and Applied");
+                            } catch (NumberFormatException ex) {
+                                Log.e("DressActivity", "Error parsing character image resource ID", ex);
+                            }
+                        }
+                    } else {
+                        Log.e("DressActivity", "Character image load failed or user data not found.");
+                    }
+                });
+    }
+
+    // 성장 단계 이미지 업데이트 수신을 위한 BroadcastReceiver
+    private final BroadcastReceiver characterImageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int imageResource = intent.getIntExtra("characterImage", R.drawable.tomato_character_home);
+            characterImage.setImageResource(imageResource);
+            Log.d("DressActivity", "Character Image Updated via Broadcast");
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(characterImageReceiver); // BroadcastReceiver 해제
     }
 
     private void loadPurchasedItems() {

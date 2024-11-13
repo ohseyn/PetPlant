@@ -10,8 +10,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/storebar"
-        android:layout_width="541dp"
-        android:layout_height="89dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/storebar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,51 +21,60 @@
 
     <TextView
         android:id="@+id/dress_speech1"
-        android:layout_width="218dp"
-        android:layout_height="93dp"
-        android:background="@drawable/dress_speech1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/character_bubble"
+        android:gravity="center"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="어때? 잘 어울려?"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.221"
+        app:layout_constraintTop_toBottomOf="@+id/storebar"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/dress_speech2"
-        android:layout_width="185dp"
-        android:layout_height="88dp"
-        android:background="@drawable/dress_speech2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/character_bubble"
+        android:gravity="center"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="마음에 들어!"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintHorizontal_bias="0.837"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.282"
+        app:layout_constraintTop_toBottomOf="@+id/dress_speech1"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/characterImage"
-        android:layout_width="196dp"
-        android:layout_height="275dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="238dp"
+        android:layout_height="213dp"
+        android:layout_marginTop="224dp"
         android:src="@drawable/tomato_character_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dress_speech2"
+        app:layout_constraintTop_toBottomOf="@+id/storebar"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="160dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/characterImage"
-        app:tabGravity="fill"
         app:tabBackground="@drawable/tab_selector2"
+        app:tabGravity="fill"
         app:tabIndicatorColor="@android:color/transparent"
         app:tabMaxWidth="0dp"
         app:tabMode="fixed"
@@ -95,7 +104,7 @@
         android:includeFontPadding="false"
         android:text="꾸미기"
         android:textColor="#000000"
-        android:textSize="24dp"
+        android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -114,25 +123,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/characterImage" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/back_store"
-        android:layout_width="32dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
+    <ImageButton
+        android:id="@+id/back_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/ic_back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="540dp"
+        android:layout_width="match_parent"
         android:layout_height="310dp"
-        android:clipToPadding="false"
         android:background="@drawable/rectangle67"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
         tools:listitem="@layout/item_shop" />

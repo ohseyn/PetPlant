@@ -1,7 +1,10 @@
 package com.example.petplant;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,6 +36,7 @@ public class StoreActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private FirebaseAuth auth;
+    private FirebaseUser user;
     private Long coin;
     private RecyclerView recyclerView;
     private StoreItemAdapter adapter;
@@ -48,6 +53,11 @@ public class StoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
+
+        // Firestore와 Auth 초기화
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
         storeLayout = findViewById(R.id.storeLayout); // 레이아웃을 변수에 저장
         ImageButton back_profile = findViewById(R.id.back_profile);
@@ -91,9 +101,7 @@ public class StoreActivity extends AppCompatActivity {
             }
         });
 
-        // Firestore와 Auth 초기화
-        db = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
+        registerReceiver(characterImageReceiver, new IntentFilter("UPDATE_CHARACTER_IMAGE"));
 
         // View 초기화
         recyclerView = findViewById(R.id.recyclerView);
@@ -104,6 +112,8 @@ public class StoreActivity extends AppCompatActivity {
         buyButton = findViewById(R.id.buyButton);
         buyButton.setVisibility(View.GONE);
         shopCoinTextView = findViewById(R.id.coin);
+
+        loadCharacterImage();
 
         // Intent로 전달된 코인 값 받아오기
         coin = getIntent().getLongExtra("coin", 0L);
@@ -141,6 +151,8 @@ public class StoreActivity extends AppCompatActivity {
                         selectedItem = null; // 캐릭터 아이템 초기화
                     } else {
                         selectedItem = item;
+                        // onCreate 내에서 인텐트로 전달된 캐릭터 이미지 적용
+                        int characterImageResource = getIntent().getIntExtra("characterImage", R.drawable.tomato_character_home);
                         characterImage.setImageResource(item.getImageResource());
                         selectedBackground = null; // 배경 초기화
                     }
@@ -233,6 +245,46 @@ public class StoreActivity extends AppCompatActivity {
                 Toast.makeText(StoreActivity.this, "아이템을 선택해주세요.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void loadCharacterImage() {
+        db.collection("users").document(user.getUid())
+                .addSnapshotListener((snapshot, e) -> {
+                    if (snapshot != null && snapshot.exists()) {
+                        String characterImageResourceString = snapshot.getString("characterBaseImage");
+//                        Long characterImageResource = snapshot.getLong("characterBaseImage");
+//                        if (characterImageResource != null) {
+//                            characterImage.setImageResource(characterImageResource.intValue());
+//                        }
+                        if (characterImageResourceString != null) {
+                            try {
+                                int characterImageResource = Integer.parseInt(characterImageResourceString);
+                                characterImage.setImageResource(characterImageResource);
+                                Log.d("StoreActivity", "Character Image Loaded and Applied");
+                            } catch (NumberFormatException ex) {
+                                Log.e("StoreActivity", "Error parsing character image resource ID", ex);
+                            }
+                        }
+                    } else {
+                        Log.e("StoreActivity", "Character image load failed or user data not found.");
+                    }
+                });
+    }
+
+    // 성장 단계 이미지 업데이트 수신을 위한 BroadcastReceiver
+    private final BroadcastReceiver characterImageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int imageResource = intent.getIntExtra("characterImage", R.drawable.tomato_character_home);
+            characterImage.setImageResource(imageResource);
+            Log.d("StoreActivity", "Character Image Updated via Broadcast");
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(characterImageReceiver); // BroadcastReceiver 해제
     }
 
     private void loadPurchasedItems() {

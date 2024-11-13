@@ -365,7 +365,8 @@ public class HomeMainActivity extends AppCompatActivity {
         long lastShownDate = preferences.getLong("lastShownDate", -1);
         boolean notYetPressed = preferences.getBoolean("notYetPressed", false);
 
-        if (notYetPressed || daysSinceSignUp == 10 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
+        // 10
+        if (notYetPressed || daysSinceSignUp == 1 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
             if (lastShownDate != daysSinceSignUp || notYetPressed) { // 같은 날 다이얼로그가 이미 표시되지 않았는지 확인
                 showProgressDialog(daysSinceSignUp);
                 SharedPreferences.Editor editor = preferences.edit();
@@ -387,7 +388,8 @@ public class HomeMainActivity extends AppCompatActivity {
         //String message = "";
 
         switch ((int) daysSinceSignUp) {
-            case 10:
+            // 10
+            case 1:
                 questionTitle.setText("왕큰방울이의 꽃이 폈나요?");
                 break;
             case 27:
@@ -426,44 +428,85 @@ public class HomeMainActivity extends AppCompatActivity {
 
         positiveConfirmButton.setOnClickListener(v -> {
             updateCharacterImage();  // 캐릭터 이미지 업데이트 및 Firestore 저장
-            loadSelectedDesign();
             dialog.dismiss();
         });
     }
 
     private void updateCharacterImage() {
-        String userId = user.getUid();
-        int baseCharacterImage;
-
-        // 성장 단계에 따라 캐릭터 이미지 선택
-        switch ((int) daysSinceSignUp) {
-            case 10:
-                baseCharacterImage = R.drawable.tomato_character_flower; // 꽃 상태 이미지
-                break;
-            case 27:
-                baseCharacterImage = R.drawable.tomato_character_home; // 열매(초기)
-                break;
-            case 37:
-                baseCharacterImage = R.drawable.tomato_character_home; // 열매(중기)
-                break;
-            case 47:
-                baseCharacterImage = R.drawable.tomato_character_home; // 열매(말기)
-                break;
-            default:
-                baseCharacterImage = R.drawable.tomato_character_home; // 모종 상태
-                return;
+        if (user == null) {
+            Log.e("HomeMainActivity", "User is not logged in");
+            return;
         }
 
-        //character.setImageResource(baseCharacterImage);
+        String userId = user.getUid();
+        //int baseCharacterImage;
+        int nextStageImage = getNextStageImage(daysSinceSignUp);
 
-        // Firestore에 변경된 캐릭터 이미지 저장
         db.collection("users").document(userId)
-                .update("characterBaseImage", baseCharacterImage, "characterState", (int) daysSinceSignUp)
+                .update("characterBaseImage", String.valueOf(nextStageImage))
                 .addOnSuccessListener(aVoid -> {
                     Log.d("HomeMainActivity", "Character Image Update Succeeded");
-                    loadSelectedDesign();
+                    applyCharacterImage(nextStageImage);  // Apply new character image locally
                 })
                 .addOnFailureListener(e -> Log.e("HomeMainActivity", "Character Image Update Failed", e));
+
+//        // 성장 단계에 따라 캐릭터 이미지 선택
+//        switch ((int) daysSinceSignUp) {
+//            // 10
+//            case 1:
+//                baseCharacterImage = R.drawable.tomato_character_flower; // 꽃 상태 이미지
+//                break;
+//            case 27:
+//                baseCharacterImage = R.drawable.tomato_character_home; // 열매(초기)
+//                break;
+//            case 37:
+//                baseCharacterImage = R.drawable.tomato_character_home; // 열매(중기)
+//                break;
+//            case 47:
+//                baseCharacterImage = R.drawable.tomato_character_home; // 열매(말기)
+//                break;
+//            default:
+//                baseCharacterImage = R.drawable.tomato_character_home; // 모종 상태
+//                return;
+//        }
+
+//        // Firestore에 변경된 캐릭터 이미지 저장
+//        db.collection("users").document(userId)
+//                .update("characterBaseImage", baseCharacterImage, "characterState", (int) daysSinceSignUp)
+//                .addOnSuccessListener(aVoid -> {
+//                    Log.d("HomeMainActivity", "Character Image Update Succeeded");
+//                    loadSelectedDesign();
+//                    applyCharacterImage(baseCharacterImage); // 성장 단계에 따른 이미지 적용
+//                })
+//                .addOnFailureListener(e -> Log.e("HomeMainActivity", "Character Image Update Failed", e));
+    }
+
+    private int getNextStageImage(long daysSinceSignUp) {
+        // Choose image based on growth stage
+        switch ((int) daysSinceSignUp) {
+            case 1: return R.drawable.tomato_character_flower;
+            case 27: return R.drawable.tomato_character_home;
+            case 37: return R.drawable.tomato_character_home;
+            case 47: return R.drawable.tomato_character_home;
+            default: return R.drawable.tomato_character_home;
+        }
+    }
+
+    private void applyCharacterImage(int imageResource) {
+        character.setImageResource(imageResource); // 홈 화면의 캐릭터 이미지 변경
+
+        Intent intent = new Intent("UPDATE_CHARACTER_IMAGE");
+        intent.putExtra("characterImage", imageResource);
+        sendBroadcast(intent);
+
+//        // 상점 및 꾸미기 화면에도 적용
+//        Intent updateIntent = new Intent(this, StoreActivity.class);
+//        updateIntent.putExtra("characterImage", imageResource);
+//        startActivity(updateIntent);
+//
+//        Intent dressIntent = new Intent(this, DressActivity.class);
+//        dressIntent.putExtra("characterImage", imageResource);
+//        startActivity(dressIntent);
     }
 
     private void showNegativeDialog() {
@@ -557,7 +600,8 @@ public class HomeMainActivity extends AppCompatActivity {
                     if (snapshot != null && snapshot.exists()) {
                         Long selectedBackground = snapshot.getLong("selectedBackgroundImage");
                         Long selectedItemImage = snapshot.getLong("selectedItemImage");
-                        Long characterBaseImage = snapshot.getLong("characterBaseImage");
+                        //Long characterBaseImage = snapshot.getLong("characterBaseImage");
+                        String characterBaseImageString = snapshot.getString("characterBaseImage");
 
                         // 배경 적용
                         if (selectedBackground != null) {
@@ -569,10 +613,19 @@ public class HomeMainActivity extends AppCompatActivity {
                         if (selectedItemImage != null) {
                             character.setImageResource(selectedItemImage.intValue());
                             Log.d("HomeMainActivity", "Item Apply");
-                        } else if (characterBaseImage != null) {
-                            character.setImageResource(characterBaseImage.intValue());
-                            Log.d("HomeMainActivity", "Default character Apply");
+                        } else if (characterBaseImageString != null) {
+                            try {
+                                int characterBaseImage = Integer.parseInt(characterBaseImageString);
+                                character.setImageResource(characterBaseImage);
+                                Log.d("HomeMainActivity", "Default character Apply");
+                            } catch (NumberFormatException ex) {
+                                Log.e("HomeMainActivity", "Error parsing characterBaseImage", ex);
+                            }
                         }
+//                        else if (characterBaseImage != null) {
+//                            character.setImageResource(characterBaseImage.intValue());
+//                            Log.d("HomeMainActivity", "Default character Apply");
+//                        }
                     } else {
                         Log.e("HomeMainActivity", "Firestore Data load fail: snapshot : null or non exist.");
                     }
