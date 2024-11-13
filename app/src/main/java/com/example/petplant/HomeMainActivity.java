@@ -443,7 +443,7 @@ public class HomeMainActivity extends AppCompatActivity {
         int nextStageImage = getNextStageImage(daysSinceSignUp);
 
         db.collection("users").document(userId)
-                .update("characterBaseImage", String.valueOf(nextStageImage))
+                .update("characterBaseImage", nextStageImage)
                 .addOnSuccessListener(aVoid -> {
                     Log.d("HomeMainActivity", "Character Image Update Succeeded");
                     applyCharacterImage(nextStageImage);  // Apply new character image locally
@@ -485,9 +485,9 @@ public class HomeMainActivity extends AppCompatActivity {
         // Choose image based on growth stage
         switch ((int) daysSinceSignUp) {
             case 1: return R.drawable.tomato_character_flower;
-            case 27: return R.drawable.tomato_character_home;
-            case 37: return R.drawable.tomato_character_home;
-            case 47: return R.drawable.tomato_character_home;
+            case 27: return R.drawable.tomato_character_fruit_first;
+            case 37: return R.drawable.tomato_character_fruit_mid;
+            case 47: return R.drawable.tomato_character_fruit_final;
             default: return R.drawable.tomato_character_home;
         }
     }
@@ -600,8 +600,7 @@ public class HomeMainActivity extends AppCompatActivity {
                     if (snapshot != null && snapshot.exists()) {
                         Long selectedBackground = snapshot.getLong("selectedBackgroundImage");
                         Long selectedItemImage = snapshot.getLong("selectedItemImage");
-                        //Long characterBaseImage = snapshot.getLong("characterBaseImage");
-                        String characterBaseImageString = snapshot.getString("characterBaseImage");
+                        Long characterBaseImage = snapshot.getLong("characterBaseImage");
 
                         // 배경 적용
                         if (selectedBackground != null) {
@@ -613,19 +612,10 @@ public class HomeMainActivity extends AppCompatActivity {
                         if (selectedItemImage != null) {
                             character.setImageResource(selectedItemImage.intValue());
                             Log.d("HomeMainActivity", "Item Apply");
-                        } else if (characterBaseImageString != null) {
-                            try {
-                                int characterBaseImage = Integer.parseInt(characterBaseImageString);
-                                character.setImageResource(characterBaseImage);
-                                Log.d("HomeMainActivity", "Default character Apply");
-                            } catch (NumberFormatException ex) {
-                                Log.e("HomeMainActivity", "Error parsing characterBaseImage", ex);
-                            }
+                        } else if (characterBaseImage != null) {
+                            character.setImageResource(characterBaseImage.intValue());
+                            Log.d("HomeMainActivity", "Default character Apply");
                         }
-//                        else if (characterBaseImage != null) {
-//                            character.setImageResource(characterBaseImage.intValue());
-//                            Log.d("HomeMainActivity", "Default character Apply");
-//                        }
                     } else {
                         Log.e("HomeMainActivity", "Firestore Data load fail: snapshot : null or non exist.");
                     }

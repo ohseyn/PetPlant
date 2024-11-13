@@ -251,19 +251,10 @@ public class StoreActivity extends AppCompatActivity {
         db.collection("users").document(user.getUid())
                 .addSnapshotListener((snapshot, e) -> {
                     if (snapshot != null && snapshot.exists()) {
-                        String characterImageResourceString = snapshot.getString("characterBaseImage");
-//                        Long characterImageResource = snapshot.getLong("characterBaseImage");
-//                        if (characterImageResource != null) {
-//                            characterImage.setImageResource(characterImageResource.intValue());
-//                        }
-                        if (characterImageResourceString != null) {
-                            try {
-                                int characterImageResource = Integer.parseInt(characterImageResourceString);
-                                characterImage.setImageResource(characterImageResource);
-                                Log.d("StoreActivity", "Character Image Loaded and Applied");
-                            } catch (NumberFormatException ex) {
-                                Log.e("StoreActivity", "Error parsing character image resource ID", ex);
-                            }
+                        Long characterImageResource = snapshot.getLong("characterBaseImage");
+                        if (characterImageResource != null) {
+                            characterImage.setImageResource(characterImageResource.intValue());
+                            Log.d("StoreActivity", "Character Image Loaded and Applied");
                         }
                     } else {
                         Log.e("StoreActivity", "Character image load failed or user data not found.");

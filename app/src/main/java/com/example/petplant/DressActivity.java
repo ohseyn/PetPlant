@@ -103,19 +103,10 @@ public class DressActivity extends AppCompatActivity {
         db.collection("users").document(user.getUid())
                 .addSnapshotListener((snapshot, e) -> {
                     if (snapshot != null && snapshot.exists()) {
-                        String characterImageResourceString = snapshot.getString("characterBaseImage");
-//                        Long characterImageResource = snapshot.getLong("characterBaseImage");
-//                        if (characterImageResource != null) {
-//                            characterImage.setImageResource(characterImageResource.intValue());
-//                        }
-                        if (characterImageResourceString != null) {
-                            try {
-                                int characterImageResource = Integer.parseInt(characterImageResourceString);
-                                characterImage.setImageResource(characterImageResource);
-                                Log.d("DressActivity", "Character Image Loaded and Applied");
-                            } catch (NumberFormatException ex) {
-                                Log.e("DressActivity", "Error parsing character image resource ID", ex);
-                            }
+                        Long characterImageResource = snapshot.getLong("characterBaseImage");
+                        if (characterImageResource != null) {
+                            characterImage.setImageResource(characterImageResource.intValue());
+                            Log.d("DressActivity", "Character Image Loaded and Applied");
                         }
                     } else {
                         Log.e("DressActivity", "Character image load failed or user data not found.");
