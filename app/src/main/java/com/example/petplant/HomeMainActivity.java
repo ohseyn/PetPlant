@@ -271,7 +271,7 @@ public class HomeMainActivity extends AppCompatActivity {
                     intent.putExtra("coin", coin != null ? coin : 0L);
                     startActivity(intent);
                 })
-                .addOnFailureListener(e -> Log.e("HomeMainActivity", "Firestore 에러: ", e));
+                .addOnFailureListener(e -> Log.e("HomeMainActivity", "Firestore Error: ", e));
     }
 
     private final String[] randomTexts = {
@@ -365,7 +365,7 @@ public class HomeMainActivity extends AppCompatActivity {
         long lastShownDate = preferences.getLong("lastShownDate", -1);
         boolean notYetPressed = preferences.getBoolean("notYetPressed", false);
 
-        if (notYetPressed || daysSinceSignUp == 3 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
+        if (notYetPressed || daysSinceSignUp == 10 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
             if (lastShownDate != daysSinceSignUp || notYetPressed) { // 같은 날 다이얼로그가 이미 표시되지 않았는지 확인
                 showProgressDialog(daysSinceSignUp);
                 SharedPreferences.Editor editor = preferences.edit();
@@ -387,7 +387,7 @@ public class HomeMainActivity extends AppCompatActivity {
         //String message = "";
 
         switch ((int) daysSinceSignUp) {
-            case 3:
+            case 10:
                 questionTitle.setText("왕큰방울이의 꽃이 폈나요?");
                 break;
             case 27:
@@ -435,9 +435,9 @@ public class HomeMainActivity extends AppCompatActivity {
         String userId = user.getUid();
         int baseCharacterImage;
 
-        // 경과 일수에 따라 캐릭터 이미지 변경
+        // 성장 단계에 따라 캐릭터 이미지 선택
         switch ((int) daysSinceSignUp) {
-            case 3:
+            case 10:
                 baseCharacterImage = R.drawable.tomato_character_flower; // 꽃 상태 이미지
                 break;
             case 27:
@@ -460,27 +460,10 @@ public class HomeMainActivity extends AppCompatActivity {
         db.collection("users").document(userId)
                 .update("characterBaseImage", baseCharacterImage, "characterState", (int) daysSinceSignUp)
                 .addOnSuccessListener(aVoid -> {
-                    Log.d("HomeMainActivity", "캐릭터 기본 이미지와 상태가 Firestore에 업데이트되었습니다.");
-                    // Firestore에서 데이터를 다시 로드하여 즉시 반영되도록 함
+                    Log.d("HomeMainActivity", "Character Image Update Succeeded");
                     loadSelectedDesign();
                 })
-                .addOnFailureListener(e -> Log.e("HomeMainActivity", "캐릭터 이미지 업데이트 실패", e));
-
-        // 적용된 아이템이 있다면 Firestore에서 불러와 함께 적용
-        db.collection("users").document(userId)
-                .get()
-                .addOnSuccessListener(snapshot -> {
-                    if (snapshot != null && snapshot.exists()) {
-                        Long itemResource = snapshot.getLong("selectedItemImage");
-                        if (itemResource != null) {
-                            // 아이템이 적용된 캐릭터 이미지로 설정
-                            character.setImageResource(itemResource.intValue());
-                        } else {
-                            // 기본 상태 이미지로 설정
-                            character.setImageResource(baseCharacterImage);
-                        }
-                    }
-                });
+                .addOnFailureListener(e -> Log.e("HomeMainActivity", "Character Image Update Failed", e));
     }
 
     private void showNegativeDialog() {
@@ -513,7 +496,7 @@ public class HomeMainActivity extends AppCompatActivity {
                 .setMessage("다음 날 다시 확인해보세요.")
                 .setPositiveButton("확인", (dialog, which) -> {
                     // 다음날 다이얼로그가 다시 뜨도록 설정
-                    Log.d("HomeMainActivity", "사용자가 확인을 누르고 다이얼로그 종료");
+                    Log.d("HomeMainActivity", "Dialog End");
                 })
                 .show();
     }
@@ -537,8 +520,8 @@ public class HomeMainActivity extends AppCompatActivity {
                     // 가입일이 없으면 현재 시간을 저장
                     long currentTime = System.currentTimeMillis();
                     docRef.update("signUpDate", currentTime)
-                            .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "가입일이 저장되었습니다."))
-                            .addOnFailureListener(e -> Log.e("HomeMainActivity", "가입일 저장 실패", e));
+                            .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "SignUpDate Saved"))
+                            .addOnFailureListener(e -> Log.e("HomeMainActivity", "SignUpDate Save Failed", e));
                     signUpDate = currentTime;
                 } else {
                     // 이미 저장된 가입일을 SharedPreferences에 저장
@@ -563,7 +546,7 @@ public class HomeMainActivity extends AppCompatActivity {
                 }
             }
         }).addOnFailureListener(e ->
-                Log.e("HomeMainActivity", "Firestore 에러: ", e));
+                Log.e("HomeMainActivity", "Firestore Error: ", e));
     }
 
     private void loadSelectedDesign() {
