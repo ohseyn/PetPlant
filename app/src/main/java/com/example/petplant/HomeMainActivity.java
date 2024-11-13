@@ -550,7 +550,7 @@ public class HomeMainActivity extends AppCompatActivity {
             if (documentSnapshot.exists()) {
                 name = documentSnapshot.getString("name");
                 plantName = documentSnapshot.getString("plantName");
-                character_name.setText(plantName + "와");
+                character_name.setText(plantName);
 
                 coin = documentSnapshot.getLong("coin");
                 shop_coin.setText(String.valueOf(coin));

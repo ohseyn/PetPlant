@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.35"
-        app:srcCompat="@drawable/tomato_character_home"
+        app:srcCompat="@drawable/quiz_inccorect_character"
         tools:ignore="MissingConstraints" />
 
     <FrameLayout
@@ -65,7 +65,7 @@
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingRight="20dp"
-            android:background="@drawable/rectangle94"
+            android:background="@drawable/group592"
             android:fontFamily="@font/tmoneyroundwindregular"
             android:gravity="center"
             android:text="질문을 열심히 풀었어요.\n\n보상으로                    을 줄게요!"

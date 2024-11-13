@@ -65,7 +65,7 @@
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingRight="20dp"
-            android:background="@drawable/rectangle94"
+            android:background="@drawable/group592"
             android:fontFamily="@font/tmoneyroundwindregular"
             android:gravity="center"
             android:text="질문의 정답을 멋지게 골랐어요.\n\n보상으로                    을 줄게요!"
