@@ -32,6 +32,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -62,6 +63,21 @@ public class HomeMainActivity extends AppCompatActivity {
     private Long coin;
     private String profileUIri;
     private List<PageItem> pageItems;
+
+    // 긍정과 부정 다이얼로그에 사용할 이미지 배열
+    private int[] positiveImages = {
+            R.drawable.positive_flower, // 10일차 긍정 이미지
+            R.drawable.positive_fruit1, // 27일차 긍정 이미지
+            R.drawable.positive_fruit2, // 37일차 긍정 이미지
+            R.drawable.positive_fruit3  // 47일차 긍정 이미지
+    };
+
+    private int[] negativeImages = {
+            R.drawable.negative_flower, // 10일차 부정 이미지
+            R.drawable.negative_fruit1, // 27일차 부정 이미지
+            R.drawable.negative_fruit2, // 37일차 부정 이미지
+            R.drawable.negative_fruit3  // 47일차 부정 이미지
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -302,7 +318,7 @@ public class HomeMainActivity extends AppCompatActivity {
     }
 
     private void calculateDaysSinceSignUp(Long signUpDate) {
-        if (signUpDate != null) {
+        if (signUpDate != null && signUpDate > 0) {
             long currentDate = System.currentTimeMillis();
 
             // Calendar 인스턴스를 생성하여 시간 부분 제거
@@ -320,7 +336,7 @@ public class HomeMainActivity extends AppCompatActivity {
             currentCalendar.set(Calendar.SECOND, 0);
             currentCalendar.set(Calendar.MILLISECOND, 0);
 
-            long daysSinceSignUp = (currentCalendar.getTimeInMillis() - signUpCalendar.getTimeInMillis()) / (1000 * 60 * 60 * 24);
+            daysSinceSignUp = (currentCalendar.getTimeInMillis() - signUpCalendar.getTimeInMillis()) / (1000 * 60 * 60 * 24);
 
             Log.d("HomeMainActivity", "daysSinceSignUp calculated: " + daysSinceSignUp);
             timeTextView.setText(" " + (daysSinceSignUp + 1)); // UI에 경과 일수 표시
@@ -328,6 +344,7 @@ public class HomeMainActivity extends AppCompatActivity {
             checkAndShowDialog(daysSinceSignUp + 1);
         } else {
             Log.e("HomeMainActivity", "가입일 정보가 없습니다.");
+            daysSinceSignUp = 0;
         }
     }
 
@@ -422,7 +439,14 @@ public class HomeMainActivity extends AppCompatActivity {
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_positive, null);
         builder.setView(dialogView);
 
+        ImageView positiveImage = dialogView.findViewById(R.id.positiveImage);
+        TextView positiveMessage = dialogView.findViewById(R.id.positiveMessage);
         Button positiveConfirmButton = dialogView.findViewById(R.id.positiveConfirmButton);
+
+        // 주기에 맞는 이미지 설정
+        int imageResource = getPositiveImageForDaysSinceSignUp(daysSinceSignUp);
+        positiveImage.setImageResource(imageResource);
+
         AlertDialog dialog = builder.create();
         dialog.show();
 
@@ -439,14 +463,14 @@ public class HomeMainActivity extends AppCompatActivity {
         }
 
         String userId = user.getUid();
-        //int baseCharacterImage;
         int nextStageImage = getNextStageImage(daysSinceSignUp);
 
         db.collection("users").document(userId)
                 .update("characterBaseImage", nextStageImage)
                 .addOnSuccessListener(aVoid -> {
-                    Log.d("HomeMainActivity", "Character Image Update Succeeded");
-                    applyCharacterImage(nextStageImage);  // Apply new character image locally
+                    Log.d("HomeMainActivity", "Character Image Update Succeeded with image resource: " + nextStageImage);
+                    applyCharacterImage(nextStageImage);
+                    loadSelectedDesign();  // Firebase 업데이트 후 즉시 갱신
                 })
                 .addOnFailureListener(e -> Log.e("HomeMainActivity", "Character Image Update Failed", e));
 
@@ -482,18 +506,24 @@ public class HomeMainActivity extends AppCompatActivity {
     }
 
     private int getNextStageImage(long daysSinceSignUp) {
-        // Choose image based on growth stage
-        switch ((int) daysSinceSignUp) {
-            case 1: return R.drawable.tomato_character_flower;
-            case 27: return R.drawable.tomato_character_fruit_first;
-            case 37: return R.drawable.tomato_character_fruit_mid;
-            case 47: return R.drawable.tomato_character_fruit_final;
-            default: return R.drawable.tomato_character_home;
-        }
+        if (daysSinceSignUp >= 47) return R.drawable.tomato_character_fruit_final; // 열매 말기
+        else if (daysSinceSignUp >= 37) return R.drawable.tomato_character_fruit_mid; // 열매 중기
+        else if (daysSinceSignUp >= 27) return R.drawable.tomato_character_fruit_first; // 열매 초기
+        else if (daysSinceSignUp >= 1) return R.drawable.tomato_character_flower; // 꽃 단계
+        return R.drawable.tomato_character_home; // 기본 모종 단계
+//        switch ((int) daysSinceSignUp) {
+//            case 10: return R.drawable.tomato_character_flower;
+//            case 27: return R.drawable.tomato_character_fruit_first;
+//            case 37: return R.drawable.tomato_character_fruit_mid;
+//            case 47: return R.drawable.tomato_character_fruit_final;
+//            default: return R.drawable.tomato_character_home;
+//        }
     }
 
     private void applyCharacterImage(int imageResource) {
         character.setImageResource(imageResource); // 홈 화면의 캐릭터 이미지 변경
+        character.invalidate();
+        character.requestLayout();
 
         Intent intent = new Intent("UPDATE_CHARACTER_IMAGE");
         intent.putExtra("characterImage", imageResource);
@@ -514,7 +544,14 @@ public class HomeMainActivity extends AppCompatActivity {
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_negative, null);
         builder.setView(dialogView);
 
+        ImageView negativeImage = dialogView.findViewById(R.id.negativeImage);
+        TextView negativeMessage = dialogView.findViewById(R.id.negativeMessage);
         Button negativeConfirmButton = dialogView.findViewById(R.id.negativeConfirmButton);
+
+        // 주기에 맞는 이미지 설정
+        int imageResource = getNegativeImageForDaysSinceSignUp(daysSinceSignUp);
+        negativeImage.setImageResource(imageResource);
+
         AlertDialog dialog = builder.create();
         dialog.show();
 
@@ -531,6 +568,36 @@ public class HomeMainActivity extends AppCompatActivity {
             editor.putBoolean("notYetPressed", true);
             editor.apply();
         });
+    }
+
+    // daysSinceSignUp 값에 따라 긍정 이미지를 반환하는 메서드
+    private int getPositiveImageForDaysSinceSignUp(long daysSinceSignUp) {
+        Log.d("HomeMainActivity", "getPositiveImageForDaysSinceSignUp called with daysSinceSignUp: " + daysSinceSignUp);
+        if (daysSinceSignUp == 1) {
+            return positiveImages[0];
+        } else if (daysSinceSignUp == 27) {
+            return positiveImages[1];
+        } else if (daysSinceSignUp == 37) {
+            return positiveImages[2];
+        } else if (daysSinceSignUp == 47) {
+            return positiveImages[3];
+        }
+        return R.drawable.positive_flower; // 기본 이미지
+    }
+
+    // daysSinceSignUp 값에 따라 부정 이미지를 반환하는 메서드
+    private int getNegativeImageForDaysSinceSignUp(long daysSinceSignUp) {
+        Log.d("HomeMainActivity", "getNegativeImageForDaysSinceSignUp called with daysSinceSignUp: " + daysSinceSignUp);
+        if (daysSinceSignUp == 1) {
+            return negativeImages[0];
+        } else if (daysSinceSignUp == 27) {
+            return negativeImages[1];
+        } else if (daysSinceSignUp == 37) {
+            return negativeImages[2];
+        } else if (daysSinceSignUp == 47) {
+            return negativeImages[3];
+        }
+        return R.drawable.negative_flower; // 기본 이미지
     }
 
     private void showConfirmationDialog() {
@@ -563,16 +630,18 @@ public class HomeMainActivity extends AppCompatActivity {
                     // 가입일이 없으면 현재 시간을 저장
                     long currentTime = System.currentTimeMillis();
                     docRef.update("signUpDate", currentTime)
-                            .addOnSuccessListener(aVoid -> Log.d("HomeMainActivity", "SignUpDate Saved"))
+                            .addOnSuccessListener(aVoid -> {
+                                Log.d("HomeMainActivity", "SignUpDate Saved");
+                                calculateDaysSinceSignUp(currentTime);
+                            })
                             .addOnFailureListener(e -> Log.e("HomeMainActivity", "SignUpDate Save Failed", e));
                     signUpDate = currentTime;
                 } else {
                     // 이미 저장된 가입일을 SharedPreferences에 저장
-                    sharedPreferences.edit().putLong("signUpDate", signUpDate).apply();
+                    //sharedPreferences.edit().putLong("signUpDate", signUpDate).apply();
+                    // 경과 일수 계산 및 표시
+                    calculateDaysSinceSignUp(signUpDate); // 수정된 호출 부분
                 }
-
-                // 경과 일수 계산 및 표시
-                calculateDaysSinceSignUp(signUpDate); // 수정된 호출 부분
 
                 String path = documentSnapshot.getString("userImageUrl");
                 if (path != null) {
@@ -614,8 +683,10 @@ public class HomeMainActivity extends AppCompatActivity {
                             Log.d("HomeMainActivity", "Item Apply");
                         } else if (characterBaseImage != null) {
                             character.setImageResource(characterBaseImage.intValue());
-                            Log.d("HomeMainActivity", "Default character Apply");
+                            Log.d("HomeMainActivity",  "Default Character Image Applied: " + characterBaseImage);
                         }
+                        character.invalidate();
+                        character.requestLayout();
                     } else {
                         Log.e("HomeMainActivity", "Firestore Data load fail: snapshot : null or non exist.");
                     }

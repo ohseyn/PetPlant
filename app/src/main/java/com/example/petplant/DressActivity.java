@@ -106,6 +106,8 @@ public class DressActivity extends AppCompatActivity {
                         Long characterImageResource = snapshot.getLong("characterBaseImage");
                         if (characterImageResource != null) {
                             characterImage.setImageResource(characterImageResource.intValue());
+                            characterImage.invalidate();
+                            characterImage.requestLayout();
                             Log.d("DressActivity", "Character Image Loaded and Applied");
                         }
                     } else {
@@ -118,11 +120,32 @@ public class DressActivity extends AppCompatActivity {
     private final BroadcastReceiver characterImageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int imageResource = intent.getIntExtra("characterImage", R.drawable.tomato_character_home);
-            characterImage.setImageResource(imageResource);
-            Log.d("DressActivity", "Character Image Updated via Broadcast");
+            // 전달된 이미지 리소스가 있는지 확인
+            if (intent.hasExtra("characterImage")) {
+                int imageResource = intent.getIntExtra("characterImage", -1);
+                if (imageResource != -1) { // 유효한 값인지 확인
+                    characterImage.setImageResource(imageResource);
+                    characterImage.invalidate();
+                    characterImage.requestLayout();
+                    Log.d("DressActivity", "Character Image Updated via Broadcast: " + imageResource);
+                } else {
+                    Log.e("DressActivity", "Received invalid character image resource");
+                }
+            } else {
+                Log.e("DressActivity", "No character image resource found in intent");
+            }
         }
     };
+//    private final BroadcastReceiver characterImageReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            int imageResource = intent.getIntExtra("characterImage", R.drawable.tomato_character_home);
+//            characterImage.setImageResource(imageResource);
+//            characterImage.invalidate();
+//            characterImage.requestLayout();
+//            Log.d("DressActivity", "Character Image Updated via Broadcast");
+//        }
+//    };
 
     @Override
     protected void onDestroy() {

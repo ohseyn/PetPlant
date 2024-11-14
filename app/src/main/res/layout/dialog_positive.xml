@@ -11,7 +11,7 @@
         android:id="@+id/positiveImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/good"
+        android:src="@drawable/positive_flower"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp" />
 
@@ -19,7 +19,7 @@
         android:id="@+id/positiveMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="왕큰방울이가 꽃을 피울 정도로 성장했어요!"
+        android:text="왕큰방울이가 꽃을\n피울 정도로 성장했어요!"
         android:textSize="22sp"
         android:gravity="center"
         android:layout_marginBottom="20dp" />
