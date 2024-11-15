@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabGravity="fill"
+        android:background="@drawable/background_tab"
         app:tabIndicatorColor="#02AE7A"
         app:tabMode="fixed"
         app:tabSelectedTextColor="#02AE7A"
