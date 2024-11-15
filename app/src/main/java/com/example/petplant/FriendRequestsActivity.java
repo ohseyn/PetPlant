@@ -79,6 +79,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
 
         stickerAdapter = new StickerRequestAdapter(stickerRequestList);
 
+        recyclerView.setAdapter(friendRequestsAdapter);
+
         // 탭 선택 리스너 설정
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -87,7 +89,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
                 if (position == 1) {  // '친구신청 알림' 탭
                     loadFriendRequests();
                     recyclerView.setAdapter(friendRequestsAdapter);
-                } else {  // '스티커 알림' 탭
+                } else if (position == 0){  // '스티커 알림' 탭
                     loadStickerRequests(auth.getUid());
                     recyclerView.setAdapter(stickerAdapter);
                 }
@@ -101,9 +103,10 @@ public class FriendRequestsActivity extends AppCompatActivity {
         });
 
         // 처음에는 '친구신청 알림' 탭을 선택
-        TabLayout.Tab initialTab = tabLayout.getTabAt(0);
+        TabLayout.Tab initialTab = tabLayout.getTabAt(1);
         if (initialTab != null) {
             initialTab.select();
+            loadFriendRequests();
         }
     }
 
@@ -114,6 +117,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     friendRequestList.clear();
+
                     for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
                         FriendRequest friendRequest = snapshot.toObject(FriendRequest.class);
                         // Firestore 문서 ID를 requestId로 설정
@@ -146,60 +150,80 @@ public class FriendRequestsActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> Log.d("FriendRequests", "Error loading friend requests", e));
     }
+
     private void loadStickerRequests(String userUid) {
-        DocumentReference userDocRef = db.collection("users").document(userUid);
+        db.collection("users").document(userUid)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    stickerRequestList.clear(); // 기존 데이터 초기화
+                    if (documentSnapshot.exists()) {
+                        List<Map<String, Object>> activityRequest = (List<Map<String, Object>>) documentSnapshot.get("activityRequest");
+                        if (activityRequest != null) {
+                            for (Map<String, Object> activity : activityRequest) {
+                                String userName = (String) activity.get("userName");
+                                String stickerType = (String) activity.get("kind");
 
-        userDocRef.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-                List<Map<String, Object>> activityRequest = (List<Map<String, Object>>) documentSnapshot.get("activityRequest");
-
-                if (activityRequest != null && !activityRequest.isEmpty()) {
-                    stickerRequestList.clear();
-                    for (Map<String, Object> activity : activityRequest) {
-                        String userName = (String) activity.get("userName");  // 사용자 이름
-                        String stickerType = (String) activity.get("kind");  // 스티커 종류
-
-                        // StickerRequest 객체 생성 (이름과 스티커 종류만 필요)
-                        StickerRequest stickerRequest = new StickerRequest(userName, stickerType);
-                        stickerRequestList.add(stickerRequest);
+                                StickerRequest stickerRequest = new StickerRequest(userName, stickerType);
+                                stickerRequestList.add(stickerRequest);
+                            }
+                            stickerAdapter.notifyDataSetChanged(); // 어댑터에 데이터 변경 알림
+                        }
                     }
-                    stickerAdapter.notifyDataSetChanged();
-                } else {
-                    Log.d("loadStickerRequests", "No sticker requests found.");
-                }
-            } else {
-                Log.e("loadStickerRequests", "User document does not exist.");
-            }
-        }).addOnFailureListener(e -> {
-            Log.e("loadStickerRequests", "Error getting user document: " + e.getMessage());
-        });
+                })
+                .addOnFailureListener(e -> Log.e("StickerRequests", "Error loading sticker requests: " + e.getMessage()));
+
+//        DocumentReference userDocRef = db.collection("users").document(userUid);
+//
+//        userDocRef.get().addOnSuccessListener(documentSnapshot -> {
+//            stickerRequestList.clear(); // 이전 데이터 초기화
+//            if (documentSnapshot.exists()) {
+//                List<Map<String, Object>> activityRequest = (List<Map<String, Object>>) documentSnapshot.get("activityRequest");
+//
+//                if (activityRequest != null && !activityRequest.isEmpty()) {
+//                    stickerRequestList.clear();
+//                    for (Map<String, Object> activity : activityRequest) {
+//                        String userName = (String) activity.get("userName");  // 사용자 이름
+//                        String stickerType = (String) activity.get("kind");  // 스티커 종류
+//
+//                        // StickerRequest 객체 생성 (이름과 스티커 종류만 필요)
+//                        StickerRequest stickerRequest = new StickerRequest(userName, stickerType);
+//                        stickerRequestList.add(stickerRequest);
+//                    }
+//                    stickerAdapter.notifyDataSetChanged();
+//                } else {
+//                    Log.d("loadStickerRequests", "No sticker requests found.");
+//                }
+//            } else {
+//                Log.e("loadStickerRequests", "User document does not exist.");
+//            }
+//        }).addOnFailureListener(e -> {
+//            Log.e("loadStickerRequests", "Error getting user document: " + e.getMessage());
+//        });
     }
 
-
-
-    private int getStickerDrawableResId(String kind) {
-        // 스티커 종류에 따라 리소스 ID 반환
-        switch (kind) {
-            case "sticker1":
-                return R.drawable.sticker1;
-            case "sticker2":
-                return R.drawable.sticker2;
-            case "sticker3":
-                return R.drawable.sticker3;
-            case "sticker4":
-                return R.drawable.sticker4;
-            case "sticker5":
-                return R.drawable.sticker5;
-            case "sticker6":
-                return R.drawable.sticker6;
-            case "sticker7":
-                return R.drawable.sticker7;
-            case "sticker8":
-                return R.drawable.sticker8;
-            default:
-                return R.drawable.sticker1;
-        }
-    }
+//    private int getStickerDrawableResId(String kind) {
+//        // 스티커 종류에 따라 리소스 ID 반환
+//        switch (kind) {
+//            case "sticker1":
+//                return R.drawable.sticker1;
+//            case "sticker2":
+//                return R.drawable.sticker2;
+//            case "sticker3":
+//                return R.drawable.sticker3;
+//            case "sticker4":
+//                return R.drawable.sticker4;
+//            case "sticker5":
+//                return R.drawable.sticker5;
+//            case "sticker6":
+//                return R.drawable.sticker6;
+//            case "sticker7":
+//                return R.drawable.sticker7;
+//            case "sticker8":
+//                return R.drawable.sticker8;
+//            default:
+//                return R.drawable.sticker1;
+//        }
+//    }
 
     // 시간 차 계산 메서드 (n초 전, n분 전, n시간 전, n일 전)
     private String getTimeSince(long timestamp) {

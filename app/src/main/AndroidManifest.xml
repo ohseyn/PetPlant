@@ -19,6 +19,7 @@
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
+        android:windowSoftInputMode ="adjustNothing"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
@@ -30,11 +31,14 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
-        <activity android:name=".FriendList">
+        <activity
+            android:name=".FriendList"
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing">
         </activity>
+
         <activity
             android:name=".SecondOnboardingActivity"
             android:exported="true">
@@ -102,7 +106,8 @@
 
         <activity
             android:name=".FriendAddActivity"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing">
         </activity>
 
         <activity
@@ -282,11 +287,6 @@
         </activity>
 
         <activity
-            android:name=".inbox_friend"
-            android:exported="true">
-        </activity>
-
-        <activity
             android:name=".profile"
             android:exported="true">
         </activity>
@@ -380,13 +380,6 @@
             android:name=".Guide"
             android:exported="true">
         </activity>
-
-
-        <activity
-            android:name=".LoginMainActivity"
-            android:exported="true">
-        </activity>
-
 
         <activity
             android:name=".MainActivity"

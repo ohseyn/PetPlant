@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/dressLayout"
-    android:background="@drawable/store_background"
+    android:background="@drawable/background_default"
     tools:context=".DressActivity">
 
     <androidx.appcompat.widget.AppCompatButton
