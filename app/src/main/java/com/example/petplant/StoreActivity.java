@@ -235,11 +235,11 @@ public class StoreActivity extends AppCompatActivity {
 
         // 구매 버튼 클릭 리스너 설정
         buyButton.setOnClickListener(v -> {
-            if ((selectedBackground != null || selectedItem != null) && coin >= selectedItemPrice){
+            if ((selectedBackground != null || selectedItem != null)){
                 if (coin >= selectedItemPrice) {
                     showBuyDialog();
                 } else {
-                    Toast.makeText(StoreActivity.this, "코인이 부족합니다.", Toast.LENGTH_SHORT).show();
+                    showInsufficientCoinsDialog();
                 }
             } else {
                 Toast.makeText(StoreActivity.this, "아이템을 선택해주세요.", Toast.LENGTH_SHORT).show();
@@ -284,16 +284,6 @@ public class StoreActivity extends AppCompatActivity {
             }
         }
     };
-//    private final BroadcastReceiver characterImageReceiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            int imageResource = intent.getIntExtra("characterImage", R.drawable.tomato_character_home);
-//            characterImage.setImageResource(imageResource);
-//            characterImage.invalidate();
-//            characterImage.requestLayout();
-//            Log.d("StoreActivity", "Character Image Updated via Broadcast");
-//        }
-//    };
 
     @Override
     protected void onDestroy() {
@@ -379,7 +369,7 @@ public class StoreActivity extends AppCompatActivity {
         View dialogLayout = inflater.inflate(R.layout.dialog_purchase_confirmation, null);
 
         ImageView itemImage = dialogLayout.findViewById(R.id.itemImage);
-        TextView itemName = dialogLayout.findViewById(R.id.itemName);
+        //TextView itemName = dialogLayout.findViewById(R.id.itemName);
         TextView itemPrice = dialogLayout.findViewById(R.id.itemPrice);
         Button confirmButton = dialogLayout.findViewById(R.id.confirmButton);
         Button cancelButton = dialogLayout.findViewById(R.id.cancelButton);
@@ -387,12 +377,12 @@ public class StoreActivity extends AppCompatActivity {
         // 선택된 아이템이나 배경에 따라 이미지와 이름 설정
         if (selectedItem != null) {
             itemImage.setImageResource(selectedItem.getImageResource());
-            itemName.setText(selectedItem.getName());
-            itemPrice.setText(selectedItem.getPrice() + " 코인");
+            //itemName.setText(selectedItem.getName());
+            itemPrice.setText(String.valueOf(selectedItem.getPrice()));
         } else if (selectedBackground != null) {
             itemImage.setImageResource(selectedBackground.getImageResource());
-            itemName.setText(selectedBackground.getName());
-            itemPrice.setText(selectedBackground.getPrice() + " 코인");
+            //itemName.setText(selectedBackground.getName());
+            itemPrice.setText(String.valueOf(selectedBackground.getPrice()));
         }
 
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -413,7 +403,6 @@ public class StoreActivity extends AppCompatActivity {
         });
 
         cancelButton.setOnClickListener(v -> dialog.dismiss());
-
         dialog.show();
     }
 
@@ -423,17 +412,17 @@ public class StoreActivity extends AppCompatActivity {
         View dialogLayout = inflater.inflate(R.layout.dialog_success, null);
 
         ImageView itemImage = dialogLayout.findViewById(R.id.itemImage);
-        TextView itemName = dialogLayout.findViewById(R.id.itemName);
+        //TextView itemName = dialogLayout.findViewById(R.id.itemName);
         Button decorateButton = dialogLayout.findViewById(R.id.decorateButton);
         Button confirmButton2 = dialogLayout.findViewById(R.id.confirmButton2);
 
         // 선택된 아이템이나 배경이 null이 아닌 경우에만 이미지를 설정
         if (selectedItem != null) {
             itemImage.setImageResource(selectedItem.getImageResource());
-            itemName.setText(selectedItemName);
+            //itemName.setText(selectedItemName);
         } else if (selectedBackground != null) {
             itemImage.setImageResource(selectedBackground.getImageResource());
-            itemName.setText(selectedItemName);
+            //itemName.setText(selectedItemName);
         }
 
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -453,6 +442,22 @@ public class StoreActivity extends AppCompatActivity {
         });
 
         confirmButton2.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
+    }
+
+    private void showInsufficientCoinsDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.dialog_fail, null); // dialog_fail.xml 사용
+
+        Button failButton = dialogLayout.findViewById(R.id.failbutton);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogLayout)
+                .create();
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.shop_rounded_dialog); // 다이얼로그 배경 설정
+
+        failButton.setOnClickListener(v -> dialog.dismiss()); // 확인 버튼 클릭 시 다이얼로그 닫기
+
         dialog.show();
     }
 

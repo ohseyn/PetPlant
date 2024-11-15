@@ -184,18 +184,18 @@ public class ShopActivity extends AppCompatActivity {
         View dialogLayout = inflater.inflate(R.layout.dialog_purchase_confirmation, null);
 
         ImageView itemImage = dialogLayout.findViewById(R.id.itemImage);
-        TextView itemName = dialogLayout.findViewById(R.id.itemName);
+        //TextView itemName = dialogLayout.findViewById(R.id.itemName);
         TextView itemPrice = dialogLayout.findViewById(R.id.itemPrice);
         Button confirmButton = dialogLayout.findViewById(R.id.confirmButton);
         Button cancelButton = dialogLayout.findViewById(R.id.cancelButton);
 
         if (currentItem != -1) {
             itemImage.setImageResource(selectedItem);
-            itemName.setText(selectedItemName);
+            //itemName.setText(selectedItemName);
             itemPrice.setText(selectedItemPrice + " 코인");
         } else if (currentBackgroundItem != -1) {
             itemImage.setImageResource(backgrounds[currentBackgroundItem]);
-            itemName.setText(selectedBackgroundName);
+            //itemName.setText(selectedBackgroundName);
             itemPrice.setText(selectedBackgroundPrice + " 코인");
         }
 
@@ -223,16 +223,16 @@ public class ShopActivity extends AppCompatActivity {
         View dialogLayout = inflater.inflate(R.layout.dialog_success, null);
 
         ImageView itemImage = dialogLayout.findViewById(R.id.itemImage);
-        TextView itemName = dialogLayout.findViewById(R.id.itemName);
+        //TextView itemName = dialogLayout.findViewById(R.id.itemName);
         Button decorateButton = dialogLayout.findViewById(R.id.decorateButton);
         Button confirmButton2 = dialogLayout.findViewById(R.id.confirmButton2);
 
         if (currentItem != -1) {
             itemImage.setImageResource(selectedItem);
-            itemName.setText(selectedItemName);
+            //itemName.setText(selectedItemName);
         } else if (currentBackgroundItem != -1) {
             itemImage.setImageResource(backgrounds[currentBackgroundItem]);
-            itemName.setText(selectedBackgroundName);
+            //itemName.setText(selectedBackgroundName);
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(dialogLayout);
