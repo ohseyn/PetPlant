@@ -101,7 +101,6 @@ public class talking_message extends AppCompatActivity {
     // "좋아요!" 메시지와 이미지를 표시하는 메서드
     private void showResponseTextAndImage() {
         responseText_talking.setVisibility(View.VISIBLE); // 텍스트 보이기
-        talkBalloon_talking.setVisibility(View.VISIBLE); // 이미지 보이기
     }
 
     // 이미지 회전 메서드
