@@ -1,11 +1,14 @@
 package com.example.petplant;
 
+import com.google.firebase.Timestamp;
+
 public class FriendRequest {
     private String from;
     private String status;
     private String requestId;  // Firestore의 문서 ID를 저장할 필드
     private String timeSinceRequest;  // 시간을 저장할 필드
     private String profileImage;
+    private Timestamp timestamp; // 타임스탬프 필드 추가
 
     // 기본 생성자 (Firestore에서 객체로 매핑할 때 필요)
     public FriendRequest() {}
@@ -52,4 +55,7 @@ public class FriendRequest {
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
     }
+
+    public Timestamp getTimestamp() { return timestamp; }
+    public void setTimestamp(Timestamp timestamp) { this.timestamp = timestamp; }
 }
