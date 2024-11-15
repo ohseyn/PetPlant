@@ -47,11 +47,11 @@ public class DressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dress);
 
         db = FirebaseFirestore.getInstance();
+
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
-        registerReceiver(characterImageReceiver, new IntentFilter("UPDATE_CHARACTER_IMAGE"));
-
+        registerReceiver(characterImageReceiver, new IntentFilter("UPDATE_CHARACTER_IMAGE"), Context.RECEIVER_NOT_EXPORTED);
         dressLayout = findViewById(R.id.dressLayout);
         characterImage = findViewById(R.id.characterImage);
         recyclerView = findViewById(R.id.recyclerView);

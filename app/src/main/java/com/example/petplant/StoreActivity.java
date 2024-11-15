@@ -101,7 +101,7 @@ public class StoreActivity extends AppCompatActivity {
             }
         });
 
-        registerReceiver(characterImageReceiver, new IntentFilter("UPDATE_CHARACTER_IMAGE"));
+        registerReceiver(characterImageReceiver, new IntentFilter("UPDATE_CHARACTER_IMAGE"), Context.RECEIVER_NOT_EXPORTED);
 
         // View 초기화
         recyclerView = findViewById(R.id.recyclerView);
