@@ -40,6 +40,7 @@ public class DressActivity extends AppCompatActivity {
     private StoreItemAdapter adapter;
     private StoreItem selectedBackground;
     private StoreItem selectedItem;
+    private Button applyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,10 @@ public class DressActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 
+        applyButton = findViewById(R.id.applyButton);
+        applyButton.setEnabled(false);
+        applyButton.setAlpha(0.5f); // 비활성화 상태일 때 투명도 조정
+
         loadCharacterImage();
         loadPurchasedItems();
 
@@ -70,14 +75,27 @@ public class DressActivity extends AppCompatActivity {
                 int characterImageResource = getIntent().getIntExtra("characterImage", R.drawable.tomato_character_home);
                 characterImage.setImageResource(item.getImageResource());
             }
-            findViewById(R.id.applyButton).setVisibility(View.VISIBLE);
+
+            // 적용하기 버튼 활성화 상태 설정
+            if (selectedBackground != null || selectedItem != null) {
+                applyButton.setEnabled(true);
+                applyButton.setAlpha(1.0f); // 활성화 상태일 때 투명도 조정
+            } else {
+                applyButton.setEnabled(false);
+                applyButton.setAlpha(0.5f); // 비활성화 상태일 때 투명도 조정
+            }
         });
         recyclerView.setAdapter(adapter);
 
-        findViewById(R.id.applyButton).setOnClickListener(v -> {
+        applyButton.setOnClickListener(v -> {
             if (selectedBackground != null || selectedItem != null) {
                 saveDesignToFirestore(selectedBackground, selectedItem);
                 Toast.makeText(this, "디자인이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                selectedBackground = null;
+                selectedItem = null;
+                // 적용 버튼 비활성화
+                applyButton.setEnabled(false);
+                applyButton.setAlpha(0.5f);
                 finish();
             }
         });

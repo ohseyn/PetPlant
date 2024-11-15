@@ -110,7 +110,8 @@ public class StoreActivity extends AppCompatActivity {
 
         characterImage = findViewById(R.id.characterImage);
         buyButton = findViewById(R.id.buyButton);
-        buyButton.setVisibility(View.GONE);
+        buyButton.setEnabled(false);
+        buyButton.setAlpha(0.5f); // 초기 투명도
         shopCoinTextView = findViewById(R.id.coin);
 
         loadCharacterImage();
@@ -130,21 +131,28 @@ public class StoreActivity extends AppCompatActivity {
                 Toast.makeText(this, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
                 selectedItem = null; // 선택된 아이템 초기화
                 selectedBackground = null;
-                buyButton.setVisibility(View.GONE); // 구매 버튼 숨기기
+                buyButton.setEnabled(false); // 버튼 비활성화
+                buyButton.setAlpha(0.5f);   // 버튼 투명도 조정
             } else {
                 // 선택된 아이템이 이미 선택된 상태인지 확인
                 if (selectedBackground != null && selectedBackground.equals(item)) {
                     // 선택된 배경을 다시 클릭할 경우 해제
                     selectedBackground = null;
                     loadSelectedDesign(); // 저장된 배경 이미지로 복원
+                    buyButton.setEnabled(false); // 버튼 비활성화
+                    buyButton.setAlpha(0.5f);   // 투명도 조정
                 } else if (selectedItem != null && selectedItem.equals(item)) {
                     // 선택된 캐릭터 아이템을 다시 클릭할 경우 해제
                     selectedItem = null;
                     loadSelectedDesign(); // 저장된 캐릭터 이미지로 복원
+                    buyButton.setEnabled(false); // 버튼 비활성화
+                    buyButton.setAlpha(0.5f);   // 투명도 조정
                 } else {
                     // 새로 선택된 경우
                     selectedItemPrice = item.getPrice();
                     selectedItemName = item.getName();
+                    buyButton.setEnabled(true);
+                    buyButton.setAlpha(1.0f);
                     if (backgroundList.contains(item)) {
                         selectedBackground = item;
                         storeLayout.setBackgroundResource(item.getImageResource());
@@ -157,9 +165,6 @@ public class StoreActivity extends AppCompatActivity {
                         selectedBackground = null; // 배경 초기화
                     }
                 }
-
-                // 구매 버튼 가시성 설정
-                buyButton.setVisibility((selectedBackground != null || selectedItem != null) ? View.VISIBLE : View.GONE);
             }
             adapter.notifyDataSetChanged();
 //                // 새로 선택된 아이템이거나 구매되지 않은 경우
