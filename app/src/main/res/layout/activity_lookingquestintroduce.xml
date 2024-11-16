@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/removequestback"
+    android:background="@drawable/smellactivity_back"
     android:padding="15dp">
 
     <LinearLayout
@@ -48,7 +48,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="-25dp"
-            android:text="활동하는 모습을 사진으로 남겨봅시다."
+            android:text="활동하는 모습을 글로 남겨봅시다."
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"/>
@@ -85,7 +85,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
-            android:text="방울토마토는 물을 많이 필요로 하는 식물입니다."
+            android:text="방울토마토와 친해져요"
             android:textColor="#000000"
             android:textSize="14sp" />
 
@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="방울토마토 화분의 겉 흙이 말랐을 때,\n물을 흠뻑 줍니다."
+            android:text="관찰하고\n글을 써봐요"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="14sp" />
@@ -102,14 +102,14 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/do_quest_water"
+        android:id="@+id/do_quest_looking"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:background="@drawable/button_border3"
-        android:backgroundTint="#46C140"
+        android:backgroundTint="#F7608F"
         android:onClick="onButtonClick"
-        android:text="사진 찍으러 가기"
+        android:text="글 작성 하러 가기"
         android:textSize="15sp"
         android:textColor="#FFFFFF"
         android:fontFamily="@font/suit_extrabold"
