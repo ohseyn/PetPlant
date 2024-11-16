@@ -205,16 +205,16 @@ public class HomeMainActivity extends AppCompatActivity {
                 intent = new Intent(this, sand_introduce.class);
                 break;
             case 4:
-                intent = new Intent(this, smellquest_text.class);
+                intent = new Intent(this, smellquest_introduce.class);
                 break;
             case 5:
-                intent = new Intent(this, looking_text.class);
+                intent = new Intent(this, lookingquest_introduce.class);
                 break;
             case 6:
-                intent = new Intent(this, touching_text.class);
+                intent = new Intent(this, touchingquest_introduce.class);
                 break;
             case 7:
-                intent = new Intent(this, talking_text.class);
+                intent = new Intent(this, talkingquest_introduce.class);
                 break;
         }
         if (intent != null) {

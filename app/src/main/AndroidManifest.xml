@@ -187,6 +187,27 @@
         </activity>
 
         <activity
+            android:name=".smellquest_introduce"
+            android:exported="true">
+        </activity>
+
+
+        <activity
+            android:name=".lookingquest_introduce"
+            android:exported="true">
+        </activity>
+        
+        <activity
+            android:name=".touchingquest_introduce"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".talkingquest_introduce"
+            android:exported="true">
+        </activity>
+
+        <activity
             android:name=".reward_sandquest"
             android:exported="true">
         </activity>
