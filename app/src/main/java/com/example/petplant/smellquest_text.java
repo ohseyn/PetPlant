@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,17 +36,18 @@ import java.util.Locale;
 import java.util.Map;
 
 public class smellquest_text extends AppCompatActivity {
+    Intent intent = getIntent();
     private String currentPhotoPath;
     private FirebaseStorage storage;
     private StorageReference storageRef;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private FirebaseUser user;
+    private TextView plantName;
     private EditText inputEditText;
     private TextView charCountTextView;
     private Button nextButton3;
     private Button back_home;
-    Intent intent = getIntent();
     private static final int MAX_CHAR_COUNT = 200;
 
     @Override
@@ -53,17 +55,31 @@ public class smellquest_text extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smellquest); // Replace with your layout file name
 
-        // Initialize views
+        // Firebase 초기화
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+
+        // View 초기화
+        plantName = findViewById(R.id.plantName);
         inputEditText = findViewById(R.id.inputEditText);
         charCountTextView = findViewById(R.id.charCountTextView);
         nextButton3 = findViewById(R.id.nextButton3);
+
+        // Firebase에서 식물 이름 가져오기 메서드 호출
+        if (user != null) {
+            getProfileImageFromFirebase();
+        } else {
+            Log.e("smellquest_text", "User not authenticated.");
+        }
 
         // Set initial character count
         charCountTextView.setText("0/" + MAX_CHAR_COUNT);
 
         // Add TextWatcher to monitor text changes in the EditText
         inputEditText.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // No action needed here
@@ -82,32 +98,49 @@ public class smellquest_text extends AppCompatActivity {
             }
         });
 
-        // Handle next button click (if you need to perform an action on click)
+        // Handle next button click
         nextButton3.setOnClickListener(view -> {
-            // Perform the action when the next button is clicked
-            // For example, you can fetch the input text or validate it here
             String userInput = inputEditText.getText().toString().trim();
-
             if (!userInput.isEmpty()) {
-                // Proceed to the next step or save the text input
-                // Example: move to the next screen or save data to Firebase
                 uploadImageToStorage(null);
-            }
-        });
-        ;
-
-        Button nextButton3 = findViewById(R.id.nextButton3);
-        nextButton3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                uploadImageToStorage(null);
-                Intent intent = new Intent(getApplicationContext(),smellquest_message.class);
+                Intent intent = new Intent(getApplicationContext(), smellquest_message.class);
                 startActivity(intent);
             }
         });
-
     }
-    // Firebase Storage에 이미지 업로드 및 데이터 만들기
+
+    // Firebase에서 프로필 이미지 및 식물 이름 가져오기
+    private void getProfileImageFromFirebase() {
+        db.collection("users").document(auth.getCurrentUser().getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            String profileImageUri = documentSnapshot.getString("profileImageUrl");
+                            Log.d("profile", "Firebase profileImageUri: " + profileImageUri);
+
+                            // 사용자 식물 이름 설정
+                            String userPlantName = documentSnapshot.getString("plantName");
+                            if (plantName != null) {
+                                plantName.setText(userPlantName != null ? userPlantName : "저");
+                            } else {
+                                Log.e("smellquest_text", "plantName TextView is null");
+                            }
+                        } else {
+                            Log.d("smellquest_text", "No such document in Firestore");
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("smellquest_text", "Error fetching plant name from Firebase", e);
+                    }
+                });
+    }
+
+    // Firebase Storage에 이미지 업로드 및 데이터 생성
     private void uploadImageToStorage(Uri imageUri) {
         // Firebase 초기화
         storage = FirebaseStorage.getInstance();

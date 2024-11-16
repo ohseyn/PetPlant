@@ -196,7 +196,7 @@
             android:name=".lookingquest_introduce"
             android:exported="true">
         </activity>
-        
+
         <activity
             android:name=".touchingquest_introduce"
             android:exported="true">

@@ -225,6 +225,38 @@ public class HomeMainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (pageItems == null) {
+            Log.e("HomeMainActivity", "pageItems is null. Initializing...");
+            pageItems = new ArrayList<>(); // 기본 초기화
+        }
+
+        Intent intent = getIntent();
+        boolean isCompleted = intent.getBooleanExtra("completed", false);
+        int questPosition = intent.getIntExtra("questPosition", -1);
+
+        if (isCompleted && questPosition != -1 && questPosition < pageItems.size()) {
+            // 어댑터를 통해 버튼 상태를 업데이트
+            pageAdapter.updateButtonState(questPosition, "완료", false);
+            pageAdapter.notifyItemChanged(questPosition); // UI 갱신
+
+            // 로그 추가
+            Log.d("HomeMainActivity", "Quest at position " + questPosition + " marked as completed.");
+
+            // Intent 데이터 초기화
+            intent.removeExtra("completed");
+            intent.removeExtra("questPosition");
+        } else {
+            Log.e("HomeMainActivity", "Intent data is not valid or questPosition is out of bounds");
+        }
+    }
+
+
+
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -262,7 +294,7 @@ public class HomeMainActivity extends AppCompatActivity {
     }
 
     private void loadQuestStatus() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = -1; i < 8; i++) {
             if (sharedPreferences.getBoolean("quest" + i, false)) {
                 // 완료된 퀘스트 버튼 상태 업데이트
                 pageAdapter.updateButtonState(i, "완료", false);

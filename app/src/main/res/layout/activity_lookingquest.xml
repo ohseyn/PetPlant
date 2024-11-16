@@ -16,18 +16,44 @@
         android:orientation="horizontal" />
 
     <!-- Question text -->
-    <TextView
-        android:id="@+id/questtext"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:text="오늘 저의 모습은 어땠나요?"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp">
 
+        <!-- Question text -->
+        <TextView
+            android:id="@+id/questtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오늘"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Plant name -->
+        <TextView
+            android:id="@+id/plantName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:text="방울이"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Ending text -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="의 모습은 어땠나요?"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
     <!-- Dashed box for text input -->
     <ImageView
         android:layout_gravity="center"

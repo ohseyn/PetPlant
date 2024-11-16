@@ -157,7 +157,7 @@ public class profile extends AppCompatActivity {
                             if (profileImageUri != null && !profileImageUri.isEmpty()) {
                                 Glide.with(profile.this).load(profileImageUri).into(profileImage);
                             } else {
-                                profileImage.setImageResource(R.drawable.default_profile_image);  // 기본 이미지 설정
+                                profileImage.setImageResource(R.drawable.profile_frame);  // 기본 이미지 설정
                             }
 
                             // 사용자 이름과 식물 이름 설정

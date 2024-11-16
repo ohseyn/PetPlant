@@ -35,108 +35,120 @@ import java.util.Locale;
 import java.util.Map;
 
 public class looking_text extends AppCompatActivity {
-    private String currentPhotoPath;
     private FirebaseStorage storage;
     private StorageReference storageRef;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private FirebaseUser user;
     private EditText inputEditText;
+    private TextView plantName;
     private TextView charCountTextView;
     private Button nextButton3;
-    private Button back_home;
-    Intent intent = getIntent();
     private static final int MAX_CHAR_COUNT = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lookingquest); // Replace with your layout file name
+        setContentView(R.layout.activity_lookingquest);
 
-        // Initialize views
+        // Firebase 초기화
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        user = auth.getCurrentUser();
+
+        // View 초기화
+        plantName = findViewById(R.id.plantName);
         inputEditText = findViewById(R.id.inputEditText);
         charCountTextView = findViewById(R.id.charCountTextView);
         nextButton3 = findViewById(R.id.nextButton3);
 
-        // Set initial character count
+        // 초기 글자 수 설정
         charCountTextView.setText("0/" + MAX_CHAR_COUNT);
 
-        // Add TextWatcher to monitor text changes in the EditText
+        // TextWatcher 추가
         inputEditText.addTextChangedListener(new TextWatcher() {
-
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // No action needed here
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Update the character count as text changes
-                int currentCharCount = s.length();
-                charCountTextView.setText(currentCharCount + "/" + MAX_CHAR_COUNT);
+                charCountTextView.setText(s.length() + "/" + MAX_CHAR_COUNT);
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                // Additional validation can be added here if needed
-            }
+            public void afterTextChanged(Editable s) {}
         });
 
-        // Handle next button click (if you need to perform an action on click)
-        nextButton3.setOnClickListener(view -> {
-            // Perform the action when the next button is clicked
-            // For example, you can fetch the input text or validate it here
-            String userInput = inputEditText.getText().toString().trim();
+        // Firebase에서 plantName 가져오기
+        if (user != null) {
+            getProfileImageFromFirebase();
+        } else {
+            Log.e("looking_text", "User not authenticated.");
+        }
 
-            if (!userInput.isEmpty()) {
-                // Proceed to the next step or save the text input
-                // Example: move to the next screen or save data to Firebase
-                uploadImageToStorage(null);
-            }
-        });
-        ;
-
-        Button nextButton3 = findViewById(R.id.nextButton3);
+        // nextButton 클릭 리스너 설정
         nextButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadImageToStorage(null);
-                Intent intent = new Intent(getApplicationContext(),looking_message.class);
-                startActivity(intent);
+                String userInput = inputEditText.getText().toString().trim();
+                if (!userInput.isEmpty()) {
+                    uploadImageToStorage(null);
+                    Intent intent = new Intent(getApplicationContext(), looking_message.class);
+                    startActivity(intent);
+                }
             }
         });
-
     }
-    // Firebase Storage에 이미지 업로드 및 데이터 만들기
+
+    private void getProfileImageFromFirebase() {
+        db.collection("users").document(auth.getCurrentUser().getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            String userPlantName = documentSnapshot.getString("plantName");
+                            if (plantName != null) {
+                                plantName.setText(userPlantName != null ? userPlantName : "식물 이름 없음");
+                            } else {
+                                Log.e("looking_text", "plantName TextView is null");
+                            }
+                        } else {
+                            Log.d("looking_text", "No such document in Firestore");
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("looking_text", "Error fetching plant name from Firebase", e);
+                    }
+                });
+    }
+
     private void uploadImageToStorage(Uri imageUri) {
-        // Firebase 초기화
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-        db = FirebaseFirestore.getInstance();
 
-        Log.d("user",user.getUid());
+        Log.d("user", user.getUid());
         String textActivity = inputEditText.getText().toString();
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         Intent thisIntent = getIntent();
         Map<String, Object> activity = new HashMap<>();
-        String description = "lookingquest" +timeStamp+"_"+user.getUid();
-        activity.put("activityDescription","lookingquest"); //waterquest, removequest, smellquest
+        String description = "lookingquest" + timeStamp + "_" + user.getUid();
+        activity.put("activityDescription", "lookingquest");
         activity.put("imageUrI", "");
-        activity.put("plantName", thisIntent.getStringExtra("plantName")); // Reference to the plant document
+        activity.put("plantName", thisIntent.getStringExtra("plantName"));
         activity.put("textActivity", textActivity);
         activity.put("timestamp", Timestamp.now());
-        activity.put("userId", user.getUid().toString());
+        activity.put("userId", user.getUid());
 
-        db.collection("activities").document(description)  // description을 문서 ID로 설정
-                .set(activity)  // 데이터를 저장
-                .addOnSuccessListener(new OnSuccessListener<Void>() {  // OnSuccessListener의 반환 타입은 Void
+        db.collection("activities").document(description)
+                .set(activity)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
-
-                        // 문서가 성공적으로 작성된 후, 해당 문서 참조를 다시 가져옴
                         db.collection("activities").document(description)
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -145,16 +157,13 @@ public class looking_text extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             DocumentSnapshot document = task.getResult();
                                             if (document.exists()) {
-                                                // 문서가 성공적으로 가져와졌을 때, Intent를 실행
                                                 Intent intent = new Intent(getApplicationContext(), looking_message.class);
                                                 startActivity(intent);
                                             } else {
                                                 Log.w(TAG, "No such document");
-                                                // 문서가 존재하지 않을 때 처리 (예: 사용자에게 메시지 표시)
                                             }
                                         } else {
                                             Log.w(TAG, "Error getting document", task.getException());
-                                            // 문서를 가져오는 중 에러 발생 처리 (예: 사용자에게 메시지 표시)
                                         }
                                     }
                                 });
@@ -164,10 +173,7 @@ public class looking_text extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error writing document", e);
-                        // Handle error gracefully (e.g., display a message)
                     }
                 });
     }
-
-
 }
