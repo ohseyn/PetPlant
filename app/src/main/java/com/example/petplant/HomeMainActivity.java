@@ -620,6 +620,9 @@ public class HomeMainActivity extends AppCompatActivity {
                 character_name.setText(plantName);
 
                 coin = documentSnapshot.getLong("coin");
+                if (coin == null) {
+                    coin = 0L;
+                }
                 shop_coin.setText(String.valueOf(coin));
 
                 // 가입일 확인 및 저장

@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="35dp"
-        android:background="@drawable/mynaui_bell"
+        android:background="@mipmap/mynaui_bell"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -88,8 +88,8 @@
 
     <ImageButton
         android:id="@+id/buttonNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="47dp"
+        android:layout_height="54dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:src="@drawable/ic_right"
@@ -99,8 +99,8 @@
 
     <ImageButton
         android:id="@+id/buttonPrevious"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="52dp"
+        android:layout_height="51dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/ic_left"
