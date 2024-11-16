@@ -43,16 +43,16 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
     @Override
     public void onBindViewHolder(@NonNull StoreItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         StoreItem currentItem = itemList.get(position);
-        holder.itemName.setText(currentItem.getName());
+        //holder.itemPrice.setText(currentItem.getName());
         holder.itemImage.setImageResource(currentItem.getImageResource());
 
         // 구매한 아이템인지 여부에 따라 표시 다르게 처리
         if (currentItem.isPurchased()) {
             holder.itemView.setAlpha(0.5f);  // 구매한 아이템은 반투명 처리
-            holder.itemName.setText("구매됨");
+            holder.itemPrice.setText("보유 중");
         } else {
             holder.itemView.setAlpha(1.0f);
-            holder.itemName.setText(currentItem.getName()); // 원래 이름 표시
+            holder.itemPrice.setText(currentItem.getPrice() + "");
         }
 
         // 아이템 클릭 시 처리
@@ -78,12 +78,12 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
     // 뷰홀더 클래스
     public static class StoreItemViewHolder extends RecyclerView.ViewHolder {
         public ImageView itemImage;
-        public TextView itemName;
+        public TextView itemPrice;
 
         public StoreItemViewHolder(@NonNull View itemView) {
             super(itemView);
             itemImage = itemView.findViewById(R.id.item_image);
-            itemName = itemView.findViewById(R.id.item_name);
+            itemPrice = itemView.findViewById(R.id.item_price);
         }
     }
 }

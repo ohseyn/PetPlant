@@ -343,28 +343,28 @@ public class StoreActivity extends AppCompatActivity {
     // 배경 아이템 리스트 생성
     private List<StoreItem> getBackgroundItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("기본", R.drawable.background_default, 0, "background"));
-        list.add(new StoreItem("겨울", R.drawable.background_winter, 70, "background"));
-        list.add(new StoreItem("해질녘", R.drawable.background_evening, 80, "background"));
-        list.add(new StoreItem("여름", R.drawable.background_summer, 90, "background"));
-        list.add(new StoreItem("봄날", R.drawable.background_spring, 100, "background"));
-        list.add(new StoreItem("밤하늘", R.drawable.background_night, 40, "background"));
-        list.add(new StoreItem("무지개", R.drawable.background_rainbow, 50, "background"));
-        list.add(new StoreItem("가을", R.drawable.background_fall, 30, "background"));
+        list.add(new StoreItem("무지개", R.drawable.background_rainbow, 200, "background"));
+        list.add(new StoreItem("해질녘", R.drawable.background_evening, 200, "background"));
+        list.add(new StoreItem("밤하늘", R.drawable.background_night, 250, "background"));
+        list.add(new StoreItem("오로라", R.drawable.background_aurora, 230, "background"));
+        list.add(new StoreItem("봄날", R.drawable.background_spring, 350, "background"));
+        list.add(new StoreItem("여름", R.drawable.background_summer, 380, "background"));
+        list.add(new StoreItem("가을", R.drawable.background_fall, 380, "background"));
+        list.add(new StoreItem("겨울", R.drawable.background_winter, 400, "background"));
         return list;
     }
 
     // 캐릭터 아이템 리스트 생성
     private List<StoreItem> getCharacterItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("멋쟁이 안경", R.drawable.tomato_glass, 100, "item"));
-        list.add(new StoreItem("굵은 수염", R.drawable.tomato_mustache, 120, "item"));
-        list.add(new StoreItem("멋쟁이 신사", R.drawable.tomato_gentle, 150, "item"));
-        list.add(new StoreItem("귀도리 모자", R.drawable.tomato_hat, 130, "item"));
-        list.add(new StoreItem("책가방", R.drawable.tomato_bag, 140, "item"));
-        list.add(new StoreItem("리본", R.drawable.tomato_bow, 160, "item"));
-        list.add(new StoreItem("잎사귀 우산", R.drawable.tomato_leaf, 110, "item"));
-        list.add(new StoreItem("선글라스", R.drawable.tomato_sunglasses, 180, "item"));
+        list.add(new StoreItem("멋쟁이 안경", R.drawable.tomato_glass, 150, "item"));
+        list.add(new StoreItem("굵은 수염", R.drawable.tomato_mustache, 150, "item"));
+        list.add(new StoreItem("리본", R.drawable.tomato_bow, 150, "item"));
+        list.add(new StoreItem("멋쟁이 신사", R.drawable.tomato_gentle, 180, "item"));
+        list.add(new StoreItem("책가방", R.drawable.tomato_bag, 180, "item"));
+        list.add(new StoreItem("선글라스", R.drawable.tomato_sunglasses, 200, "item"));
+        list.add(new StoreItem("귀도리 모자", R.drawable.tomato_hat, 200, "item"));
+        list.add(new StoreItem("잎사귀 우산", R.drawable.tomato_leaf, 230, "item"));
         return list;
     }
 
