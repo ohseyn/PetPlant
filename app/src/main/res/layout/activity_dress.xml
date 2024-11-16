@@ -151,7 +151,7 @@
         android:id="@+id/applyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-110dp"
+        android:layout_marginTop="-120dp"
         android:alpha="0.5"
         android:backgroundTint="#02AE7A"
         android:enabled="false"
