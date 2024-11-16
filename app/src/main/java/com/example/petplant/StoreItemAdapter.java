@@ -36,7 +36,15 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
     @Override
     public StoreItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // XML 파일을 뷰로 변환하여 뷰홀더에 전달
-        View view = LayoutInflater.from(context).inflate(R.layout.item_shop, parent, false);
+        // context를 통해 현재 화면이 StoreActivity인지 DressActivity인지 확인
+        boolean isStoreActivity = context instanceof StoreActivity;
+
+        // 레이아웃 파일을 화면에 따라 선택
+        int layoutResource = isStoreActivity ? R.layout.item_shop : R.layout.item_shop_no_coin;
+
+        // 선택된 레이아웃 파일을 inflate
+        View view = LayoutInflater.from(context).inflate(layoutResource, parent, false);
+        //View view = LayoutInflater.from(context).inflate(R.layout.item_shop, parent, false);
         return new StoreItemViewHolder(view);
     }
 
@@ -46,14 +54,26 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
         //holder.itemPrice.setText(currentItem.getName());
         holder.itemImage.setImageResource(currentItem.getImageResource());
 
-        // 구매한 아이템인지 여부에 따라 표시 다르게 처리
-        if (currentItem.isPurchased()) {
-            holder.itemView.setAlpha(0.5f);  // 구매한 아이템은 반투명 처리
-            holder.itemPrice.setText("보유 중");
-        } else {
-            holder.itemView.setAlpha(1.0f);
-            holder.itemPrice.setText(currentItem.getPrice() + "");
+        // 레이아웃에 따라 itemPrice가 있을 경우에만 설정
+        if (holder.itemPrice != null) {
+            // 구매한 아이템인지 여부에 따라 표시 다르게 처리
+            if (currentItem.isPurchased()) {
+                holder.itemView.setAlpha(0.5f);  // 구매한 아이템은 반투명 처리
+                holder.itemPrice.setText("보유 중");
+            } else {
+                holder.itemView.setAlpha(1.0f);
+                holder.itemPrice.setText(currentItem.getPrice() + ""); // 가격 표시
+            }
         }
+
+//        // 구매한 아이템인지 여부에 따라 표시 다르게 처리
+//        if (currentItem.isPurchased()) {
+//            holder.itemView.setAlpha(0.5f);  // 구매한 아이템은 반투명 처리
+//            holder.itemPrice.setText("보유 중");
+//        } else {
+//            holder.itemView.setAlpha(1.0f);
+//            holder.itemPrice.setText(currentItem.getPrice() + "");
+//        }
 
         // 아이템 클릭 시 처리
         holder.itemView.setOnClickListener(v -> {
