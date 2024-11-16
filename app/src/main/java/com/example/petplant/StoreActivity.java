@@ -343,28 +343,28 @@ public class StoreActivity extends AppCompatActivity {
     // 배경 아이템 리스트 생성
     private List<StoreItem> getBackgroundItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("무지개", R.drawable.background_rainbow, 200, "background"));
-        list.add(new StoreItem("해질녘", R.drawable.background_evening, 200, "background"));
-        list.add(new StoreItem("밤하늘", R.drawable.background_night, 250, "background"));
-        list.add(new StoreItem("오로라", R.drawable.background_aurora, 230, "background"));
-        list.add(new StoreItem("봄날", R.drawable.background_spring, 350, "background"));
-        list.add(new StoreItem("여름", R.drawable.background_summer, 380, "background"));
-        list.add(new StoreItem("가을", R.drawable.background_fall, 380, "background"));
-        list.add(new StoreItem("겨울", R.drawable.background_winter, 400, "background"));
+        list.add(new StoreItem("무지개", R.drawable.icon_rainbow, R.drawable.background_rainbow, 200, "background"));
+        list.add(new StoreItem("해질녘", R.drawable.icon_evening, R.drawable.background_evening, 200, "background"));
+        list.add(new StoreItem("밤하늘", R.drawable.icon_night, R.drawable.background_night, 250, "background"));
+        list.add(new StoreItem("오로라", R.drawable.icon_aurora, R.drawable.background_aurora, 230, "background"));
+        list.add(new StoreItem("봄날", R.drawable.icon_spring, R.drawable.background_spring, 350, "background"));
+        list.add(new StoreItem("여름", R.drawable.icon_summer, R.drawable.background_summer, 380, "background"));
+        list.add(new StoreItem("가을", R.drawable.icon_fall, R.drawable.background_fall, 380, "background"));
+        list.add(new StoreItem("겨울", R.drawable.icon_winter, R.drawable.background_winter, 400, "background"));
         return list;
     }
 
     // 캐릭터 아이템 리스트 생성
     private List<StoreItem> getCharacterItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("멋쟁이 안경", R.drawable.tomato_glass, 150, "item"));
-        list.add(new StoreItem("굵은 수염", R.drawable.tomato_mustache, 150, "item"));
-        list.add(new StoreItem("리본", R.drawable.tomato_bow, 150, "item"));
-        list.add(new StoreItem("멋쟁이 신사", R.drawable.tomato_gentle, 180, "item"));
-        list.add(new StoreItem("책가방", R.drawable.tomato_bag, 180, "item"));
-        list.add(new StoreItem("선글라스", R.drawable.tomato_sunglasses, 200, "item"));
-        list.add(new StoreItem("귀도리 모자", R.drawable.tomato_hat, 200, "item"));
-        list.add(new StoreItem("잎사귀 우산", R.drawable.tomato_leaf, 230, "item"));
+        list.add(new StoreItem("멋쟁이 안경", R.drawable.icon_glass, R.drawable.tomato_glass, 150, "item"));
+        list.add(new StoreItem("굵은 수염", R.drawable.icon_mustache, R.drawable.tomato_mustache, 150, "item"));
+        list.add(new StoreItem("리본", R.drawable.icon_bow, R.drawable.tomato_bow, 150, "item"));
+        list.add(new StoreItem("멋쟁이 신사", R.drawable.icon_gentle, R.drawable.tomato_gentle, 180, "item"));
+        list.add(new StoreItem("책가방", R.drawable.icon_bag, R.drawable.tomato_bag, 180, "item"));
+        list.add(new StoreItem("선글라스", R.drawable.icon_sunglasses, R.drawable.tomato_sunglasses, 200, "item"));
+        list.add(new StoreItem("귀도리 모자", R.drawable.icon_hat, R.drawable.tomato_hat, 200, "item"));
+        list.add(new StoreItem("잎사귀 우산", R.drawable.icon_leaf, R.drawable.tomato_leaf, 230, "item"));
         return list;
     }
 
@@ -381,12 +381,10 @@ public class StoreActivity extends AppCompatActivity {
 
         // 선택된 아이템이나 배경에 따라 이미지와 이름 설정
         if (selectedItem != null) {
-            itemImage.setImageResource(selectedItem.getImageResource());
-            //itemName.setText(selectedItem.getName());
+            itemImage.setImageResource(selectedItem.getIconImageResource());
             itemPrice.setText(String.valueOf(selectedItem.getPrice()));
         } else if (selectedBackground != null) {
-            itemImage.setImageResource(selectedBackground.getImageResource());
-            //itemName.setText(selectedBackground.getName());
+            itemImage.setImageResource(selectedBackground.getIconImageResource());
             itemPrice.setText(String.valueOf(selectedBackground.getPrice()));
         }
 
@@ -423,11 +421,9 @@ public class StoreActivity extends AppCompatActivity {
 
         // 선택된 아이템이나 배경이 null이 아닌 경우에만 이미지를 설정
         if (selectedItem != null) {
-            itemImage.setImageResource(selectedItem.getImageResource());
-            //itemName.setText(selectedItemName);
+            itemImage.setImageResource(selectedItem.getIconImageResource());
         } else if (selectedBackground != null) {
-            itemImage.setImageResource(selectedBackground.getImageResource());
-            //itemName.setText(selectedItemName);
+            itemImage.setImageResource(selectedBackground.getIconImageResource());
         }
 
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -472,11 +468,13 @@ public class StoreActivity extends AppCompatActivity {
 
         if (selectedItem != null) {
             purchasedItem.put("itemName", selectedItem.getName());
+            purchasedItem.put("iconImage", selectedItem.getIconImageResource());
             purchasedItem.put("itemImage", selectedItem.getImageResource());
             purchasedItem.put("itemPrice", selectedItem.getPrice());
             purchasedItem.put("type", "item"); // item으로 설정
         } else if (selectedBackground != null) {
             purchasedItem.put("itemName", selectedBackground.getName());
+            purchasedItem.put("iconImage", selectedBackground.getIconImageResource());
             purchasedItem.put("itemImage", selectedBackground.getImageResource());
             purchasedItem.put("itemPrice", selectedBackground.getPrice());
             purchasedItem.put("type", "background"); // background로 설정
