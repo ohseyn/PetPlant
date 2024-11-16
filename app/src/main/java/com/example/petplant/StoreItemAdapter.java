@@ -51,7 +51,7 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
     @Override
     public void onBindViewHolder(@NonNull StoreItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         StoreItem currentItem = itemList.get(position);
-        holder.itemImage.setImageResource(currentItem.getImageResource());
+        holder.itemImage.setImageResource(currentItem.getIconImageResource());
 
         if (currentItem.isPurchased()) {
             // 보유 중인 상태

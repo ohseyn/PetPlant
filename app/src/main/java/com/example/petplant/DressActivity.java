@@ -177,20 +177,51 @@ public class DressActivity extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots) {
+                        // Firestore에서 각 필드 값을 가져옴
                         String itemName = document.getString("itemName");
-                        int itemImage = document.getLong("itemImage").intValue();
-                        int itemPrice = document.getLong("itemPrice").intValue();
-                        String itemType = document.getString("type"); // Firestore에 저장된 type 필드 확인
+                        Long iconImageLong = document.getLong("iconImage");
+                        Long itemImageLong = document.getLong("itemImage");
+                        int itemPrice = document.contains("itemPrice") ? document.getLong("itemPrice").intValue() : 0;
+                        String itemType = document.getString("type");
 
-                        StoreItem item = new StoreItem(itemName, itemImage, itemPrice, itemType);
+                        // Null 체크 및 기본값 설정
+                        int iconImage = iconImageLong != null ? iconImageLong.intValue() : R.drawable.icon_default;
+                        int itemImage = itemImageLong != null ? itemImageLong.intValue() : R.drawable.tomato_character_default;
+
+                        // StoreItem 객체 생성
+                        StoreItem item = new StoreItem(itemName, iconImage, itemImage, itemPrice, itemType);
+
+                        // 아이템이 배경인지 일반 아이템인지 판별하여 리스트에 추가
                         if (item.isBackground()) {
-                            backgroundList.add(item); // 배경일 경우 backgroundList에 추가
+                            backgroundList.add(item);
                         } else if (item.isItem()) {
-                            itemList.add(item); // 아이템일 경우 itemList에 추가
+                            itemList.add(item);
                         }
                     }
-                    adapter.updateItemList(backgroundList);
-                });
+                    adapter.updateItemList(backgroundList); // 기본적으로 배경 리스트를 업데이트
+                })
+                .addOnFailureListener(e -> Log.e("DressActivity", "구매한 아이템을 불러오는 중 오류 발생", e));
+//        String userId = auth.getCurrentUser().getUid();
+//        db.collection("users").document(userId).collection("purchases")
+//                .get()
+//                .addOnSuccessListener(queryDocumentSnapshots -> {
+//                    for (DocumentSnapshot document : queryDocumentSnapshots) {
+//                        String itemName = document.getString("itemName");
+//                        int iconImage = document.getLong("iconImage").intValue();
+//                        int itemImage = document.getLong("itemImage").intValue();
+//                        int itemPrice = document.getLong("itemPrice").intValue();
+//                        String itemType = document.getString("type"); // Firestore에 저장된 type 필드 확인
+//
+//                        StoreItem item = new StoreItem(itemName, iconImage, itemImage, itemPrice, itemType);
+//                        if (item.isBackground()) {
+//                            backgroundList.add(item); // 배경일 경우 backgroundList에 추가
+//                        } else if (item.isItem()) {
+//                            itemList.add(item); // 아이템일 경우 itemList에 추가
+//                        }
+//                    }
+//                    adapter.updateItemList(backgroundList);
+//                })
+//                .addOnFailureListener(e -> Log.e("DressActivity", "구매한 아이템을 불러오는 중 오류 발생", e));
     }
 
     private void saveDesignToFirestore(StoreItem background, StoreItem item) {
@@ -198,12 +229,16 @@ public class DressActivity extends AppCompatActivity {
 
         if (background != null) {
             db.collection("users").document(userId)
-                    .update("selectedBackground", background.getName(), "selectedBackgroundImage", background.getImageResource())
+                    .update("selectedBackground", background.getName(),
+                            "selectedBackgroundIconImage", background.getIconImageResource(),
+                            "selectedBackgroundImage", background.getImageResource())
                     .addOnSuccessListener(aVoid -> Log.d("DressActivity", "배경 디자인이 저장되었습니다."));
         }
         if (item != null) {
             db.collection("users").document(userId)
-                    .update("selectedItem", item.getName(), "selectedItemImage", item.getImageResource())
+                    .update("selectedItem", item.getName(),
+                            "selectedItemIconImage", item.getIconImageResource(),
+                            "selectedItemImage", item.getImageResource())
                     .addOnSuccessListener(aVoid -> Log.d("DressActivity", "아이템 디자인이 저장되었습니다."));
         }
     }
