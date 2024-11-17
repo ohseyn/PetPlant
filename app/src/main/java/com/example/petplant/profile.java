@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -15,11 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -149,27 +155,46 @@ public class profile extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
+                            // 프로필 이미지 URI 가져오기
                             String profileImageUri = documentSnapshot.getString("profileImageUrl");
-
-                            // 로그로 Firebase에서 가져온 프로필 이미지 URI 확인
-                            Log.d("profile", "Firebase profileImageUri: " + profileImageUri);
-
-                            if (profileImageUri != null && !profileImageUri.isEmpty()) {
-                                Glide.with(profile.this).load(profileImageUri).into(profileImage);
-                            } else {
-                                profileImage.setImageResource(R.drawable.profile_frame);  // 기본 이미지 설정
-                            }
 
                             // 사용자 이름과 식물 이름 설정
                             String userName = documentSnapshot.getString("name");
                             String userPlantName = documentSnapshot.getString("plantName");
-                            String userclassname = documentSnapshot.getString("classname");
+                            String userClassName = documentSnapshot.getString("classname");
+
+                            // 사용자 이름과 식물 이름이 null인지 확인 후 설정
                             name.setText(userName != null ? userName : "이름 없음");
-                            classname.setText(userclassname != null ? userclassname : "이름 없음");
                             plantName.setText(userPlantName != null ? userPlantName : "식물 이름 없음");
+                            classname.setText(userClassName != null ? userClassName : "상태메시지 없음");
+
+                            // Glide로 프로필 이미지 로드
+                            Glide.with(profile.this)
+                                    .load(profileImageUri)
+                                    .error(R.drawable.profile_frame) // 로드 실패 시 기본 이미지 설정
+                                    .listener(new RequestListener<Drawable>() {
+                                        @Override
+                                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                            Log.e("GlideError", "이미지 로드 실패", e);
+                                            return false; // 기본 이미지 표시
+                                        }
+
+                                        @Override
+                                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                            return false;
+                                        }
+                                    })
+                                    .into(profileImage);
+
                         } else {
                             Log.d("ProfileActivity", "No such document in Firestore");
                         }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("ProfileActivity", "데이터 가져오기 실패", e);
                     }
                 });
     }
