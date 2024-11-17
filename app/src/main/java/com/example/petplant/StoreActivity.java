@@ -127,47 +127,103 @@ public class StoreActivity extends AppCompatActivity {
 
         // 선택된 아이템이 구매된 상태인지 확인 후 토스트 메시지 출력
         adapter = new StoreItemAdapter(this, backgroundList, item -> {
-            if (item.isPurchased()) {
-                Toast.makeText(this, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
-                selectedItem = null; // 선택된 아이템 초기화
+            if (item == null) {
+                // 선택 해제 로직
+                restoreSavedBackground();
+                restoreSavedCharacter();
                 selectedBackground = null;
-                buyButton.setEnabled(false); // 버튼 비활성화
-                buyButton.setAlpha(0.5f);   // 버튼 투명도 조정
-            } else {
-                // 선택된 아이템이 이미 선택된 상태인지 확인
+                selectedItem = null;
+                buyButton.setEnabled(false);
+                buyButton.setAlpha(0.5f);
+                return;
+            }
+
+            if (item.isPurchased()) {
+                // 이미 구매한 아이템 클릭 시 처리
+                Toast.makeText(this, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (backgroundList.contains(item)) {
+                // 배경 아이템 선택 또는 해제
                 if (selectedBackground != null && selectedBackground.equals(item)) {
-                    // 선택된 배경을 다시 클릭할 경우 해제
+                    // 배경 선택 해제
                     selectedBackground = null;
-                    loadSelectedDesign(); // 저장된 배경 이미지로 복원
-                    buyButton.setEnabled(false); // 버튼 비활성화
-                    buyButton.setAlpha(0.5f);   // 투명도 조정
-                } else if (selectedItem != null && selectedItem.equals(item)) {
-                    // 선택된 캐릭터 아이템을 다시 클릭할 경우 해제
-                    selectedItem = null;
-                    loadSelectedDesign(); // 저장된 캐릭터 이미지로 복원
-                    buyButton.setEnabled(false); // 버튼 비활성화
-                    buyButton.setAlpha(0.5f);   // 투명도 조정
+                    // 사용자가 저장한 배경 상태로 복원
+                    restoreSavedBackground();
                 } else {
-                    // 새로 선택된 경우
-                    selectedItemPrice = item.getPrice();
-                    selectedItemName = item.getName();
-                    buyButton.setEnabled(true);
-                    buyButton.setAlpha(1.0f);
-                    if (backgroundList.contains(item)) {
-                        selectedBackground = item;
-                        storeLayout.setBackgroundResource(item.getImageResource());
-                        selectedItem = null; // 캐릭터 아이템 초기화
-                    } else {
-                        selectedItem = item;
-                        // onCreate 내에서 인텐트로 전달된 캐릭터 이미지 적용
-                        int characterImageResource = getIntent().getIntExtra("characterImage", R.drawable.tomato_character_home);
-                        characterImage.setImageResource(item.getImageResource());
-                        selectedBackground = null; // 배경 초기화
-                    }
+                    // 배경 선택
+                    selectedBackground = item;
+                    storeLayout.setBackgroundResource(item.getImageResource());
+                }
+            } else if (itemList.contains(item)) {
+                // 캐릭터 아이템 선택 또는 해제
+                if (selectedItem != null && selectedItem.equals(item)) {
+                    // 캐릭터 아이템 선택 해제
+                    selectedItem = null;
+                    // 사용자가 저장한 캐릭터 상태로 복원
+                    restoreSavedCharacter();
+                } else {
+                    // 캐릭터 아이템 선택
+                    selectedItem = item;
+                    characterImage.setImageResource(item.getImageResource());
                 }
             }
+
+            // 버튼 활성화/비활성화 상태 갱신
+            if (selectedBackground != null || selectedItem != null) {
+                buyButton.setEnabled(true);
+                buyButton.setAlpha(1.0f);
+            } else {
+                buyButton.setEnabled(false);
+                buyButton.setAlpha(0.5f);
+            }
+
+            // RecyclerView 갱신 (UI 업데이트)
             adapter.notifyDataSetChanged();
         });
+//        adapter = new StoreItemAdapter(this, backgroundList, item -> {
+//            if (item.isPurchased()) {
+//                Toast.makeText(this, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
+//                selectedItem = null; // 선택된 아이템 초기화
+//                selectedBackground = null;
+//                buyButton.setEnabled(false); // 버튼 비활성화
+//                buyButton.setAlpha(0.5f);   // 버튼 투명도 조정
+//            } else {
+//                // 선택된 아이템이 이미 선택된 상태인지 확인
+//                if (selectedBackground != null && selectedBackground.equals(item)) {
+//                    // 선택된 배경을 다시 클릭할 경우 해제
+//                    selectedBackground = null;
+//                    loadSelectedDesign(); // 저장된 배경 이미지로 복원
+//                    buyButton.setEnabled(false); // 버튼 비활성화
+//                    buyButton.setAlpha(0.5f);   // 투명도 조정
+//                } else if (selectedItem != null && selectedItem.equals(item)) {
+//                    // 선택된 캐릭터 아이템을 다시 클릭할 경우 해제
+//                    selectedItem = null;
+//                    loadSelectedDesign(); // 저장된 캐릭터 이미지로 복원
+//                    buyButton.setEnabled(false); // 버튼 비활성화
+//                    buyButton.setAlpha(0.5f);   // 투명도 조정
+//                } else {
+//                    // 새로 선택된 경우
+//                    selectedItemPrice = item.getPrice();
+//                    selectedItemName = item.getName();
+//                    buyButton.setEnabled(true);
+//                    buyButton.setAlpha(1.0f);
+//                    if (backgroundList.contains(item)) {
+//                        selectedBackground = item;
+//                        storeLayout.setBackgroundResource(item.getImageResource());
+//                        selectedItem = null; // 캐릭터 아이템 초기화
+//                    } else {
+//                        selectedItem = item;
+//                        // onCreate 내에서 인텐트로 전달된 캐릭터 이미지 적용
+//                        // int characterImageResource = getIntent().getIntExtra("characterImage", R.drawable.tomato_character_home);
+//                        characterImage.setImageResource(item.getImageResource());
+//                        selectedBackground = null; // 배경 초기화
+//                    }
+//                }
+//            }
+//            adapter.notifyDataSetChanged();
+//        });
         recyclerView.setAdapter(adapter);
 
         // TabLayout 설정
@@ -298,28 +354,28 @@ public class StoreActivity extends AppCompatActivity {
     // 배경 아이템 리스트 생성
     private List<StoreItem> getBackgroundItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("무지개", R.drawable.icon_rainbow, R.drawable.background_rainbow, 200, "background"));
-        list.add(new StoreItem("해질녘", R.drawable.icon_evening, R.drawable.background_evening, 200, "background"));
-        list.add(new StoreItem("밤하늘", R.drawable.icon_night, R.drawable.background_night, 250, "background"));
-        list.add(new StoreItem("오로라", R.drawable.icon_aurora, R.drawable.background_aurora, 230, "background"));
-        list.add(new StoreItem("봄날", R.drawable.icon_spring, R.drawable.background_spring, 350, "background"));
-        list.add(new StoreItem("여름", R.drawable.icon_summer, R.drawable.background_summer, 380, "background"));
-        list.add(new StoreItem("가을", R.drawable.icon_fall, R.drawable.background_fall, 380, "background"));
-        list.add(new StoreItem("겨울", R.drawable.icon_winter, R.drawable.background_winter, 400, "background"));
+        list.add(new StoreItem("무지개", R.mipmap.icon_rainbow, R.drawable.background_rainbow, 200, "background"));
+        list.add(new StoreItem("해질녘", R.mipmap.icon_evening, R.drawable.background_evening, 200, "background"));
+        list.add(new StoreItem("밤하늘", R.mipmap.icon_night, R.drawable.background_night, 250, "background"));
+        list.add(new StoreItem("오로라", R.mipmap.icon_aurora, R.drawable.background_aurora, 230, "background"));
+        list.add(new StoreItem("봄날", R.mipmap.icon_spring, R.drawable.background_spring, 350, "background"));
+        list.add(new StoreItem("여름", R.mipmap.icon_summer, R.drawable.background_summer, 380, "background"));
+        list.add(new StoreItem("가을", R.mipmap.icon_fall, R.drawable.background_fall, 380, "background"));
+        list.add(new StoreItem("겨울", R.mipmap.icon_winter, R.drawable.background_winter, 400, "background"));
         return list;
     }
 
     // 캐릭터 아이템 리스트 생성
     private List<StoreItem> getCharacterItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("멋쟁이 안경", R.drawable.icon_glass, R.drawable.tomato_glass, 150, "item"));
-        list.add(new StoreItem("굵은 수염", R.drawable.icon_mustache, R.drawable.tomato_mustache, 150, "item"));
-        list.add(new StoreItem("리본", R.drawable.icon_bow, R.drawable.tomato_bow, 150, "item"));
-        list.add(new StoreItem("멋쟁이 신사", R.drawable.icon_gentle, R.drawable.tomato_gentle, 180, "item"));
-        list.add(new StoreItem("책가방", R.drawable.icon_bag, R.drawable.tomato_bag, 180, "item"));
-        list.add(new StoreItem("선글라스", R.drawable.icon_sunglasses, R.drawable.tomato_sunglasses, 200, "item"));
-        list.add(new StoreItem("귀도리 모자", R.drawable.icon_hat, R.drawable.tomato_hat, 200, "item"));
-        list.add(new StoreItem("잎사귀 우산", R.drawable.icon_leaf, R.drawable.tomato_leaf, 230, "item"));
+        list.add(new StoreItem("멋쟁이 안경", R.mipmap.icon_glass, R.drawable.tomato_glass, 150, "item"));
+        list.add(new StoreItem("굵은 수염", R.mipmap.icon_mustache, R.drawable.tomato_mustache, 150, "item"));
+        list.add(new StoreItem("리본", R.mipmap.icon_bow, R.drawable.tomato_bow, 150, "item"));
+        list.add(new StoreItem("멋쟁이 신사", R.mipmap.icon_gentle, R.drawable.tomato_gentle, 180, "item"));
+        list.add(new StoreItem("책가방", R.mipmap.icon_bag, R.drawable.tomato_bag, 180, "item"));
+        list.add(new StoreItem("선글라스", R.mipmap.icon_sunglasses, R.drawable.tomato_sunglasses, 200, "item"));
+        list.add(new StoreItem("귀도리 모자", R.mipmap.icon_hat, R.drawable.tomato_hat, 200, "item"));
+        list.add(new StoreItem("잎사귀 우산", R.mipmap.icon_leaf, R.drawable.tomato_leaf, 230, "item"));
         return list;
     }
 
@@ -491,5 +547,37 @@ public class StoreActivity extends AppCompatActivity {
     // 코인 값 업데이트 함수
     private void updateCoinTextView() {
         shopCoinTextView.setText(String.valueOf(coin));
+    }
+
+    private void restoreSavedBackground() {
+        db.collection("users").document(user.getUid())
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    if (snapshot.exists()) {
+                        Long savedBackgroundResource = snapshot.getLong("selectedBackgroundImage");
+                        if (savedBackgroundResource != null) {
+                            storeLayout.setBackgroundResource(savedBackgroundResource.intValue());
+                        } else {
+                            storeLayout.setBackgroundResource(R.drawable.background_default); // 기본 배경
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> Log.e("StoreActivity", "Failed to restore background", e));
+    }
+
+    private void restoreSavedCharacter() {
+        db.collection("users").document(user.getUid())
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    if (snapshot.exists()) {
+                        Long savedCharacterResource = snapshot.getLong("selectedItemImage");
+                        if (savedCharacterResource != null) {
+                            characterImage.setImageResource(savedCharacterResource.intValue());
+                        } else {
+                            characterImage.setImageResource(R.drawable.tomato_character_default); // 기본 캐릭터
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> Log.e("StoreActivity", "Failed to restore character", e));
     }
 }

@@ -7,7 +7,7 @@
 
     <style name="RoundedCorners" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item> <!-- 둥근 정도 설정 -->
+        <item name="cornerSize">8dp</item> <!-- 둥근 정도 설정 -->
     </style>
 
     <style name="CustomTabLayoutStyle" parent="Widget.Design.TabLayout">

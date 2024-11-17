@@ -3,6 +3,7 @@ package com.example.petplant;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
     private List<StoreItem> itemList;
     private OnItemClickListener onItemClickListener;
     private int selectedPosition = RecyclerView.NO_POSITION; // 선택된 아이템 저장
+    private int selectedItemPosition = RecyclerView.NO_POSITION; // 선택된 아이템 위치
+    private int selectedBackgroundPosition = RecyclerView.NO_POSITION; // 선택된 배경 위치
 
     // 인터페이스 정의 (아이템 클릭 시 호출)
     public interface OnItemClickListener {
@@ -52,6 +55,12 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
     @Override
     public void onBindViewHolder(@NonNull StoreItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         StoreItem currentItem = itemList.get(position);
+
+        if (currentItem == null) {
+            Log.e("StoreItemAdapter", "currentItem is null at position: " + position);
+            return; // 아이템이 null이면 처리 중단
+        }
+
         holder.itemImage.setImageResource(currentItem.getIconImageResource());
 
         if (currentItem.isPurchased()) {
@@ -74,7 +83,7 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
             holder.itemImage.setAlpha(1.0f); // 이미지 투명도 초기화
 
             // 선택된 아이템 가시화 (초록 테두리 및 연한 초록 필터)
-            if (selectedPosition == position) {
+            if (position == selectedItemPosition || position == selectedBackgroundPosition) {
                 holder.itemImage.setBackgroundResource(R.drawable.green_border); // 초록 테두리 drawable 추가 필요
                 holder.itemImage.setColorFilter(Color.parseColor("#1A02AE7A")); // 연한 초록색 필터 (opacity 10%)
             } else {
@@ -93,25 +102,77 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
             }
         }
 
-        // 아이템 클릭 시 처리
+        // 클릭 리스너
         holder.itemView.setOnClickListener(v -> {
-            if (currentItem.isPurchased()) {
-                Toast.makeText(context, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
-            } else {
-                // 선택 상태 업데이트
-                int previousPosition = selectedPosition;
-                selectedPosition = position; // 현재 선택된 위치 저장
-
-                // 이전 위치와 현재 위치의 뷰를 갱신
-                notifyItemChanged(previousPosition);
-                notifyItemChanged(selectedPosition);
-
-                onItemClickListener.onItemClick(currentItem); // 클릭 이벤트 전달
-//                selectedPosition = position; // 현재 선택된 위치 저장
-//                onItemClickListener.onItemClick(currentItem); // 구매되지 않은 경우에만 선택 이벤트 처리
-//                notifyDataSetChanged(); // 뷰 갱신
-            }
+            handleItemClick(currentItem, position);
         });
+
+        // 아이템 클릭 시 처리
+//        holder.itemView.setOnClickListener(v -> {
+//            if (currentItem.isPurchased()) {
+//                Toast.makeText(context, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
+//            } else {
+//                // 선택 상태 업데이트
+//                int previousPosition = selectedPosition;
+//                selectedPosition = position; // 현재 선택된 위치 저장
+//
+//                // 이전 위치와 현재 위치의 뷰를 갱신
+//                notifyItemChanged(previousPosition);
+//                notifyItemChanged(selectedPosition);
+//
+//                onItemClickListener.onItemClick(currentItem); // 클릭 이벤트 전달
+////                selectedPosition = position; // 현재 선택된 위치 저장
+////                onItemClickListener.onItemClick(currentItem); // 구매되지 않은 경우에만 선택 이벤트 처리
+////                notifyDataSetChanged(); // 뷰 갱신
+//            }
+//        });
+    }
+
+    private void handleItemClick(StoreItem currentItem, int position) {
+        if (currentItem == null) {
+            Log.d("StoreItemAdapter", "handleItemClick: currentItem is null, position = " + position);
+            onItemClickListener.onItemClick(null); // 선택 해제로 처리
+            return;
+        }
+
+        if (currentItem.isPurchased()) {
+            Toast.makeText(context, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (currentItem.isBackground()) {
+            // 배경 선택/해제 처리
+            if (position == selectedBackgroundPosition) {
+                // 선택 해제: 저장된 배경 상태로 복원
+                int previousPosition = selectedBackgroundPosition;
+                selectedBackgroundPosition = RecyclerView.NO_POSITION;
+                notifyItemChanged(previousPosition); // 이전 선택 해제
+                onItemClickListener.onItemClick(null); // 선택 해제 콜백 호출
+            } else {
+                // 새로운 배경 선택
+                int previousPosition = selectedBackgroundPosition;
+                selectedBackgroundPosition = position;
+                notifyItemChanged(previousPosition); // 이전 선택 해제
+                notifyItemChanged(position); // 현재 선택 적용
+                onItemClickListener.onItemClick(currentItem); // 선택된 아이템 콜백 호출
+            }
+        } else if (currentItem.isItem()) {
+            // 캐릭터 아이템 선택/해제 처리
+            if (position == selectedItemPosition) {
+                // 선택 해제: 저장된 캐릭터 상태로 복원
+                int previousPosition = selectedItemPosition;
+                selectedItemPosition = RecyclerView.NO_POSITION;
+                notifyItemChanged(previousPosition); // 이전 선택 해제
+                onItemClickListener.onItemClick(null); // 선택 해제 콜백 호출
+            } else {
+                // 새로운 아이템 선택
+                int previousPosition = selectedItemPosition;
+                selectedItemPosition = position;
+                notifyItemChanged(previousPosition); // 이전 선택 해제
+                notifyItemChanged(position); // 현재 선택 적용
+                onItemClickListener.onItemClick(currentItem); // 선택된 아이템 콜백 호출
+            }
+        }
     }
 
     @Override
