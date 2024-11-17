@@ -54,6 +54,7 @@ public class artificial_introduce extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private FirebaseUser user;
+    private View loadingScreen; // 커스텀 로딩 화면을 위한 View
 
     private String ImageUrl;  // URL을 저장할 변수
     String timeStamp;
@@ -62,6 +63,11 @@ public class artificial_introduce extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artificialquestintroduce);
+
+        // UI 요소 초기화
+        Button button = findViewById(R.id.do_quest_artificial);
+        loadingScreen = findViewById(R.id.loading_screen); // 커스텀 로딩 화면 초기화
+
         // Firebase 초기화
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
@@ -69,14 +75,22 @@ public class artificial_introduce extends AppCompatActivity {
         user = auth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
 
-        // do_quest 버튼을 클릭하면 카메라를 호출
-        Button button = findViewById(R.id.do_quest_artificial);
+        // do_quest 버튼 클릭 시 사진 촬영 및 로딩 화면 표시
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showLoadingScreen(); // 로딩 화면 표시
                 requestPermissions();
             }
         });
+    }
+
+    private void showLoadingScreen() {
+        loadingScreen.setVisibility(View.VISIBLE); // 로딩 화면 보이기
+    }
+
+    private void hideLoadingScreen() {
+        loadingScreen.setVisibility(View.GONE); // 로딩 화면 숨기기
     }
 
     // 런타임 권한 요청 코드
@@ -103,6 +117,7 @@ public class artificial_introduce extends AppCompatActivity {
             } catch (IOException ex) {
                 ex.printStackTrace();
                 Log.e(TAG, "Error occurred while creating the File", ex);
+                hideLoadingScreen(); // 오류 시 로딩 화면 숨김
                 return;
             }
             if (photoFile != null) {
@@ -116,10 +131,12 @@ public class artificial_introduce extends AppCompatActivity {
                 takePictureLauncher.launch(takePictureIntent);
             } else {
                 Log.e(TAG, "Failed to create image file.");
+                hideLoadingScreen(); // 오류 시 로딩 화면 숨김
             }
         } else {
             Log.e(TAG, "No camera app found to handle the intent.");
             Toast.makeText(this, "카메라 앱이 없습니다. 다른 앱을 사용하거나 카메라 앱을 설치해주세요.", Toast.LENGTH_LONG).show();
+            hideLoadingScreen(); // 오류 시 로딩 화면 숨김
 
             // 이미지 선택을 위한 대체 코드
             Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -158,6 +175,7 @@ public class artificial_introduce extends AppCompatActivity {
                 dispatchTakePictureIntent();
             } else {
                 Toast.makeText(this, "카메라와 저장소 권한이 필요합니다.", Toast.LENGTH_SHORT).show();
+                hideLoadingScreen(); // 권한 거부 시 로딩 화면 숨김
             }
         }
     }
@@ -166,12 +184,11 @@ public class artificial_introduce extends AppCompatActivity {
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK) {
-                    // 사진이 정상적으로 저장되었습니다.
                     Log.d(TAG, "Photo saved to: " + currentPhotoPath);
-                    // 사진이 성공적으로 촬영되었을 때 업로드 실행
-                    uploadImageToStorage(null); // 현재 사진을 Firebase에 업로드
+                    uploadImageToStorage(null); // 사진 업로드 시작
                 } else {
                     Log.e(TAG, "Failed to take picture");
+                    hideLoadingScreen(); // 사진 촬영 실패 시 로딩 화면 숨김
                 }
             }
     );
@@ -184,34 +201,24 @@ public class artificial_introduce extends AppCompatActivity {
                     currentPhotoPath = selectedImageUri.toString();
                     if (selectedImageUri != null) {
                         Log.d(TAG, "Image selected: " + selectedImageUri.toString());
-
-                        // 사진 업로드 전에 로그 추가
-                        Log.d(TAG, "Uploading selected image to Firebase Storage...");
                         uploadImageToStorage(selectedImageUri); // 선택된 이미지를 업로드
                     } else {
                         Log.e(TAG, "No image selected");
+                        hideLoadingScreen(); // 이미지 선택 실패 시 로딩 화면 숨김
                     }
                 } else {
                     Log.e(TAG, "Failed to select image");
+                    hideLoadingScreen(); // 이미지 선택 실패 시 로딩 화면 숨김
                 }
             }
     );
 
-    // Firebase Storage에 이미지 업로드 및 데이터 만들기
     private void uploadImageToStorage(Uri imageUri) {
-        // Firebase 초기화
-        storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReference();
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-        db = FirebaseFirestore.getInstance();
-
         Log.d("user", user.getUid());
 
         Bitmap bitmap = null;
         Log.d("sss", imageUri != null ? imageUri.toString() : "No imageUri provided");
 
-        // URI가 null이 아닐 경우, URI에서 Bitmap을 생성
         if (imageUri != null) {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
@@ -222,9 +229,9 @@ public class artificial_introduce extends AppCompatActivity {
             bitmap = BitmapFactory.decodeFile(currentPhotoPath);
         }
 
-        // Bitmap이 null인지 확인 후 처리
         if (bitmap == null) {
             Log.e("UploadImage", "Bitmap is null, cannot upload image");
+            hideLoadingScreen(); // Bitmap이 null일 때 로딩 화면 숨김
             return;
         }
 
@@ -233,35 +240,24 @@ public class artificial_introduce extends AppCompatActivity {
         byte[] data = baos.toByteArray();
         timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
 
-        // Firestore에 저장된 userImageUrl 경로로 이미지 업로드
         StorageReference imageRef = storageRef.child("Images/artificialquest" + user.getUid() + timeStamp);
         UploadTask uploadTask = imageRef.putBytes(data);
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                // 업로드 실패 처리
                 Log.e("Home_removequest_introduce", "이미지 업로드 실패", exception);
+                hideLoadingScreen(); // 업로드 실패 시 로딩 화면 숨김
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // 업로드 성공하면 이미지 URL 및 퀘스트 정보 Firestore에 저장
                 imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri downloadUri) {
                         ImageUrl = downloadUri.toString();
-                        Log.d("ThirdOnboardingActivity", "Image URL: " + ImageUrl);  // 로그 추가
-                        Intent thisIntent = getIntent();
-                        Map<String, Object> activity = new HashMap<>();
-                        String description = "artificialquest" +timeStamp+"_"+user.getUid();
-                        activity.put("activityDescription","artificialquest"); //waterquest, removequest, smellquest
-                        activity.put("imageUrI", ImageUrl);
-                        activity.put("plantName", thisIntent.getStringExtra("plantName")); // Reference to the plant document
-                        activity.put("textActivity", "");
-                        activity.put("timestamp", Timestamp.now());
-                        activity.put("userId", user.getUid().toString());
-                        saveToFirestore(ImageUrl);  // Firestore에 데이터 저장
+                        Log.d("ThirdOnboardingActivity", "Image URL: " + ImageUrl);
+                        saveToFirestore(ImageUrl);
                     }
                 });
             }
@@ -272,31 +268,30 @@ public class artificial_introduce extends AppCompatActivity {
         Intent thisIntent = getIntent();
         Map<String, Object> activity = new HashMap<>();
         String description = "artificialquest" + timeStamp + "_" + user.getUid();
-        activity.put("activityDescription", "artificialquest"); //waterquest, removequest, smellquest
+        activity.put("activityDescription", "artificialquest");
         activity.put("imageUrI", imageUrl);
-        activity.put("plantName", thisIntent.getStringExtra("plantName")); // Reference to the plant document
+        activity.put("plantName", thisIntent.getStringExtra("plantName"));
         activity.put("textActivity", "");
         activity.put("timestamp", Timestamp.now());
         activity.put("userId", user.getUid());
 
-        db.collection("activities").document(description)  // description을 문서 ID로 설정
-                .set(activity)  // 데이터를 저장
-                .addOnSuccessListener(new OnSuccessListener<Void>() {  // OnSuccessListener의 반환 타입은 Void
+        db.collection("activities").document(description)
+                .set(activity)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
-
-                        // Firestore에 데이터 저장이 완료되었을 때 sandquest_message로 이동
-                        Log.d(TAG, "Navigating to sandquest_message...");
+                        hideLoadingScreen(); // Firestore 저장 후 로딩 화면 숨김
                         Intent intent = new Intent(artificial_introduce.this, artificialquest_message.class);
-                        intent.putExtra("photoPath", currentPhotoPath);  // 사진 경로 전달
-                        startActivity(intent);  // waterquest_message로 이동
+                        intent.putExtra("photoPath", currentPhotoPath);
+                        startActivity(intent);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error writing document", e);
+                        hideLoadingScreen(); // Firestore 저장 실패 시 로딩 화면 숨김
                     }
                 });
     }
