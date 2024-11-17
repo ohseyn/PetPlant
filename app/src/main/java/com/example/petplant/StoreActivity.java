@@ -144,6 +144,10 @@ public class StoreActivity extends AppCompatActivity {
                 return;
             }
 
+            // 아이템 선택 시 가격 설정
+            selectedItemPrice = item.getPrice();
+            selectedItemName = item.getName();
+
             if (backgroundList.contains(item)) {
                 // 배경 아이템 선택 또는 해제
                 if (selectedBackground != null && selectedBackground.equals(item)) {
