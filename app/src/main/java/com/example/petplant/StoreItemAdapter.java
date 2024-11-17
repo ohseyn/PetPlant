@@ -2,6 +2,7 @@ package com.example.petplant;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,8 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
 
         if (currentItem.isPurchased()) {
             // 보유 중인 상태
-            holder.itemImage.setAlpha(0.5f); // 아이콘 이미지에 투명도 설정
+            holder.itemImage.setAlpha(0.5f);
+            holder.itemImage.setBackground(null); // 테두리 제거
 
             if (holder.itemPrice != null) {
                 holder.itemPrice.setText("보유 중"); // "보유 중" 텍스트 설정
@@ -71,10 +73,19 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
             // 구매 가능한 상태
             holder.itemImage.setAlpha(1.0f); // 이미지 투명도 초기화
 
+            // 선택된 아이템 가시화 (초록 테두리 및 연한 초록 필터)
+            if (selectedPosition == position) {
+                holder.itemImage.setBackgroundResource(R.drawable.green_border); // 초록 테두리 drawable 추가 필요
+                holder.itemImage.setColorFilter(Color.parseColor("#1A02AE7A")); // 연한 초록색 필터 (opacity 10%)
+            } else {
+                holder.itemImage.setBackground(null);
+                holder.itemImage.setColorFilter(null); // 필터 제거
+            }
+
             if (holder.itemPrice != null) {
                 holder.itemPrice.setText(String.valueOf(currentItem.getPrice())); // 가격 표시
                 holder.itemPrice.setTextColor(context.getResources().getColor(android.R.color.holo_orange_light)); // 가격 글씨 색상 #FEC600
-                holder.itemPrice.setBackground(null); // 배경 제거
+                //holder.itemPrice.setBackground(null); // 배경 제거
             }
 
             if (holder.coinImage != null) {
@@ -87,7 +98,18 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
             if (currentItem.isPurchased()) {
                 Toast.makeText(context, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
             } else {
-                onItemClickListener.onItemClick(currentItem); // 구매되지 않은 경우에만 선택 이벤트 처리
+                // 선택 상태 업데이트
+                int previousPosition = selectedPosition;
+                selectedPosition = position; // 현재 선택된 위치 저장
+
+                // 이전 위치와 현재 위치의 뷰를 갱신
+                notifyItemChanged(previousPosition);
+                notifyItemChanged(selectedPosition);
+
+                onItemClickListener.onItemClick(currentItem); // 클릭 이벤트 전달
+//                selectedPosition = position; // 현재 선택된 위치 저장
+//                onItemClickListener.onItemClick(currentItem); // 구매되지 않은 경우에만 선택 이벤트 처리
+//                notifyDataSetChanged(); // 뷰 갱신
             }
         });
     }

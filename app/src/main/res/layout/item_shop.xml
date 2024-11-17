@@ -17,9 +17,10 @@
 
         <ImageView
             android:id="@+id/item_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:scaleType="centerCrop"/>
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/rounded_background"/>
 
         <TextView
             android:id="@+id/item_price"

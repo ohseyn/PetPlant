@@ -167,52 +167,7 @@ public class StoreActivity extends AppCompatActivity {
                 }
             }
             adapter.notifyDataSetChanged();
-//                // 새로 선택된 아이템이거나 구매되지 않은 경우
-//                if (selectedItem != null && selectedItem.equals(item)) {
-//                    selectedItem = null;
-//                    buyButton.setVisibility(View.GONE);
-//                } else {
-//                    selectedItem = item;
-//                    selectedItemPrice = item.getPrice();
-//                    selectedItemName = item.getName();
-//
-//                    // 선택한 아이템이 배경인지 아이템인지에 따라 다르게 표시
-//                    if (backgroundList.contains(item)) {
-//                        storeLayout.setBackgroundResource(item.getImageResource());
-//                    } else {
-//                        characterImage.setImageResource(item.getImageResource());
-//                    }
-//                    buyButton.setVisibility(View.VISIBLE);
-//                }
-//            }
-//            adapter.notifyDataSetChanged();
         });
-
-//        adapter = new StoreItemAdapter(this, backgroundList, item -> {
-//            if (selectedItem != null && selectedItem.equals(item)) {
-//                // 이미 선택된 아이템을 다시 선택한 경우 해제
-//                selectedItem = null;
-//                selectedItemPrice = 0;
-//                selectedItemName = "";
-//                buyButton.setVisibility(View.GONE);
-//            } else {
-//                // 새로운 아이템을 선택한 경우
-//                selectedItem = item;
-//                selectedItemPrice = item.getPrice();
-//                selectedItemName = item.getName();
-//                characterImage.setImageResource(item.getImageResource());
-//
-//                // 이미 구매한 아이템인지 확인
-//                if (item.isPurchased()) {
-//                    buyButton.setVisibility(View.GONE);
-//                    Toast.makeText(this, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    buyButton.setVisibility(View.VISIBLE);
-//                }
-//            }
-//            // 선택된 상태 업데이트
-//            adapter.notifyDataSetChanged();
-//        });
         recyclerView.setAdapter(adapter);
 
         // TabLayout 설정
