@@ -71,7 +71,7 @@
             android:layout_width="40dp"
             android:layout_height="37dp"
             android:layout_gravity="center"
-            android:background="@drawable/edit"
+            android:background="@mipmap/edit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

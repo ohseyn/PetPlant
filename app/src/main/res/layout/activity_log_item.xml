@@ -148,7 +148,7 @@
             android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="parent"
             android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/mynaui_smile" />
+            android:src="@mipmap/mynaui_smile" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

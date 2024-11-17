@@ -124,7 +124,7 @@
                             app:layout_constraintBottom_toTopOf="@+id/plant"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:srcCompat="@drawable/group877" />
+                            app:srcCompat="@mipmap/group877" />
 
                         <TextView
                             android:id="@+id/plant"
@@ -174,11 +174,11 @@
                             android:id="@+id/imageView5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="30dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/group878"
+                            app:srcCompat="@mipmap/group878"
                             tools:ignore="MissingConstraints" />
 
                         <TextView
@@ -395,7 +395,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
-                android:background="@drawable/mynaui_home2"
+                android:background="@mipmap/mynaui_home2"
                 app:layout_constraintStart_toStartOf="@+id/inbox"
                 app:layout_constraintEnd_toEndOf="@+id/profile"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -416,7 +416,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
-                android:background="@drawable/mynaui_user2"
+                android:background="@mipmap/mynaui_user2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="30dp"
@@ -437,7 +437,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
-                android:background="@drawable/mynaui_inbox2"
+                android:background="@mipmap/mynaui_inbox2"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
