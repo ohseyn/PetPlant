@@ -140,7 +140,7 @@ public class artificial_oxquiz_start extends AppCompatActivity {
 
     // 체크 아이콘 추가
     private void addCheckMark(Button button) {
-        Drawable checkMark = ContextCompat.getDrawable(this, R.drawable.ic_check);
+        Drawable checkMark = ContextCompat.getDrawable(this, R.mipmap.ic_check_blue);
         InsetDrawable insetDrawable = new InsetDrawable(checkMark, 30, 0, 0, 0);
         button.setCompoundDrawablesWithIntrinsicBounds(insetDrawable, null, null, null);
     }

@@ -74,8 +74,10 @@ public class water_oxquiz_start extends AppCompatActivity {
             public void onClick(View v) {
                 if (isFirstClick) {
                     if (!selectedButton.getText().toString().equals(CORRECT_ANSWER)) {
-                        setWrongButtonStyle(selectedButton);  // 오답 스타일 적용
-                        setCorrectButtonStyle(correctButton);  // 정답 스타일 적용
+                        setWrongButtonStyle(selectedButton);
+                        addCheckMark(selectedButton);// 오답 스타일 적용
+                        setCorrectButtonStyle(correctButton);
+                        addCheckMark(selectedButton);// 정답 스타일 적용
                     } else {
                         addCheckMark(selectedButton);  // 정답 선택 시 체크 아이콘 추가
                     }
@@ -133,7 +135,7 @@ public class water_oxquiz_start extends AppCompatActivity {
 
     // 체크 아이콘 추가
     private void addCheckMark(Button button) {
-        Drawable checkMark = ContextCompat.getDrawable(this, R.drawable.ic_check_green);
+        Drawable checkMark = ContextCompat.getDrawable(this, R.mipmap.ic_check_green);
         InsetDrawable insetDrawable = new InsetDrawable(checkMark, 30, 0, 0, 0);
         button.setCompoundDrawablesWithIntrinsicBounds(insetDrawable, null, null, null);
     }
