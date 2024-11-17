@@ -54,6 +54,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore")
     implementation ("com.google.firebase:firebase-storage")
     implementation ("com.google.firebase:firebase-messaging:23.0.0")
+    implementation ("com.google.android.material:material:1.9.0")
 }
 
 apply {

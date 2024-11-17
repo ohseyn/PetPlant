@@ -5,6 +5,10 @@
         <item name="colorPrimaryDark">#00000000</item>
     </style>
 
+    <style name="RoundedCorners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item> <!-- 둥근 정도 설정 -->
+    </style>
 
     <style name="CustomTabLayoutStyle" parent="Widget.Design.TabLayout">
         <item name="tabBackground">@drawable/tab_selector</item> <!-- 위에서 정의한 tab_selector.xml을 사용 -->
