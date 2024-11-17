@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:gravity="center"
             android:text="150"
             android:textColor="#FEC600"
@@ -43,7 +43,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="-18dp"
             android:layout_marginTop="-20dp"
-            android:background="@drawable/shop_coin"/>
+            android:background="@mipmap/shop_coin"/>
 
     </LinearLayout>
 

@@ -77,14 +77,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/storebar"
-        app:layout_constraintVertical_bias="0.371"
+        app:layout_constraintVertical_bias="0.351"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/dress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/paint"
+        android:background="@mipmap/paint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginEnd="22dp"
@@ -119,7 +119,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="420dp"
         android:background="@drawable/rectangle67"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -164,7 +164,7 @@
         android:id="@+id/buyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-150dp"
+        android:layout_marginTop="-180dp"
         android:backgroundTint="#02AE7A"
         android:focusable="true"
         android:text="구매하기"
@@ -173,7 +173,6 @@
         android:enabled="false"
         android:alpha="0.5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 

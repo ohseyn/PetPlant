@@ -69,7 +69,7 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
             holder.itemImage.setBackground(null); // 테두리 제거
 
             if (holder.itemPrice != null) {
-                holder.itemPrice.setText("보유 중"); // "보유 중" 텍스트 설정
+                holder.itemPrice.setText("보유중"); // "보유 중" 텍스트 설정
                 holder.itemPrice.setTextColor(context.getResources().getColor(android.R.color.darker_gray)); // 회색 글씨
                 holder.itemPrice.setGravity(View.TEXT_ALIGNMENT_CENTER); // 텍스트 중앙 정렬
                 holder.itemPrice.setBackgroundResource(R.drawable.text_background); // 중앙 정렬을 돕는 배경 추가
