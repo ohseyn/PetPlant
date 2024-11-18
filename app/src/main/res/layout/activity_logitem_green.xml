@@ -5,24 +5,27 @@
     android:id="@+id/cardViewActivity"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:backgroundTint="@android:color/transparent"
     android:layout_margin="8dp"
-    app:cardCornerRadius="20dp"
+    app:cardCornerRadius="13dp"
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:background="@drawable/log_green"
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/textActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="활동 종류"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
+            android:textColor="#46C140"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="10dp"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
@@ -36,17 +39,19 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="160dp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageActivity"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="10dp"
             android:scaleType="centerCrop"
             android:src="@drawable/guideimage1"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="35dp"
             app:layout_constraintVertical_bias="0.0"
             tools:ignore="MissingConstraints" />
 
@@ -59,6 +64,7 @@
             android:textColor="@android:color/black"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="160dp"
             app:layout_constraintTop_toTopOf="@+id/textActivityTitle"
             tools:ignore="MissingConstraints" />
 
@@ -78,11 +84,11 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="80dp"
+            android:layout_marginEnd="40dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="120dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="50dp"
             tools:ignore="MissingConstraints">
 
@@ -91,7 +97,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@android:color/darker_gray"
-                android:visibility="gone"/> <!-- 기본적으로 숨김 -->
+                android:visibility="gone"
+                /> <!-- 기본적으로 숨김 -->
 
             <View
                 android:id="@+id/viewSticker2"
@@ -99,7 +106,8 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:background="@android:color/darker_gray"
-                android:visibility="gone" /> <!-- 기본적으로 숨김 -->
+                android:visibility="gone"
+                /> <!-- 기본적으로 숨김 -->
 
             <FrameLayout
                 android:layout_width="40dp"
@@ -128,6 +136,7 @@
 
         </LinearLayout>
 
+
         <TextView
             android:id="@+id/textTime"
             android:layout_width="wrap_content"
@@ -135,8 +144,9 @@
             android:layout_gravity="center_vertical"
             android:text="오전 10:45"
             android:textColor="@android:color/darker_gray"
-            android:textSize="14sp"
+            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
@@ -144,11 +154,12 @@
             android:id="@+id/buttonLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/plantSort"
             android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
             android:backgroundTint="@android:color/transparent"
-            android:src="@mipmap/mynaui_smile" />
+            android:src="@mipmap/mynaui_smile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plantSort"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
