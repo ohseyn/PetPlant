@@ -132,6 +132,11 @@ public class  FriendList extends AppCompatActivity {
                             String userPlantName = documentSnapshot.getString("plantName");
                             String profileImageUri = documentSnapshot.getString("profileImageUrl");
 
+                            // 프로필 이미지 URI가 없을 경우 기본 이미지 설정
+                            if (profileImageUri == null || profileImageUri.isEmpty()) {
+                                profileImageUri = "android.resource://" + getPackageName() + "/" + R.drawable.profile_frame;
+                            }
+
                             Map<String, String> friendData = new HashMap<>();
                             friendData.put("id", documentSnapshot.getId());
                             friendData.put("name", userName);
@@ -149,6 +154,7 @@ public class  FriendList extends AppCompatActivity {
                     .addOnFailureListener(e -> Log.d("FriendList", "Error: " + e.getMessage()));
         }
     }
+
 
     // 친구 이름으로 검색하는 기능
     private void searchFriend(String friendName) {
