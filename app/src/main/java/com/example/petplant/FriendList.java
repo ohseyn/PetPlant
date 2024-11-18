@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FriendList extends AppCompatActivity {
+public class  FriendList extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private ArrayList<Map<String, String>> friendsInfo = new ArrayList<>();

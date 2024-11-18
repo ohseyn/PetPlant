@@ -17,13 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -96,9 +94,10 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         // 활동 항목 클릭 시 해당 다이얼로그 호출
         holder.itemView.setOnClickListener(v -> {
             String description = activity.getActivityDescription();
-            if ("waterquest".equals(description) || "artificialquest".equals(description) ||
-                    "sandquest".equals(description) || "removequest".equals(description)) {
+            if ("sandquest".equals(description) || "artificialquest".equals(description)) {
                 showPictureDialog(holder.itemView.getContext(), activity);
+            } else if("waterquest".equals(description) || "removequest".equals(description)) {
+                showPictureDialog2(holder.itemView.getContext(), activity);
             } else if ("smellquest".equals(description) || "lookingquest".equals(description) ||
                     "touchingquest".equals(description) || "talkingquest".equals(description)) {
                 showTextDialog(holder.itemView.getContext(), activity);
@@ -131,7 +130,7 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
     // 사진이 있는 다이얼로그를 띄우는 메서드
     private void showPictureDialog(Context context, UserActivity activity) {
         Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.activity_detail_picture);  // 사진이 있는 레이아웃
+        dialog.setContentView(R.layout.activity_detail_picture_blue);  // 사진이 있는 레이아웃
 
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
@@ -153,6 +152,42 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
 
         if (activity.getStickers() != null && !activity.getStickers().isEmpty()) {
              // 이전 뷰 제거
+
+            for (Sticker sticker : activity.getStickers()) {
+                // 새로운 뷰를 생성하여 스티커 추가
+                ImageView stickerView = new ImageView(context);
+                stickerView.setLayoutParams(new LinearLayout.LayoutParams(40, 40)); // 크기 설정
+                stickerView.setBackgroundResource(sticker.getDrawableResourceId()); // 스티커 리소스 설정
+            }
+        }
+
+        dialog.show();
+    }
+
+    private void showPictureDialog2(Context context, UserActivity activity) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.activity_detail_picture_green);  // 사진이 있는 레이아웃
+
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        TextView title = dialog.findViewById(R.id.textActivityTitle);
+        TextView plantName = dialog.findViewById(R.id.plantName);
+        TextView time = dialog.findViewById(R.id.textActivityTime);
+        ImageView imageActivity = dialog.findViewById(R.id.imageActivity);
+
+        title.setText(activity.getActivityDescription());
+        plantName.setText(activity.getPlantName());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault());
+        time.setText(sdf.format(activity.getTimestamp().toDate()));
+
+        if (activity.getImageUrI() != null && !activity.getImageUrI().isEmpty()) {
+            Glide.with(context).load(activity.getImageUrI()).into(imageActivity);
+        } else {
+            imageActivity.setImageResource(R.drawable.guideimage1);  // 기본 이미지 설정
+        }
+
+        if (activity.getStickers() != null && !activity.getStickers().isEmpty()) {
+            // 이전 뷰 제거
 
             for (Sticker sticker : activity.getStickers()) {
                 // 새로운 뷰를 생성하여 스티커 추가
