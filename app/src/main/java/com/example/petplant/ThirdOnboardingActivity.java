@@ -1,6 +1,5 @@
 package com.example.petplant;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -203,7 +201,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
 
 
     private void startProfileActivity() {
-        Intent intent = new Intent(ThirdOnboardingActivity.this, loadingactivity.class);
+        Intent intent = new Intent(ThirdOnboardingActivity.this, profile_loading.class);
         intent.putExtra("profileImageUri", profileImageUrl);  // 프로필 이미지 URI 전달
         intent.putExtra("name", nameInput.getText().toString());
         intent.putExtra("plantName", getIntent().getStringExtra("plantName"));

@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class loadingactivity extends AppCompatActivity {
+public class profile_loading extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class loadingactivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(loadingactivity.this, HomeMainActivity.class);
+                Intent intent = new Intent(profile_loading.this, HomeMainActivity.class);
                 intent.putExtras(getIntent().getExtras()); // 기존 인텐트의 데이터를 전달
                 startActivity(intent);
                 finish();
