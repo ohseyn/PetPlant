@@ -8,15 +8,13 @@
     android:background="@drawable/background_default"
     tools:context=".DressActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/storebar"
+    <ImageView
+        android:id="@+id/dressbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/storebar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/appbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
@@ -33,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/storebar"
+        app:layout_constraintTop_toBottomOf="@+id/dressbar"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -50,24 +48,25 @@
         app:layout_constraintHorizontal_bias="0.837"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dress_speech1"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"/>
 
     <ImageView
         android:id="@+id/characterImage"
         android:layout_width="238dp"
         android:layout_height="213dp"
-        android:layout_marginTop="224dp"
         android:src="@drawable/tomato_character_home"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/storebar"
+        app:layout_constraintTop_toBottomOf="@+id/dressbar"
+        app:layout_constraintVertical_bias="0.351"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -109,18 +108,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <Button-->
-<!--        android:id="@+id/applyButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:backgroundTint="#02AE7A"-->
-<!--        android:text="적용하기"-->
-<!--        android:textColor="@android:color/white"-->
-<!--        android:textSize="16sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/characterImage" />-->
-
     <ImageButton
         android:id="@+id/back_profile"
         android:layout_width="wrap_content"
@@ -135,7 +122,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="340dp"
+        android:layout_height="0dp"
         android:background="@drawable/rectangle67"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -143,7 +130,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         android:scrollbars="vertical"
-        android:scrollbarFadeDuration="0"
+        android:overScrollMode="always"
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
         tools:listitem="@layout/item_shop" />
 
@@ -151,7 +138,7 @@
         android:id="@+id/applyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-120dp"
+        android:layout_marginTop="-50dp"
         android:alpha="0.5"
         android:backgroundTint="#02AE7A"
         android:enabled="false"

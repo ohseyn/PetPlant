@@ -48,7 +48,6 @@ public class DressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dress);
 
         db = FirebaseFirestore.getInstance();
-
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
@@ -56,24 +55,32 @@ public class DressActivity extends AppCompatActivity {
         dressLayout = findViewById(R.id.dressLayout);
         characterImage = findViewById(R.id.characterImage);
         recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 
         applyButton = findViewById(R.id.applyButton);
         applyButton.setEnabled(false);
         applyButton.setAlpha(0.5f); // 비활성화 상태일 때 투명도 조정
 
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+
         loadCharacterImage();
         loadPurchasedItems();
 
         adapter = new StoreItemAdapter(this, new ArrayList<>(), item -> {
+            TabLayout.Tab currentTab = tabLayout.getTabAt(tabLayout.getSelectedTabPosition());
             if (backgroundList.contains(item)) {
                 selectedBackground = item;
                 dressLayout.setBackgroundResource(item.getImageResource());
+                if (currentTab != null && currentTab.getPosition() != 0) {
+                    tabLayout.selectTab(tabLayout.getTabAt(0)); // 강제로 배경 탭 선택
+                }
             } else if (itemList.contains(item)){
                 selectedItem = item;
-                // onCreate 내에서 인텐트로 전달된 캐릭터 이미지 적용
-                //int characterImageResource = getIntent().getIntExtra("characterImage", R.drawable.tomato_character_home);
                 characterImage.setImageResource(item.getImageResource());
+                if (currentTab != null && currentTab.getPosition() != 1) {
+                    tabLayout.selectTab(tabLayout.getTabAt(1)); // 강제로 아이템 탭 선택
+                }
             }
 
             // 초록색 테두리 및 적용 상태 업데이트
@@ -84,19 +91,13 @@ public class DressActivity extends AppCompatActivity {
                 storeItem.setCurrentlyApplied(storeItem == selectedItem);
             }
 
-            adapter.updateItemList(backgroundList);
-            adapter.updateItemList(itemList);
+            adapter.updateItemList(tabLayout.getSelectedTabPosition() == 0 ? backgroundList : itemList);
 
             // 적용하기 버튼 활성화 상태 설정
-            if (selectedBackground != null || selectedItem != null) {
-                applyButton.setEnabled(true);
-                applyButton.setAlpha(1.0f); // 활성화 상태일 때 투명도 조정
-            } else {
-                applyButton.setEnabled(false);
-                applyButton.setAlpha(0.5f); // 비활성화 상태일 때 투명도 조정
-            }
+            applyButton.setEnabled(selectedBackground != null || selectedItem != null);
+            applyButton.setAlpha(applyButton.isEnabled() ? 1.0f : 0.5f);
         });
-//        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
         applyButton.setOnClickListener(v -> {
             if (selectedBackground != null || selectedItem != null) {
@@ -111,7 +112,6 @@ public class DressActivity extends AppCompatActivity {
             }
         });
 
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -126,6 +126,8 @@ public class DressActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });
+
+        loadPurchasedItems();
     }
 
     private void loadCharacterImage() {
