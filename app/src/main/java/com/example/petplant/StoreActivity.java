@@ -523,17 +523,19 @@ public class StoreActivity extends AppCompatActivity {
                         String purchasedItemName = documentSnapshot.getString("itemName");
                         for (StoreItem item : itemList) {
                             if (item.getName().equals(purchasedItemName)) {
-                                item.setPurchased(true);  // 구매한 아이템을 표시하도록 상태 설정
+                                item.setPurchased(true);
+                            }
+                        }
+                        for (StoreItem item : backgroundList) {
+                            if (item.getName().equals(purchasedItemName)) {
+                                item.setPurchased(true);
                             }
                         }
                     }
 
-                    // RecyclerView 갱신
-                    adapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged(); // 업데이트 후 갱신
                 })
-                .addOnFailureListener(e -> {
-                    Log.e("StoreActivity", "구매한 아이템 정보를 가져오는 중 오류 발생", e);
-                });
+                .addOnFailureListener(e -> Log.e("StoreActivity", "구매한 아이템 정보를 가져오는 중 오류 발생", e));
     }
 
     // Firestore에 코인 업데이트

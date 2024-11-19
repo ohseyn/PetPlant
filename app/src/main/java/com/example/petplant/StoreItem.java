@@ -9,6 +9,7 @@ public class StoreItem implements Serializable {
     private int price;
     private boolean isPurchased; // 구매 여부 추가
     private String type;
+    private boolean isCurrentlyApplied;
 
     public StoreItem(String name, int iconImageResource, int imageResource, int price, String type) {
         this.name = name;
@@ -48,4 +49,8 @@ public class StoreItem implements Serializable {
     public void setPurchased(boolean purchased) {
         isPurchased = purchased;
     }
+
+    public boolean isCurrentlyApplied() { return isCurrentlyApplied; }
+
+    public void setCurrentlyApplied(boolean currentlyApplied) { isCurrentlyApplied = currentlyApplied; }
 }

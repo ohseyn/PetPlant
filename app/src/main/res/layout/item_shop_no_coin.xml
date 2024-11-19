@@ -17,10 +17,21 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/item_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/RoundedCorners"/>
+
+        <TextView
+            android:id="@+id/applied_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="적용 중"
+            android:visibility="gone"
+            android:textColor="#02AE7A"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
 

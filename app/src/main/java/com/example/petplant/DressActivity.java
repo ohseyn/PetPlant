@@ -69,12 +69,23 @@ public class DressActivity extends AppCompatActivity {
             if (backgroundList.contains(item)) {
                 selectedBackground = item;
                 dressLayout.setBackgroundResource(item.getImageResource());
-            } else {
+            } else if (itemList.contains(item)){
                 selectedItem = item;
                 // onCreate 내에서 인텐트로 전달된 캐릭터 이미지 적용
-                int characterImageResource = getIntent().getIntExtra("characterImage", R.drawable.tomato_character_home);
+                //int characterImageResource = getIntent().getIntExtra("characterImage", R.drawable.tomato_character_home);
                 characterImage.setImageResource(item.getImageResource());
             }
+
+            // 초록색 테두리 및 적용 상태 업데이트
+            for (StoreItem storeItem : backgroundList) {
+                storeItem.setCurrentlyApplied(storeItem == selectedBackground);
+            }
+            for (StoreItem storeItem : itemList) {
+                storeItem.setCurrentlyApplied(storeItem == selectedItem);
+            }
+
+            adapter.updateItemList(backgroundList);
+            adapter.updateItemList(itemList);
 
             // 적용하기 버튼 활성화 상태 설정
             if (selectedBackground != null || selectedItem != null) {
@@ -85,7 +96,7 @@ public class DressActivity extends AppCompatActivity {
                 applyButton.setAlpha(0.5f); // 비활성화 상태일 때 투명도 조정
             }
         });
-        recyclerView.setAdapter(adapter);
+//        recyclerView.setAdapter(adapter);
 
         applyButton.setOnClickListener(v -> {
             if (selectedBackground != null || selectedItem != null) {
@@ -176,6 +187,9 @@ public class DressActivity extends AppCompatActivity {
         db.collection("users").document(userId).collection("purchases")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    backgroundList.clear();
+                    itemList.clear();
+
                     for (DocumentSnapshot document : queryDocumentSnapshots) {
                         // Firestore에서 각 필드 값을 가져옴
                         String itemName = document.getString("itemName");
@@ -184,44 +198,80 @@ public class DressActivity extends AppCompatActivity {
                         int itemPrice = document.contains("itemPrice") ? document.getLong("itemPrice").intValue() : 0;
                         String itemType = document.getString("type");
 
-                        // Null 체크 및 기본값 설정
-                        int iconImage = iconImageLong != null ? iconImageLong.intValue() : R.drawable.icon_default;
-                        int itemImage = itemImageLong != null ? itemImageLong.intValue() : R.drawable.tomato_character_default;
+                        StoreItem item = new StoreItem(
+                                itemName,
+                                iconImageLong != null ? iconImageLong.intValue() : R.drawable.icon_default,
+                                itemImageLong != null ? itemImageLong.intValue() : R.drawable.tomato_character_default,
+                                itemPrice,
+                                itemType
+                        );
+                        item.setPurchased(true);
 
-                        // StoreItem 객체 생성
-                        StoreItem item = new StoreItem(itemName, iconImage, itemImage, itemPrice, itemType);
+//                        // Null 체크 및 기본값 설정
+//                        int iconImage = iconImageLong != null ? iconImageLong.intValue() : R.drawable.icon_default;
+//                        int itemImage = itemImageLong != null ? itemImageLong.intValue() : R.drawable.tomato_character_default;
+//
+//                        // StoreItem 객체 생성
+//                        StoreItem item = new StoreItem(itemName, iconImage, itemImage, itemPrice, itemType);
+//                        item.setPurchased(true);
 
-                        // 아이템이 배경인지 일반 아이템인지 판별하여 리스트에 추가
+//                        // Firestore에서 현재 적용 중인 상태 불러오기
+//                        db.collection("users").document(userId).get()
+//                                .addOnSuccessListener(snapshot -> {
+//                                    if (snapshot.contains("selectedBackgroundImage")) {
+//                                        Long selectedBackgroundImage = snapshot.getLong("selectedBackgroundImage");
+//                                        if (selectedBackgroundImage != null && selectedBackgroundImage.intValue() == item.getImageResource()) {
+//                                            item.setCurrentlyApplied(true); // 배경: 현재 적용 중으로 설정
+//                                        }
+//                                    }
+//                                    if (snapshot.contains("selectedItemImage")) {
+//                                        Long selectedItemImage = snapshot.getLong("selectedItemImage");
+//                                        if (selectedItemImage != null && selectedItemImage.intValue() == item.getImageResource()) {
+//                                            item.setCurrentlyApplied(true); // 아이템: 현재 적용 중으로 설정
+//                                        }
+//                                    }
+//                                });
+
                         if (item.isBackground()) {
                             backgroundList.add(item);
                         } else if (item.isItem()) {
                             itemList.add(item);
                         }
                     }
-                    adapter.updateItemList(backgroundList); // 기본적으로 배경 리스트를 업데이트
+
+                    // 기본 배경 추가
+                    StoreItem defaultBackground = new StoreItem(
+                            "기본 배경",
+                            R.drawable.icon_default,
+                            R.drawable.background_default,
+                            0,
+                            "background"
+                    );
+                    defaultBackground.setCurrentlyApplied(true); // 기본 배경 적용 중으로 설정
+                    backgroundList.add(defaultBackground);
+
+                    adapter.updateItemList(backgroundList); // 기본적으로 배경 리스트를 보여줌
+                    recyclerView.setAdapter(adapter); // 어댑터 연결
+
+                    // Firestore에서 적용 중인 상태 설정
+                    db.collection("users").document(userId)
+                            .get()
+                            .addOnSuccessListener(snapshot -> {
+                                if (snapshot.exists()) {
+                                    Long selectedBackground = snapshot.getLong("selectedBackgroundImage");
+                                    Long selectedItem = snapshot.getLong("selectedItemImage");
+
+                                    for (StoreItem item : backgroundList) {
+                                        item.setCurrentlyApplied(item.getImageResource() == (selectedBackground != null ? selectedBackground.intValue() : -1));
+                                    }
+                                    for (StoreItem item : itemList) {
+                                        item.setCurrentlyApplied(item.getImageResource() == (selectedItem != null ? selectedItem.intValue() : -1));
+                                    }
+                                    adapter.updateItemList(backgroundList); // 기본적으로 배경 리스트 먼저 보여줌
+                                }
+                            });
                 })
                 .addOnFailureListener(e -> Log.e("DressActivity", "구매한 아이템을 불러오는 중 오류 발생", e));
-//        String userId = auth.getCurrentUser().getUid();
-//        db.collection("users").document(userId).collection("purchases")
-//                .get()
-//                .addOnSuccessListener(queryDocumentSnapshots -> {
-//                    for (DocumentSnapshot document : queryDocumentSnapshots) {
-//                        String itemName = document.getString("itemName");
-//                        int iconImage = document.getLong("iconImage").intValue();
-//                        int itemImage = document.getLong("itemImage").intValue();
-//                        int itemPrice = document.getLong("itemPrice").intValue();
-//                        String itemType = document.getString("type"); // Firestore에 저장된 type 필드 확인
-//
-//                        StoreItem item = new StoreItem(itemName, iconImage, itemImage, itemPrice, itemType);
-//                        if (item.isBackground()) {
-//                            backgroundList.add(item); // 배경일 경우 backgroundList에 추가
-//                        } else if (item.isItem()) {
-//                            itemList.add(item); // 아이템일 경우 itemList에 추가
-//                        }
-//                    }
-//                    adapter.updateItemList(backgroundList);
-//                })
-//                .addOnFailureListener(e -> Log.e("DressActivity", "구매한 아이템을 불러오는 중 오류 발생", e));
     }
 
     private void saveDesignToFirestore(StoreItem background, StoreItem item) {
@@ -234,6 +284,14 @@ public class DressActivity extends AppCompatActivity {
                             "selectedBackgroundImage", background.getImageResource())
                     .addOnSuccessListener(aVoid -> Log.d("DressActivity", "배경 디자인이 저장되었습니다."));
         }
+//        else {
+//            db.collection("users").document(userId)
+//                    .update("selectedBackground", "기본 배경",
+//                            "selectedBackgroundIconImage", R.drawable.icon_default,
+//                            "selectedBackgroundImage", R.drawable.background_default)
+//                    .addOnSuccessListener(aVoid -> Log.d("DressActivity", "기본 배경이 저장되었습니다."));
+//        }
+
         if (item != null) {
             db.collection("users").document(userId)
                     .update("selectedItem", item.getName(),
@@ -241,5 +299,12 @@ public class DressActivity extends AppCompatActivity {
                             "selectedItemImage", item.getImageResource())
                     .addOnSuccessListener(aVoid -> Log.d("DressActivity", "아이템 디자인이 저장되었습니다."));
         }
+//        else {
+//            db.collection("users").document(userId)
+//                    .update("selectedItem", null,
+//                            "selectedItemIconImage", null,
+//                            "selectedItemImage", null)
+//                    .addOnSuccessListener(aVoid -> Log.d("DressActivity", "아이템 정보가 초기화되었습니다."));
+//        }
     }
 }

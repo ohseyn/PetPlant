@@ -45,6 +45,17 @@
             android:layout_marginTop="-20dp"
             android:background="@mipmap/shop_coin"/>
 
+        <TextView
+            android:id="@+id/applied_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="적용 중"
+            android:visibility="gone"
+            android:textColor="#02AE7A"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
