@@ -108,15 +108,15 @@ public class GuideSlidePageFragment extends Fragment {
 
     // 페이지별 이미지 리소스 배열
     private int[] pageImages = {
-            R.drawable.guideimage1,
-            R.drawable.guideimage2,
-            R.drawable.guideimage3,
-            R.drawable.guideimage4,
-            R.drawable.guideimage5,
-            R.drawable.guideimage6,
-            R.drawable.guideimage7,
-            R.drawable.guideimage8,
-            R.drawable.guideimage9
+            R.mipmap.guideimage1,
+            R.mipmap.guideimage2,
+            R.mipmap.guideimage3,
+            R.mipmap.guideimage4,
+            R.mipmap.guideimage5,
+            R.mipmap.guideimage6,
+            R.mipmap.guideimage7,
+            R.mipmap.guideimage8,
+            R.mipmap.guideimage9
     };
 
     public static GuideSlidePageFragment newInstance(int pageNumber) {

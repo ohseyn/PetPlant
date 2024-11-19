@@ -21,7 +21,7 @@
         android:paddingRight="20dp"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:text="저는 이런\n모습으로 자랐군요!"
+        android:text="저는\n이렇게 자랐군요!"
         android:textSize="17sp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="50dp"

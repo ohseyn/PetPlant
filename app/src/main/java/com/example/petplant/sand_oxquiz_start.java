@@ -89,7 +89,7 @@ public class sand_oxquiz_start extends AppCompatActivity {
 
                     // 질문 텍스트 변경
                     questionTextView.setText("방울토마토가 성장하며 피운 꽃은, \n \"노란색\" 입니다.");
-                    questionImageView.setImageResource(R.drawable.quizimage_flowercolor);
+                    questionImageView.setImageResource(R.mipmap.flower_blue);
 
                     btnCheckAnswer.setText(REWARD_TEXT);  // 버튼 텍스트 변경
                     isFirstClick = false;
