@@ -203,7 +203,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
 
 
     private void startProfileActivity() {
-        Intent intent = new Intent(ThirdOnboardingActivity.this, HomeMainActivity.class);
+        Intent intent = new Intent(ThirdOnboardingActivity.this, loadingactivity.class);
         intent.putExtra("profileImageUri", profileImageUrl);  // 프로필 이미지 URI 전달
         intent.putExtra("name", nameInput.getText().toString());
         intent.putExtra("plantName", getIntent().getStringExtra("plantName"));
