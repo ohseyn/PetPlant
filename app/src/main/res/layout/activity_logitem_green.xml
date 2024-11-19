@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/log_green"
+        android:background="@mipmap/log_green"
         android:padding="5dp">
 
         <TextView
