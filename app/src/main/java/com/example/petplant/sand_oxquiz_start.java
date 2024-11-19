@@ -82,9 +82,11 @@ public class sand_oxquiz_start extends AppCompatActivity {
                 if (isFirstClick) {
                     if (!selectedButton.getText().toString().equals(CORRECT_ANSWER)) {
                         setWrongButtonStyle(selectedButton);  // 오답 스타일 적용
+                        addCheckMark(selectedButton, false);  // 오답일 경우 빨간 체크 아이콘 추가
                         setCorrectButtonStyle(correctButton);  // 정답 스타일 적용
+                        addCheckMark(correctButton, true);  // 정답일 경우 파란 체크 아이콘 추가
                     } else {
-                        addCheckMark(selectedButton);  // 정답 선택 시 체크 아이콘 추가
+                        addCheckMark(selectedButton, true);  // 정답 선택 시 파란 체크 아이콘 추가
                     }
 
                     // 질문 텍스트 변경
@@ -141,8 +143,13 @@ public class sand_oxquiz_start extends AppCompatActivity {
     }
 
     // 체크 아이콘 추가
-    private void addCheckMark(Button button) {
-        Drawable checkMark = ContextCompat.getDrawable(this, R.mipmap.ic_check_blue);
+    private void addCheckMark(Button button, boolean isCorrect) {
+        Drawable checkMark;
+        if (isCorrect) {
+            checkMark = ContextCompat.getDrawable(this, R.mipmap.ic_check_blue);
+        } else {
+            checkMark = ContextCompat.getDrawable(this, R.mipmap.ic_check_red);
+        }
         InsetDrawable insetDrawable = new InsetDrawable(checkMark, 30, 0, 0, 0);
         button.setCompoundDrawablesWithIntrinsicBounds(insetDrawable, null, null, null);
     }
