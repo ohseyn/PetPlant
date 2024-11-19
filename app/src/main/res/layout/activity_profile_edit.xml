@@ -61,7 +61,7 @@
                 android:id="@+id/profile_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/profile_frame"
+                android:background="@mipmap/profile_frame"
                 android:contentDescription="Profile image"
                 android:scaleType="centerCrop" />
         </androidx.cardview.widget.CardView>
@@ -84,7 +84,7 @@
         android:id="@+id/introduce_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/textbox2"
+        android:background="@mipmap/textbox2"
         android:gravity="left"
         android:hint="나를 소개하는 문구를 적어주세요."
         android:paddingTop="10dp"
@@ -112,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/textbox"
+        android:background="@mipmap/textbox"
         android:hint="한글 1~5자로 입력해 주세요."
         android:paddingLeft="10dp"
         android:textSize="15dp"

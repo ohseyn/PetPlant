@@ -134,7 +134,7 @@ public class  FriendList extends AppCompatActivity {
 
                             // 프로필 이미지 URI가 없을 경우 기본 이미지 설정
                             if (profileImageUri == null || profileImageUri.isEmpty()) {
-                                profileImageUri = "android.resource://" + getPackageName() + "/" + R.drawable.profile_frame;
+                                profileImageUri = "android.resource://" + getPackageName() + "/" + R.mipmap.profile_frame;
                             }
 
                             Map<String, String> friendData = new HashMap<>();

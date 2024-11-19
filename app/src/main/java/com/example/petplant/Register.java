@@ -51,7 +51,6 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_email_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
@@ -109,7 +108,7 @@ public class Register extends AppCompatActivity {
                                     db.collection("users").document(user.getUid()).set(userInfo)
                                             .addOnSuccessListener(aVoid -> {
                                                 Toast.makeText(Register.this, "Account created and data saved.", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
+                                                Intent intent = new Intent(getApplicationContext(), account_success.class);
                                                 startActivity(intent);
                                                 finish();
                                             })

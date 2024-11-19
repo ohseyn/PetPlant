@@ -92,7 +92,7 @@
         android:id="@+id/name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/textbox"
+        android:background="@mipmap/textbox"
         android:hint="한글 1~5자로 입력해주세요."
         android:padding="15dp"
         android:paddingLeft="10dp"

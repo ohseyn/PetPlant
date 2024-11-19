@@ -77,14 +77,14 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
         if (profileImageUri != null && !profileImageUri.isEmpty()) {
             Glide.with(holder.itemView.getContext())
                     .load(profileImageUri)
-                    .placeholder(R.drawable.profile_frame) // 로딩 중 기본 이미지
-                    .error(R.drawable.profile_frame) // 오류 시 기본 이미지
+                    .placeholder(R.mipmap.profile_frame) // 로딩 중 기본 이미지
+                    .error(R.mipmap.profile_frame) // 오류 시 기본 이미지
                     .into(holder.profileImageView);
         } else {
             Glide.with(holder.itemView.getContext())
                     .load(profileImageUri)
-                    .placeholder(R.drawable.profile_frame) // 로딩 중 기본 이미지
-                    .error(R.drawable.profile_frame) // 오류 시 기본 이미지
+                    .placeholder(R.mipmap.profile_frame) // 로딩 중 기본 이미지
+                    .error(R.mipmap.profile_frame) // 오류 시 기본 이미지
                     .into(holder.profileImageView);
         }
 
@@ -114,11 +114,11 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
         // 프로필 이미지 설정 (기본 이미지 포함)
         if (profileImageUri != null && !profileImageUri.isEmpty()) {
             Glide.with(context).load(profileImageUri)
-                    .placeholder(R.drawable.profile_frame) // 로딩 중 기본 이미지
-                    .error(R.drawable.profile_frame) // 오류 시 기본 이미지
+                    .placeholder(R.mipmap.profile_frame) // 로딩 중 기본 이미지
+                    .error(R.mipmap.profile_frame) // 오류 시 기본 이미지
                     .into(profileImageView);
         } else {
-            Glide.with(context).load(R.drawable.profile_frame).into(profileImageView);
+            Glide.with(context).load(R.mipmap.profile_frame).into(profileImageView);
         }
 
 
