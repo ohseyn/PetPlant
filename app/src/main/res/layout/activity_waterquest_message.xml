@@ -112,7 +112,7 @@
     <Button
         android:id="@+id/next_button"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="65dp"
         android:backgroundTint="@drawable/button_background3"
         android:enabled="false"
         android:onClick="onButtonClick"
