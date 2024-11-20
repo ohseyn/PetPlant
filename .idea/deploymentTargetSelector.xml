@@ -13,17 +13,21 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-
-      <SelectionState runConfigName="water_oxquiz_start">
+      <SelectionState runConfigName="looking_message">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="remove_oxquiz_start">
+      <SelectionState runConfigName="artificialquest_message">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="TutorialActivity">
+      <SelectionState runConfigName="sandquest_message">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-
+      <SelectionState runConfigName="waterquest_message">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="removequest_message">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
