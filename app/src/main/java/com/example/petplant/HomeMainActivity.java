@@ -388,7 +388,6 @@ public class HomeMainActivity extends AppCompatActivity {
                 showProgressDialog(daysSinceSignUp);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putLong("lastShownDate", daysSinceSignUp);
-                //editor.putBoolean("notYetPressed", false);
                 editor.apply();
             }
         }
@@ -473,36 +472,6 @@ public class HomeMainActivity extends AppCompatActivity {
                     loadSelectedDesign();  // Firebase 업데이트 후 즉시 갱신
                 })
                 .addOnFailureListener(e -> Log.e("HomeMainActivity", "Character Image Update Failed", e));
-
-//        // 성장 단계에 따라 캐릭터 이미지 선택
-//        switch ((int) daysSinceSignUp) {
-//            // 10
-//            case 1:
-//                baseCharacterImage = R.drawable.tomato_character_flower; // 꽃 상태 이미지
-//                break;
-//            case 27:
-//                baseCharacterImage = R.drawable.tomato_character_home; // 열매(초기)
-//                break;
-//            case 37:
-//                baseCharacterImage = R.drawable.tomato_character_home; // 열매(중기)
-//                break;
-//            case 47:
-//                baseCharacterImage = R.drawable.tomato_character_home; // 열매(말기)
-//                break;
-//            default:
-//                baseCharacterImage = R.drawable.tomato_character_home; // 모종 상태
-//                return;
-//        }
-
-//        // Firestore에 변경된 캐릭터 이미지 저장
-//        db.collection("users").document(userId)
-//                .update("characterBaseImage", baseCharacterImage, "characterState", (int) daysSinceSignUp)
-//                .addOnSuccessListener(aVoid -> {
-//                    Log.d("HomeMainActivity", "Character Image Update Succeeded");
-//                    loadSelectedDesign();
-//                    applyCharacterImage(baseCharacterImage); // 성장 단계에 따른 이미지 적용
-//                })
-//                .addOnFailureListener(e -> Log.e("HomeMainActivity", "Character Image Update Failed", e));
     }
 
     private int getNextStageImage(long daysSinceSignUp) {
@@ -511,13 +480,6 @@ public class HomeMainActivity extends AppCompatActivity {
         else if (daysSinceSignUp >= 27) return R.drawable.tomato_character_fruit_first; // 열매 초기
         else if (daysSinceSignUp >= 1) return R.drawable.tomato_character_flower; // 꽃 단계
         return R.drawable.tomato_character_home; // 기본 모종 단계
-//        switch ((int) daysSinceSignUp) {
-//            case 10: return R.drawable.tomato_character_flower;
-//            case 27: return R.drawable.tomato_character_fruit_first;
-//            case 37: return R.drawable.tomato_character_fruit_mid;
-//            case 47: return R.drawable.tomato_character_fruit_final;
-//            default: return R.drawable.tomato_character_home;
-//        }
     }
 
     private void applyCharacterImage(int imageResource) {

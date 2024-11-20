@@ -77,15 +77,23 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
             // StoreActivity 처리
             if (currentItem.isPurchased()) {
                 holder.itemImage.setAlpha(0.5f); // 반투명 처리
+                holder.appliedText.setVisibility(View.VISIBLE); // "보유 중" 표시
                 holder.itemPrice.setText("보유중");
                 holder.itemPrice.setTextColor(context.getResources().getColor(android.R.color.darker_gray));
-                holder.itemPrice.setBackgroundResource(R.drawable.text_background); // 배경 설정
+                holder.itemImage.setColorFilter(Color.parseColor("#26000000"));
+                holder.itemPrice.setVisibility(View.GONE); // 가격 숨김
                 holder.coinImage.setVisibility(View.GONE); // 코인 숨김
             } else {
                 holder.itemImage.setAlpha(1.0f); // 투명도 초기화
                 holder.itemPrice.setText(String.valueOf(currentItem.getPrice())); // 가격 표시
+                holder.appliedText.setVisibility(View.GONE); // 숨김
                 holder.itemPrice.setTextColor(context.getResources().getColor(android.R.color.holo_orange_light));
                 holder.coinImage.setVisibility(View.VISIBLE); // 코인 표시
+                if (position == selectedItemPosition || position == selectedBackgroundPosition) {
+                    holder.itemImage.setBackgroundResource(R.drawable.green_border); // 초록색 테두리
+                } else {
+                    holder.itemImage.setBackground(null); // 테두리 제거
+                }
             }
 
             // 초록 테두리와 필터
@@ -98,90 +106,11 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
             }
         }
 
-//        if(currentItem.isPurchased() && currentItem.isCurrentlyApplied()) {
-//            if (holder.appliedText != null) {
-//                holder.appliedText.setVisibility(View.VISIBLE); // "적용 중" 표시
-//            }
-//            if (holder.itemPrice != null) {
-//                holder.itemPrice.setVisibility(View.GONE); // 가격 숨김
-//            }
-//            holder.itemImage.setBackgroundResource(R.drawable.green_border); // 초록색 테두리
-//            holder.itemImage.setColorFilter(Color.parseColor("#1A02AE7A")); // 연한 초록색 필터
-//        } else if (currentItem.isPurchased()) {
-//            // 보유 중인 상태
-//            holder.itemImage.setAlpha(0.5f);
-//            holder.itemImage.setBackground(null); // 테두리 제거
-//            if (holder.appliedText != null) {
-//                holder.appliedText.setVisibility(View.GONE); // "적용 중" 숨김
-//            }
-//
-//            if (holder.itemPrice != null) {
-//                holder.itemPrice.setText("보유중"); // "보유 중" 텍스트 설정
-//                holder.itemPrice.setTextColor(context.getResources().getColor(android.R.color.darker_gray)); // 회색 글씨
-//                holder.itemPrice.setGravity(View.TEXT_ALIGNMENT_CENTER); // 텍스트 중앙 정렬
-//                holder.itemPrice.setBackgroundResource(R.drawable.text_background); // 중앙 정렬을 돕는 배경 추가
-//            }
-//
-//            if (holder.coinImage != null) {
-//                holder.coinImage.setVisibility(View.GONE); // 코인 이미지는 숨김
-//            }
-//        } else {
-//            // 구매 가능한 상태
-//            holder.itemImage.setAlpha(1.0f); // 이미지 투명도 초기화
-//
-//            // 선택된 아이템 가시화 (초록 테두리 및 연한 초록 필터)
-//            if (position == selectedItemPosition || position == selectedBackgroundPosition) {
-//                holder.itemImage.setBackgroundResource(R.drawable.green_border); // 초록 테두리 drawable 추가 필요
-//                holder.itemImage.setColorFilter(Color.parseColor("#1A02AE7A")); // 연한 초록색 필터 (opacity 10%)
-//            } else {
-//                holder.itemImage.setBackground(null);
-//                holder.itemImage.setColorFilter(null); // 필터 제거
-//            }
-//
-//            if (holder.itemPrice != null) {
-//                holder.itemPrice.setText(String.valueOf(currentItem.getPrice())); // 가격 표시
-//                holder.itemPrice.setTextColor(context.getResources().getColor(android.R.color.holo_orange_light)); // 가격 글씨 색상 #FEC600
-//            }
-//
-//            if (holder.coinImage != null) {
-//                holder.coinImage.setVisibility(View.VISIBLE); // 코인 이미지는 보임
-//            }
-//        }
-
-        // 클릭 리스너
-        //holder.itemView.setOnClickListener(v -> handleItemClick(currentItem, position, isDressActivity));
-
         holder.itemView.setOnClickListener(v -> {
-            if (currentItem.isCurrentlyApplied()) {
-                Toast.makeText(context, "이미 적용 중입니다.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
             onItemClickListener.onItemClick(currentItem);
-
             // 초록 테두리 및 적용 상태 갱신
             notifyItemChanged(position);
         });
-
-        // 아이템 클릭 시 처리
-//        holder.itemView.setOnClickListener(v -> {
-//            if (currentItem.isPurchased()) {
-//                Toast.makeText(context, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
-//            } else {
-//                // 선택 상태 업데이트
-//                int previousPosition = selectedPosition;
-//                selectedPosition = position; // 현재 선택된 위치 저장
-//
-//                // 이전 위치와 현재 위치의 뷰를 갱신
-//                notifyItemChanged(previousPosition);
-//                notifyItemChanged(selectedPosition);
-//
-//                onItemClickListener.onItemClick(currentItem); // 클릭 이벤트 전달
-////                selectedPosition = position; // 현재 선택된 위치 저장
-////                onItemClickListener.onItemClick(currentItem); // 구매되지 않은 경우에만 선택 이벤트 처리
-////                notifyDataSetChanged(); // 뷰 갱신
-//            }
-//        });
     }
 
     private void handleItemClick(StoreItem currentItem, int position, boolean isDressActivity) {
@@ -198,7 +127,6 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
             return;
         }
 
-
         // 꾸미기 화면에서는 "적용 중" 상태 설정
         if (currentItem.isCurrentlyApplied()) {
             Toast.makeText(context, "이미 적용 중입니다.", Toast.LENGTH_SHORT).show();
@@ -207,40 +135,6 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
 
         onItemClickListener.onItemClick(currentItem);
         notifyItemChanged(position);
-
-//        if (currentItem.isBackground()) {
-//            // 배경 선택/해제 처리
-//            if (position == selectedBackgroundPosition) {
-//                // 선택 해제: 저장된 배경 상태로 복원
-//                int previousPosition = selectedBackgroundPosition;
-//                selectedBackgroundPosition = RecyclerView.NO_POSITION;
-//                notifyItemChanged(previousPosition); // 이전 선택 해제
-//                onItemClickListener.onItemClick(null); // 선택 해제 콜백 호출
-//            } else {
-//                // 새로운 배경 선택
-//                int previousPosition = selectedBackgroundPosition;
-//                selectedBackgroundPosition = position;
-//                notifyItemChanged(previousPosition); // 이전 선택 해제
-//                notifyItemChanged(position); // 현재 선택 적용
-//                onItemClickListener.onItemClick(currentItem); // 선택된 아이템 콜백 호출
-//            }
-//        } else if (currentItem.isItem()) {
-//            // 캐릭터 아이템 선택/해제 처리
-//            if (position == selectedItemPosition) {
-//                // 선택 해제: 저장된 캐릭터 상태로 복원
-//                int previousPosition = selectedItemPosition;
-//                selectedItemPosition = RecyclerView.NO_POSITION;
-//                notifyItemChanged(previousPosition); // 이전 선택 해제
-//                onItemClickListener.onItemClick(null); // 선택 해제 콜백 호출
-//            } else {
-//                // 새로운 아이템 선택
-//                int previousPosition = selectedItemPosition;
-//                selectedItemPosition = position;
-//                notifyItemChanged(previousPosition); // 이전 선택 해제
-//                notifyItemChanged(position); // 현재 선택 적용
-//                onItemClickListener.onItemClick(currentItem); // 선택된 아이템 콜백 호출
-//            }
-//        }
     }
 
     @Override

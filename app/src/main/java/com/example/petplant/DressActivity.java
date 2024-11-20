@@ -167,16 +167,6 @@ public class DressActivity extends AppCompatActivity {
             }
         }
     };
-//    private final BroadcastReceiver characterImageReceiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            int imageResource = intent.getIntExtra("characterImage", R.drawable.tomato_character_home);
-//            characterImage.setImageResource(imageResource);
-//            characterImage.invalidate();
-//            characterImage.requestLayout();
-//            Log.d("DressActivity", "Character Image Updated via Broadcast");
-//        }
-//    };
 
     @Override
     protected void onDestroy() {
@@ -208,31 +198,6 @@ public class DressActivity extends AppCompatActivity {
                                 itemType
                         );
                         item.setPurchased(true);
-
-//                        // Null 체크 및 기본값 설정
-//                        int iconImage = iconImageLong != null ? iconImageLong.intValue() : R.drawable.icon_default;
-//                        int itemImage = itemImageLong != null ? itemImageLong.intValue() : R.drawable.tomato_character_default;
-//
-//                        // StoreItem 객체 생성
-//                        StoreItem item = new StoreItem(itemName, iconImage, itemImage, itemPrice, itemType);
-//                        item.setPurchased(true);
-
-//                        // Firestore에서 현재 적용 중인 상태 불러오기
-//                        db.collection("users").document(userId).get()
-//                                .addOnSuccessListener(snapshot -> {
-//                                    if (snapshot.contains("selectedBackgroundImage")) {
-//                                        Long selectedBackgroundImage = snapshot.getLong("selectedBackgroundImage");
-//                                        if (selectedBackgroundImage != null && selectedBackgroundImage.intValue() == item.getImageResource()) {
-//                                            item.setCurrentlyApplied(true); // 배경: 현재 적용 중으로 설정
-//                                        }
-//                                    }
-//                                    if (snapshot.contains("selectedItemImage")) {
-//                                        Long selectedItemImage = snapshot.getLong("selectedItemImage");
-//                                        if (selectedItemImage != null && selectedItemImage.intValue() == item.getImageResource()) {
-//                                            item.setCurrentlyApplied(true); // 아이템: 현재 적용 중으로 설정
-//                                        }
-//                                    }
-//                                });
 
                         if (item.isBackground()) {
                             backgroundList.add(item);
@@ -286,13 +251,6 @@ public class DressActivity extends AppCompatActivity {
                             "selectedBackgroundImage", background.getImageResource())
                     .addOnSuccessListener(aVoid -> Log.d("DressActivity", "배경 디자인이 저장되었습니다."));
         }
-//        else {
-//            db.collection("users").document(userId)
-//                    .update("selectedBackground", "기본 배경",
-//                            "selectedBackgroundIconImage", R.drawable.icon_default,
-//                            "selectedBackgroundImage", R.drawable.background_default)
-//                    .addOnSuccessListener(aVoid -> Log.d("DressActivity", "기본 배경이 저장되었습니다."));
-//        }
 
         if (item != null) {
             db.collection("users").document(userId)
@@ -301,12 +259,5 @@ public class DressActivity extends AppCompatActivity {
                             "selectedItemImage", item.getImageResource())
                     .addOnSuccessListener(aVoid -> Log.d("DressActivity", "아이템 디자인이 저장되었습니다."));
         }
-//        else {
-//            db.collection("users").document(userId)
-//                    .update("selectedItem", null,
-//                            "selectedItemIconImage", null,
-//                            "selectedItemImage", null)
-//                    .addOnSuccessListener(aVoid -> Log.d("DressActivity", "아이템 정보가 초기화되었습니다."));
-//        }
     }
 }
