@@ -17,7 +17,7 @@ public class profile_loading extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(profile_loading.this, HomeMainActivity.class);
+                Intent intent = new Intent(profile_loading.this, TutorialActivity.class);
                 intent.putExtras(getIntent().getExtras()); // 기존 인텐트의 데이터를 전달
                 startActivity(intent);
                 finish();

@@ -88,7 +88,7 @@ public class sandquest_message extends AppCompatActivity {
         resetButtonBorder(sand_answer2);
 
         // 선택된 버튼에 테두리 색상 적용
-        setButtonBorder(selectedButton, R.color.remove_color);
+        setButtonBorder(selectedButton, R.color.water_color);
 
         // "대화마치기" 버튼 활성화
         nextButton_sand.setEnabled(true);  // 활성화되면 색상이 진해짐
