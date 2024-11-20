@@ -64,8 +64,10 @@ public class reward_waterquest extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         // 현재 코인 값 가져오기
                         Long currentCoin = documentSnapshot.getLong("coin");
+
+                        // currentCoin이 null이면 0으로 초기화
                         if (currentCoin == null) {
-                            currentCoin = documentSnapshot.getLong("coin");  // 코인 값이 없으면 0으로 설정
+                            currentCoin = 0L;
                         }
 
                         // 15코인 추가
@@ -78,7 +80,7 @@ public class reward_waterquest extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // 완료 버튼을 누르면 HomeMainActivity로 돌아가면서 완료 상태를 전달
                                     Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
-                                    intent.putExtra("coin", coin);
+                                    intent.putExtra("coin", updatedCoin); // 수정: updatedCoin을 전달
                                     intent.putExtra("questPosition", 0); // 1번째 퀘스트의 예시 위치
                                     intent.putExtra("completed", true); // 완료 상태 전달
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -88,6 +90,8 @@ public class reward_waterquest extends AppCompatActivity {
                                 }
                             }
                         });
+                    } else {
+                        Log.e("Firestore", "Document does not exist");
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {

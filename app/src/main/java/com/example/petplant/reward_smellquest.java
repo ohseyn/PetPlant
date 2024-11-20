@@ -23,7 +23,6 @@ public class reward_smellquest extends AppCompatActivity {
 
     FirebaseFirestore db;
     FirebaseUser user;
-    Long coin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +53,13 @@ public class reward_smellquest extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         // 현재 코인 값 가져오기
                         Long currentCoin = documentSnapshot.getLong("coin");
+
+                        // currentCoin이 null이면 0으로 초기화
                         if (currentCoin == null) {
-                            currentCoin = 0L;  // 코인 값이 없으면 0으로 설정
+                            currentCoin = 0L;
                         }
 
-                        // 15코인 추가
+                        // 15 코인 추가
                         Long updatedCoin = currentCoin + 15;
 
                         // Firestore에 업데이트
@@ -68,8 +69,8 @@ public class reward_smellquest extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // HomeMainActivity로 돌아가며 모든 퀘스트 완료 상태 전달
                                     Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
-                                    intent.putExtra("coin", coin);
-                                    intent.putExtra("questPosition", 4); // 4번째 퀘스트의 예시 위치
+                                    intent.putExtra("coin", updatedCoin); // updatedCoin 전달
+                                    intent.putExtra("questPosition", 4); // 4번째 퀘스트의 위치
                                     intent.putExtra("isCompleted", true);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
@@ -78,6 +79,8 @@ public class reward_smellquest extends AppCompatActivity {
                                 }
                             }
                         });
+                    } else {
+                        Log.e("Firestore", "Document does not exist");
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {

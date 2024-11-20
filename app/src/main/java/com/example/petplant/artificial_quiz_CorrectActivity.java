@@ -23,7 +23,6 @@ public class artificial_quiz_CorrectActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     FirebaseUser user;
-    Long coin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,6 @@ public class artificial_quiz_CorrectActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
-
 
         Button go_home = findViewById(R.id.go_home);
         go_home.setOnClickListener(new View.OnClickListener() {
@@ -55,11 +53,13 @@ public class artificial_quiz_CorrectActivity extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         // 현재 코인 값 가져오기
                         Long currentCoin = documentSnapshot.getLong("coin");
+
+                        // currentCoin이 null이면 0으로 초기화
                         if (currentCoin == null) {
-                            currentCoin = documentSnapshot.getLong("coin");  // 코인 값이 없으면 0으로 설정
+                            currentCoin = 0L;
                         }
 
-                        // 15코인 추가
+                        // 25 코인 추가
                         Long updatedCoin = currentCoin + 25;
 
                         // Firestore에 업데이트
@@ -69,8 +69,8 @@ public class artificial_quiz_CorrectActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // 완료 버튼을 누르면 HomeMainActivity로 돌아가면서 완료 상태를 전달
                                     Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
-                                    intent.putExtra("coin", coin);
-                                    intent.putExtra("questPosition", 2); // 4번째 퀘스트의 예시 위치
+                                    intent.putExtra("coin", updatedCoin); // updatedCoin 전달
+                                    intent.putExtra("questPosition", 2); // 2번째 퀘스트의 위치
                                     intent.putExtra("isCompleted", true); // 완료 상태 전달
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
@@ -79,6 +79,8 @@ public class artificial_quiz_CorrectActivity extends AppCompatActivity {
                                 }
                             }
                         });
+                    } else {
+                        Log.e("Firestore", "Document does not exist");
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
