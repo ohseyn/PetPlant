@@ -22,39 +22,44 @@
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/RoundedCorners"/>
 
-        <TextView
-            android:id="@+id/item_price"
+        <!-- 가격 및 코인 이미지 컨테이너 -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
             android:gravity="center"
-            android:text="150"
-            android:textColor="#FEC600"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:background="@drawable/text_background"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
 
-        <ImageView
-            android:id="@+id/coin_image"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="-18dp"
-            android:layout_marginTop="-20dp"
-            android:background="@mipmap/shop_coin"/>
+            <!-- 코인 이미지 -->
+            <ImageView
+                android:id="@+id/coin_image"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="4dp"
+                android:src="@mipmap/shop_coin"/>
+
+            <!-- 아이템 가격 -->
+            <TextView
+                android:id="@+id/item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="150"
+                android:textColor="#FEC600"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/applied_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="적용 중"
+            android:text="보유 중"
             android:visibility="gone"
-            android:textColor="#02AE7A"
+            android:textColor="#999999"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 

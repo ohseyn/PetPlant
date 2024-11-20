@@ -186,48 +186,6 @@ public class StoreActivity extends AppCompatActivity {
             // RecyclerView 갱신 (UI 업데이트)
             adapter.notifyDataSetChanged();
         });
-//        adapter = new StoreItemAdapter(this, backgroundList, item -> {
-//            if (item.isPurchased()) {
-//                Toast.makeText(this, "이미 구매한 아이템입니다.", Toast.LENGTH_SHORT).show();
-//                selectedItem = null; // 선택된 아이템 초기화
-//                selectedBackground = null;
-//                buyButton.setEnabled(false); // 버튼 비활성화
-//                buyButton.setAlpha(0.5f);   // 버튼 투명도 조정
-//            } else {
-//                // 선택된 아이템이 이미 선택된 상태인지 확인
-//                if (selectedBackground != null && selectedBackground.equals(item)) {
-//                    // 선택된 배경을 다시 클릭할 경우 해제
-//                    selectedBackground = null;
-//                    loadSelectedDesign(); // 저장된 배경 이미지로 복원
-//                    buyButton.setEnabled(false); // 버튼 비활성화
-//                    buyButton.setAlpha(0.5f);   // 투명도 조정
-//                } else if (selectedItem != null && selectedItem.equals(item)) {
-//                    // 선택된 캐릭터 아이템을 다시 클릭할 경우 해제
-//                    selectedItem = null;
-//                    loadSelectedDesign(); // 저장된 캐릭터 이미지로 복원
-//                    buyButton.setEnabled(false); // 버튼 비활성화
-//                    buyButton.setAlpha(0.5f);   // 투명도 조정
-//                } else {
-//                    // 새로 선택된 경우
-//                    selectedItemPrice = item.getPrice();
-//                    selectedItemName = item.getName();
-//                    buyButton.setEnabled(true);
-//                    buyButton.setAlpha(1.0f);
-//                    if (backgroundList.contains(item)) {
-//                        selectedBackground = item;
-//                        storeLayout.setBackgroundResource(item.getImageResource());
-//                        selectedItem = null; // 캐릭터 아이템 초기화
-//                    } else {
-//                        selectedItem = item;
-//                        // onCreate 내에서 인텐트로 전달된 캐릭터 이미지 적용
-//                        // int characterImageResource = getIntent().getIntExtra("characterImage", R.drawable.tomato_character_home);
-//                        characterImage.setImageResource(item.getImageResource());
-//                        selectedBackground = null; // 배경 초기화
-//                    }
-//                }
-//            }
-//            adapter.notifyDataSetChanged();
-//        });
         recyclerView.setAdapter(adapter);
 
         // TabLayout 설정
@@ -417,7 +375,7 @@ public class StoreActivity extends AppCompatActivity {
             showSuccessDialog();
             selectedItem = null; // 구매 후 선택 초기화
             selectedBackground = null; // 구매 후 선택 초기화
-            buyButton.setVisibility(View.GONE);
+            buyButton.setEnabled(false);
         });
 
         cancelButton.setOnClickListener(v -> dialog.dismiss());
@@ -533,7 +491,8 @@ public class StoreActivity extends AppCompatActivity {
                         }
                     }
 
-                    adapter.notifyDataSetChanged(); // 업데이트 후 갱신
+                    runOnUiThread(() -> adapter.notifyDataSetChanged());
+                    //adapter.notifyDataSetChanged(); // 업데이트 후 갱신
                 })
                 .addOnFailureListener(e -> Log.e("StoreActivity", "구매한 아이템 정보를 가져오는 중 오류 발생", e));
     }
