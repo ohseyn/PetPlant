@@ -81,7 +81,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
-            android:text="  방울토마토가 잘 성장하게 하려면,\n웃거름 또는 액체비료를 주면 좋아요."
+            android:text="  방울토마토를 잘 성장하게 하려면,\n웃거름 또는 액체비료를 주면 좋아요."
             android:textColor="#000000"
             android:textSize="14sp" />
 

@@ -56,6 +56,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-messaging:23.0.0")
     implementation ("com.google.android.material:material:1.9.0")
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.24")
+    implementation ("com.tbuonomo:dotsindicator:4.3")
 
 }
 

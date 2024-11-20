@@ -53,6 +53,7 @@ public class HomeMainActivity extends AppCompatActivity {
     private TextView speechBubble;
     private TextView timeTextView;
     private TextView character_name;
+
     private TextView shop_coin;
     private Handler handler = new Handler();
     private Runnable timeUpdater;

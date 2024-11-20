@@ -81,7 +81,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
-            android:text="방울토마토는 인공수정이 필요한 식물입니다."
+            android:text="집에서 키우는 방울토마토는 바람, 벌 등의\n
+  도움을 받지 못해 인공 수정이 필요해요."
             android:textColor="#000000"
             android:textSize="14sp" />
 
@@ -90,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="방울토마토 화분의 겉 흙이 말랐을 때,\n물을 흠뻑 줍니다."
+            android:text="방울토마토 꽃이 핀 후, 면봉으로 가볍게 문질러주면\n방울토마토가 무사히 열매를 맺게 돼요."
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="14sp" />
