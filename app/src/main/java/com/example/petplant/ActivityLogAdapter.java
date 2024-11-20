@@ -23,6 +23,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,18 +76,106 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         String userName = activity.getPlantName() != null ? activity.getPlantName() : activity.getUserName();
         holder.textUserName.setText(userName);
 
+        // 활동 설명 및 제목 설정
+//        String description = activity.getActivityDescription();
+//        switch (description) {
+//            case "waterquest":
+//                holder.textActivity.setText("가꾸기 활동");
+//                holder.textActivityTitle.setText("물 주기 활동 완료");
+//                break;
+//
+//            case "removequest":
+//                holder.textActivity.setText("가꾸기 활동");
+//                holder.textActivityTitle.setText("곁순 제거해주기 활동 완료");
+//                break;
+//
+//            case "artificialquest":
+//                holder.textActivity.setText("더 보살피기 활동");
+//                holder.textActivityTitle.setText("인공수정 해주기 활동 완료");
+//                break;
+//
+//            case "sandquest":
+//                holder.textActivity.setText("더 보살피기 활동");
+//                holder.textActivityTitle.setText("비료 주기 활동 완료");
+//                break;
+//
+//            case "smellquest":
+//                holder.textActivity.setText("친해지기 활동");
+//                holder.textActivityTitle.setText("향 맡아보기 활동 완료");
+//                break;
+//
+//            case "lookingquest":
+//                holder.textActivity.setText("친해지기 활동");
+//                holder.textActivityTitle.setText("바라보기 활동 완료");
+//                break;
+//
+//            case "touchingquest":
+//                holder.textActivity.setText("친해지기 활동");
+//                holder.textActivityTitle.setText("쓰다듬고 만지기 활동 완료");
+//                break;
+//
+//            case "talkingquest":
+//                holder.textActivity.setText("친해지기 활동");
+//                holder.textActivityTitle.setText("말 걸기 활동 완료");
+//                break;
+//
+//            default:
+//                holder.textActivity.setText("기타 활동");
+//                holder.textActivityTitle.setText("기타 활동 완료");
+//                break;
+//        }
+//
+//        // 글 미리보기 추가 (친해지기 활동만)
+//        if ("smellquest".equals(description) || "lookingquest".equals(description) ||
+//                "touchingquest".equals(description) || "talkingquest".equals(description)) {
+//            if (activity.getTextActivity() != null && !activity.getTextActivity().isEmpty()) {
+//                holder.textPreview.setVisibility(View.VISIBLE);
+//                holder.textPreview.setText(activity.getTextActivity());
+//            } else {
+//                holder.textPreview.setVisibility(View.GONE);
+//            }
+//        } else {
+//            holder.textPreview.setVisibility(View.GONE); // 기타 활동은 미리보기 숨김
+//        }
+
         // 활동 설명 설정
         holder.textActivity.setText(activity.getActivityDescription());
 
         String description = activity.getActivityDescription();
+        if ("sandquest".equals(description) || "artificialquest".equals(description)) {
+            holder.textActivity.setText("더 보살피기 활동");
+        } else if ("waterquest".equals(description) || "removequest".equals(description)) {
+            holder.textActivity.setText("가꾸기 활동");
+        } else if ("smellquest".equals(description) || "lookingquest".equals(description) ||
+                "touchingquest".equals(description) || "talkingquest".equals(description)) {
+            holder.textActivity.setText("친해지기 활동");
+
+            // 글 미리보기 추가
+            if (activity.getTextActivity() != null && !activity.getTextActivity().isEmpty()) {
+                //holder.textPreview.setVisibility(View.VISIBLE);
+                //holder.textPreview.setText(activity.getTextActivity());
+            } else {
+                //holder.textPreview.setVisibility(View.GONE);
+            }
+        } else {
+            holder.textActivity.setText("기타 활동");
+            //holder.textActivityTitle.setText("기타 활동 완료");
+            //holder.textPreview.setVisibility(View.GONE); // 기타 활동에는 글 미리보기 없음
+        }
 
         // 좋아요 버튼 클릭 시 BottomSheetDialog 표시
         holder.buttonLike.setOnClickListener(v -> showBottomSheetDialog(v.getContext(), holder, activity));
 
         // Timestamp를 문자열로 변환
         if (activity.getTimestamp() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault());
-            holder.textTime.setText(sdf.format(activity.getTimestamp().toDate()));
+            SimpleDateFormat sdf = new SimpleDateFormat("a hh:mm", Locale.getDefault());
+            DateFormatSymbols symbols = DateFormatSymbols.getInstance(Locale.getDefault());
+            symbols.setAmPmStrings(new String[]{"오전", "오후"});
+            sdf.setDateFormatSymbols(symbols);
+
+            // 형식화된 시간 설정
+            String formattedTime = sdf.format(activity.getTimestamp().toDate());
+            holder.textTime.setText(formattedTime);  // 오전/오후 hh:mm 형식으로 표시
         } else {
             holder.textTime.setText("Unknown time");
         }
@@ -157,9 +246,9 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         TextView time = dialog.findViewById(R.id.textActivityTime);
         ImageView imageActivity = dialog.findViewById(R.id.imageActivity);
 
-        title.setText(activity.getActivityDescription());
+        title.setText(activity.getActivityDescription() + " 활동 완료");
         plantName.setText(activity.getPlantName());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("a hh:mm", Locale.getDefault());
         time.setText(sdf.format(activity.getTimestamp().toDate()));
 
         if (activity.getImageUrI() != null && !activity.getImageUrI().isEmpty()) {
@@ -181,9 +270,9 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         TextView time = dialog.findViewById(R.id.textActivityTime);
         ImageView imageActivity = dialog.findViewById(R.id.imageActivity);
 
-        title.setText(activity.getActivityDescription());
+        title.setText(activity.getActivityDescription() + " 활동 완료");
         plantName.setText(activity.getPlantName());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("a hh:mm", Locale.getDefault());
         time.setText(sdf.format(activity.getTimestamp().toDate()));
 
         if (activity.getImageUrI() != null && !activity.getImageUrI().isEmpty()) {
@@ -205,9 +294,9 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         TextView time = dialog.findViewById(R.id.textActivityTime);
         TextView description = dialog.findViewById(R.id.textActivityDescription);
 
-        title.setText(activity.getActivityDescription());
+        title.setText(activity.getActivityDescription() + " 활동 완료");
         plantName.setText(activity.getPlantName());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("a hh:mm", Locale.getDefault());
         time.setText(sdf.format(activity.getTimestamp().toDate()));
         description.setText(activity.getTextActivity());
 

@@ -383,7 +383,7 @@ public class HomeMainActivity extends AppCompatActivity {
         boolean notYetPressed = preferences.getBoolean("notYetPressed", false);
 
         // 10
-        if (notYetPressed || daysSinceSignUp == 1 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
+        if (notYetPressed || daysSinceSignUp == 10 || daysSinceSignUp == 27 || daysSinceSignUp == 37 || daysSinceSignUp == 47) {
             if (lastShownDate != daysSinceSignUp || notYetPressed) { // 같은 날 다이얼로그가 이미 표시되지 않았는지 확인
                 showProgressDialog(daysSinceSignUp);
                 SharedPreferences.Editor editor = preferences.edit();
@@ -405,7 +405,7 @@ public class HomeMainActivity extends AppCompatActivity {
 
         switch ((int) daysSinceSignUp) {
             // 10
-            case 1:
+            case 10:
                 questionTitle.setText("왕큰방울이의 꽃이 폈나요?");
                 break;
             case 27:
@@ -478,7 +478,8 @@ public class HomeMainActivity extends AppCompatActivity {
         if (daysSinceSignUp >= 47) return R.drawable.tomato_character_fruit_final; // 열매 말기
         else if (daysSinceSignUp >= 37) return R.drawable.tomato_character_fruit_mid; // 열매 중기
         else if (daysSinceSignUp >= 27) return R.drawable.tomato_character_fruit_first; // 열매 초기
-        else if (daysSinceSignUp >= 1) return R.drawable.tomato_character_flower; // 꽃 단계
+        // 10
+        else if (daysSinceSignUp >= 10) return R.drawable.tomato_character_flower; // 꽃 단계
         return R.drawable.tomato_character_home; // 기본 모종 단계
     }
 
@@ -535,7 +536,8 @@ public class HomeMainActivity extends AppCompatActivity {
     // daysSinceSignUp 값에 따라 긍정 이미지를 반환하는 메서드
     private int getPositiveImageForDaysSinceSignUp(long daysSinceSignUp) {
         Log.d("HomeMainActivity", "getPositiveImageForDaysSinceSignUp called with daysSinceSignUp: " + daysSinceSignUp);
-        if (daysSinceSignUp == 1) {
+        // 10
+        if (daysSinceSignUp == 10) {
             return positiveImages[0];
         } else if (daysSinceSignUp == 27) {
             return positiveImages[1];
@@ -550,7 +552,8 @@ public class HomeMainActivity extends AppCompatActivity {
     // daysSinceSignUp 값에 따라 부정 이미지를 반환하는 메서드
     private int getNegativeImageForDaysSinceSignUp(long daysSinceSignUp) {
         Log.d("HomeMainActivity", "getNegativeImageForDaysSinceSignUp called with daysSinceSignUp: " + daysSinceSignUp);
-        if (daysSinceSignUp == 1) {
+        // 10
+        if (daysSinceSignUp == 10) {
             return negativeImages[0];
         } else if (daysSinceSignUp == 27) {
             return negativeImages[1];

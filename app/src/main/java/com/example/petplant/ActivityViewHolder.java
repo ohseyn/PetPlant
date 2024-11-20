@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ActivityViewHolder extends RecyclerView.ViewHolder {
-    TextView textUserName, textActivity, textTime;
+    TextView textUserName, textActivity, textTime, textActivityTitle, textPreview;
     ImageView imageActivity;
     ImageButton buttonLike;
 
@@ -28,6 +28,9 @@ public class ActivityViewHolder extends RecyclerView.ViewHolder {
         textTime = itemView.findViewById(R.id.textTime);
         imageActivity = itemView.findViewById(R.id.imageActivity);
         buttonLike = itemView.findViewById(R.id.buttonLike);
+
+        textActivityTitle = itemView.findViewById(R.id.textActivityTitle);
+        textPreview = itemView.findViewById(R.id.textPreview);
 
         // 스티커가 표시될 View 초기화
         viewSticker1 = itemView.findViewById(R.id.viewSticker1);

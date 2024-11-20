@@ -5,6 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <TextView
+        android:id="@+id/textActivityTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="활동 제목"
+        android:visibility="gone"
+        android:textSize="18sp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textPreview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="미리보기 텍스트"
+        android:visibility="gone"
+        android:textSize="12sp"
+        tools:ignore="MissingConstraints" />
+
     <ImageView
         android:id="@+id/imageActivity"
         android:layout_width="130dp"

@@ -43,11 +43,11 @@
         android:id="@+id/plantName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="93dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="96dp"
         android:text="식물 이름"
         android:textColor="@android:color/black"
-        android:textSize="15sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/textUserName"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -60,7 +60,7 @@
         android:layout_marginTop="0dp"
         android:text="방울토마토  /"
         android:textColor="@android:color/black"
-        android:textSize="15sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textActivityTitle"
         tools:ignore="MissingConstraints" />
