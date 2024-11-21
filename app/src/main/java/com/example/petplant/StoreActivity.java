@@ -330,14 +330,14 @@ public class StoreActivity extends AppCompatActivity {
     // 캐릭터 아이템 리스트 생성
     private List<StoreItem> getCharacterItems() {
         List<StoreItem> list = new ArrayList<>();
-        list.add(new StoreItem("멋쟁이 안경", R.mipmap.icon_glass, R.drawable.tomato_glass, 150, "item"));
-        list.add(new StoreItem("굵은 수염", R.mipmap.icon_mustache, R.drawable.tomato_mustache, 150, "item"));
-        list.add(new StoreItem("리본", R.mipmap.icon_bow, R.drawable.tomato_bow, 150, "item"));
-        list.add(new StoreItem("멋쟁이 신사", R.mipmap.icon_gentle, R.drawable.tomato_gentle, 180, "item"));
-        list.add(new StoreItem("책가방", R.mipmap.icon_bag, R.drawable.tomato_bag, 180, "item"));
-        list.add(new StoreItem("선글라스", R.mipmap.icon_sunglasses, R.drawable.tomato_sunglasses, 200, "item"));
-        list.add(new StoreItem("귀도리 모자", R.mipmap.icon_hat, R.drawable.tomato_hat, 200, "item"));
-        list.add(new StoreItem("잎사귀 우산", R.mipmap.icon_leaf, R.drawable.tomato_leaf, 230, "item"));
+        list.add(new StoreItem("멋쟁이 안경", R.mipmap.icon_glass, R.drawable.tomato_seed_with_glass, 15, "item"));
+        list.add(new StoreItem("굵은 수염", R.mipmap.icon_mustache, R.drawable.tomato_seed_with_mustache, 150, "item"));
+        list.add(new StoreItem("리본", R.mipmap.icon_bow, R.drawable.tomato_seed_with_bow, 150, "item"));
+        list.add(new StoreItem("멋쟁이 신사", R.mipmap.icon_gentle, R.drawable.tomato_seed_with_gentle, 180, "item"));
+        list.add(new StoreItem("책가방", R.mipmap.icon_bag, R.drawable.tomato_seed_with_bag, 180, "item"));
+        list.add(new StoreItem("선글라스", R.mipmap.icon_sunglasses, R.drawable.tomato_seed_with_sunglasses, 200, "item"));
+        list.add(new StoreItem("귀도리 모자", R.mipmap.icon_hat, R.drawable.tomato_seed_with_hat, 200, "item"));
+        list.add(new StoreItem("잎사귀 우산", R.mipmap.icon_leaf, R.drawable.tomato_seed_with_leaf, 230, "item"));
         return list;
     }
 
