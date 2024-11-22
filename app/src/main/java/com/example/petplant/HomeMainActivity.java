@@ -3,6 +3,7 @@ package com.example.petplant;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -292,30 +293,71 @@ public class HomeMainActivity extends AppCompatActivity {
     }
 
     private final String[] randomTexts = {
-            "오늘도 화이팅!",
-            "물이 맛있어요!",
-            "햇빛이 좋아요!",
-            "함께라서 행복해!",
-            "잎이 자라고 있어요!",
+            "오늘도 즐거운 하루 보내요!",
+            "오늘은 어떤 활동을 할까요?",
+            "잘 부탁해요!",
+            "저를 보살펴줘서 기뻐요!",
+            "기분이 정말 좋아요!",
+            "최고에요!",
+            "함께 있어서 행복해요!",
             "항상 고마워요!",
-            "즐거운 하루에요!",
-            "오늘도 좋은날이에요!"
+            "오늘도 와줬네요?",
+            "오늘도 파이팅 해요!",
+            "아자아자~"
     };
+
+    private final
+    int[] soundFiles = {
+            R.raw.sound1, // "오늘도 화이팅!"에 대응
+            R.raw.sound2, // "물이 맛있어요!"에 대응
+            R.raw.sound3, // "햇빛이 좋아요!"에 대응
+            R.raw.sound4, // "함께라서 행복해!"에 대응
+            R.raw.sound5, // "잎이 자라고 있어요!"에 대응
+            R.raw.sound6, // "항상 고마워요!"에 대응
+            R.raw.sound7, // "즐거운 하루에요!"에 대응
+            R.raw.sound8,
+            R.raw.sound9,
+            R.raw.sound10,
+            R.raw.sound11
+    };
+
+
+    private MediaPlayer mediaPlayer;
 
     private void toggleSpeechBubble() {
         // 현재 텍스트가 보이지 않는 상태이면 랜덤 텍스트를 선택하여 표시
         if (speechBubble.getVisibility() == View.GONE) {
-            // 랜덤 텍스트 선택
+            // 랜덤 텍스트와 음성 파일 선택
             int randomIndex = new Random().nextInt(randomTexts.length);
             String randomText = randomTexts[randomIndex];
+            int soundFile = soundFiles[randomIndex];
 
             // 텍스트 설정 및 표시
             speechBubble.setText(randomText);
             speechBubble.setVisibility(View.VISIBLE);
+
+            // 음성 파일 재생
+            playSound(soundFile);
         } else {
             // 텍스트 숨기기
             speechBubble.setVisibility(View.GONE);
         }
+    }
+
+    private void playSound(int soundFile) {
+        // 기존 재생 중인 음성이 있으면 중지
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+
+        // 새로운 음성 파일 재생
+        mediaPlayer = MediaPlayer.create(this, soundFile);
+        mediaPlayer.setOnCompletionListener(mp -> {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        });
+        mediaPlayer.start();
     }
 
     private void calculateDaysSinceSignUp(Long signUpDate) {
