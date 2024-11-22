@@ -93,6 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/button_border"
         android:backgroundTint="#F7608F"
         android:text="완료"

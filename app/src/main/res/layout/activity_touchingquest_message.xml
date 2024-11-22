@@ -102,6 +102,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:backgroundTint="@drawable/button_background2"
         android:enabled="false"
+        android:layout_marginBottom="5dp"
         android:onClick="onButtonClick"
         android:text="대화 마치기"
         android:textColor="#FFFFFF"

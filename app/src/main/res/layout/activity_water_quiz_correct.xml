@@ -19,6 +19,7 @@
         android:backgroundTint="#46C140"
         android:fontFamily="@font/suit_extrabold"
         android:onClick="onButtonClick"
+        android:layout_marginBottom="5dp"
         android:text="홈으로 가기"
         android:textSize="15sp"
         android:textColor="#FFFFFF"

@@ -106,6 +106,7 @@
         android:text="대화 마치기"
         android:textColor="#FFFFFF"
         android:textSize="17sp"
+        android:layout_marginBottom="5dp"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView

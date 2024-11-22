@@ -103,6 +103,7 @@
         android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:background="@drawable/button_border3"
+        android:layout_marginBottom="5dp"
         android:backgroundTint="#3F90E3"
         android:onClick="onButtonClick"
         android:text="사진 찍으러 가기"

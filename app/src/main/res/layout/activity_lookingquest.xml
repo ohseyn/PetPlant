@@ -90,13 +90,14 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nextButton3"
         android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:background="@drawable/button_border"
         android:backgroundTint="#F7608F"
         android:text="완료"
-        android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textSize="15sp"
+        android:textStyle="bold"
         tools:ignore="TextContrastCheck" />
 </LinearLayout>
