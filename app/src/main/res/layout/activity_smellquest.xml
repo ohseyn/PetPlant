@@ -92,6 +92,7 @@
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:background="@drawable/button_border"
+        android:layout_marginBottom="5dp"
         android:backgroundTint="#F7608F"
         android:text="완료"
         android:textStyle="bold"

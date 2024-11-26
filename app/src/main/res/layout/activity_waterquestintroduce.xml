@@ -70,7 +70,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="60dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/water_video" />
+            android:background="@mipmap/water_video" />
 
         <TextView
             android:id="@+id/instructions_detail"

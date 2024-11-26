@@ -71,7 +71,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="60dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/artificial_video"/>
+            android:background="@mipmap/artificial_video"/>
 
 
         <TextView
