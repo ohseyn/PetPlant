@@ -96,6 +96,15 @@ public class profile extends AppCompatActivity {
             }
         });
 
+        ImageButton bell2 = findViewById(R.id.bell2);
+        bell2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), FriendRequestsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // 친구 목록 카드뷰 클릭 시 친구 목록 화면으로 이동
         friendCard.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), FriendList.class);
