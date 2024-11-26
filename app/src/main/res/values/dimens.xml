@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="pageMargin">16dp</dimen> <!-- 페이지 간 마진 -->
+    <dimen name="offsetMargin">32dp</dimen> <!-- 옆 카드 보이는 정도 -->
+</resources>

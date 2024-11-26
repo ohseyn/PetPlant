@@ -3,6 +3,7 @@ package com.example.petplant;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -189,6 +190,33 @@ public class HomeMainActivity extends AppCompatActivity {
         viewPager.setAdapter(pageAdapter);
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
 
+        // 페이지 간격 및 옆 카드 보이기 설정
+        int pageMarginPx = getResources().getDimensionPixelOffset(R.dimen.pageMargin);
+        int offsetPx = getResources().getDimensionPixelOffset(R.dimen.offsetMargin);
+
+        viewPager.setClipToPadding(false);
+        viewPager.setClipChildren(false);
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+
+        viewPager.setPageTransformer((page, position) -> {
+            float scaleFactor = 0.85f + (1 - Math.abs(position)) * 0.15f; // 중앙 페이지는 커지고, 양옆은 작아짐
+            page.setScaleY(scaleFactor); // 세로 크기 조정
+            page.setScaleX(scaleFactor); // 가로 크기 조정
+
+            float offset = position * -(2 * offsetPx + pageMarginPx);
+            page.setTranslationX(offset);
+        });
+
+
+        viewPager.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                outRect.right = pageMarginPx / 2;
+                outRect.left = pageMarginPx / 2;
+            }
+        });
+
         Intent intent = getIntent();
         if (intent != null) {
             int questPosition = intent.getIntExtra("questPosition", -1);
@@ -204,6 +232,7 @@ public class HomeMainActivity extends AppCompatActivity {
             }
         }
     }
+
 
     private void handlePageItemClick(int position) {
         Intent intent = null;
