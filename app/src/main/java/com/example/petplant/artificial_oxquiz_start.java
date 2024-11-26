@@ -103,6 +103,7 @@ public class artificial_oxquiz_start extends AppCompatActivity {
                         intent = new Intent(artificial_oxquiz_start.this, artificial_quiz_IncorrectActivity.class);
                     }
                     startActivity(intent);
+                    overridePendingTransition(0, 0);
                 }
             }
         });

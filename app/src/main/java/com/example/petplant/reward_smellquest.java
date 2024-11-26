@@ -38,6 +38,7 @@ public class reward_smellquest extends AppCompatActivity {
             public void onClick(View view) {
                 // 코인 업데이트
                 updateCoinInFirestore();
+                overridePendingTransition(0, 0);
             }
         });
     }
@@ -74,6 +75,7 @@ public class reward_smellquest extends AppCompatActivity {
                                     intent.putExtra("isCompleted", true);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
+                                    overridePendingTransition(0, 0);
                                 } else {
                                     Log.e("Firestore", "Error updating coin", task.getException());
                                 }

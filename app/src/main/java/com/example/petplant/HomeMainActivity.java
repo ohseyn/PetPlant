@@ -138,7 +138,10 @@ public class HomeMainActivity extends AppCompatActivity {
 
     private void setButtonListeners() {
         ImageButton inbox = findViewById(R.id.inbox);
-        inbox.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ActivityLogActivity.class)));
+        inbox.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), ActivityLogActivity.class));
+            overridePendingTransition(0, 0);
+        });
 
         ImageButton profile = findViewById(R.id.profile);
         profile.setOnClickListener(view -> {
@@ -147,17 +150,28 @@ public class HomeMainActivity extends AppCompatActivity {
             intent.putExtra("plantName", plantName);
             intent.putExtra("profileImageUri", profileUIri);
             startActivity(intent);
+            overridePendingTransition(0, 0);
         });
 
         ImageButton bell = findViewById(R.id.bell);
-        bell.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), FriendRequestsActivity.class)));
+        bell.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), FriendRequestsActivity.class));
+            overridePendingTransition(0, 0);
+        });
 
         ImageButton store = findViewById(R.id.store);
-        store.setOnClickListener(view -> openStore());
+        store.setOnClickListener(view -> {
+            openStore();
+            overridePendingTransition(0, 0);
+        });
 
         ImageButton guide = findViewById(R.id.guide);
-        guide.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), Guide.class)));
+        guide.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), Guide.class));
+            overridePendingTransition(0, 0);
+        });
     }
+
 
     private void setupViewPager() {
         List<PageItem> pageItems = new ArrayList<>();

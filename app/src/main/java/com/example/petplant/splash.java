@@ -19,6 +19,7 @@ public class splash extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(splash.this, Login.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }

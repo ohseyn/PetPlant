@@ -38,6 +38,7 @@ public class reward_sandquest extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), sand_oxquiz_start.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -47,6 +48,7 @@ public class reward_sandquest extends AppCompatActivity {
             public void onClick(View view) {
                 // 코인 업데이트
                 updateCoinInFirestore();
+                overridePendingTransition(0, 0);
             }
         });
     }
@@ -82,6 +84,7 @@ public class reward_sandquest extends AppCompatActivity {
                                     intent.putExtra("questPosition", 3); // 3번째 퀘스트의 위치
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
+                                    overridePendingTransition(0, 0);
                                 } else {
                                     Log.e("Firestore", "Error updating coin", task.getException());
                                 }

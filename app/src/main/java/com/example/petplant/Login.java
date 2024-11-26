@@ -57,6 +57,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Register.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 finish();
             }
         });
@@ -88,6 +89,7 @@ public class Login extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
                                     startActivity(intent);
+                                    overridePendingTransition(0, 0);
                                     finish();
                                 } else {
                                     Toast.makeText(Login.this, "Authentication failed.",

@@ -105,6 +105,7 @@ public class smellquest_text extends AppCompatActivity {
                 uploadImageToStorage(null);
                 Intent intent = new Intent(getApplicationContext(), smellquest_message.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }
@@ -181,6 +182,7 @@ public class smellquest_text extends AppCompatActivity {
                                                 // 문서가 성공적으로 가져와졌을 때, Intent를 실행
                                                 Intent intent = new Intent(getApplicationContext(), smellquest_message.class);
                                                 startActivity(intent);
+                                                overridePendingTransition(0, 0);
                                             } else {
                                                 Log.w(TAG, "No such document");
                                                 // 문서가 존재하지 않을 때 처리 (예: 사용자에게 메시지 표시)

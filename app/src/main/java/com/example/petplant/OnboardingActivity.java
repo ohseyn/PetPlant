@@ -61,6 +61,7 @@ public class OnboardingActivity extends AppCompatActivity {
                     // 다음 액티비티로 이동
                     Intent intent = new Intent(OnboardingActivity.this, SecondOnboardingActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0);
                 }
             }
         });

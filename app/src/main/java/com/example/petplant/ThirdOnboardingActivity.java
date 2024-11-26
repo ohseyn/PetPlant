@@ -206,6 +206,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
         intent.putExtra("name", nameInput.getText().toString());
         intent.putExtra("plantName", getIntent().getStringExtra("plantName"));
         startActivity(intent);
+        overridePendingTransition(0, 0);
 
         Log.d("ThirdOnboardingActivity", "HomeMainActivity로 이동");
     }

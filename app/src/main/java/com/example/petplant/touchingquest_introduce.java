@@ -60,6 +60,7 @@ public class touchingquest_introduce extends AppCompatActivity {
                 Intent intent = new Intent(touchingquest_introduce.this, touching_text.class);
                 intent.putExtra("plantName", userPlantName != null ? userPlantName : "저");
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }

@@ -60,6 +60,7 @@ public class lookingquest_introduce extends AppCompatActivity {
                 Intent intent = new Intent(lookingquest_introduce.this, looking_text.class);
                 intent.putExtra("plantName", userPlantName != null ? userPlantName : "저");
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }

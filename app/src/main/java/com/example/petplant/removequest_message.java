@@ -143,6 +143,7 @@ public class removequest_message extends AppCompatActivity {
             Intent intent = new Intent(this, reward_removequest.class); // reward_quiz 액티비티로 이동
             intent.putExtra("photoPath", photoPath); // 필요시 데이터 전달
             startActivity(intent); //
+            overridePendingTransition(0, 0);
         }
     }
 }

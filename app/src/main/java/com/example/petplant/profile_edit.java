@@ -78,6 +78,7 @@ public class profile_edit extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), profile.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -214,6 +215,7 @@ public class profile_edit extends AppCompatActivity {
         intent.putExtra("name", nameInput.getText().toString());
         intent.putExtra("classname", introduceInput.getText().toString());
         startActivity(intent);
+        overridePendingTransition(0, 0);
 
         Log.d("profile_edit", "profile로 이동");
     }

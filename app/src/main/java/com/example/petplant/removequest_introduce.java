@@ -285,6 +285,7 @@ public class removequest_introduce extends AppCompatActivity {
                         Intent intent = new Intent(removequest_introduce.this, removequest_message.class);
                         intent.putExtra("photoPath", currentPhotoPath);
                         startActivity(intent);
+                        overridePendingTransition(0, 0);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

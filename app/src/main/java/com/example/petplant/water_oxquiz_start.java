@@ -96,6 +96,7 @@ public class water_oxquiz_start extends AppCompatActivity {
                         intent = new Intent(water_oxquiz_start.this, water_quiz_IncorrectActivity.class);
                     }
                     startActivity(intent);
+                    overridePendingTransition(0, 0);
                 }
             }
         });

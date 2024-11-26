@@ -60,6 +60,7 @@ public class smellquest_introduce extends AppCompatActivity {
                 Intent intent = new Intent(smellquest_introduce.this, smellquest_text.class);
                 intent.putExtra("plantName", userPlantName != null ? userPlantName : "저");
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }

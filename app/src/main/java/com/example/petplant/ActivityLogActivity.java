@@ -55,6 +55,7 @@ public class ActivityLogActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
         Log.d("바보","체크");
@@ -64,6 +65,7 @@ public class ActivityLogActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), profile.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 

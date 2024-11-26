@@ -285,6 +285,7 @@ public class sand_introduce extends AppCompatActivity {
                         Intent intent = new Intent(sand_introduce.this, sandquest_message.class);
                         intent.putExtra("photoPath", currentPhotoPath);
                         startActivity(intent);
+                        overridePendingTransition(0, 0);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

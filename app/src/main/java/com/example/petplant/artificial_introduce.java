@@ -285,6 +285,7 @@ public class artificial_introduce extends AppCompatActivity {
                         Intent intent = new Intent(artificial_introduce.this, artificialquest_message.class);
                         intent.putExtra("photoPath", currentPhotoPath);
                         startActivity(intent);
+                        overridePendingTransition(0, 0);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

@@ -104,6 +104,7 @@ public class sand_oxquiz_start extends AppCompatActivity {
                         intent = new Intent(sand_oxquiz_start.this, sand_quiz_IncorrectActivity.class);
                     }
                     startActivity(intent);
+                    overridePendingTransition(0, 0);
                 }
             }
         });

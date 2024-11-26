@@ -64,6 +64,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -110,6 +111,7 @@ public class Register extends AppCompatActivity {
                                                 Toast.makeText(Register.this, "Account created and data saved.", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(getApplicationContext(), account_success.class);
                                                 startActivity(intent);
+                                                overridePendingTransition(0, 0);
                                                 finish();
                                             })
                                             .addOnFailureListener(e -> {

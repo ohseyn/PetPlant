@@ -19,6 +19,7 @@ public class account_success extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(account_success.this, OnboardingActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }

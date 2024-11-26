@@ -60,6 +60,7 @@ public class talkingquest_introduce extends AppCompatActivity {
                 Intent intent = new Intent(talkingquest_introduce.this, talking_text.class);
                 intent.putExtra("plantName", userPlantName != null ? userPlantName : "저");
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }

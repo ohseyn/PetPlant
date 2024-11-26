@@ -38,6 +38,7 @@ public class artificial_quiz_CorrectActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // 코인 업데이트
                 updateCoinInFirestore();
+                overridePendingTransition(0, 0);
             }
         });
     }
@@ -74,6 +75,7 @@ public class artificial_quiz_CorrectActivity extends AppCompatActivity {
                                     intent.putExtra("isCompleted", true); // 완료 상태 전달
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
+                                    overridePendingTransition(0, 0);
                                 } else {
                                     Log.e("Firestore", "Error updating coin", task.getException());
                                 }

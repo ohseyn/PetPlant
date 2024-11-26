@@ -20,6 +20,7 @@ public class profile_loading extends AppCompatActivity {
                 Intent intent = new Intent(profile_loading.this, TutorialActivity.class);
                 intent.putExtras(getIntent().getExtras()); // 기존 인텐트의 데이터를 전달
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 finish();
             }
         }, 3000);

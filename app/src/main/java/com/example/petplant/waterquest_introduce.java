@@ -81,6 +81,7 @@ public class waterquest_introduce extends AppCompatActivity {
             public void onClick(View v) {
                 showLoadingScreen(); // 로딩 화면 표시
                 requestPermissions();
+                overridePendingTransition(0, 0);
             }
         });
     }
@@ -285,6 +286,7 @@ public class waterquest_introduce extends AppCompatActivity {
                         Intent intent = new Intent(waterquest_introduce.this, waterquest_message.class);
                         intent.putExtra("photoPath", currentPhotoPath);
                         startActivity(intent);
+                        overridePendingTransition(0, 0);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

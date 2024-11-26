@@ -247,6 +247,7 @@ public class ShopActivity extends AppCompatActivity {
             intent.putExtra("selectedItem", selectedItem);
             intent.putExtra("selectedItemName", selectedItemName);
             startActivity(intent);
+            overridePendingTransition(0, 0);
             dialog.dismiss();
         });
 

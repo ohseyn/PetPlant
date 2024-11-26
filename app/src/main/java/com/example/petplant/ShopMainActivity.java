@@ -27,6 +27,7 @@ public class ShopMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ShopMainActivity.this, ShopActivity.class);
                 startActivityForResult(intent, 1);
+                overridePendingTransition(0, 0);
             }
         });
     }

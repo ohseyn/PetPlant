@@ -93,6 +93,7 @@ public class profile extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), profile_edit.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -102,6 +103,7 @@ public class profile extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), FriendRequestsActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -132,6 +134,7 @@ public class profile extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ActivityLogActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -142,6 +145,7 @@ public class profile extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -152,6 +156,7 @@ public class profile extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }

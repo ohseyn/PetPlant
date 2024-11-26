@@ -148,6 +148,7 @@ public class smellquest_message extends AppCompatActivity {
             Intent intent = new Intent(this, reward_smellquest.class);
             intent.putExtra("photoPath", photoPath);
             startActivity(intent);
+            overridePendingTransition(0, 0);
         }
     }
 }

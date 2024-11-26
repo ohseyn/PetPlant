@@ -18,6 +18,7 @@ public class waterquiz_correct extends AppCompatActivity {
         Intent intent = new Intent(this, HomeMainActivity.class);
 
         startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 
 

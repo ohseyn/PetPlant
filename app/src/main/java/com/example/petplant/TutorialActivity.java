@@ -56,6 +56,7 @@ public class TutorialActivity extends AppCompatActivity {
                 // 완료: 메인 화면으로 이동
                 startActivity(new Intent(TutorialActivity.this, HomeMainActivity.class));
                 finish();
+                overridePendingTransition(0, 0);
             }
         });
     }

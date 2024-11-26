@@ -97,6 +97,7 @@ public class touching_text extends AppCompatActivity {
                     uploadImageToStorage(null);
                     Intent intent = new Intent(getApplicationContext(), touching_message.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0);
                 }
             }
         });
@@ -167,6 +168,7 @@ public class touching_text extends AppCompatActivity {
                                             if (document.exists()) {
                                                 Intent intent = new Intent(getApplicationContext(), touching_message.class);
                                                 startActivity(intent);
+                                                overridePendingTransition(0, 0);
                                             } else {
                                                 Log.w(TAG, "No such document");
                                             }

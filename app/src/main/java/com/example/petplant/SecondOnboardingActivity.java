@@ -100,5 +100,6 @@ public class SecondOnboardingActivity extends AppCompatActivity {
         Intent intent = new Intent(SecondOnboardingActivity.this, ThirdOnboardingActivity.class);
         intent.putExtra("name", inputName);
         startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 }
