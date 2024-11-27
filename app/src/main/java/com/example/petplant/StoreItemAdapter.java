@@ -89,27 +89,35 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
                 holder.appliedText.setVisibility(View.GONE); // 숨김
                 holder.itemPrice.setTextColor(context.getResources().getColor(android.R.color.holo_orange_light));
                 holder.coinImage.setVisibility(View.VISIBLE); // 코인 표시
-                if (position == selectedItemPosition || position == selectedBackgroundPosition) {
-                    holder.itemImage.setBackgroundResource(R.drawable.green_border); // 초록색 테두리
-                } else {
-                    holder.itemImage.setBackground(null); // 테두리 제거
-                }
+//                if (position == selectedItemPosition || position == selectedBackgroundPosition) {
+//                    holder.itemImage.setBackgroundResource(R.drawable.green_border); // 초록색 테두리
+//                } else {
+//                    holder.itemImage.setBackground(null); // 테두리 제거
+//                }
             }
 
             // 초록 테두리와 필터
-            if (position == selectedItemPosition || position == selectedBackgroundPosition) {
+            if (currentItem.isBackground() && position == selectedBackgroundPosition) {
+                holder.itemImage.setBackgroundResource(R.drawable.green_border);
+                holder.itemImage.setColorFilter(Color.parseColor("#1A02AE7A"));
+            } else if (currentItem.isItem() && position == selectedItemPosition) {
                 holder.itemImage.setBackgroundResource(R.drawable.green_border);
                 holder.itemImage.setColorFilter(Color.parseColor("#1A02AE7A"));
             } else {
-                holder.itemImage.setBackground(null);
-                holder.itemImage.setColorFilter(null);
+                holder.itemImage.setBackground(null); // 테두리 제거
+                holder.itemImage.setColorFilter(null); // 필터 제거
             }
+//            if (position == selectedItemPosition || position == selectedBackgroundPosition) {
+//                holder.itemImage.setBackgroundResource(R.drawable.green_border);
+//                holder.itemImage.setColorFilter(Color.parseColor("#1A02AE7A"));
+//            } else {
+//                holder.itemImage.setBackground(null);
+//                holder.itemImage.setColorFilter(null);
+//            }
         }
 
         holder.itemView.setOnClickListener(v -> {
-            onItemClickListener.onItemClick(currentItem);
-            // 초록 테두리 및 적용 상태 갱신
-            notifyItemChanged(position);
+            handleItemClick(currentItem, position, context instanceof DressActivity);
         });
     }
 
@@ -120,17 +128,27 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.Stor
             return;
         }
 
-        if (!isDressActivity) {
-            // 상점 화면에서는 구매 여부와 관계없이 선택 가능
-            onItemClickListener.onItemClick(currentItem);
-            notifyItemChanged(position);
-            return;
-        }
+        if (isDressActivity) {
+            // 꾸미기 화면에서 "적용 중" 상태 설정
+            if (currentItem.isCurrentlyApplied()) {
+                Toast.makeText(context, "이미 적용 중입니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        // 꾸미기 화면에서는 "적용 중" 상태 설정
-        if (currentItem.isCurrentlyApplied()) {
-            Toast.makeText(context, "이미 적용 중입니다.", Toast.LENGTH_SHORT).show();
-            return;
+            // "적용 중" 상태 변경
+            for (StoreItem item : itemList) {
+                item.setCurrentlyApplied(false); // 기존 적용 상태 초기화
+            }
+            currentItem.setCurrentlyApplied(true); // 선택한 항목 적용
+        } else {
+            // 상점 화면에서 아이템/배경 선택 처리
+            if (currentItem.isBackground()) {
+                selectedBackgroundPosition = position;
+                selectedItemPosition = RecyclerView.NO_POSITION; // 아이템 선택 해제
+            } else if (currentItem.isItem()) {
+                selectedItemPosition = position;
+                selectedBackgroundPosition = RecyclerView.NO_POSITION; // 배경 선택 해제
+            }
         }
 
         onItemClickListener.onItemClick(currentItem);

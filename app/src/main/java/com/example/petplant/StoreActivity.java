@@ -540,7 +540,7 @@ public class StoreActivity extends AppCompatActivity {
                         if (savedCharacterResource != null) {
                             characterImage.setImageResource(savedCharacterResource.intValue());
                         } else {
-                            characterImage.setImageResource(R.drawable.tomato_character_default); // 기본 캐릭터
+                            characterImage.setImageResource(R.drawable.tomato_character_home); // 기본 캐릭터
                         }
                     }
                 })
