@@ -49,6 +49,6 @@
             android:backgroundTint="#02AE7A"
             android:textColor="@android:color/white"
             android:layout_gravity="end|bottom"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="95dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
