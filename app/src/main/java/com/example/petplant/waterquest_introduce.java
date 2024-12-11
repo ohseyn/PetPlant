@@ -87,7 +87,9 @@ public class waterquest_introduce extends AppCompatActivity {
     }
 
     private void showLoadingScreen() {
-        loadingScreen.setVisibility(View.VISIBLE); // 로딩 화면 보이기
+        Button questButton = findViewById(R.id.do_quest_water); // 버튼 ID로 가져오기
+        loadingScreen.setVisibility(View.VISIBLE); // 로딩 화면 표시
+        questButton.setVisibility(View.GONE);; // 로딩 화면 보이기
     }
 
     private void hideLoadingScreen() {
