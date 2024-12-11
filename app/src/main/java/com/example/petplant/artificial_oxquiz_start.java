@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,8 @@ public class artificial_oxquiz_start extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artificial_oxquiz_start);
 
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.button_sound);
+
         questionImageView = findViewById(R.id.imageView);
 
         // TextView와 버튼 초기화
@@ -58,6 +61,7 @@ public class artificial_oxquiz_start extends AppCompatActivity {
         View.OnClickListener optionClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 if (selectedButton != null) {
                     resetButtonStyle(selectedButton);  // 이전 선택 초기화
                 }
@@ -79,6 +83,7 @@ public class artificial_oxquiz_start extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 if (isFirstClick) {
                     if (!selectedButton.getText().toString().equals(CORRECT_ANSWER)) {
                         setWrongButtonStyle(selectedButton);  // 오답 스타일 적용
@@ -96,6 +101,7 @@ public class artificial_oxquiz_start extends AppCompatActivity {
                     isFirstClick = false;
                 } else {
                     // 다음 화면으로 이동
+                    mediaPlayer.start();
                     Intent intent;
                     if (selectedButton.getText().toString().equals(CORRECT_ANSWER)) {
                         intent = new Intent(artificial_oxquiz_start.this, artificial_quiz_CorrectActivity.class);
@@ -103,7 +109,7 @@ public class artificial_oxquiz_start extends AppCompatActivity {
                         intent = new Intent(artificial_oxquiz_start.this, artificial_quiz_IncorrectActivity.class);
                     }
                     startActivity(intent);
-                    overridePendingTransition(0, 0);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             }
         });

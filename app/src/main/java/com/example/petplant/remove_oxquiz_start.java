@@ -103,7 +103,7 @@ public class remove_oxquiz_start extends AppCompatActivity {
                         intent = new Intent(remove_oxquiz_start.this, remove_quiz_IncorrectActivity.class);
                     }
                     startActivity(intent);
-                    overridePendingTransition(0, 0);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             }
         });

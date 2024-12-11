@@ -73,6 +73,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 startActivity(intent);
             }
         });

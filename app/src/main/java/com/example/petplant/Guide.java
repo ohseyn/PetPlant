@@ -28,7 +28,7 @@ public class Guide extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
                 startActivity(intent);
-                overridePendingTransition(0, 0);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 

@@ -162,7 +162,7 @@ public class waterquest_message extends AppCompatActivity {
             Intent intent = new Intent(this, reward_waterquest.class); // reward_quiz 액티비티로 이동
             intent.putExtra("photoPath", photoPath); // 필요시 데이터 전달
             startActivity(intent); // reward_quiz 액티비티 시작
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 }

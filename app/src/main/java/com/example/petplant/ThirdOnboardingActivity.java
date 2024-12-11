@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -55,6 +56,8 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third_onboarding);
 
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.button_sound);
+
         // Firebase 초기화
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
@@ -74,6 +77,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 openGallery();
             }
         });
@@ -82,6 +86,7 @@ public class ThirdOnboardingActivity extends AppCompatActivity {
         start_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 saveProfileData(plantName);
             }
         });

@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.GradientDrawable;
 import android.media.ExifInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,8 @@ public class artificialquest_message extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artificialquest_message);
+
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.button_sound);
 
         // UI 요소 초기화
         artificial_answer1 = findViewById(R.id.artificial_answer1);
@@ -76,6 +79,7 @@ public class artificialquest_message extends AppCompatActivity {
         nextButton_artificial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 onButtonClick(v);  // 버튼 클릭 시 reward_quiz로 이동
             }
         });
@@ -146,12 +150,13 @@ public class artificialquest_message extends AppCompatActivity {
 
     // "대화마치기" 버튼 클릭 시 호출되는 메서드
     public void onButtonClick(View view) {
+
         // next_button이 활성화된 후에만 reward_quiz로 이동
         if (nextButton_artificial.isEnabled()) {
             Intent intent = new Intent(this, reward_artificialquest.class); // reward_quiz 액티비티로 이동
             intent.putExtra("photoPath", photoPath); // 필요시 데이터 전달
             startActivity(intent); // reward_quiz 액티비티 시작
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 }

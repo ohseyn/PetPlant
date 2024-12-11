@@ -1,6 +1,7 @@
 package com.example.petplant;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ public class OnboardingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onboarding);
+
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.button_sound);
 
         chooseButton = findViewById(R.id.choose_button);
         chooseButton.setEnabled(false); // 초기 상태는 비활성화
@@ -59,9 +62,10 @@ public class OnboardingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (chooseButton.isEnabled()) {
                     // 다음 액티비티로 이동
+                    mediaPlayer.start();
                     Intent intent = new Intent(OnboardingActivity.this, SecondOnboardingActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(0, 0);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             }
         });

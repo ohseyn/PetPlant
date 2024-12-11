@@ -141,7 +141,7 @@ public class HomeMainActivity extends AppCompatActivity {
         ImageButton inbox = findViewById(R.id.inbox);
         inbox.setOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), ActivityLogActivity.class));
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         });
 
         ImageButton profile = findViewById(R.id.profile);
@@ -151,25 +151,25 @@ public class HomeMainActivity extends AppCompatActivity {
             intent.putExtra("plantName", plantName);
             intent.putExtra("profileImageUri", profileUIri);
             startActivity(intent);
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         });
 
         ImageButton bell = findViewById(R.id.bell);
         bell.setOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), FriendRequestsActivity.class));
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         });
 
         ImageButton store = findViewById(R.id.store);
         store.setOnClickListener(view -> {
             openStore();
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         });
 
         ImageButton guide = findViewById(R.id.guide);
         guide.setOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), Guide.class));
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         });
     }
 

@@ -1,6 +1,7 @@
 package com.example.petplant;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -45,6 +46,7 @@ public class Login extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_email_login);
 
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.button_sound);
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.login_email);
         editTextPassword = findViewById(R.id.login_password);
@@ -55,9 +57,10 @@ public class Login extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediaPlayer.start();
                 Intent intent = new Intent(getApplicationContext(), Register.class);
                 startActivity(intent);
-                overridePendingTransition(0, 0);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }
         });
@@ -65,6 +68,7 @@ public class Login extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediaPlayer.start();
                 progressBar.setVisibility(View.VISIBLE);
                 String email, password;
                 email = String.valueOf(editTextEmail.getText());
@@ -89,7 +93,7 @@ public class Login extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), HomeMainActivity.class);
                                     startActivity(intent);
-                                    overridePendingTransition(0, 0);
+                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                     finish();
                                 } else {
                                     Toast.makeText(Login.this, "Authentication failed.",

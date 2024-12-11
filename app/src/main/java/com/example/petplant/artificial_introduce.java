@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -64,6 +65,8 @@ public class artificial_introduce extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artificialquestintroduce);
 
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.button_sound);
+
         // UI 요소 초기화
         Button button = findViewById(R.id.do_quest_artificial);
         loadingScreen = findViewById(R.id.loading_screen); // 커스텀 로딩 화면 초기화
@@ -79,6 +82,7 @@ public class artificial_introduce extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 showLoadingScreen(); // 로딩 화면 표시
                 requestPermissions();
             }

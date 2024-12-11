@@ -48,7 +48,7 @@
         android:layout_marginTop="64dp"
         android:text="활동 제목"
         android:textColor="@android:color/black"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +60,7 @@
         android:layout_marginEnd="25dp"
         android:text="친해지기 활동"
         android:textColor="#FA90B1"
-        android:textSize="15sp"
+        android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="30dp"
         app:layout_constraintTop_toTopOf="parent" />
@@ -73,7 +73,7 @@
         android:layout_marginEnd="30dp"
         android:text="오전 10:30"
         android:textColor="@android:color/darker_gray"
-        android:textSize="15sp"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

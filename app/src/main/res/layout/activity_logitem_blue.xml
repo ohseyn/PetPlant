@@ -33,7 +33,7 @@
             android:id="@+id/textActivityTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
+            android:layout_marginStart="150dp"
             android:layout_marginTop="32dp"
             android:text="활동 완료"
             android:textColor="@android:color/black"
@@ -58,7 +58,7 @@
             android:id="@+id/plantSort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
+            android:layout_marginStart="150dp"
             android:layout_marginTop="28dp"
             android:text="방울토마토 |"
             android:textColor="@android:color/black"
@@ -100,7 +100,7 @@
             android:layout_marginEnd="40dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="110dp"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints">
 

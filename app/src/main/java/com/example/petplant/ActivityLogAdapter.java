@@ -251,19 +251,19 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         String description = activity.getActivityDescription();
         switch (description) {
             case "waterquest":
-                title.setText("물 주기 활동 완료");
+                title.setText("물 주기 활동 완료!");
                 break;
             case "removequest":
-                title.setText("곁순 제거해주기 활동 완료");
+                title.setText("곁순 제거해주기 활동 완료!");
                 break;
             case "artificialquest":
-                title.setText("인공수정 해주기 활동 완료");
+                title.setText("인공수정 해주기 활동 완료!");
                 break;
             case "sandquest":
-                title.setText("비료 주기 활동 완료");
+                title.setText("비료 주기 활동 완료!");
                 break;
             default:
-                title.setText("활동 완료");
+                title.setText("활동 완료!");
                 break;
         }
 
@@ -295,19 +295,19 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         String description = activity.getActivityDescription();
         switch (description) {
             case "waterquest":
-                title.setText("물 주기 활동 완료");
+                title.setText("물 주기 활동 완료!");
                 break;
             case "removequest":
-                title.setText("곁순 제거해주기 활동 완료");
+                title.setText("곁순 제거해주기 활동 완료!");
                 break;
             case "artificialquest":
-                title.setText("인공수정 해주기 활동 완료");
+                title.setText("인공수정 해주기 활동 완료!");
                 break;
             case "sandquest":
-                title.setText("비료 주기 활동 완료");
+                title.setText("비료 주기 활동 완료!");
                 break;
             default:
-                title.setText("활동 완료");
+                title.setText("활동 완료!");
                 break;
         }
 
@@ -339,19 +339,19 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
         String activityType = activity.getActivityDescription();
         switch (activityType) {
             case "smellquest":
-                title.setText("향 맡아보기 활동 완료");
+                title.setText("향 맡아보기 활동 완료!");
                 break;
             case "lookingquest":
-                title.setText("바라보기 활동 완료");
+                title.setText("바라보기 활동 완료!");
                 break;
             case "touchingquest":
-                title.setText("쓰다듬고 만지기 활동 완료");
+                title.setText("쓰다듬고 만지기 활동 완료!");
                 break;
             case "talkingquest":
-                title.setText("말 걸기 활동 완료");
+                title.setText("말 걸기 활동 완료!");
                 break;
             default:
-                title.setText("활동 완료");
+                title.setText("활동 완료!");
                 break;
         }
 

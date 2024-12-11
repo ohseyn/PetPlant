@@ -1,6 +1,7 @@
 package com.example.petplant;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +30,8 @@ public class reward_artificialquest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward_artificialquest);
 
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.button_sound);
+
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -36,6 +39,7 @@ public class reward_artificialquest extends AppCompatActivity {
         go_quiz_artificialquest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediaPlayer.start();
                 Intent intent = new Intent(getApplicationContext(), artificial_oxquiz_start.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -47,6 +51,7 @@ public class reward_artificialquest extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 코인 업데이트
+                mediaPlayer.start();
                 updateCoinInFirestore();
                 overridePendingTransition(0, 0);
             }
@@ -91,6 +96,7 @@ public class reward_artificialquest extends AppCompatActivity {
                                 }
                             }
                         });
+                        
                     } else {
                         Log.e("Firestore", "Document does not exist");
                     }

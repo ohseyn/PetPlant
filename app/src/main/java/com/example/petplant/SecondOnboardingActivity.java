@@ -1,6 +1,7 @@
 package com.example.petplant;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +35,8 @@ public class SecondOnboardingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_onboarding);
 
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.button_sound);
+
         // Firestore 초기화
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -53,6 +56,7 @@ public class SecondOnboardingActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 // 텍스트 입력 검증 (예: 빈 값이 아닌 경우)
                 String inputText = nameInput.getText().toString();
                 if (!inputText.trim().isEmpty()) {
@@ -100,6 +104,6 @@ public class SecondOnboardingActivity extends AppCompatActivity {
         Intent intent = new Intent(SecondOnboardingActivity.this, ThirdOnboardingActivity.class);
         intent.putExtra("name", inputName);
         startActivity(intent);
-        overridePendingTransition(0, 0);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

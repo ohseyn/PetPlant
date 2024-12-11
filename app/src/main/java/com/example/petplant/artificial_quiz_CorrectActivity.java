@@ -1,6 +1,7 @@
 package com.example.petplant;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +30,8 @@ public class artificial_quiz_CorrectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artificial_quiz_correct);
 
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.button_sound);
+
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -37,6 +40,7 @@ public class artificial_quiz_CorrectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 코인 업데이트
+                mediaPlayer.start();
                 updateCoinInFirestore();
                 overridePendingTransition(0, 0);
             }
